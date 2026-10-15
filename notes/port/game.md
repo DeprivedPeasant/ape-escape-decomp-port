@@ -1,5 +1,338 @@
 # Integrated game host (2026-10-14)
 
+## Wiring pass 10: reconcile mode and stage CD boundaries (2026-10-15)
+
+The merged mode checker was wrong at the archive boundary. Its second
+verified-port filter removed `CdMgrQueueCommand` (`80012360`) from the MIPS
+hook set, undoing the area checker's explicit exception for this native
+archive service. The host correctly retained pass 9's native queue routing
+for XaPlay and its other callers. Original XaPlay calls the queue at
+`80011FF0`, `8001202C` and `80012060`, then CdIntToPos at `80012070`.
+Executing the queue only on the mode oracle omitted its boundary event and
+modified queue RAM only there: the pre-fix run fails at event 5430 with host
+command 11 versus oracle CdIntToPos. This was an inconsistent test boundary,
+not evidence of an incorrect queue algorithm or a gameplay port defect.
+
+The mode oracle now retains that same native boundary. The standalone
+player1 checker continues to prove the original queue implementation and
+XaPlay's fallback. `check_game_modes --mutate` explicitly removes the queue
+hook again and requires the former queue/CdIntToPos mismatch; its normal
+fixtures compare all three mode sequences against original instructions.
+Queue callbacks also compare the pointed-to four-byte parameter word, as
+copied by the original at `80012468`, including XaPlay's caller padding.
+Otherwise moving to the native boundary would hide the existing padding
+mutation in excluded stack storage; that mutation must still be rejected.
+No new game functions, masks, exclusions or ledger changes are involved.
+
+
+## Pass 7/8 merge: bounded mode guards (2026-10-15)
+
+The former mode-35 missing-entry guard became invalid when save-menu part 1
+was merged. It entered the now-ported synchronous Mode_SaveMenu loop after
+the last native-leaf guard, with raw tracing bypassing the normal log limit.
+The seeded native-leaf words and SeqPlayer_SaveRestoreVram callback were not
+the cause. The guard now checks the merged ledger before probing an absent
+entry. The sequence-6 fixture stops at the member-186 entry through the existing
+host continuation service; the oracle stops before the same first instruction.
+It does not claim save-menu execution coverage. Its owning
+module checker and central-wrapper suite retain that coverage.
+
+The test shim caps each bounded native invocation at 20,000 callbacks and
+reports an AeRam error before unwinding. Raw tracing also caps the log, and
+Python callback failures request an immediate unwind. Public mode-word test
+calls now use that bounded scope. Existing MIPS instruction limits remain.
+
+## Wiring pass 7: Stage Start and merged small modes
+
+The existing generated member/address table already listed members
+183/184/185/186b/188/18A. Their previously absent module bindings now populate
+call, native_call, overlay_call, renderer/render and nested dependency tables.
+The hook generator ignores native-only hook types without ledger entry ports,
+including 186d, rather than failing regeneration. Member-186 public MCX APIs
+use the native `card_call` word-array callback and retain their member guard;
+all 22 names and seven argument words are exercised. Pure rendering leaves
+in 185/186 retain named callbacks and member guards. Unmerged save-menu game
+functions remain named missing calls.
+
+The original-main fixtures now cover three title selections:
+
+| Fixture | Loaded modes | Equal frame boundaries | Stop |
+| --- | --- | ---: | --- |
+| Boot selection 2 | 181 -> 180 | 574 | main's CdMgrUpdate after title |
+| Explicit new-game selection 0 | 181 -> 180 -> 188 | 665 | AreaKindVisitedSet, `800964DC`, at the end of StageStartUi_RunA |
+| Explicit title selection 6 | 181 -> 180 -> 186 | 574 | Mode_SaveMenu, `80136AB8`, mode 35; part 1 is not merged |
+
+These are archive/input fixtures, not an assertion that boot's sequence 2
+itself selects new game. All non-stack RAM, every scratchpad byte, native
+calls, and every frame-boundary hash match. The new-game fixture uses real
+stage-start archive assets and reaches 913 VSyncs / 5,761 native calls.
+It reaches no Mode_Stage frame: continuing that flow requires the unported
+AreaKindVisitedSet helper, and this task explicitly forbids porting new game
+functions. Existing boot/audio boundary doubles remain reported by name.
+
+The integrated audit repairs the member-188 LookAt translation, rectangle
+copies, initial wipe store, mesh-header mask, wipe divisor, rendering field
+reads, and explicit XaPlay caller padding;
+instruction evidence and old-source reproducers are in game_module_bugs.md.
+The sole new exclusion-registry row declares the unwritten XaPlay caller
+input and needs owner review. No RAM mask or ledger minimum/status changed.
+
+The save-menu checker now uses a tracked declaration-only dispatcher and
+the production dependency closure instead of two absent temporary C files.
+The central-wrapper checker routes that dispatcher and member 188's test API
+through the real adapters. Member 186d is explicitly included in check_game's
+support sources; it and all newly merged modes were already in the viewer
+manifest. No code or data outside this worktree was changed or committed.
+
+The proxy build also retains MinGW's automatic exports when including the
+188 test API and checks its exports before starting suites. The four small
+overlay checker scripts use their shared harness entry point. These are
+checker/link closure repairs, not alternate gameplay implementations.
+
+Both viewer build caches now include generated `.inc` files in their cache
+keys, so changing native dispatch routes invalidates the affected executable
+and objects. The viewer and net-catch checks were repeated after this fix.
+
+## Wiring pass 9: MissB integration (2026-10-15)
+
+The generator recognizes native word-array parameters written as C arrays as
+well as pointers, and emits an AeMissbCallFn adapter with its original
+array-before-count argument order. It forwards through the central member/
+address table and named native APIs. Renderer names use render_words with
+all words intact; missing names retain their identity. The 66 MissB ports
+are regenerated into the table, and all eight sources join the shared
+viewer/CMake manifest. Verified SoundBankSetVolume and SfxVoiceSetPanVol
+replace stale SDK routes; SfxVoiceSetPitch leaves the body missing table.
+
+Area-05 frame 47 exposed mixed CD queuing: XaPlay called the queue port while
+other host paths used the native asynchronous archive callback. XaPlay now
+accepts that same boundary and keeps the queue C port as its standalone
+fallback. The original eight calls and their parameters remain unchanged.
+The module checker retains 48 fallback cases and adds eight native-queue
+cases with payload comparisons. The former bypass is independently rejected.
+Original instruction PCs and the boot/save/body unit-host repairs are in
+[game_module_bugs.md](game_module_bugs.md). No arithmetic port bug was found,
+and no exclusion row, comparison mask, ledger status or minimum was changed.
+
+The integration checker adds 144 MissB port/renderer/missing/XA comparisons.
+Four new executable mutations remove or corrupt that routing. Boot/save
+unit hosts supply the newly reachable sound interfaces, run the sound ports
+as original instructions, and retain their coverage requirements. Member
+189's named unit exports now enter central adapters too. The save-score-1000
+fixture uses real score bytes rather than a retired dependency double.
+
+| Check | Final result |
+| --- | --- |
+| check_game | 1,293 cases; 474 frames; 1,109 direct comparisons |
+| check_game_area | 495 comparisons; four areas; catch frame 11, saved activity 2 |
+| check_game_modes --mutate | Three fixtures; 1,813 frame boundaries; 14 focused rectangle/renderer/LookAt comparisons; 149 entry guards, 18 native leaves, 22 MCX routes; 10 old 188 sources and three earlier mutations rejected |
+| check_modes | 802 cases |
+| check_game_calls | All 68 suites pass after the full run and five focused overlay reruns; aggregate 1,232 wrappers / 188,434 invocations |
+| check_game_wiring_mutations | 57/57 caught |
+| check_game_module_regressions | 139 positive comparisons; all existing old sources rejected; 0 failures |
+| check_viewer_game / check_net_catch | Full RAM/scratchpad repeats match; caught=1, capture=1, removed=1, saved=2 |
+| check_verified | 68 saved checker reports; 0 errors; 171 warnings |
+| Generators | Nine tracked artifacts plus the hook inventory reproduce byte for byte |
+
+The twelve delegated helpers/partial interfaces and the existing unexercised
+AreaGetMonkeyRecord adapter remain outside the exercised-wrapper count.
+The initial proxy export failure and the old pre-fix 188 proxy run are
+preserved in the task logs; the aggregate contains only passing reports.
+Artifacts and a complete checker status summary are under extract/codex-task.
+
+Changed files (25):
+
+| Group | Files |
+| --- | --- |
+| Host API / dispatch | src/game/ae_game.h, ae_game_stage.c, ae_game_hooks.c, ae_game_native.inc, ae_game_platform.h |
+| Stage Start fixes | src/modes/ae_ovl188.c, ae_ovl188.h |
+| Generator | tools/generate_game_hooks.py |
+| MIPS checkers | tools/mips/check_game.py, check_game_calls.py, check_game_modes.py, check_ovl186b.py, check_ovl188.py |
+| Test support | tools/mips/game_integration_callbacks.inc, game_integration_hooks.inc, game_integration_shim.c, ovl186b_test_api.c (new) |
+| Build cache closure | tools/codex/build_native_viewer.py, check_viewer_game.py |
+| Registry | tools/mips/check_exclusions.csv |
+| Notes | notes/port/game.md, game_hooks.md, game_module_bugs.md, modes.md, viewer_game.md |
+
+| check_game_area | 687 comparisons; loads and all 90 frames in areas 01/02/05/44; original net catch at frame 11, saved activity 2 |
+| check_game_modes / check_modes | Pass; 4,861 native calls; 240 ported-entry guards, 11 native leaves; 802 resident-mode cases |
+| check_game_calls | All 73 suites pass after focused host repairs; 1,427 wrappers / 191,391 invocations |
+| check_game_wiring_mutations | 65/65 caught; zero build errors or survivors |
+| check_game_module_regressions | 284 comparisons; all former sources, including the XA bypass, rejected; zero failures |
+| check_missa / check_missb | 1,280 / 434 original-instruction cases |
+| check_player1 | Wrapper run passes; XaPlay has 56 cases, including eight native-queue payload cases |
+| check_viewer_game | Two 120-frame repeats and eight neutral frames per area 01/02; all 2,098,176 RAM/scratchpad bytes match |
+| check_net_catch | caught=1, capture=1, removed=1, saved=2; no RAM error |
+| check_verified | 73 saved checker reports; 0 errors, 278 inventory/coverage warnings |
+| Generators | All nine tracked artifacts reproduce byte for byte |
+
+The actual viewer missing-function count is now zero in both areas. Its
+checker regenerated the table in viewer_game.md. Native packet presentation
+and voice mapping remain outside this integration proof. The existing
+AreaGetMonkeyRecord wrapper gap and 14 explicitly delegated interfaces remain
+outside the central-entry count. Every MissB wrapper is exercised. MIPS calls
+retain hard instruction budgets; checkers ran sequentially without the prior
+multi-GB growth.
+
+The initial full sweep and focused repaired-host runs are retained under
+extract/codex-task and extract/mips/call_proxy; the final command manifest is
+extract/codex-task/final_manifest9.json. The aggregate uses only passing suite
+reports. Changes are uncommitted for the project owner's review. Generated
+files merge by rerunning the generators.
+
+## Wiring pass 8: missa integration (2026-10-15)
+
+Regenerated module wiring now includes AeMissaHooks, its nested dependencies
+and indirect callbacks. The hook generator skips helper hook structs with no
+game-host field, so regeneration no longer stops at AeOvl186dHooks. Audited
+missa packet callbacks use renderer routes; the five-word trail-segment
+callback has its own RenderTrailRingSegment identity rather than recursively
+calling the public TrailRingDraw state port. BeginFrame uses the resident
+mode's existing native frame service.
+
+The area fixture and viewer supply real player member 008 before StageRequest
+reaches PlayerInit. The empty-header reproducer independently exposed cached
+reads in that port: preserve the original count/model-table reloads and the
+loop's final index. The strengthened missa checker includes that input and
+the module regression restores the former cached count to require rejection.
+Instruction evidence is in game_module_bugs.md. No ledger requirement or
+comparison exclusion was changed.
+
+check_game_area passes all 495 comparisons for areas 01/02/05/44, including
+all 360 scripted frames and the frame-11 net catch with saved activity 2.
+check_missa passes 1,280 cases. PlayerAuxModelInit's native boundary compares
+its one meaningful argument. PointInBoxXZ is removed from check_game's shared
+missing table so the body oracles execute the newly ported function too.
+
+The pad adapter now recovers PadUpdate's button word for the historical
+zero-argument stick callback before calling StickToButtons. Focused integration
+adds 12 real indirect-dispatch comparisons, 16 five-word trail-renderer fallback
+checks, 16 enclosing PadUpdate comparisons and four stage archive out-pointer
+checks. The area default now includes these 48 additional checks. Debug demo profiles supply valid neutral playback
+records; fade transitions reuse the registered stage-fade renderer boundary
+and preserve its native cursor advance.
+
+The wrapper sweep also closes the small-overlay shared runners, save-menu
+dispatcher identity / missing unit support, and stage-start's formerly bypassed
+dispatcher. The two non-returning save workers retain their original module
+iteration tests and join the explicitly delegated interfaces; they are not
+counted as complete synchronous entry proofs. AreaGetMonkeyRecord remains the
+existing unexercised adapter. See game_module_bugs.md for these test-host fixes.
+
+Final validation (full wrapper sweep plus focused reruns of repaired hosts):
+
+| Check | Result |
+| --- | --- |
+| check_game | 1,293 cases; 474 frames; 1,109 direct comparisons |
+| check_game_area | 543 comparisons: all four loads, 360 scripted frames, bootstrap/catch comparisons and 48 focused routes; catch frame 11, saved activity 2 |
+| check_game_modes / check_modes | Pass; 4,861 boot/title native calls; 179 overlay-entry guards and 11 native leaves |
+| check_game_calls | All 70 suites pass; 1,300 adapters exercised / 190,174 invocations; 14 explicit delegated interfaces and the existing AreaGetMonkeyRecord gap |
+| check_game_wiring_mutations | 61/61 caught; no build errors or survivors |
+| check_game_module_regressions | 140 comparisons, zero failures; old PlayerInit and all existing bad sources rejected |
+| check_missa | 1,280 original-instruction cases, including the empty-header regression |
+| check_viewer_game | Two 120-frame repeats and eight neutral frames in each of areas 01/02; all 2,098,176 RAM/scratchpad bytes equal |
+| check_net_catch | caught=1, capture=1, removed=1, saved=2; no RAM error |
+| check_verified | All 70 checker reports found; 0 errors, 202 inventory/coverage warnings |
+| Generators | All nine tracked artifacts reproduce byte for byte |
+
+Actual viewer runs reach four missing names in each area: ItemsClearFlags,
+LevelMonkeyCountGet, PlayerAuxModelInit and SoundSilence. The table in
+viewer_game.md is regenerated by its checker. Native packet presentation and
+voice mapping remain outside this integration proof. No exclusion row, ledger
+status or minimum was changed. Final logs, failed attempts, rejection sources
+and the all-zero final command manifest remain under extract/codex-task and
+extract/mips. Changes are uncommitted for the owner's review.
+
+Changed files in this pass:
+
+| Group | Files |
+| --- | --- |
+| Generated host wiring | src/game/ae_game_hooks.c, ae_game_platform.h, ae_game_native.inc |
+| Generation and instrumentation | tools/generate_game_hooks.py; tools/mips/game_integration_callbacks.inc, game_integration_hooks.inc, game_integration_shim.c |
+| Port and viewer fixes | src/player/ae_missa_player.c; src/app/viewer_game.c |
+| Integration checks | tools/mips/check_game.py, check_game_area.py, check_game_calls.py, check_game_wiring_mutations.py, check_game_module_regressions.py |
+| Module test closure | tools/mips/check_missa.py, check_ovl186b.py, ovl186b_test_api.c (new), ovl_game_stub.c |
+| Notes | notes/port/game.md, game_hooks.md (generated), game_module_bugs.md, missa.md, viewer_game.md (actual-run missing table) |
+
+
+## Wiring pass 6: mode overlays and original-main entry (2026-10-15)
+
+Members 181/182/180/187/18B now use generated member-and-address adapters and
+fully populated named/nested hook tables. `ae_game_run` enters ported main;
+ArcLoadMember's native callback copies the requested bytes, successful mode
+loads record the member, and ModeEntry selects only that member's port.
+Unavailable mode entries call missing and terminate dispatch with an AeRam
+error. Native archive/display/renderer APIs keep named callbacks; renderer
+word arrays and the original five/seven-word call ABI retain their values.
+Native overlay leaves also match member plus address, allowing future members
+to reuse an address. Future C ports require normal declarations, ledger member
+identity, the viewer source entry and regeneration; native leaves are table
+entries in the hook generator.
+
+The integrated original-instruction checker runs main -> boot (181) -> title
+(180) with identical real EXE RAM and scripted archive/input callbacks. It
+compares 574 frame-boundary RAM/scratchpad hashes, final non-stack RAM, all
+scratchpad, and 4,861 native calls across 822 VSyncs / 1,247,124 instructions.
+Only the existing stack window is omitted; no new masks or exclusions were
+added. No ported entry is intercepted on the oracle side. The oracle changes
+native hook sets and clears decoded instructions at real member loads.
+
+Boot selects title sequence 2, which returns to mode 3; the integrated run is
+bounded there. The new-game title branch selects mode 8, member 188 at
+8013683C, currently the stage-start missing boundary. A separate dispatch
+check requires that named stop and automatically adapts when 188 merges.
+Native sequence archive/display services remain callbacks; the native viewer
+still enters the stage directly. The bounded run reaches these unported
+helpers: PadSetupDualShock (80012CA0), SeqTrackSetPlayState (800A2B6C),
+SeqTrackClose (800A1F3C), SoundStopAllVoices (800A342C), SoundBankFree
+(800A1CCC). It records their deterministic boundary results without claiming
+those implementations.
+
+Original-instruction audit fixed member 187 LookAt's discarded
+ApplyMatrixLV translation and two member-181 clear-image rectangle errors.
+Native clear callbacks now compare their complete eight-byte RECT inputs;
+Mode_02 reads its original template, including edited-template test cases. The strengthened checker executes that SDK's real
+instructions, and the old source is rejected on RAM. Test closure repairs
+replace two missing temporary 187 support files, wire resident mode hooks in
+the boot unit host, route both overlay test dispatchers through central
+adapters, and update two obsolete vertical-contact inputs to pass the real
+HalfPipeRangeTest. Details and instruction evidence: game_module_bugs.md.
+No ledger minimum/status or exclusion was weakened.
+
+| Check | Result |
+| --- | --- |
+| check_game | 1,293 cases; 474 frames; 1,109 direct comparisons |
+| check_game_area | 495 comparisons, areas 01/02/05/44; net catch frame 11, saved activity 2 |
+| check_game_modes | 574 frame boundaries; 80 unloaded port guards; 11 native leaf routes/guards; five-word ABI; member mutation and both old rectangle sources rejected |
+| check_modes | 802 cases |
+| check_game_calls | All 62 suites pass across the full run and focused 181/187 repairs; aggregate 1,163 wrappers / 187,890 invocations |
+| check_game_wiring_mutations | 57/57 caught; no build errors or survivors |
+| check_game_module_regressions | 139 positive comparisons; nine old 18C, two old stage, one old flash and one old stage-clear sources rejected; zero failures |
+| check_viewer_game / check_net_catch | Full-image repeat/neutral comparisons pass; caught=1, capture=1, removed=1, saved=2 |
+| check_verified | 62 saved checker reports; 0 errors; 110 existing inventory/coverage warnings |
+| Generators | All nine generated artifacts reproduce byte for byte |
+
+The twelve delegated native/partial helpers and the existing unexercised
+AreaGetMonkeyRecord adapter remain outside the central-entry count. The full
+wrapper run had only the two repaired unit-host failures; focused reruns
+exercise all 40 boot/intro/stage-clear adapters (242 invocations), and the
+aggregate includes only passing reports. Logs, original failed attempts and
+final proofs remain under extract/codex-task and extract/mips. Changes are
+uncommitted for the owner's review.
+
+Changed files (31):
+
+| Group | Files |
+| --- | --- |
+| Host API and dispatch | src/game/ae_game.h, ae_game_stage.c, ae_calls.h, ae_calls_api.h (new) |
+| Generated adapters/tables | src/game/ae_calls.c, ae_game_hooks.c, ae_game_modules.h, ae_game_platform.h, ae_game_native.inc (new) |
+| Overlay fixes | src/modes/ae_overlay_hooks.h, ae_ovl181.c, ae_ovl187.c |
+| Generation/build closure | tools/generate_game_hooks.py; tools/codex/viewer_game_sources.txt |
+| Checkers | tools/mips/check_game.py, check_game_calls.py, check_game_modes.py (new), check_game_module_regressions.py, check_ovl181.py, check_ovl187.py |
+| Test routing/instrumentation | tools/mips/game_integration_callbacks.inc, game_integration_shim.c, ovl_game_stub.c |
+| Tracked unit support (new) | tools/mips/boot_overlay_test_api.c, ovl187_test_api.c, ovl187_test_stubs.c |
+| Documentation | notes/port/game.md, game_hooks.md, game_module_bugs.md, modes.md, viewer_game.md |
+
+
 ## Resident mode ports (2026-10-15)
 
 The host now runs the shared body and complete fade exit of the ported

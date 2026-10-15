@@ -1,5 +1,12 @@
 # PlayerUpdate first-half port map
 
+Wiring pass 9 adds an optional native CdMgrQueueCommand callback to
+AePlayer1Hooks. XaPlay retains its eight original calls and uses the existing
+queue C port when that callback is absent. Its checker retains all 48 fallback
+cases and adds eight native-queue cases comparing command payload bytes.
+The default now reports 56 XaPlay cases. See game_module_bugs.md for the
+original call PCs, area-05 frame-47 reproducer and old-source rejection.
+
 This note records the address-based batch from `extract/codex-task/task.md`. The original call edges below were read from the SCUS-944.23 instruction ranges with `tools/mips/mips_ram.py`. Eighteen functions have readable RAM-image ports and independent differential checks; `PlayerUpdate` remains unfinished.
 
 ## Call tree and boundaries

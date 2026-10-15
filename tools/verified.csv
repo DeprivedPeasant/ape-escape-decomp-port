@@ -304,16 +304,12 @@ address,name,c_function,source,checker,status,min_cases,notes
 80087A20,PlaySfxAt,ae_PlaySfxAt,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,207,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
 800882C4,SoundLoopStartEx,ae_SoundLoopStartEx,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,241,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
 800880D0,SoundLoopStopAndFree,ae_SoundLoopStopAndFree,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,11,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
-80064454,PlayerRunAnimEvents,ae_PlayerRunAnimEvents,src/player/ae_anim_events.c,tools/mips/check_anim_events.py,diffed,361,"Real member 008 records and every frame boundary; 352/353 instructions with 800644D4 proven unreachable."
-8007C468,PlayerAnimEventAddHitBodies,ae_PlayerAnimEventAddHitBodies,src/player/ae_anim_events.c,tools/mips/check_anim_events.py,diffed,8,"Direct and event-driven cases cover interpolation and body/slot exhaustion."
 8007304C,CollisionBuildProbePoints,ae_CollisionBuildProbePoints,src/bodies/ae_probe.c,tools/mips/check_probe.py,diffed,195,
 8004F6E8,CollisionPointInGrid,ae_CollisionPointInGrid,src/bodies/ae_probe.c,tools/mips/check_probe.py,diffed,193,
 800733DC,CollisionShiftProbePoints,ae_CollisionShiftProbePoints,src/bodies/ae_probe.c,tools/mips/check_probe.py,diffed,48,
 80073AA0,PointInBoxXYZ,ae_PointInBoxXYZ,src/bodies/ae_probe.c,tools/mips/check_probe.py,diffed,150,
 80072D28,BodyProbeGround,ae_BodyProbeGround,src/bodies/ae_probe.c,tools/mips/check_probe.py,diffed,150,
 8008FC30,GimmickActivate,ae_GimmickActivate,src/world/ae_gimmick.c,tools/mips/check_gimmick.py,diffed,315,"Structured type dispatcher; renderer, sound and overlay calls remain hooks."
-80090230,GimmickDeactivateChain,ae_GimmickDeactivateChain,src/world/ae_gimmick.c,tools/mips/check_gimmick.py,diffed,4,"Recursive three-link deactivation helper."
-8008ECFC,SwingDoorSetPivot,ae_SwingDoorSetPivot,src/world/ae_gimmick.c,tools/mips/check_gimmick.py,diffed,22,"Eight direction cases and two pivot formula modes."
 80064AF0,PlayerCond_False,ae_PlayerCond_False,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
 80064AF8,PlayerCond_JumpHeld,ae_PlayerCond_JumpHeld,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
 80064B08,PlayerCond_JumpPressed,ae_PlayerCond_JumpPressed,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
@@ -453,38 +449,14 @@ address,name,c_function,source,checker,status,min_cases,notes
 80075A40,CollProbe_Trench,ae_CollProbe_Trench,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,322/322 instructions; 2/2 targeted mutations caught.
 8007449C,CollProbe_Triangle,ae_CollProbe_Triangle,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,393/456 instructions; 63 instructions proved unreachable; 3/3 targeted mutations caught.
 80076E80,CollProbe_Rope,ae_CollProbe_Rope,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,102,307/307 instructions; 2/2 targeted mutations caught.
-
 8006D044,Gadget7TrailUpdate,ae_Gadget7TrailUpdate,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,8,renderer block replaced by native hook
 8006DAF8,Gadget4TrailUpdate,ae_Gadget4TrailUpdate,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,12,per-record renderer replaced by native hook
 8007A514,Gadget4PlayerUpdate,ae_Gadget4PlayerUpdate,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,18,player state and hit-volume logic checked
 8007C6CC,GadgetSelectFxDraw,ae_GadgetSelectFxDraw,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,12,animation and collision logic checked
 800986E0,Gadget4UpdateDraw,ae_Gadget4UpdateDraw,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,23,Super Hoop update and hit-volume logic checked
 8009AD60,Gadget3UpdateDraw,ae_Gadget3UpdateDraw,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,12,aim and selection logic checked with named renderer hooks
-80046970,CameraKindFixed_Nop,ae_CameraKindFixed_Nop,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
-80047104,CameraSlotInitFollow,ae_CameraSlotInitFollow,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
-800471E4,CameraSlotCreate,ae_CameraSlotCreate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
-80047290,CameraSlotRemove,ae_CameraSlotRemove,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
-80047360,CameraSlotAimAtFocus,ae_CameraSlotAimAtFocus,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
-80047464,CameraSlotSmoothEye,ae_CameraSlotSmoothEye,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; positive caller divisors and registered divide-trap proofs."
-80047558,CameraSlotSmoothTarget,ae_CameraSlotSmoothTarget,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; positive caller divisors and registered divide-trap proofs."
-80047654,CameraKindAim_SnapToFocus,ae_CameraKindAim_SnapToFocus,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
-800482C0,CameraFollowDispatch,ae_CameraFollowDispatch,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
-80048454,CameraKindAimUpdate,ae_CameraKindAimUpdate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; player-state and gadget gates covered."
-8004875C,CameraKindFixedUpdate,ae_CameraKindFixedUpdate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; radar and fixed-state paths covered."
-80048D10,CameraSlotPlaceBehindPlayer,ae_CameraSlotPlaceBehindPlayer,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
-80048DD0,CameraSlotUpdateYaw,ae_CameraSlotUpdateYaw,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; yaw wrap and input branches covered."
-80048F6C,CameraSlotGroundClamp,ae_CameraSlotGroundClamp,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
-8004906C,CameraSlotGroundClampNear,ae_CameraSlotGroundClampNear,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; clamp and no-clamp paths covered."
-8004923C,CameraSlotStickOrbit,ae_CameraSlotStickOrbit,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; orbit directions and limits covered."
-800493D4,CameraSlotResetFollow,ae_CameraSlotResetFollow,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
-80049514,CameraSlotSnapshotEye,ae_CameraSlotSnapshotEye,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
 800495F4,CameraFollowUpdate,ae_CameraFollowUpdate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; focused movement, projection, clamp and ground-probe matrix."
-8004AA24,CameraSlotFlagBit81,ae_CameraSlotFlagBit81,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
-8004AC84,CameraFollowAimedVariant,ae_CameraFollowAimedVariant,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; aim and player-state paths covered."
 8004AF78,CameraFollowGadgetVariant,ae_CameraFollowGadgetVariant,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; gadget state, stick and primitive paths covered."
-8004B5FC,CameraKind3FollowUpdate,ae_CameraKind3FollowUpdate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
-8004B8F4,CameraSlotGetFocusPoint,ae_CameraSlotGetFocusPoint,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; supported focus modes and unreachable mode proof."
-8004C2E4,CameraSlotClearScript,ae_CameraSlotClearScript,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
 8004CA70,CameraSlotUpdate,ae_CameraSlotUpdate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; script, focus and update modes covered."
 80050AFC,StageProgressRestore_Nop,ae_StageProgressRestore_Nop,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,1,Empty leaf: both instructions executed on the real EXE and area 01 image.
 800848B0,StageProgressRestore_Nop2,ae_StageProgressRestore_Nop2,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,1,Empty leaf: both instructions executed on the real EXE and area 01 image.
@@ -495,12 +467,10 @@ address,name,c_function,source,checker,status,min_cases,notes
 80096FAC,StageProgressOnExit,ae_StageProgressOnExit,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,10,Persists activity and gimmick rows; handles the time-station special byte and time-attack result tables.
 80094F20,StageRequestExit,ae_StageRequestExit,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,1,Leaf wrapper calls StageExitStart and returns zero.
 800966B4,StageProgressOnEnter,ae_StageProgressOnEnter,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,12,"Initializes per-area records, regular progress, time-attack tables and the level-33 special state."
-800972E0,StageProgressRestore,ae_StageProgressRestore,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,6,"Restores area activity bytes; handles time-station entry and one-time progress reset."
 8003244C,AreaLoadGridAndProps,ae_AreaLoadGridAndProps,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,4,"Binds heightfield arrays and initializes prop records, visibility masks and rotation matrices."
 80031B60,AreaLoad,ae_AreaLoad,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,7,"Loads area tables and runtime state; archive, rendering and subsystem operations remain named hooks."
 8005D100,StageRequest,ae_StageRequest,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,52,"Dispatches all stage-transition actions, including progress, area loading, audio and cutscene handoffs."
 8005D890,StageRequestUpdate,ae_StageRequestUpdate,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,27,"Advances exit streaming and transition state; area checks, CD queue progress and UI updates remain hooks."
-800955C8,StageRequestRetry,ae_StageRequestRetry,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,1,"Repeats the current area's action-8 request using the live area and entry."
 8005AD90,GimmickSaveTableReset,ae_GimmickSaveTableReset,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,4,Full reachable instruction coverage
 8005ADF8,GimmickSaveStates,ae_GimmickSaveStates,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,2,Full reachable instruction coverage
 8005AF4C,GimmickRestoreStates,ae_GimmickRestoreStates,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,2,Full reachable instruction coverage
@@ -627,15 +597,8 @@ address,name,c_function,source,checker,status,min_cases,notes
 800587EC,ZakoDebugMenuInit,ae_ZakoDebugMenuInit,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,1,
 8007D23C,MenuItemInitToggle,ae_MenuItemInitToggle,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,16,
 8009764C,GetLevelFirstArea,ae_GetLevelFirstArea,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,6,
-80010C3C,AreaGetEntryPoint,ae_AreaGetEntryPoint,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,3,"Full instruction coverage; real area data and edge entries."
-80032BBC,PlayerSpawnAtEntry,ae_PlayerSpawnAtEntry,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,12,"Full instruction coverage across several real areas and entry records."
-80046D80,SetProjection,ae_SetProjection,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,3,"Full instruction coverage; projection RAM and GTE H output compared."
 80046DAC,CameraActivateSlot,ae_CameraActivateSlot,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,3,"Full instruction coverage across first, middle and last camera slots."
 80047754,CameraResetAll,ae_CameraResetAll,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,5,"Full instruction coverage across absent, named, unmatched and area-camera CAM cases."
-800489EC,CameraShakeReset,ae_CameraShakeReset,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,1,"Full instruction coverage; both shake fields are seeded nonzero."
-8004B510,AimModeLeave,ae_AimModeLeave,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,2,"Full instruction coverage; active and inactive paths with sound ID 5 setup."
-8004BAD8,EventCamSetScript,ae_EventCamSetScript,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,2,"Full instruction coverage for both script table sets."
-8004D0F0,StageExitFlagsClear,ae_StageExitFlagsClear,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,1,"Full instruction coverage; halfword flags and pending byte are seeded."
 800877F8,PlaySfx,ae_PlaySfx,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,5,"Full instruction coverage for missing bank, queued, full, success and busy voice paths."
 80010CA4,AreaGetKind,ae_AreaGetKind,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,15,
 80010CC0,AreaGetLevel,ae_AreaGetLevel,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,15,
@@ -778,60 +741,24 @@ address,name,c_function,source,checker,status,min_cases,notes
 80085630,ProjectileGroupSpawnSpread,ae_ProjectileGroupSpawnSpread,src/effects/ae_fxscript.c,tools/mips/check_fxscript.py,diffed,5,FX script batch; notes/port/fxscript.md
 800856FC,ProjectileGroupsUpdate,ae_ProjectileGroupsUpdate,src/effects/ae_fxscript.c,tools/mips/check_fxscript.py,diffed,18,FX script batch; notes/port/fxscript.md
 800994A8,RcCarUpdate,ae_RcCarUpdate,src/effects/ae_fxscript.c,tools/mips/check_fxscript.py,diffed,18,FX script batch; notes/port/fxscript.md
-8005DC78,PlayerCanExitStage,ae_PlayerCanExitStage,src/effects/ae_effects_core.c,tools/mips/check_effects.py,diffed,40,"Uses nine real area members; all 27 original instructions covered."
-8006EF08,TrailPointAdd,ae_TrailPointAdd,src/effects/ae_effects_core.c,tools/mips/check_effects.py,diffed,40,"Uses nine real area members; all 32 original instructions covered."
-8006D4C0,SpriteEffectQueue,ae_SpriteEffectQueue,src/effects/ae_effects_core.c,tools/mips/check_effects.py,diffed,40,"Uses nine real area members; one proven impossible fallback instruction declared unreachable."
-8006D588,SpriteEffectQueue2,ae_SpriteEffectQueue2,src/effects/ae_effects_core.c,tools/mips/check_effects.py,diffed,40,"Calls the verified SpriteEffectQueue port; all 8 original instructions covered."
-8006B950,PlayerSplash,ae_PlayerSplash,src/effects/ae_effects_player.c,tools/mips/check_effects.py,diffed,40,"Directly calls verified particle and sound ports; checker models PlaySfx only to compare its selected id; all 42 instructions covered."
-8006B168,PlayerFxTrailUpdate,ae_PlayerFxTrailUpdate,src/effects/ae_effects_player.c,tools/mips/check_effects.py,diffed,40,"Directly calls verified EffectSpawnFromDef and SpawnParticle ports; all 109 original instructions covered."
-8006EE3C,TrailsUpdate,ae_TrailsUpdate,src/effects/ae_effects_trails.c,tools/mips/check_effects.py,diffed,40,"Uses nine real area members; all 50 reachable instructions covered; 8006EED8 is unreachable from unsigned halfword bounds."
 8006C334,PlayerTintEffectUpdate,ae_PlayerTintEffectUpdate,src/effects/ae_effects_player.c,tools/mips/check_effects.py,diffed,40,"Uses nine real area members; all 150 original instructions covered, including both particle modes and SpawnRandomParticle hook."
-80071370,FlyingMeshesUpdateDraw,ae_FlyingMeshesUpdateDraw,src/effects/ae_effects_flying.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; 135/137 original instructions covered; 80071518..8007151C are transparently patched to observe and execute SpawnParticle."
-8006A9F8,EffectsUpdateAll,ae_EffectsUpdateAll,src/effects/ae_effects_dispatch.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; all 26 instructions covered; completed subsystems call their ports directly and preserve the original dispatch order."
 8006B800,PlayerEffectsUpdate,ae_PlayerEffectsUpdate,src/effects/ae_effects_dispatch.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; all 18 instructions covered; directly calls the player trail, stage-exit, water, tint, and trail-point ports."
-8006BA2C,PlayerWaterEffectsUpdate,ae_PlayerWaterEffectsUpdate,src/effects/ae_effects_water.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; all 313 instructions covered across five water-state scenarios and boundary velocities."
-8006D5A8,SpriteEffectsDraw,ae_SpriteEffectsDraw,src/effects/ae_effects_sprite_draw.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; 156/328 original instructions covered and 172 projection/packet instructions declared for GpuDrawSprite."
 80070D94,RandomParticlesUpdate,ae_RandomParticlesUpdate,src/effects/ae_effects_random.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; all 217 instructions covered, including signed life values, both source-position layouts, interpolation, and RibbonDraw calls."
 8006EF88,TrailPointsDraw,ae_TrailPointsDraw,src/effects/ae_effects_trail_draw.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; 94/187 instructions covered; 93 GTE, clipping, and packet instructions are declared for GpuDrawTrailPoint."
 8006FA10,EffectObjDraw,ae_EffectObjDraw,src/effects/ae_effects_objects.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; 121/273 instructions covered; native projection and packet emission use GpuDrawEffectObj, with its range and two zero-sine correction instructions declared."
 8006FEE8,EffectObjsUpdate,ae_EffectObjsUpdate,src/effects/ae_effects_objects.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; all 146 instructions covered, including object aging, motion, body allocation and registration."
-8006E1C0,FxPlayerState6Update,ae_FxPlayerState6Update,src/effects/ae_effects_player_state.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; 199/253 instructions covered; the 54-instruction GTE projection and primitive-packet block is declared for GpuDrawFxPlayerState6."
-80070560,GroundSparksUpdateDraw,ae_GroundSparksUpdateDraw,src/effects/ae_effects_ground_sparks.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; 207/378 instructions covered; native projection and SpawnParticle jal/delay-slot ranges are declared and compared through their boundaries."
-80014750,MatrixRotYMul,ae_MatrixRotYMul,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
 80016D60,MeshCalcEnvUVs,ae_MeshCalcEnvUVs,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4,Full instruction coverage; UV generation is routed through the renderer hook.
-80047690,CameraNudge,ae_CameraNudge,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
 8005ACE8,AreaOverlayUpdate,ae_AreaOverlayUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,7,Dispatcher matches; five overlay targets remain hooked pending their ports.
-8005DD78,StageTimerAdd,ae_StageTimerAdd,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,2
-8005E794,PlayerHeal,ae_PlayerHeal,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
-80067AF0,PlayerEyeBlinkUpdate,ae_PlayerEyeBlinkUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,14
 800715B4,IndicatorHintFree,ae_IndicatorHintFree,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,1,Full instruction coverage.
 800715FC,IndicatorHintReady,ae_IndicatorHintReady,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3,Full instruction coverage.
 800719F8,IndicatorsUpdateDraw,ae_IndicatorsUpdateDraw,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,15,Renderer block is registered as RenderIndicator.
-80078A18,PickupCollect,ae_PickupCollect,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,12
-80078C9C,CollisionRayTest,ae_CollisionRayTest,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,16
 8007BC9C,PlayerClearDAT44A2,ae_PlayerClearDAT44A2,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,1,Full instruction coverage.
-800836E0,PickupSetPosition,ae_PickupSetPosition,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,2
-80083CB8,PickupsUpdate,ae_PickupsUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,24
-8008435C,ItemsDraw,ae_ItemsDraw,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,11
 80084598,ItemsUpdateDraw,ae_ItemsUpdateDraw,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,2,Full instruction coverage.
 800846D8,ItemDrawModelEnvMap,ae_ItemDrawModelEnvMap,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,2,Full instruction coverage; environment UV generation is routed through the renderer hook.
-80084964,CollectedItemsAdd,ae_CollectedItemsAdd,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,5
-8008686C,SoundEmitterUpdate,ae_SoundEmitterUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,12
 80087654,BgmApplyPlayerEffect,ae_BgmApplyPlayerEffect,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,5,Full instruction coverage.
-80087EE0,SoundEmitterAttenuation,ae_SoundEmitterAttenuation,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,8
 80088AB8,ColliderScriptsUpdate,ae_ColliderScriptsUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,5,Full instruction coverage.
-8008B7F8,ColliderScriptRun,ae_ColliderScriptRun,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
-8008DF20,MessageBoxSetText,ae_MessageBoxSetText,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3
-8008DF3C,MessageBoxBusy,ae_MessageBoxBusy,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3
-80095600,HudPanelB_Start,ae_HudPanelB_Start,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
-800958C0,HudCounterC_Start,ae_HudCounterC_Start,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,5
 80098398,HudPopupStartPickup,ae_HudPopupStartPickup,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,1,Full instruction coverage.
 800983E8,HudPopupUpdate,ae_HudPopupUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,7,HUD primitive and ordering-table block is registered as RenderHudPopup.
-8009B6C8,SpecialActorPlayerNear,ae_SpecialActorPlayerNear,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,7
-8009B7A0,AreaFeature30GetState,ae_AreaFeature30GetState,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
-800A25CC,SeqFadeTrackProgram,ae_SeqFadeTrackProgram,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3
-800A30D8,SeqGetChannelProgram,ae_SeqGetChannelProgram,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
-800A3570,SfxVoiceSetPanVol,ae_SfxVoiceSetPanVol,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3
 800652E4,PlayerIsOnGround,ae_PlayerIsOnGround,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,6,
 80066018,PlayerStartHurtBlink,ae_PlayerStartHurtBlink,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,3,
 80066094,PlayerEnterSwimIfInWater,ae_PlayerEnterSwimIfInWater,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,6,
@@ -1011,15 +938,12 @@ address,name,c_function,source,checker,status,min_cases,notes
 800729CC,SoundLoopsResume,ae_SoundLoopsResume,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,16,18/18 instructions; overlay and pan hooks checked; 2 mutations caught
 8007A180,PlayerStopGadgetSounds,ae_PlayerStopGadgetSounds,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,16,97/97 instructions; sound-hook order checked; 2 mutations caught
 8007CAE0,DrawScaledModelAt,ae_DrawScaledModelAt,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,19,Scale-zero trap and divisor-minus-one cases checked with renderer hooks.
-8007F5E4,PauseMenuDrawButton,ae_PauseMenuDrawButton,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,130,"Item model selection and disabled-button behavior checked; 8007F790..8007F794 is impossible for integer item values."
 8007F830,ScreenWipeReset,ae_ScreenWipeReset,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,16,full instruction coverage; 2 mutations caught
 8007F848,ScreenSnapshotRestore,ae_ScreenSnapshotRestore,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,16,full instruction coverage; LoadImage arguments and stack window checked; 2 mutations caught
 8007F8F4,ScreenWipeBlurBlock,ae_ScreenWipeBlurBlock,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,4,All 382 pixels and nine blur samples per pixel checked against renderer GTE hooks.
 8007F9D0,ScreenWipeStep,ae_ScreenWipeStep,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,3,Rows 239 4 and 0 cover the wipe stepping and completion paths.
-8007FA4C,PauseMenuRun,ae_PauseMenuRun,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,26,"Mode transitions inputs cursor and sounds checked; 358 instructions are registered renderer or proven unreachable paths. Listing span is 5880 bytes to 80081144; inventory lists 3980."
 80081B9C,PauseMenuSetLayout,ae_PauseMenuSetLayout,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,8,full instruction coverage; 2 mutations caught
 80081D54,PauseMenuDrawButtons,ae_PauseMenuDrawButtons,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,8,All button layout state changes and renderer packet effects checked.
-80081F18,HudDrawWindowFrame,ae_HudDrawWindowFrame,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,3,"Rectangle arguments are checked at the RendererHudDrawWindowFrame native boundary; all 70 GPU packet instructions are registered to the renderer hook."
 80082030,PauseItemEnabled,ae_PauseItemEnabled,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,324,full instruction coverage; edge return values checked; 2 mutations caught
 800821D4,PauseMenuUpdate,ae_PauseMenuUpdate,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,3,Inactive and active paths checked including sound stop and pause run calls.
 8008227C,SetDAT_800BEF80,ae_SetDAT_800BEF80,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,64,RAM write and random values checked; 2 mutations caught
@@ -1078,7 +1002,6 @@ address,name,c_function,source,checker,status,min_cases,notes
 8013E1E0,Area02_SurfaceEffectsInit,ae_Area02_SurfaceEffectsInit,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
 8013E33C,Area02_EffectDraw,ae_Area02_EffectDraw,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin; lifetime/animation records verified; renderer block hooked
 8013E950,Area02_SurfaceDraw,ae_Area02_SurfaceDraw,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin; animation/state records verified; projection and packet blocks hooked
-
 80136000,StageClearUi_LookAt_18B,ae_StageClearUi_LookAt_18B,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
 801361D8,SaveUi_StringTableIndex_18B,ae_SaveUi_StringTableIndex_18B,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
 80136208,Mode_SpecialAreaEnter,ae_Mode_SpecialAreaEnter,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
@@ -1177,3 +1100,422 @@ address,name,c_function,source,checker,status,min_cases,notes
 80139F6C,SeqPlayer_FindRecordByTime,ae_SeqPlayer_FindRecordByTime,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
 8013AC98,SeqPlayer_FindRangeIndex,ae_SeqPlayer_FindRangeIndex,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
 8013B8D0,SeqPlayer_ApplyFlagOps,ae_SeqPlayer_ApplyFlagOps,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80136000,StageStartUi_LookAt,ae_StageStartUi_LookAt,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,4,overlay member 188.bin
+801361D8,StageStartUi_StringTableIndex,ae_StageStartUi_StringTableIndex,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,4,overlay member 188.bin
+8013683C,Mode_StageStart,ae_Mode_StageStart,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,5,overlay member 188.bin
+80136A1C,StageStartUi_RunA,ae_StageStartUi_RunA,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,8,overlay member 188.bin
+80136EAC,StageStartUi_CopyStrip,ae_StageStartUi_CopyStrip,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,2,overlay member 188.bin
+80137198,StageStartUi_DrawWipeA,ae_StageStartUi_DrawWipeA,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,18,overlay member 188.bin
+801375B4,StageStartUi_RunB,ae_StageStartUi_RunB,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,14,overlay member 188.bin
+80137C88,StageStartUi_DrawWipeB,ae_StageStartUi_DrawWipeB,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,20,overlay member 188.bin
+801380DC,StageStartUi_MeshInit,ae_StageStartUi_MeshInit,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,2,overlay member 188.bin
+80138118,StageStartUi_SetAreaMeshTable,ae_StageStartUi_SetAreaMeshTable,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,2,overlay member 188.bin
+80138138,StageStartUi_AreaInit,ae_StageStartUi_AreaInit,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,2,overlay member 188.bin
+801385B0,StageStartUi_RunScript,ae_StageStartUi_RunScript,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,33,overlay member 188.bin
+80138E04,StageStartUi_DrawNumber,ae_StageStartUi_DrawNumber,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,6,overlay member 188.bin
+8013912C,StageStartUi_DrawTitleLines,ae_StageStartUi_DrawTitleLines,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,3,overlay member 188.bin
+80139248,StageStartUi_DrawObjectives,ae_StageStartUi_DrawObjectives,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,12,overlay member 188.bin
+801394D0,StageStartUi_DrawStageIcon,ae_StageStartUi_DrawStageIcon,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,5,overlay member 188.bin
+80139628,StageStartUi_DrawText,ae_StageStartUi_DrawText,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,4,overlay member 188.bin
+80139710,StageStartUi_SetDrawStp,ae_StageStartUi_SetDrawStp,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,2,overlay member 188.bin
+801397F4,StageStartUi_DrawCounter,ae_StageStartUi_DrawCounter,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,4,overlay member 188.bin
+801399A4,StageStartUi_UpdateObjects,ae_StageStartUi_UpdateObjects,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,9,overlay member 188.bin
+80139E0C,StageStartUi_CopyBuffer,ae_StageStartUi_CopyBuffer,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,4,overlay member 188.bin
+80139EE0,StageStartUi_ClampVerts,ae_StageStartUi_ClampVerts,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,6,overlay member 188.bin
+80139FB8,StageStartUi_WipeQuadA,ae_StageStartUi_WipeQuadA,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,4,overlay member 188.bin
+8013A10C,StageStartUi_WipeQuadB,ae_StageStartUi_WipeQuadB,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,4,overlay member 188.bin
+8013A3C4,StageStartUi_DrawScanlines,ae_StageStartUi_DrawScanlines,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,5,overlay member 188.bin
+8013A7A8,RippleGrid_Init2,ae_RippleGrid_Init2,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,2,overlay member 188.bin
+8013A8C0,RippleGrid_Smooth2,ae_RippleGrid_Smooth2,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,4,overlay member 188.bin
+8013AABC,RippleGrid_Draw2,ae_RippleGrid_Draw2,src/modes/ae_ovl188.c,tools/mips/check_ovl188.py,diffed,4,overlay member 188.bin
+80136000,ovl183_entry_80136000,ae_ovl183_entry_80136000,src/modes/ae_ovl183.c,tools/mips/check_ovl183.py,diffed,8,overlay member 183.bin; mode dispatch and input state diffed
+801361BC,SoundTest_Update,ae_SoundTest_Update,src/modes/ae_ovl183.c,tools/mips/check_ovl183.py,diffed,8,overlay member 183.bin; menu and page transitions diffed
+80136244,SoundTest_DrawMainMenu,ae_SoundTest_DrawMainMenu,src/modes/ae_ovl183.c,tools/mips/check_ovl183.py,diffed,8,overlay member 183.bin; native selection renderer receives computed values
+80136698,SoundTest_DrawCommonTest,ae_SoundTest_DrawCommonTest,src/modes/ae_ovl183.c,tools/mips/check_ovl183.py,diffed,8,overlay member 183.bin; selection and sound state diffed
+8013684C,SoundTest_DrawSightTest,ae_SoundTest_DrawSightTest,src/modes/ae_ovl183.c,tools/mips/check_ovl183.py,diffed,8,overlay member 183.bin; XA selection and mute state diffed
+80136000,ovl184_entry_80136000,ae_ovl184_entry_80136000,src/modes/ae_ovl184.c,tools/mips/check_ovl184.py,diffed,8,overlay member 184.bin; mode entry state diffed
+80136038,Ovl184_LoadListLoop,ae_Ovl184_LoadListLoop,src/modes/ae_ovl184.c,tools/mips/check_ovl184.py,diffed,8,overlay member 184.bin; resident-list and frame state diffed
+801361D0,Ovl184_DemoLoop,ae_Ovl184_DemoLoop,src/modes/ae_ovl184.c,tools/mips/check_ovl184.py,diffed,8,overlay member 184.bin; demo input and loop state diffed
+80136350,Ovl184_DrawDemoPrompt,ae_Ovl184_DrawDemoPrompt,src/modes/ae_ovl184.c,tools/mips/check_ovl184.py,diffed,8,overlay member 184.bin; prompt state diffed with native text hooks
+80146000,ovl185_entry_80146000,ae_ovl185_entry_80146000,src/modes/ae_ovl185.c,tools/mips/check_ovl185.py,diffed,8,overlay member 185.bin; mode dispatch diffed
+8014607C,Ovl185_Run,ae_Ovl185_Run,src/modes/ae_ovl185.c,tools/mips/check_ovl185.py,diffed,8,overlay member 185.bin; demo input and mode state diffed
+80146230,Ovl185_Update,ae_Ovl185_Update,src/modes/ae_ovl185.c,tools/mips/check_ovl185.py,diffed,8,overlay member 185.bin; update state diffed with native selection rendering
+80146500,Ovl185_LoadScene,ae_Ovl185_LoadScene,src/modes/ae_ovl185.c,tools/mips/check_ovl185.py,diffed,8,overlay member 185.bin; scene and area load state diffed
+80136000,StageClearUi_LookAt_18A,ae_StageClearUi_LookAt_18A,src/modes/ae_ovl18a.c,tools/mips/check_ovl18a.py,diffed,8,overlay member 18A.bin; camera matrix state diffed
+801361D8,Ovl18A_StringTableIndex,ae_Ovl18A_StringTableIndex,src/modes/ae_ovl18a.c,tools/mips/check_ovl18a.py,diffed,8,overlay member 18A.bin; string indexing diffed
+80136208,ovl_18A_entry_80136208,ae_ovl18A_entry_80136208,src/modes/ae_ovl18a.c,tools/mips/check_ovl18a.py,diffed,8,overlay member 18A.bin; mode state diffed with named renderer and native hooks
+80136724,Ovl18A_WaitInputTimeout,ae_Ovl18A_WaitInputTimeout,src/modes/ae_ovl18a.c,tools/mips/check_ovl18a.py,diffed,8,overlay member 18A.bin; Start edge and signed timeout diffed
+80136780,Ovl18A_SceneInit,ae_Ovl18A_SceneInit,src/modes/ae_ovl18a.c,tools/mips/check_ovl18a.py,diffed,8,overlay member 18A.bin; actor and mesh records diffed
+801368CC,Ovl18A_UpdateSpin,ae_Ovl18A_UpdateSpin,src/modes/ae_ovl18a.c,tools/mips/check_ovl18a.py,diffed,8,overlay member 18A.bin; animation and transform state diffed
+80136AA0,Ovl18A_AdvanceAnim,ae_Ovl18A_AdvanceAnim,src/modes/ae_ovl18a.c,tools/mips/check_ovl18a.py,diffed,8,overlay member 18A.bin; clip advancement diffed
+80136C04,Ovl18A_StartClip,ae_Ovl18A_StartClip,src/modes/ae_ovl18a.c,tools/mips/check_ovl18a.py,diffed,8,overlay member 18A.bin; clip selection state diffed
+80136C6C,Ovl18A_PlayXa,ae_Ovl18A_PlayXa,src/modes/ae_ovl18a.c,tools/mips/check_ovl18a.py,diffed,8,overlay member 18A.bin; calls verified ae_XaPlay directly
+80136C94,Ovl18A_PickScene,ae_Ovl18A_PickScene,src/modes/ae_ovl18a.c,tools/mips/check_ovl18a.py,diffed,28,overlay member 18A.bin; progress-based scene selection diffed
+801391B0,SaveUi_DrawDetail,ae_SaveUi_DrawDetail,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,4,overlay member 186.bin
+801399E4,SaveUi_LastUsedEntry,ae_SaveUi_LastUsedEntry,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,4,overlay member 186.bin
+80139A3C,SaveUi_DrawMainWindow,ae_SaveUi_DrawMainWindow,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,1,overlay member 186.bin
+80139A68,SaveUi_DrawBackground3D,ae_SaveUi_DrawBackground3D,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,4,overlay member 186.bin
+80139F08,SaveUi_YesNoUpdate,ae_SaveUi_YesNoUpdate,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,5,overlay member 186.bin
+80139FC8,SaveUi_FileSelectUpdate,ae_SaveUi_FileSelectUpdate,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,21,overlay member 186.bin
+8013A400,SaveUi_ConfirmPressed,ae_SaveUi_ConfirmPressed,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,4,overlay member 186.bin
+8013A43C,SaveUi_CancelPressed,ae_SaveUi_CancelPressed,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,4,overlay member 186.bin
+8013A634,SaveUi_FadeTick,ae_SaveUi_FadeTick,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,7,overlay member 186.bin
+8013B400,SaveUi_OnCardResult_7,ae_SaveUi_OnCardResult_7,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,10,overlay member 186.bin
+8013B47C,SaveUi_ConfirmDialogUpdate,ae_SaveUi_ConfirmDialogUpdate,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,3,overlay member 186.bin
+8013B550,SaveUi_NameEntryInit,ae_SaveUi_NameEntryInit,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,3,overlay member 186.bin
+8013B6C4,SaveUi_NameEntryUpdate,ae_SaveUi_NameEntryUpdate,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,18,overlay member 186.bin
+8013BC64,SaveUi_NameEntryDraw,ae_SaveUi_NameEntryDraw,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,5,overlay member 186.bin
+8013C7F0,CardMgr_Run,ae_CardMgr_Run,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,3,overlay member 186.bin
+8013C8E8,CardMgr_Init,ae_CardMgr_Init,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,2,overlay member 186.bin
+8013C954,CardMgr_RunFileList,ae_CardMgr_RunFileList,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,2,overlay member 186.bin
+8013CB30,CardMgr_RunFileDetail,ae_CardMgr_RunFileDetail,src/modes/ae_ovl186b.c,tools/mips/check_ovl186b.py,diffed,2,overlay member 186.bin
+80064454,PlayerRunAnimEvents,ae_PlayerRunAnimEvents,src/player/ae_anim_events.c,tools/mips/check_anim_events.py,diffed,361,Real member 008 records and every frame boundary; 352/353 instructions with 800644D4 proven unreachable.
+8007C468,PlayerAnimEventAddHitBodies,ae_PlayerAnimEventAddHitBodies,src/player/ae_anim_events.c,tools/mips/check_anim_events.py,diffed,8,Direct and event-driven cases cover interpolation and body/slot exhaustion.
+80090230,GimmickDeactivateChain,ae_GimmickDeactivateChain,src/world/ae_gimmick.c,tools/mips/check_gimmick.py,diffed,4,Recursive three-link deactivation helper.
+8008ECFC,SwingDoorSetPivot,ae_SwingDoorSetPivot,src/world/ae_gimmick.c,tools/mips/check_gimmick.py,diffed,22,Eight direction cases and two pivot formula modes.
+80046970,CameraKindFixed_Nop,ae_CameraKindFixed_Nop,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+80047104,CameraSlotInitFollow,ae_CameraSlotInitFollow,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+800471E4,CameraSlotCreate,ae_CameraSlotCreate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+80047290,CameraSlotRemove,ae_CameraSlotRemove,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+80047360,CameraSlotAimAtFocus,ae_CameraSlotAimAtFocus,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+80047464,CameraSlotSmoothEye,ae_CameraSlotSmoothEye,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; positive caller divisors and registered divide-trap proofs.
+80047558,CameraSlotSmoothTarget,ae_CameraSlotSmoothTarget,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; positive caller divisors and registered divide-trap proofs.
+80047654,CameraKindAim_SnapToFocus,ae_CameraKindAim_SnapToFocus,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+800482C0,CameraFollowDispatch,ae_CameraFollowDispatch,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+80048454,CameraKindAimUpdate,ae_CameraKindAimUpdate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; player-state and gadget gates covered.
+8004875C,CameraKindFixedUpdate,ae_CameraKindFixedUpdate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; radar and fixed-state paths covered.
+80048D10,CameraSlotPlaceBehindPlayer,ae_CameraSlotPlaceBehindPlayer,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+80048DD0,CameraSlotUpdateYaw,ae_CameraSlotUpdateYaw,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; yaw wrap and input branches covered.
+80048F6C,CameraSlotGroundClamp,ae_CameraSlotGroundClamp,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+8004906C,CameraSlotGroundClampNear,ae_CameraSlotGroundClampNear,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; clamp and no-clamp paths covered.
+8004923C,CameraSlotStickOrbit,ae_CameraSlotStickOrbit,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; orbit directions and limits covered.
+800493D4,CameraSlotResetFollow,ae_CameraSlotResetFollow,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+80049514,CameraSlotSnapshotEye,ae_CameraSlotSnapshotEye,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+8004AA24,CameraSlotFlagBit81,ae_CameraSlotFlagBit81,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+8004AC84,CameraFollowAimedVariant,ae_CameraFollowAimedVariant,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; aim and player-state paths covered.
+8004B5FC,CameraKind3FollowUpdate,ae_CameraKind3FollowUpdate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+8004B8F4,CameraSlotGetFocusPoint,ae_CameraSlotGetFocusPoint,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; supported focus modes and unreachable mode proof.
+8004C2E4,CameraSlotClearScript,ae_CameraSlotClearScript,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,Readable RAM-image camera port; differential cases at checker default scale.
+800972E0,StageProgressRestore,ae_StageProgressRestore,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,6,Restores area activity bytes; handles time-station entry and one-time progress reset.
+800955C8,StageRequestRetry,ae_StageRequestRetry,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,1,Repeats the current area's action-8 request using the live area and entry.
+80010C3C,AreaGetEntryPoint,ae_AreaGetEntryPoint,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,3,Full instruction coverage; real area data and edge entries.
+80032BBC,PlayerSpawnAtEntry,ae_PlayerSpawnAtEntry,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,12,Full instruction coverage across several real areas and entry records.
+80046D80,SetProjection,ae_SetProjection,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,3,Full instruction coverage; projection RAM and GTE H output compared.
+800489EC,CameraShakeReset,ae_CameraShakeReset,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,1,Full instruction coverage; both shake fields are seeded nonzero.
+8004B510,AimModeLeave,ae_AimModeLeave,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,2,Full instruction coverage; active and inactive paths with sound ID 5 setup.
+8004BAD8,EventCamSetScript,ae_EventCamSetScript,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,2,Full instruction coverage for both script table sets.
+8004D0F0,StageExitFlagsClear,ae_StageExitFlagsClear,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,1,Full instruction coverage; halfword flags and pending byte are seeded.
+8005DC78,PlayerCanExitStage,ae_PlayerCanExitStage,src/effects/ae_effects_core.c,tools/mips/check_effects.py,diffed,40,Uses nine real area members; all 27 original instructions covered.
+8006EF08,TrailPointAdd,ae_TrailPointAdd,src/effects/ae_effects_core.c,tools/mips/check_effects.py,diffed,40,Uses nine real area members; all 32 original instructions covered.
+8006D4C0,SpriteEffectQueue,ae_SpriteEffectQueue,src/effects/ae_effects_core.c,tools/mips/check_effects.py,diffed,40,Uses nine real area members; one proven impossible fallback instruction declared unreachable.
+8006D588,SpriteEffectQueue2,ae_SpriteEffectQueue2,src/effects/ae_effects_core.c,tools/mips/check_effects.py,diffed,40,Calls the verified SpriteEffectQueue port; all 8 original instructions covered.
+8006B950,PlayerSplash,ae_PlayerSplash,src/effects/ae_effects_player.c,tools/mips/check_effects.py,diffed,40,Directly calls verified particle and sound ports; checker models PlaySfx only to compare its selected id; all 42 instructions covered.
+8006B168,PlayerFxTrailUpdate,ae_PlayerFxTrailUpdate,src/effects/ae_effects_player.c,tools/mips/check_effects.py,diffed,40,Directly calls verified EffectSpawnFromDef and SpawnParticle ports; all 109 original instructions covered.
+8006EE3C,TrailsUpdate,ae_TrailsUpdate,src/effects/ae_effects_trails.c,tools/mips/check_effects.py,diffed,40,Uses nine real area members; all 50 reachable instructions covered; 8006EED8 is unreachable from unsigned halfword bounds.
+80071370,FlyingMeshesUpdateDraw,ae_FlyingMeshesUpdateDraw,src/effects/ae_effects_flying.c,tools/mips/check_effects.py,diffed,40,Nine real area members; 135/137 original instructions covered; 80071518..8007151C are transparently patched to observe and execute SpawnParticle.
+8006A9F8,EffectsUpdateAll,ae_EffectsUpdateAll,src/effects/ae_effects_dispatch.c,tools/mips/check_effects.py,diffed,40,Nine real area members; all 26 instructions covered; completed subsystems call their ports directly and preserve the original dispatch order.
+8006BA2C,PlayerWaterEffectsUpdate,ae_PlayerWaterEffectsUpdate,src/effects/ae_effects_water.c,tools/mips/check_effects.py,diffed,40,Nine real area members; all 313 instructions covered across five water-state scenarios and boundary velocities.
+8006D5A8,SpriteEffectsDraw,ae_SpriteEffectsDraw,src/effects/ae_effects_sprite_draw.c,tools/mips/check_effects.py,diffed,40,Nine real area members; 156/328 original instructions covered and 172 projection/packet instructions declared for GpuDrawSprite.
+8006E1C0,FxPlayerState6Update,ae_FxPlayerState6Update,src/effects/ae_effects_player_state.c,tools/mips/check_effects.py,diffed,40,Nine real area members; 199/253 instructions covered; the 54-instruction GTE projection and primitive-packet block is declared for GpuDrawFxPlayerState6.
+80070560,GroundSparksUpdateDraw,ae_GroundSparksUpdateDraw,src/effects/ae_effects_ground_sparks.c,tools/mips/check_effects.py,diffed,40,Nine real area members; 207/378 instructions covered; native projection and SpawnParticle jal/delay-slot ranges are declared and compared through their boundaries.
+80014750,MatrixRotYMul,ae_MatrixRotYMul,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4,
+80047690,CameraNudge,ae_CameraNudge,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4,
+8005DD78,StageTimerAdd,ae_StageTimerAdd,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,2,
+8005E794,PlayerHeal,ae_PlayerHeal,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4,
+80067AF0,PlayerEyeBlinkUpdate,ae_PlayerEyeBlinkUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,14,
+80078A18,PickupCollect,ae_PickupCollect,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,12,
+80078C9C,CollisionRayTest,ae_CollisionRayTest,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,16,
+800836E0,PickupSetPosition,ae_PickupSetPosition,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,2,
+80083CB8,PickupsUpdate,ae_PickupsUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,24,
+8008435C,ItemsDraw,ae_ItemsDraw,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,11,
+80084964,CollectedItemsAdd,ae_CollectedItemsAdd,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,5,
+8008686C,SoundEmitterUpdate,ae_SoundEmitterUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,12,
+80087EE0,SoundEmitterAttenuation,ae_SoundEmitterAttenuation,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,8,
+8008B7F8,ColliderScriptRun,ae_ColliderScriptRun,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4,
+8008DF20,MessageBoxSetText,ae_MessageBoxSetText,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3,
+8008DF3C,MessageBoxBusy,ae_MessageBoxBusy,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3,
+80095600,HudPanelB_Start,ae_HudPanelB_Start,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4,
+800958C0,HudCounterC_Start,ae_HudCounterC_Start,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,5,
+8009B6C8,SpecialActorPlayerNear,ae_SpecialActorPlayerNear,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,7,
+8009B7A0,AreaFeature30GetState,ae_AreaFeature30GetState,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4,
+800A25CC,SeqFadeTrackProgram,ae_SeqFadeTrackProgram,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3,
+800A30D8,SeqGetChannelProgram,ae_SeqGetChannelProgram,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4,
+800A3570,SfxVoiceSetPanVol,ae_SfxVoiceSetPanVol,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3,
+8007F5E4,PauseMenuDrawButton,ae_PauseMenuDrawButton,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,130,Item model selection and disabled-button behavior checked; 8007F790..8007F794 is impossible for integer item values.
+8007FA4C,PauseMenuRun,ae_PauseMenuRun,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,26,Mode transitions inputs cursor and sounds checked; 358 instructions are registered renderer or proven unreachable paths. Listing span is 5880 bytes to 80081144; inventory lists 3980.
+80081F18,HudDrawWindowFrame,ae_HudDrawWindowFrame,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,3,Rectangle arguments are checked at the RendererHudDrawWindowFrame native boundary; all 70 GPU packet instructions are registered to the renderer hook.
+800115F4,AreaUsesAltMember,ae_AreaUsesAltMember,src/core/ae_missa_core.c,tools/mips/check_missa.py,diffed,32,51/51 instructions; 0 declared unreachable; 2/2 mutations caught
+80013128,PadDemoPlaybackStep,ae_PadDemoPlaybackStep,src/core/ae_missa_core.c,tools/mips/check_missa.py,diffed,32,77/77 instructions; 0 declared unreachable; 2/2 mutations caught
+800140B4,StickToButtons,ae_StickToButtons,src/core/ae_missa_core.c,tools/mips/check_missa.py,diffed,32,26/26 instructions; 0 declared unreachable; 2/2 mutations caught
+80015B30,ModelInitNormals,ae_ModelInitNormals,src/core/ae_missa_core.c,tools/mips/check_missa.py,diffed,32,28/28 instructions; 0 declared unreachable; 2/2 mutations caught
+80046978,ScreenFadeSet,ae_ScreenFadeSet,src/core/ae_missa_core.c,tools/mips/check_missa.py,diffed,32,6/6 instructions; 0 declared unreachable; 2/2 mutations caught
+8005DD44,PlayTimeAdd,ae_PlayTimeAdd,src/core/ae_missa_core.c,tools/mips/check_missa.py,diffed,32,13/13 instructions; 0 declared unreachable; 2/2 mutations caught
+800650D8,PlayerInput_StickGesture,ae_PlayerInput_StickGesture,src/core/ae_missa_core.c,tools/mips/check_missa.py,diffed,32,4/4 instructions; 0 declared unreachable; 2/2 mutations caught
+80073B64,PointInBoxXZ,ae_PointInBoxXZ,src/core/ae_missa_core.c,tools/mips/check_missa.py,diffed,32,25/25 instructions; 0 declared unreachable; 2/2 mutations caught
+8007774C,DirIndexFromFlags,ae_DirIndexFromFlags,src/core/ae_missa_core.c,tools/mips/check_missa.py,diffed,32,24/24 instructions; 0 declared unreachable; 2/2 mutations caught
+8007A14C,FadeFrame,ae_FadeFrame,src/core/ae_missa_core.c,tools/mips/check_missa.py,diffed,32,10/10 instructions; 0 declared unreachable; 2/2 mutations caught
+80054A08,ZakoClearDefeatedBits,ae_ZakoClearDefeatedBits,src/world/ae_missa_zako.c,tools/mips/check_missa.py,diffed,32,45/45 instructions; 0 declared unreachable; 2/2 mutations caught
+80010D80,AreaCheckExits,ae_AreaCheckExits,src/world/ae_missa_area.c,tools/mips/check_missa.py,diffed,32,204/204 instructions; 0 declared unreachable; 2/2 mutations caught
+80032D38,PlayerPlaceAtEntry,ae_PlayerPlaceAtEntry,src/player/ae_missa_player.c,tools/mips/check_missa.py,diffed,32,60/60 instructions; 0 declared unreachable; 2/2 mutations caught
+8003272C,PlayerInit,ae_PlayerInit,src/player/ae_missa_player.c,tools/mips/check_missa.py,diffed,32,236/236 instructions; 0 declared unreachable; 2/2 mutations caught
+8001F8B0,TrailRingPush,ae_TrailRingPush,src/player/ae_missa_player.c,tools/mips/check_missa.py,diffed,32,41/41 instructions; 0 declared unreachable; 2/2 mutations caught
+8001F954,TrailRingDraw,ae_TrailRingDraw,src/ui/ae_missa_renderer.c,tools/mips/check_missa.py,diffed,32,94/145 instructions; 50 renderer words and 1 dead tail word declared unreachable; 2/2 mutations caught
+8005F68C,HudDrawTimeRankIcon,ae_HudDrawTimeRankIcon,src/ui/ae_missa_hud.c,tools/mips/check_missa.py,diffed,32,34/57 instructions; 23 declared unreachable; 2/2 mutations caught
+80060448,HudDrawMonkeyInfo,ae_HudDrawMonkeyInfo,src/ui/ae_missa_hud.c,tools/mips/check_missa.py,diffed,32,161/203 instructions; 42 declared unreachable; 2/2 mutations caught
+8004AA58,CameraRcCarFollow,ae_CameraRcCarFollow,src/camera/ae_missa_rc_car.c,tools/mips/check_missa.py,diffed,32,132/139 instructions; 7 declared unreachable; 2/2 mutations caught
+800509CC,ZakoSaveDefeatedMask,ae_ZakoSaveDefeatedMask,src/world/ae_missa_zako.c,tools/mips/check_missa.py,diffed,32,76/76 instructions; 0 declared unreachable; 2/2 mutations caught
+80047E8C,CameraRadarFocusSelect,ae_CameraRadarFocusSelect,src/camera/ae_missa_camera.c,tools/mips/check_missa.py,diffed,32,21/21 instructions; 0 declared unreachable; 2/2 mutations caught
+80047EE0,CameraRadarFocusUpdate,ae_CameraRadarFocusUpdate,src/camera/ae_missa_camera.c,tools/mips/check_missa.py,diffed,32,68/68 instructions; 0 declared unreachable; 2/2 mutations caught
+8004B54C,CameraGetSlotTarget,ae_CameraGetSlotTarget,src/camera/ae_missa_camera.c,tools/mips/check_missa.py,diffed,32,13/13 instructions; 0 declared unreachable; 2/2 mutations caught
+8004898C,BossAimSfx,ae_BossAimSfx,src/camera/ae_missa_camera.c,tools/mips/check_missa.py,diffed,32,24/24 instructions; 0 declared unreachable; 2/2 mutations caught
+80048398,AimRequestStart,ae_AimRequestStart,src/camera/ae_missa_camera.c,tools/mips/check_missa.py,diffed,32,38/38 instructions; 0 declared unreachable; 2/2 mutations caught
+8004B590,CameraAreaScriptDispatch,ae_CameraAreaScriptDispatch,src/camera/ae_missa_camera.c,tools/mips/check_missa.py,diffed,32,27/27 instructions; 0 declared unreachable; 2/2 mutations caught
+8004D880,CallIndexedHandler,ae_CallIndexedHandler,src/camera/ae_missa_camera.c,tools/mips/check_missa.py,diffed,32,14/14 instructions; 0 declared unreachable; 2/2 mutations caught
+8004D73C,StageExitStart,ae_StageExitStart,src/camera/ae_missa_camera.c,tools/mips/check_missa.py,diffed,32,25/25 instructions; 0 declared unreachable; 2/2 mutations caught
+8004BBF0,EventCamStartVictory,ae_EventCamStartVictory,src/camera/ae_missa_camera.c,tools/mips/check_missa.py,diffed,32,27/27 instructions; 0 declared unreachable; 2/2 mutations caught
+8004BC5C,EventCamStartDefault,ae_EventCamStartDefault,src/camera/ae_missa_camera.c,tools/mips/check_missa.py,diffed,32,16/16 instructions; 0 declared unreachable; 2/2 mutations caught
+80066EEC,PlayerAttachSet,ae_PlayerAttachSet,src/camera/ae_missa_camera.c,tools/mips/check_missa.py,diffed,32,18/18 instructions; 0 declared unreachable; 2/2 mutations caught
+80066F34,PlayerSetBounceFlag,ae_PlayerSetBounceFlag,src/camera/ae_missa_camera.c,tools/mips/check_missa.py,diffed,32,7/7 instructions; 0 declared unreachable; 2/2 mutations caught
+800698E4,SpawnEffectGroupAt,ae_SpawnEffectGroupAt,src/effects/ae_missa_spawn.c,tools/mips/check_missa.py,diffed,32,15/15 instructions; 0 declared unreachable; 2/2 mutations caught
+8006AA60,BreakableFinalizeVisualUpdate,ae_BreakableFinalizeVisualUpdate,src/effects/ae_missa_spawn.c,tools/mips/check_missa.py,diffed,32,44/44 instructions; 0 declared unreachable; 2/2 mutations caught
+8006C58C,PlayerFxJumpBurst,ae_PlayerFxJumpBurst,src/effects/ae_missa_spawn.c,tools/mips/check_missa.py,diffed,32,70/70 instructions; 0 declared unreachable; 2/2 mutations caught
+8006CE9C,PlayerFxSpawn116,ae_PlayerFxSpawn116,src/effects/ae_missa_spawn.c,tools/mips/check_missa.py,diffed,32,21/21 instructions; 0 declared unreachable; 2/2 mutations caught
+8006CFBC,PlayerFxSetMatrixPos,ae_PlayerFxSetMatrixPos,src/effects/ae_missa_spawn.c,tools/mips/check_missa.py,diffed,32,34/34 instructions; 0 declared unreachable; 2/2 mutations caught
+800717B4,Indicator_Activate,ae_Indicator_Activate,src/world/ae_missa_indicator.c,tools/mips/check_missa.py,diffed,32,145/145 instructions; 0 declared unreachable; 2/2 mutations caught
+8007CDFC,TargetListFindBest,ae_TargetListFindBest,src/player/ae_missa_gadget.c,tools/mips/check_missa.py,diffed,32,86/86 instructions; 0 declared unreachable; 2/2 mutations caught
+8007F40C,PadDirectionCode,ae_PadDirectionCode,src/camera/ae_missa_camera.c,tools/mips/check_missa.py,diffed,32,85/85 instructions; 0 declared unreachable; 2/2 mutations caught
+80136000,SaveUi_DrawText,ae_SaveUi_DrawText,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,5,overlay member 186.bin
+80136120,SaveUi_TextWidth,ae_SaveUi_TextWidth,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,5,overlay member 186.bin
+801368E8,SaveUi_LookAt,ae_SaveUi_LookAt,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,5,overlay member 186.bin
+80136A88,SaveUi_StringTableIndex,ae_SaveUi_StringTableIndex,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,7,overlay member 186.bin
+80136AB8,Mode_SaveMenu,ae_Mode_SaveMenu,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,9,overlay member 186.bin
+80136D58,SaveUi_FrameReset,ae_SaveUi_FrameReset,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,4,overlay member 186.bin
+80136D90,SaveUi_SceneInit,ae_SaveUi_SceneInit,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,8,overlay member 186.bin
+80136ED8,SaveUi_RunMenuA,ae_SaveUi_RunMenuA,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,9,overlay member 186.bin
+80137104,SaveUi_RunMenuB,ae_SaveUi_RunMenuB,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,8,overlay member 186.bin
+8013730C,SaveUi_FileSelectInit,ae_SaveUi_FileSelectInit,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,6,overlay member 186.bin
+80137424,SaveUi_TotalMonkeyCount,ae_SaveUi_TotalMonkeyCount,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,4,overlay member 186.bin
+80137454,SaveUi_MenuUpdate,ae_SaveUi_MenuUpdate,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,9,overlay member 186.bin
+8013758C,SaveUi_RunMenuC,ae_SaveUi_RunMenuC,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,15,overlay member 186.bin
+801377F8,SaveUi_CountEntries,ae_SaveUi_CountEntries,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,4,overlay member 186.bin
+8013784C,SaveUi_SetState,ae_SaveUi_SetState,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,50,overlay member 186.bin
+80137C84,SaveUi_FormatNumber3,ae_SaveUi_FormatNumber3,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,12,overlay member 186.bin
+80137DA8,SaveUi_MemCardStart,ae_SaveUi_MemCardStart,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,4,overlay member 186.bin
+80137E1C,SaveUi_StateTick,ae_SaveUi_StateTick,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,4,overlay member 186.bin
+80137E4C,SaveUi_StateMachine,ae_SaveUi_StateMachine,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,184,overlay member 186.bin
+801383E0,SaveUi_OnCardResult_0,ae_SaveUi_OnCardResult_0,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,11,overlay member 186.bin
+801384BC,SaveUi_OnCardResult_1,ae_SaveUi_OnCardResult_1,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,10,overlay member 186.bin
+80138524,SaveUi_OnCardResult_2,ae_SaveUi_OnCardResult_2,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,10,overlay member 186.bin
+801385EC,SaveUi_OnCardResult_3,ae_SaveUi_OnCardResult_3,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,11,overlay member 186.bin
+801386CC,SaveUi_OnCardResult_4,ae_SaveUi_OnCardResult_4,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,10,overlay member 186.bin
+80138744,SaveUi_OnCardResult_5,ae_SaveUi_OnCardResult_5,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,10,overlay member 186.bin
+801387FC,SaveUi_OnCardResult_6,ae_SaveUi_OnCardResult_6,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,14,overlay member 186.bin
+8013888C,SaveUi_DrawFileSelect,ae_SaveUi_DrawFileSelect,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,8,overlay member 186.bin
+80138DC0,SaveUi_DrawSlot,ae_SaveUi_DrawSlot,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,24,overlay member 186.bin
+8013829C,SaveUi_CardStateThread,ae_SaveUi_CardStateThread,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,48,overlay member 186.bin
+80138370,SaveUi_CardResultThread,ae_SaveUi_CardResultThread,src/modes/ae_ovl186a.c,tools/mips/check_ovl186a.py,diffed,10,overlay member 186.bin
+8013CD1C,CardMgr_SetState,ae_CardMgr_SetState,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,48,overlay member 186.bin
+8013D19C,CardMgr_StartOps,ae_CardMgr_StartOps,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,1,overlay member 186.bin
+8013D1F8,SsGetMute,ae_SsGetMute,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,1,overlay member 186.bin
+8013D218,CardMgr_IsBusy,ae_CardMgr_IsBusy,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,1,overlay member 186.bin
+8013D238,CardMgr_StateMachine,ae_CardMgr_StateMachine,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,88,overlay member 186.bin
+8013D834,CardMgr_OnCardResult_0,ae_CardMgr_OnCardResult_0,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,7,overlay member 186.bin
+8013D92C,CardMgr_OnCardResult_1,ae_CardMgr_OnCardResult_1,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,6,overlay member 186.bin
+8013DA00,CardMgr_OnCardResult_2,ae_CardMgr_OnCardResult_2,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,3,overlay member 186.bin
+8013DA7C,CardMgr_OnCardResult_3,ae_CardMgr_OnCardResult_3,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,6,overlay member 186.bin
+8013DB48,CardMgr_OnCardResult_4,ae_CardMgr_OnCardResult_4,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,5,overlay member 186.bin
+8013DBF0,CardMgr_OnCardResult_5,ae_CardMgr_OnCardResult_5,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,5,overlay member 186.bin
+8013DC78,CardMgr_OnCardResult_6,ae_CardMgr_OnCardResult_6,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,20,overlay member 186.bin
+8013DDF0,CardMgr_OnCardResult_7,ae_CardMgr_OnCardResult_7,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,5,overlay member 186.bin
+8013DEB4,CardMgr_OnCardResult_8,ae_CardMgr_OnCardResult_8,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,5,overlay member 186.bin
+8013DF40,CardMgr_OnCardResult_9,ae_CardMgr_OnCardResult_9,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,21,overlay member 186.bin
+8013E098,McxCardTypeSync,ae_McxCardTypeSync,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,3,overlay member 186.bin
+8013E114,McxAllInfoSync,ae_McxAllInfoSync,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,4,overlay member 186.bin
+8013E188,CardMgr_ResetSlots,ae_CardMgr_ResetSlots,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,4,overlay member 186.bin
+8013E22C,McxHideTransSync,ae_McxHideTransSync,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,13,overlay member 186.bin
+8013E290,CardMgr_Draw,ae_CardMgr_Draw,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,5,overlay member 186.bin
+8013E30C,CardMgr_MenuUpdate,ae_CardMgr_MenuUpdate,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,25,overlay member 186.bin
+8013EB14,CardMgr_AnimTick,ae_CardMgr_AnimTick,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,8,overlay member 186.bin
+8013F630,CardMgr_RunMessage,ae_CardMgr_RunMessage,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,9,overlay member 186.bin
+8013F808,CardMgr_DrawMessage,ae_CardMgr_DrawMessage,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,18,overlay member 186.bin
+8013FB30,CardMgr_DrawMenuLabels,ae_CardMgr_DrawMenuLabels,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,5,overlay member 186.bin
+8013FEFC,CardMgr_DrawBlinkingMenu,ae_CardMgr_DrawBlinkingMenu,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,14,overlay member 186.bin
+8014016C,SaveUi_DrawStateOverlay,ae_SaveUi_DrawStateOverlay,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,146,overlay member 186.bin
+8013FC20,SaveUi_GetColorBuffer,ae_SaveUi_GetColorBuffer,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,1,overlay member 186.bin
+8013FC2C,CardMgr_DrawMenuItems,ae_CardMgr_DrawMenuItems,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,5,overlay member 186.bin
+8013FD44,SaveUi_GetBuffer2,ae_SaveUi_GetBuffer2,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,1,overlay member 186.bin
+8013FD50,CardMgr_DrawMenuTexts,ae_CardMgr_DrawMenuTexts,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,8,overlay member 186.bin
+8013FDE4,CardMgr_DrawMenuItems2,ae_CardMgr_DrawMenuItems2,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,8,overlay member 186.bin
+8013FEA0,SaveUi_DrawStringPair,ae_SaveUi_DrawStringPair,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,1,overlay member 186.bin
+8013FFEC,SaveUi_DrawYesNo,ae_SaveUi_DrawYesNo,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,4,overlay member 186.bin
+80140074,SaveUi_DrawFileHeader,ae_SaveUi_DrawFileHeader,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,4,overlay member 186.bin
+801400F4,SaveUi_DrawEmptySlotText,ae_SaveUi_DrawEmptySlotText,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,4,overlay member 186.bin
+80141A10,SaveUi_ThreadSetHook,ae_SaveUi_ThreadSetHook,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,4,overlay member 186.bin
+80141AB4,SaveUi_ThreadClose,ae_SaveUi_ThreadClose,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,4,overlay member 186.bin
+80141AF0,SaveUi_Nop,ae_SaveUi_Nop,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,4,overlay member 186.bin
+80141B00,SaveUi_ThreadSwitch,ae_SaveUi_ThreadSwitch,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,4,overlay member 186.bin
+80141B34,SaveUi_ThreadSetHookReset,ae_SaveUi_ThreadSetHookReset,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,4,overlay member 186.bin
+80141B90,McxStartCom,ae_McxStartCom,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,4,overlay member 186.bin
+80141C40,MCXINIT_OBJ_B0,ae_MCXINIT_OBJ_B0,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,4,overlay member 186.bin
+80141C8C,MCXINIT_OBJ_FC,ae_MCXINIT_OBJ_FC,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,1,overlay member 186.bin
+80141C94,MCXINIT_OBJ_104,ae_MCXINIT_OBJ_104,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,16,overlay member 186.bin
+80141CD4,MCXINIT_OBJ_144,ae_MCXINIT_OBJ_144,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,16,overlay member 186.bin
+80141D14,MCXINIT_OBJ_184,ae_MCXINIT_OBJ_184,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,16,overlay member 186.bin
+80141E4C,MCXINIT_OBJ_2BC,ae_MCXINIT_OBJ_2BC,src/modes/ae_ovl186c.c,tools/mips/check_ovl186c.py,diffed,4,overlay member 186.bin
+80136000,HubExitUi_Init,ae_HubExitUi_Init,src/modes/ae_ovl189.c,tools/mips/check_ovl189.py,diffed,12,overlay member 189.bin
+8013606C,Mode_LeaveHub,ae_Mode_LeaveHub,src/modes/ae_ovl189.c,tools/mips/check_ovl189.py,diffed,20,overlay member 189.bin
+801375C0,HubExitUi_DrawModelA,ae_HubExitUi_DrawModelA,src/modes/ae_ovl189.c,tools/mips/check_ovl189.py,diffed,12,"overlay member 189.bin; matrix and mesh transform ported, projection and primitive emission hooked"
+80137714,HubExitUi_DrawModelB,ae_HubExitUi_DrawModelB,src/modes/ae_ovl189.c,tools/mips/check_ovl189.py,diffed,12,"overlay member 189.bin; matrix and mesh transform ported, projection and primitive emission hooked"
+8013786C,HubExitUi_DrawModelC,ae_HubExitUi_DrawModelC,src/modes/ae_ovl189.c,tools/mips/check_ovl189.py,diffed,12,"overlay member 189.bin; matrix and environment UV computation ported, model transform and environment-map draw hooked"
+80137950,HubExitUi_Run,ae_HubExitUi_Run,src/modes/ae_ovl189.c,tools/mips/check_ovl189.py,diffed,29,overlay member 189.bin
+801382D8,HubExitUi_IsDestinationUnlocked,ae_HubExitUi_IsDestinationUnlocked,src/modes/ae_ovl189.c,tools/mips/check_ovl189.py,diffed,12,overlay member 189.bin
+801383EC,HubExitUi_GetProgress,ae_HubExitUi_GetProgress,src/modes/ae_ovl189.c,tools/mips/check_ovl189.py,diffed,12,overlay member 189.bin
+80138468,HubExitUi_GetFlags,ae_HubExitUi_GetFlags,src/modes/ae_ovl189.c,tools/mips/check_ovl189.py,diffed,12,overlay member 189.bin
+80138560,SaveUi_LookAt_189,ae_SaveUi_LookAt_189,src/modes/ae_ovl189.c,tools/mips/check_ovl189.py,diffed,13,overlay member 189.bin
+80138700,HubExitUi_DrawText,ae_HubExitUi_DrawText,src/modes/ae_ovl189.c,tools/mips/check_ovl189.py,diffed,12,overlay member 189.bin
+801387FC,SaveUi_StringTableIndex_189,ae_SaveUi_StringTableIndex_189,src/modes/ae_ovl189.c,tools/mips/check_ovl189.py,diffed,12,overlay member 189.bin
+8013882C,HubExitUi_TextWidth,ae_HubExitUi_TextWidth,src/modes/ae_ovl189.c,tools/mips/check_ovl189.py,diffed,12,overlay member 189.bin
+80082230,HudTextWidth,ae_HudTextWidth,src/ui/ae_missb_ui.c,tools/mips/check_missb.py,diffed,3,19/19 MIPS instructions covered
+80082398,PauseDrawCaptureGrid,ae_PauseDrawCaptureGrid,src/ui/ae_missb_ui.c,tools/mips/check_missb.py,diffed,6,321/344 MIPS instructions covered; 23 packet/unreachable instructions declared
+800828F8,HudSetGeomOffsetThenDraw,ae_HudSetGeomOffsetThenDraw,src/ui/ae_missb_ui.c,tools/mips/check_missb.py,diffed,3,67/67 MIPS instructions covered
+80082A04,PauseDrawCounter,ae_PauseDrawCounter,src/ui/ae_missb_ui.c,tools/mips/check_missb.py,diffed,9,207/207 MIPS instructions covered
+80082D40,PauseMenuInitVolumes,ae_PauseMenuInitVolumes,src/ui/ae_missb_ui.c,tools/mips/check_missb.py,diffed,3,11/11 MIPS instructions covered
+80082D6C,PauseMenuDrawSubScreen,ae_PauseMenuDrawSubScreen,src/ui/ae_missb_ui.c,tools/mips/check_missb.py,diffed,12,335/356 MIPS instructions covered; 21 packet instructions declared
+800832FC,StringTableIndex_Main,ae_StringTableIndex_Main,src/ui/ae_missb_ui.c,tools/mips/check_missb.py,diffed,3,12/12 MIPS instructions covered
+800847C4,ItemsClearFlags,ae_ItemsClearFlags,src/world/ae_missb_items.c,tools/mips/check_missb.py,diffed,3,10/10 MIPS instructions covered
+800847EC,ItemSaveCollectedMask,ae_ItemSaveCollectedMask,src/world/ae_missb_items.c,tools/mips/check_missb.py,diffed,3,49/49 MIPS instructions covered
+80086148,SoundSilence,ae_SoundSilence,src/sound/ae_missb_sound.c,tools/mips/check_missb.py,diffed,5,10/10 MIPS instructions covered
+80086170,SoundStopAndRestoreVolume,ae_SoundStopAndRestoreVolume,src/sound/ae_missb_sound.c,tools/mips/check_missb.py,diffed,5,54/54 MIPS instructions covered
+8008760C,BgmFadeOut,ae_BgmFadeOut,src/sound/ae_missb_sound.c,tools/mips/check_missb.py,diffed,3,18/18 MIPS instructions covered
+80087BA4,SoundEmitterVolume,ae_SoundEmitterVolume,src/sound/ae_missb_sound.c,tools/mips/check_missb.py,diffed,3,31/33 MIPS instructions covered; 2 registered unreachable
+80087C64,SoundSetStereo,ae_SoundSetStereo,src/sound/ae_missb_sound.c,tools/mips/check_missb.py,diffed,3,10/10 MIPS instructions covered
+80088D78,ColliderScriptRiseToGround,ae_ColliderScriptRiseToGround,src/world/ae_missb_colliders.c,tools/mips/check_missb.py,diffed,8,109/109 MIPS instructions covered
+80088F2C,ColliderScriptLiftUpdate,ae_ColliderScriptLiftUpdate,src/world/ae_missb_colliders.c,tools/mips/check_missb.py,diffed,13,230/230 MIPS instructions covered
+800895F0,ColliderScriptRotateUpdate,ae_ColliderScriptRotateUpdate,src/world/ae_missb_colliders.c,tools/mips/check_missb.py,diffed,13,324/328 MIPS instructions covered; 4 registered unreachable
+80089B10,ColliderScriptOrbitPlayer,ae_ColliderScriptOrbitPlayer,src/world/ae_missb_colliders.c,tools/mips/check_missb.py,diffed,12,147/149 MIPS instructions covered; 2 registered unreachable
+80089D64,ColliderScriptNoOpA,ae_ColliderScriptNoOpA,src/world/ae_missb_colliders.c,tools/mips/check_missb.py,diffed,3,2/2 MIPS instructions covered
+80089D6C,ColliderScriptPropTransformUpdate,ae_ColliderScriptPropTransformUpdate,src/world/ae_missb_colliders.c,tools/mips/check_missb.py,diffed,18,453/465 MIPS instructions covered; 12 registered unreachable
+8008AA64,ColliderScriptNoOpB,ae_ColliderScriptNoOpB,src/world/ae_missb_colliders.c,tools/mips/check_missb.py,diffed,3,2/2 MIPS instructions covered
+8008DEEC,MessageBoxOpen,ae_MessageBoxOpen,src/ui/ae_missb_ui.c,tools/mips/check_missb.py,diffed,3,13/13 MIPS instructions covered
+8008EC70,BodyInsideBox,ae_BodyInsideBox,src/world/ae_missb_boxes.c,tools/mips/check_missb.py,diffed,5,35/35 MIPS instructions covered
+8008F308,SwingDoorBodyDelta,ae_SwingDoorBodyDelta,src/world/ae_missb_boxes.c,tools/mips/check_missb.py,diffed,8,88/88 MIPS instructions covered
+8008FAD0,SlideDoorMove,ae_SlideDoorMove,src/world/ae_missb_boxes.c,tools/mips/check_missb.py,diffed,19,86/86 MIPS instructions covered
+80090754,GimmickTouchCheck,ae_GimmickTouchCheck,src/world/ae_missb_boxes.c,tools/mips/check_missb.py,diffed,8,114/114 MIPS instructions covered
+8009091C,ColliderBoxContainsPoint,ae_ColliderBoxContainsPoint,src/world/ae_missb_boxes.c,tools/mips/check_missb.py,diffed,3,35/35 MIPS instructions covered
+80091598,GimmickBreakableFloorAdjust,ae_GimmickBreakableFloorAdjust,src/world/ae_missb_gimmicks.c,tools/mips/check_missb.py,diffed,7,60/60 MIPS instructions covered
+80091AF0,GimmickApplyPropScale,ae_GimmickApplyPropScale,src/world/ae_missb_gimmicks.c,tools/mips/check_missb.py,diffed,8,69/69 MIPS instructions covered
+80091C04,GimmickSetPropRotation,ae_GimmickSetPropRotation,src/world/ae_missb_gimmicks.c,tools/mips/check_missb.py,diffed,9,61/61 MIPS instructions covered
+80092324,GimmickColliderContactUpdate,ae_GimmickColliderContactUpdate,src/world/ae_missb_colliders.c,tools/mips/check_missb.py,diffed,64,465/465 MIPS instructions covered
+80093848,GimmickGetGrabOffset,ae_GimmickGetGrabOffset,src/world/ae_missb_gimmicks.c,tools/mips/check_missb.py,diffed,6,53/53 MIPS instructions covered
+80094330,GimmickPointWithinExpandedBox,ae_GimmickPointWithinExpandedBox,src/world/ae_missb_gimmicks.c,tools/mips/check_missb.py,diffed,3,43/43 MIPS instructions covered
+80094A48,GimmickLinkedAreaActive,ae_GimmickLinkedAreaActive,src/world/ae_missb_gimmicks.c,tools/mips/check_missb.py,diffed,6,38/38 MIPS instructions covered
+80094E5C,GimmickMonkeyTouchingBox,ae_GimmickMonkeyTouchingBox,src/world/ae_missb_gimmicks.c,tools/mips/check_missb.py,diffed,3,42/42 MIPS instructions covered
+80094F48,StageType_Clear_Init,ae_StageType_Clear_Init,src/world/ae_missb_game.c,tools/mips/check_missb.py,diffed,4,58/58 MIPS instructions covered
+80095030,StageType_Clear_Update,ae_StageType_Clear_Update,src/world/ae_missb_game.c,tools/mips/check_missb.py,diffed,8,133/133 MIPS instructions covered
+8009543C,StageVictoryStart,ae_StageVictoryStart,src/world/ae_missb_game.c,tools/mips/check_missb.py,diffed,3,10/10 MIPS instructions covered
+8009546C,StageIntroStart,ae_StageIntroStart,src/world/ae_missb_game.c,tools/mips/check_missb.py,diffed,3,22/22 MIPS instructions covered
+800954C4,StageIntroUpdate,ae_StageIntroUpdate,src/world/ae_missb_game.c,tools/mips/check_missb.py,diffed,8,49/49 MIPS instructions covered
+80095588,PlayerEnterCutsceneMode,ae_PlayerEnterCutsceneMode,src/world/ae_missb_game.c,tools/mips/check_missb.py,diffed,3,16/16 MIPS instructions covered
+800962B0,ProgressChecksum,ae_ProgressChecksum,src/world/ae_missb_progress.c,tools/mips/check_missb.py,diffed,3,14/14 MIPS instructions covered
+800962F4,ProgressFlagSet,ae_ProgressFlagSet,src/world/ae_missb_progress.c,tools/mips/check_missb.py,diffed,3,14/14 MIPS instructions covered
+80096360,ProgressSetByte,ae_ProgressSetByte,src/world/ae_missb_progress.c,tools/mips/check_missb.py,diffed,3,19/19 MIPS instructions covered
+800964B0,ProgressGetStageResult,ae_ProgressGetStageResult,src/world/ae_missb_progress.c,tools/mips/check_missb.py,diffed,3,11/11 MIPS instructions covered
+800965EC,LevelMonkeyCountGet,ae_LevelMonkeyCountGet,src/world/ae_missb_progress.c,tools/mips/check_missb.py,diffed,6,12/12 MIPS instructions covered
+80096638,LevelProgressRecordExit,ae_LevelProgressRecordExit,src/world/ae_missb_progress.c,tools/mips/check_missb.py,diffed,3,31/31 MIPS instructions covered
+80097454,AreaMonkeyQuotaMet,ae_AreaMonkeyQuotaMet,src/world/ae_missb_game.c,tools/mips/check_missb.py,diffed,6,44/44 MIPS instructions covered
+80097504,AreaAggregateActiveMonkeyCount,ae_AreaAggregateActiveMonkeyCount,src/world/ae_missb_gimmicks.c,tools/mips/check_missb.py,diffed,6,71/71 MIPS instructions covered
+80097620,GetDAT_800B38B8,ae_GetDAT_800B38B8,src/world/ae_missb_progress.c,tools/mips/check_missb.py,diffed,3,4/4 MIPS instructions covered
+80097A60,StageGoalReached,ae_StageGoalReached,src/world/ae_missb_game.c,tools/mips/check_missb.py,diffed,8,103/103 MIPS instructions covered
+80097BFC,StageGradeUpdate,ae_StageGradeUpdate,src/world/ae_missb_game.c,tools/mips/check_missb.py,diffed,7,68/68 MIPS instructions covered
+80097E60,LevelTableGet,ae_LevelTableGet,src/world/ae_missb_progress.c,tools/mips/check_missb.py,diffed,6,10/10 MIPS instructions covered
+80097FB0,LevelCaughtCount,ae_LevelCaughtCount,src/world/ae_missb_progress.c,tools/mips/check_missb.py,diffed,6,54/54 MIPS instructions covered
+80098088,SaveBuildImage,ae_SaveBuildImage,src/world/ae_missb_progress.c,tools/mips/check_missb.py,diffed,3,57/57 MIPS instructions covered
+8009816C,SaveComputeChecksum,ae_SaveComputeChecksum,src/world/ae_missb_progress.c,tools/mips/check_missb.py,diffed,6,109/109 MIPS instructions covered
+80098330,HudPopupStart,ae_HudPopupStart,src/world/ae_missb_game.c,tools/mips/check_missb.py,diffed,3,26/26 MIPS instructions covered
+80098FB0,PlayerAuxModelInit,ae_PlayerAuxModelInit,src/world/ae_missb_game.c,tools/mips/check_missb.py,diffed,3,15/15 MIPS instructions covered
+8009B3B0,GimmickCylinderSetPlayerFlag,ae_GimmickCylinderSetPlayerFlag,src/world/ae_missb_gimmicks.c,tools/mips/check_missb.py,diffed,3,7/7 MIPS instructions covered
+8009B578,SpecialActorPlaceAtCollider,ae_SpecialActorPlaceAtCollider,src/world/ae_missb_game.c,tools/mips/check_missb.py,diffed,7,84/84 MIPS instructions covered
+800A2294,SeqSetMonoFlag,ae_SeqSetMonoFlag,src/sound/ae_missb_sound.c,tools/mips/check_missb.py,diffed,3,3/3 MIPS instructions covered
+800A2640,SoundBankSetVolume,ae_SoundBankSetVolume,src/sound/ae_missb_sound.c,tools/mips/check_missb.py,diffed,6,108/108 MIPS instructions covered
+800A2B6C,SeqTrackSetPlayState,ae_SeqTrackSetPlayState,src/sound/ae_missb_sound.c,tools/mips/check_missb.py,diffed,8,180/180 MIPS instructions covered
+800A2F54,SeqFadeTrackOut,ae_SeqFadeTrackOut,src/sound/ae_missb_sound.c,tools/mips/check_missb.py,diffed,6,36/36 MIPS instructions covered
+800A342C,SoundStopAllVoices,ae_SoundStopAllVoices,src/sound/ae_missb_sound.c,tools/mips/check_missb.py,diffed,5,81/81 MIPS instructions covered
+800A35FC,SfxVoiceSetPitch,ae_SfxVoiceSetPitch,src/sound/ae_missb_sound.c,tools/mips/check_missb.py,diffed,3,24/24 MIPS instructions covered
+8013D000,Area46_Boss_RegisterEntry,ae_Area46_Boss_RegisterEntry,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013D06C,Area46_Boss_UpdateEncounterActor,ae_Area46_Boss_UpdateEncounterActor,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013D2A0,Area46_Boss_UpdateEntryProximity,ae_Area46_Boss_UpdateEntryProximity,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013D440,Area46_Boss_InitializeModelEntry,ae_Area46_Boss_InitializeModelEntry,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013D63C,Area46_Boss_ProjectAndEmit,ae_Area46_Boss_ProjectAndEmit,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013D77C,Area46_Boss_SpawnEffectNear,ae_Area46_Boss_SpawnEffectNear,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013D890,Area46_Boss_SpawnEffectNearWrap,ae_Area46_Boss_SpawnEffectNearWrap,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013D8BC,Area46_Boss_ClearDebris,ae_Area46_Boss_ClearDebris,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013D8E4,Area46_Boss_SpawnDebris,ae_Area46_Boss_SpawnDebris,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013DA4C,Area46_Boss_UpdateDebris,ae_Area46_Boss_UpdateDebris,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013DE1C,Area46_Boss_RumbleLong,ae_Area46_Boss_RumbleLong,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013DE44,Area46_Boss_RumbleShort,ae_Area46_Boss_RumbleShort,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013DE6C,Area46_Boss_RumbleMedium,ae_Area46_Boss_RumbleMedium,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013DE94,Area46_Boss_SpawnDropPickups,ae_Area46_Boss_SpawnDropPickups,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013DF28,Area46_Boss_ResetLoopHandle,ae_Area46_Boss_ResetLoopHandle,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013DF38,Area46_Boss_StartLoop,ae_Area46_Boss_StartLoop,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013DF60,Area46_Boss_LoopStop,ae_Area46_Boss_LoopStop,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013DF90,Area46_BossInit,ae_Area46_BossInit,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013E14C,Area46_Boss_InitializeActorRecords,ae_Area46_Boss_InitializeActorRecords,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013E1AC,Area46_Boss_ClearEntries,ae_Area46_Boss_ClearEntries,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013E1D0,Area46_Boss_AddEntry,ae_Area46_Boss_AddEntry,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013E2BC,Area46_Boss_UpdateEntries,ae_Area46_Boss_UpdateEntries,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,14,overlay member 1A0.bin
+8013EC5C,Area46_Boss_InitializeBackdrop,ae_Area46_Boss_InitializeBackdrop,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013EC94,Area46_Boss_SetBackdrop,ae_Area46_Boss_SetBackdrop,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013ECD4,Area46_Boss_UpdateBackdrop,ae_Area46_Boss_UpdateBackdrop,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013EE74,Area46_Boss_ResetBoss,ae_Area46_Boss_ResetBoss,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013EEB8,Area46_Boss_OnBossStart,ae_Area46_Boss_OnBossStart,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013EF00,Area46_Boss_ClearFlag,ae_Area46_Boss_ClearFlag,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013EF0C,Area46_Boss_SetAnim,ae_Area46_Boss_SetAnim,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013EF44,Area46_Boss_StepAnim,ae_Area46_Boss_StepAnim,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013EFCC,Area46_Boss_UpdateHop,ae_Area46_Boss_UpdateHop,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013F0E0,Area46_Boss_UpdatePlayerKnockback,ae_Area46_Boss_UpdatePlayerKnockback,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013F1AC,Area46_BossUpdate,ae_Area46_BossUpdate,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013F544,Area46_Boss_ClearShockwaves,ae_Area46_Boss_ClearShockwaves,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013F5A8,Area46_Boss_AddShockwave,ae_Area46_Boss_AddShockwave,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013F6F8,Area46_Boss_UpdateShockwaves,ae_Area46_Boss_UpdateShockwaves,src/world/ae_ovl1a0.c,tools/mips/check_ovl1a0.py,diffed,8,overlay member 1A0.bin
+8013D000,Area57_Boss_ModelInit,ae_ovl1a8_BossModelInit,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013D1FC,Area57_Boss_SpawnEffectNear,ae_ovl1a8_BossSpawnEffectNear,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013D310,Area57_Boss_SpawnEffectNearWrap,ae_ovl1a8_BossSpawnEffectNearWrap,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013D364,Area57_Boss_SpawnDebris,ae_ovl1a8_BossSpawnDebris,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013D4CC,Area57_Boss_UpdateDebris,ae_ovl1a8_BossUpdateDebris,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013D33C,Area57_Boss_ClearDebris,ae_ovl1a8_BossClearDebris,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013DA10,Area57_Boss_Init,ae_ovl1a8_BossInit,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+80140E70,Area57_Boss_Start,ae_ovl1a8_BossStart,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013E8A8,Area57_Boss_UpdateCameraSequence,ae_ovl1a8_BossUpdateCameraSequence,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013E4B4,Area57_Boss_Update,ae_ovl1a8_BossUpdate,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,11,overlay member 1A8.bin
+8013EA9C,Area57_Boss_UpdateWakeSequence,ae_ovl1a8_BossUpdateWakeSequence,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,11,overlay member 1A8.bin
+8013EA24,Area57_Boss_Wake,ae_ovl1a8_BossWake,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013D89C,Area57_Boss_RumbleLong,ae_ovl1a8_BossRumbleLong,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013D8C4,Area57_Boss_RumbleShort,ae_ovl1a8_BossRumbleShort,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013D8EC,Area57_Boss_RumbleMedium,ae_ovl1a8_BossRumbleMedium,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013D914,Area57_Boss_SpawnDropPickups,ae_ovl1a8_BossSpawnDropPickups,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013D9A8,Area57_Boss_ResetLoopHandle,ae_ovl1a8_BossResetLoopHandle,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013D9B8,Area57_Boss_LoopStart,ae_ovl1a8_BossLoopStart,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013D9E0,Area57_Boss_LoopStop,ae_ovl1a8_BossLoopStop,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013E020,Area57_Boss_ClearEntries,ae_ovl1a8_BossClearEntries,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013E044,Area57_Boss_AddEntry,ae_ovl1a8_BossAddEntry,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013E120,Area57_Boss_UpdateEntries,ae_ovl1a8_BossUpdateEntries,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,7,overlay member 1A8.bin
+8013DFB0,Area57_Boss_SpawnEffectGroupsN,ae_ovl1a8_BossSpawnEffectGroupsN,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013EEC0,Area57_Boss_AddSparks,ae_ovl1a8_BossAddSparks,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013F06C,Area57_Boss_UpdateSparks,ae_ovl1a8_BossUpdateSparks,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013EE9C,Area57_Boss_ClearSparks,ae_ovl1a8_BossClearSparks,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013F370,Area57_Boss_ResetFlag,ae_ovl1a8_BossResetFlag,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013F398,Area57_Boss_ClearFlag,ae_ovl1a8_BossClearFlag,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013F3A4,Area57_Boss_SetAnim,ae_ovl1a8_BossSetAnim,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013F3DC,Area57_Boss_StepAnim,ae_ovl1a8_BossStepAnim,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013FFFC,Area57_Boss_ClearTable8,ae_ovl1a8_BossClearTable8,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+80140020,Area57_Boss_AddWaveEntry,ae_ovl1a8_BossAddWaveEntry,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+801400F4,Area57_Boss_UpdateWaves,ae_ovl1a8_BossUpdateWaves,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,12,overlay member 1A8.bin
+801407BC,Area57_Boss_ClearRipples,ae_ovl1a8_BossClearRipples,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+801409D4,Area57_Boss_UpdateRipples,ae_ovl1a8_BossUpdateRipples,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+80140794,Area57_Boss_RumbleBig,ae_ovl1a8_BossRumbleBig,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+801407E4,Area57_Boss_SpawnGroundRipples,ae_ovl1a8_BossSpawnGroundRipples,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+80140F08,Area57_Boss_SlamImpact,ae_ovl1a8_BossSlamImpact,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+80140F68,Area57_Boss_DeathBurst,ae_ovl1a8_BossDeathBurst,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,6,overlay member 1A8.bin
+8013DDC4,Area57_Boss_DrawScaledModel,ae_ovl1a8_BossDrawScaledModel,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,21,overlay member 1A8.bin
+8013F464,Area57_Boss_UpdateSequence,ae_ovl1a8_BossUpdateSequence,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,45,overlay member 1A8.bin
+80140FFC,Area57_Boss_UpdateLateSequence,ae_ovl1a8_BossUpdateLateSequence,src/world/ae_ovl1a8.c,tools/mips/check_ovl1a8.py,diffed,32,overlay member 1A8.bin

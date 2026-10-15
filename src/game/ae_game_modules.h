@@ -77,6 +77,17 @@
 #undef AE_PLAYER_ANIM_FRAME
 #undef AE_PLAYER_HEALTH
 #undef AE_G_PLAYER_SCRATCH
+#include "../../src/core/ae_missa.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
 #include "../../src/core/ae_pad.h"
 #undef AE_PLAYER_STATE
 #undef AE_PLAYER_STATE_FLAGS
@@ -144,6 +155,149 @@
 #undef AE_PLAYER_HEALTH
 #undef AE_G_PLAYER_SCRATCH
 #include "../../src/effects/ae_spawn.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/modes/ae_ovl180.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/modes/ae_ovl181.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/modes/ae_ovl182.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/modes/ae_ovl183.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/modes/ae_ovl184.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/modes/ae_ovl185.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/modes/ae_ovl186a.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/modes/ae_ovl186b.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/modes/ae_ovl186c.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/modes/ae_ovl187.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/modes/ae_ovl188.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/modes/ae_ovl189.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/modes/ae_ovl18a.h"
 #undef AE_PLAYER_STATE
 #undef AE_PLAYER_STATE_FLAGS
 #undef AE_PLAYER_FACING_X
@@ -363,6 +517,17 @@
 #undef AE_PLAYER_ANIM_FRAME
 #undef AE_PLAYER_HEALTH
 #undef AE_G_PLAYER_SCRATCH
+#include "../../src/ui/ae_missb.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
 #include "../../src/ui/ae_pausemenu.h"
 #undef AE_PLAYER_STATE
 #undef AE_PLAYER_STATE_FLAGS
@@ -463,6 +628,17 @@
 #undef AE_PLAYER_HEALTH
 #undef AE_G_PLAYER_SCRATCH
 #include "../../src/world/ae_ovl18c.h"
+#undef AE_PLAYER_STATE
+#undef AE_PLAYER_STATE_FLAGS
+#undef AE_PLAYER_FACING_X
+#undef AE_PLAYER_FACING_Z
+#undef AE_PLAYER_VEL_X
+#undef AE_PLAYER_VEL_Y
+#undef AE_PLAYER_VEL_Z
+#undef AE_PLAYER_ANIM_FRAME
+#undef AE_PLAYER_HEALTH
+#undef AE_G_PLAYER_SCRATCH
+#include "../../src/world/ae_ovl1a0.h"
 #undef AE_PLAYER_STATE
 #undef AE_PLAYER_STATE_FLAGS
 #undef AE_PLAYER_FACING_X
@@ -610,9 +786,22 @@
     AeItemsInitHooks items_init; \
     AeMenuWinHooks menu_win; \
     AeMiscHooks misc; \
+    AeMissaHooks missa; \
+    AeMissbHooks missb; \
     AeModeHooks mode; \
+    AeOverlayHooks overlay; \
+    AeOvl180Hooks ovl180; \
+    AeOvl183Hooks ovl183; \
+    AeOvl184Hooks ovl184; \
+    AeOvl185Hooks ovl185; \
+    AeOvl186bHooks ovl186b; \
+    AeOvl187Hooks ovl187; \
+    AeOvl188Hooks ovl188; \
+    AeOvl189Hooks ovl189; \
+    AeOvl18aHooks ovl18a; \
     AeOvl18bHooks ovl18b; \
     AeOvl18cHooks ovl18c; \
+    AeOvl1A0Hooks ovl1_a0; \
     AePadHooks pad; \
     AePauseMenuHooks pause_menu; \
     AePlayer1Hooks player1; \

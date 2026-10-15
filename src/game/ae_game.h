@@ -34,6 +34,9 @@ typedef struct AeGameHost {
     AeGameRenderer renderer;
     AeGameArchive archive;
     AeGameFrameHost frame;
+    /* Public MCX APIs from member 186; native backend owns card protocol/I/O. */
+    int32_t (*card_call)(void *user, AeRam *ram, const char *name, uint32_t address,
+                         uint32_t count, const uint32_t *words);
     /* Synchronous renderer request; the draw pointer is valid for this call. */
     void (*hud_draw)(void *user, AeRam *ram, const AeHudDraw *draw);
     /* Member bytes remain owned by the host; copied before this callback's next use. */
@@ -42,6 +45,8 @@ typedef struct AeGameHost {
      * image contains data used by native ports; its instructions are never run. */
     int (*area_overlay)(void *user, int32_t area, uint32_t *member, uint32_t *address,
                         const uint8_t **bytes, size_t *size);
+    /* Called before each main mode entry; zero ends a bounded native run. */
+    int (*mode_continue)(void *user, AeRam *ram);
     void (*transition_present)(void *user, AeRam *ram);
     /* An original game-logic function that is not ported yet was called (name, address); return value goes back to
        the caller. Default (NULL): print each name once to stderr and return 0. */
@@ -68,6 +73,9 @@ typedef struct AeGameHost {
     /* Explicit caller residue used by PauseMenuRun's mode-3 exit. Native
      * sessions choose zero; differential hosts can supply their caller input. */
     uint32_t pause_menu_caller_s5;
+    /* XaPlay copies untouched high bytes of its byte locals into CD queue
+     * words: selector 0 supplies filter bits 16..31, 1 mode bits 8..31. */
+    uint32_t (*xa_caller_padding)(void *user, AeRam *ram, uint32_t local);
     /* Sound chip boundary (src/sound AeSoundHw contract, notes/port/sound.md). NULL members are no-ops. */
     AeSoundHw sound_hw;
 } AeGameHost;
@@ -104,6 +112,9 @@ void ae_game_init_legacy(AeGame *g, AeRam *ram, const AeGameHost *host);
 /* One Mode_Stage iteration in original order, with native host boundaries.
    Returns 0 on a stage fade exit or when the RAM image raised its error flag. */
 int ae_game_frame(AeGame *g);
+/* Run original main with native archive/display services. ArcLoadMember copies
+ * its member to the requested RAM destination and uses ae_ram_fail on failure. */
+int32_t ae_game_run(AeGame *g);
 int32_t ae_game_load_area(AeGame *g, int32_t area, int32_t entry);
 /* Named mode subsystem adapter; used by the generated mode hook table. */
 int32_t ae_game_mode_call(void *user, AeRam *r, const char *name, uint32_t address,

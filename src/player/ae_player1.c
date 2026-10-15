@@ -341,6 +341,15 @@ int32_t ae_CdMgrQueueCommand(AeRam *r, const AePlayer1Hooks *hooks, int32_t comm
     return 1;
 }
 
+static int32_t xa_queue_command(AeRam *r, const AePlayer1Hooks *hooks,
+                                int32_t command, uint32_t parameters,
+                                uint32_t result, uint32_t done_flag) {
+    if (hooks && hooks->CdMgrQueueCommand)
+        return (int32_t)hooks->CdMgrQueueCommand(hooks->user, r,
+            (uint32_t)command, parameters, result, done_flag);
+    return ae_CdMgrQueueCommand(r, hooks, command, parameters, result, done_flag);
+}
+
 int32_t ae_XaPlay(AeRam *r, const AePlayer1Hooks *hooks, int32_t index) {
     uint32_t table_entry = AE_PLAYER1_XA_ENTRY_TABLE +
                            (uint32_t)index * AE_PLAYER1_XA_ENTRY_STRIDE;
@@ -353,31 +362,31 @@ int32_t ae_XaPlay(AeRam *r, const AePlayer1Hooks *hooks, int32_t index) {
     if (ae_ram_failed(r)) return 0;
 
     uint32_t status = AE_PLAYER1_CD_STATUS;
-    (void)ae_CdMgrQueueCommand(r, hooks, AE_PLAYER1_XA_MODE_COMMAND, 0, status, 0);
+    (void)xa_queue_command(r, hooks, AE_PLAYER1_XA_MODE_COMMAND, 0, status, 0);
 
     ae_wr8(r, AE_PLAYER1_XA_STACK_PARAMS, ae_rd8(r, table_entry + AE_PLAYER1_XA_ENTRY_CHANNEL));
     ae_wr8(r, AE_PLAYER1_XA_STACK_PARAMS + 1u,
            ae_rd8(r, table_entry + AE_PLAYER1_XA_ENTRY_FILE));
-    (void)ae_CdMgrQueueCommand(r, hooks, AE_PLAYER1_XA_FILTER_COMMAND,
+    (void)xa_queue_command(r, hooks, AE_PLAYER1_XA_FILTER_COMMAND,
                                AE_PLAYER1_XA_STACK_PARAMS, status, 0);
 
     ae_wr8(r, AE_PLAYER1_XA_STACK_MODE, AE_PLAYER1_XA_MODE_VALUE);
     if ((flags & 1u) != 0) {
         ae_wr8(r, AE_PLAYER1_XA_STACK_MODE, AE_PLAYER1_XA_LOOP_MODE_VALUE);
     }
-    (void)ae_CdMgrQueueCommand(r, hooks, AE_PLAYER1_XA_MODE_CONFIG_COMMAND,
+    (void)xa_queue_command(r, hooks, AE_PLAYER1_XA_MODE_CONFIG_COMMAND,
                                AE_PLAYER1_XA_STACK_MODE, status, 0);
 
     uint32_t sector = ae_rd32(r, table_entry + AE_PLAYER1_XA_ENTRY_SECTOR);
     (void)player1_call_hook(r, hooks, hooks != NULL ? hooks->CdIntToPos : NULL,
                             "CdIntToPos", sector, AE_PLAYER1_XA_STACK_LOCATION, 0, 0);
     if (ae_ram_failed(r)) return 0;
-    (void)ae_CdMgrQueueCommand(r, hooks, AE_PLAYER1_XA_DEMUTE_COMMAND, 0, status, 0);
-    (void)ae_CdMgrQueueCommand(r, hooks, AE_PLAYER1_XA_SYNC_COMMAND, 0, status, 0);
-    (void)ae_CdMgrQueueCommand(r, hooks, AE_PLAYER1_XA_READ_COMMAND,
+    (void)xa_queue_command(r, hooks, AE_PLAYER1_XA_DEMUTE_COMMAND, 0, status, 0);
+    (void)xa_queue_command(r, hooks, AE_PLAYER1_XA_SYNC_COMMAND, 0, status, 0);
+    (void)xa_queue_command(r, hooks, AE_PLAYER1_XA_READ_COMMAND,
                                AE_PLAYER1_XA_STACK_LOCATION, status, 0);
-    (void)ae_CdMgrQueueCommand(r, hooks, AE_PLAYER1_XA_MODE_COMMAND, 0, status, 0);
-    (void)ae_CdMgrQueueCommand(r, hooks, AE_PLAYER1_XA_PAUSE_COMMAND, 0, status, 0);
+    (void)xa_queue_command(r, hooks, AE_PLAYER1_XA_MODE_COMMAND, 0, status, 0);
+    (void)xa_queue_command(r, hooks, AE_PLAYER1_XA_PAUSE_COMMAND, 0, status, 0);
 
     ae_wr16(r, AE_PLAYER1_CD_MANAGER + AE_PLAYER1_CD_MANAGER_XA_INDEX, (uint32_t)index);
     ae_wr32(r, AE_PLAYER1_CD_MANAGER + AE_PLAYER1_CD_MANAGER_LAST_SECTOR, sector);

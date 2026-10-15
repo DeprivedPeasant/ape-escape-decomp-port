@@ -15,6 +15,39 @@ def main():
     oracle=gte_oracle.build()
     gte_oracle.build=lambda:oracle
     h=Harness()
+    h.direct_missb_routes()
+    source='src/player/ae_player1.c'
+    text=(ROOT/source).read_text()
+    old='if (hooks && hooks->CdMgrQueueCommand)'
+    assert old in text
+    path=ROOT/'extract/codex-task/old_xa_queue_boundary.c'
+    path.write_text(text.replace(old,'if (0)',1))
+    try:Harness({source:path}).direct_missb_routes()
+    except AssertionError as error:
+        assert 'RAM bytes differ' in str(error) or 'calls differ' in str(error),str(error)
+        print('Old source rejected: XA bypasses native CD queue',flush=True)
+    else:raise AssertionError('old XA queue boundary survived')
+    # Empty player headers caused the original load failure. Keep the module
+    # aliasing behavior checked separately from the valid boot fixture.
+    import check_missa as missa
+    import exclusion_registry as registry
+    previous_checker=registry._stem
+    registry._stem='check_missa'
+    fixed=missa.Harness(h.lib._name,missa.SEED)
+    fixed.run('PlayerInit',missa.DEFAULT_CASES-1)
+    source=(ROOT/'src/player/ae_missa_player.c').read_text()
+    old=source.replace('index < ae_rd16(r, stage + AE_MISSA_PLAYER_STAGE_MODEL_AUX_COUNT)',
+                       'index < first_model_count')
+    assert old!=source
+    path=ROOT/'extract/codex-task/old_player_init_count.c';path.write_text(old)
+    old_host=Harness({'src/player/ae_missa_player.c':path})
+    old=missa.Harness(old_host.lib._name,missa.SEED)
+    try:old.run('PlayerInit',missa.DEFAULT_CASES-1)
+    except SystemExit as error:
+        assert 'RAM differs' in str(error),str(error)
+    else:raise AssertionError('old PlayerInit cached count survived')
+    registry._stem=previous_checker
+    print('Old source rejected: PlayerInit cached auxiliary model count',flush=True)
     # The former host bypassed Mode_Stage's setup and returned immediately
     # after its fade loop. Reject both independently against real instructions.
     h.load(1)
@@ -51,7 +84,6 @@ def main():
         assert 'RAM bytes differ' in str(error), 'old flash position must corrupt effect/particle positions'
         print('Old source rejected: flash position overlaps MatrixLookDir',flush=True)
     else:raise AssertionError('old flash position survived')
-    h.models['HalfPipeRangeTest']=1
     failures=[]
     for kind in (59,89):
         h.cpu.restore(h.base)
@@ -88,7 +120,10 @@ def main():
             if result!=count or original[2]!=count:raise AssertionError('allocated index lost')
         except (AssertionError,mr.MipsError) as error:
             failures.append(str(error));print('FAIL',error)
-    for y,height in [(242,241),(-129,240)]:
+    # The real HalfPipeRangeTest samples y-96 first. These values keep that
+    # sample strictly inside [-128,0], while y-height is above the top, so
+    # Box reaches its original vertical reject returning contact=1.
+    for y,height in [(32,16),(95,94)]:
         h.cpu.restore(h.base)
         shape,probe,out,position=0x801F1000,0x801F1100,0x801F1200,0x801F1300
         h.cpu.write_bytes(shape,bytes(0x38));h.cpu.write16(shape+6,128);h.cpu.write16(shape+8,128);h.cpu.write16(shape+10,64)
@@ -208,9 +243,33 @@ def main():
         rejected+=1
         print('Old source rejected: ambient position padding',flush=True)
     else: raise AssertionError('old ambient padding survived')
-    cases=h.cases+1+overlay_cases+integrated.cases
-    print(f'Module regressions: {cases} comparisons; {rejected}/9 old overlay sources rejected; one old flash and two old stage sources rejected; {len(failures)} failures')
-    (ROOT/'extract/mips/game_module_regressions.json').write_text(json.dumps(dict(cases=cases,old_overlay_sources_rejected=rejected,old_flash_source_rejected=True,old_stage_sources_rejected=2,failures=failures),indent=2))
+    # 187's former one-word SetRotMatrix hook discarded ApplyMatrixLV's
+    # in-place translation. The strengthened module checker executes its
+    # original three-word SDK instructions with the GTE oracle.
+    import check_ovl187 as stage_clear
+    previous_checker=registry._stem
+    registry._stem='check_ovl187'
+    fixed=stage_clear.Harness()
+    for case in range(8): fixed.run('StageClearUi_LookAt',case=case)
+    assert fixed.failures==0,'stage-clear real ApplyMatrixLV baseline failed'
+    source=(ROOT/'src/modes/ae_ovl187.c').read_text()
+    repaired = ('    (void)ae_sdk_apply_matrix_lv(ae_ptr(r, view_matrix, 32u),\n'
+                '        ae_ptr(r, view_matrix + O187_MATRIX_TRANSLATION_X, 12u),\n'
+                '        ae_ptr(r, view_matrix + O187_MATRIX_TRANSLATION_X, 12u));')
+    assert repaired in source
+    path=ROOT/'extract/codex-task/old_stage_clear_translation.c'
+    path.write_text(source.replace(repaired,
+        '    (void)ovl187_call1(r, h, "SetRotMatrix", O187_ADDR_GTE_SET_MATRIX, view_matrix);'))
+    old=stage_clear.Harness(source=path,tag='old_stage_clear_translation')
+    try: old.run('StageClearUi_LookAt',case=0)
+    except AssertionError as error:
+        assert 'RAM differs' in str(error),str(error)
+    else: raise AssertionError('old stage-clear translation survived')
+    registry._stem=previous_checker
+    print('Old source rejected: stage-clear ApplyMatrixLV translation',flush=True)
+    cases=h.cases+2+overlay_cases+integrated.cases+8
+    print(f'Module regressions: {cases} comparisons; {rejected}/9 old overlay sources rejected; one old flash, two old stage, one old stage-clear one old PlayerInit and one old XA queue sources rejected; {len(failures)} failures')
+    (ROOT/'extract/mips/game_module_regressions.json').write_text(json.dumps(dict(cases=cases,old_overlay_sources_rejected=rejected,old_flash_source_rejected=True,old_stage_sources_rejected=2,old_stage_clear_source_rejected=True,old_player_init_source_rejected=True,old_xa_queue_source_rejected=True,failures=failures),indent=2))
     return bool(failures)
 
 

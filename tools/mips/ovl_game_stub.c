@@ -80,16 +80,44 @@ static int32_t stage_fade_vsync(void *user, AeRam *ram, uint32_t a0,
     return game->host.platform.VSync(game->host.user, ram, a0);
 }
 
+static int32_t stage_fade_audio_call(AeGame *game, AeRam *ram,
+                                     const char *name, uint32_t address,
+                                     uint32_t count, uint32_t a0,
+                                     uint32_t a1) {
+    uint32_t args[2] = {a0, a1};
+    if (game->host.missing_words == NULL) return 0;
+    return game->host.missing_words(game->host.user, ram, name, address,
+                                    count, args);
+}
+
+static int32_t stage_fade_seq_track_close(void *user, AeRam *ram,
+                                          uint32_t a0, uint32_t a1,
+                                          uint32_t a2, uint32_t a3) {
+    (void)a2; (void)a3;
+    return stage_fade_audio_call(user, ram, "SeqTrackClose", 0x800A1F3Cu,
+                                 1u, a0, a1);
+}
+
+static int32_t stage_fade_seq_track_set_play_state(void *user, AeRam *ram,
+                                                    uint32_t a0, uint32_t a1,
+                                                    uint32_t a2, uint32_t a3) {
+    (void)ram; (void)a2; (void)a3;
+    return ae_game_call(user, 0x800A2B6Cu, a0, a1, 0, 0);
+}
+
+static int32_t stage_fade_sound_bank_free(void *user, AeRam *ram,
+                                          uint32_t a0, uint32_t a1,
+                                          uint32_t a2, uint32_t a3) {
+    (void)a2; (void)a3;
+    return stage_fade_audio_call(user, ram, "SoundBankFree", 0x800A1CCCu,
+                                 1u, a0, a1);
+}
+
 static int32_t stage_fade_stop_voices(void *user, AeRam *ram, uint32_t a0,
                                       uint32_t a1, uint32_t a2,
                                       uint32_t a3) {
-    AeGame *game = user;
-    uint32_t args[1] = {a0};
-    (void)a1; (void)a2; (void)a3;
-    if (game->host.missing_words == NULL) return 0;
-    return game->host.missing_words(game->host.user, ram,
-                                    "SoundStopAllVoices", 0x800A342Cu,
-                                    1u, args);
+    (void)ram; (void)a1; (void)a2; (void)a3;
+    return ae_game_call(user, 0x800A342Cu, a0, 0, 0, 0);
 }
 
 static int32_t pad_get_state(void *user, AeRam *ram, int32_t port) {
@@ -141,10 +169,7 @@ static uint32_t pad_stick_to_buttons(void *user, AeRam *ram) {
         ~(uint32_t)(ae_rd8(ram, 0x800E52D3u) |
                     (ae_rd8(ram, 0x800E52D2u) << 8))
     };
-    if (game->host.missing_words == NULL) return args[0];
-    return (uint32_t)game->host.missing_words(game->host.user, ram,
-                                              "StickToButtons", 0x800140B4u,
-                                              1u, args);
+    return (uint32_t)ae_game_call(game, 0x800140B4u, args[0], 0u, 0u, 0u);
 }
 
 static void pad_rumble_reset(void *user, AeRam *ram, int32_t port) {
@@ -155,7 +180,20 @@ static void pad_rumble_reset(void *user, AeRam *ram, int32_t port) {
                                        0x80014208u, 1u, &arg);
 }
 
+static int32_t missb_call(void *user, AeRam *ram, const char *name, uint32_t address,
+                          const uint32_t args[4], uint32_t count) {
+    return ae_game_mode_call(user, ram, name, address, count, args);
+}
+
 void ae_game_wire_modules(AeGame *game) {
+    game->missb.user = game;
+    game->missb.call = missb_call;
+    game->missb.sound_hw = &game->host.sound_hw;
+    game->missb.stage_fade = &game->stage_fade;
+    game->missb.progress = &game->progress;
+    game->mode.user = game;
+    game->mode.original_call = ae_game_mode_call;
+    game->mode.stack_pointer = game->call_stack_pointer;
     game->camupd.user = game;
     game->camupd.PadGetState = camupd_pad_get_state;
     game->items_init.user = game;
@@ -176,6 +214,10 @@ void ae_game_wire_modules(AeGame *game) {
     game->stage_fade.user = game;
     game->stage_fade.stage = &game->stage;
     game->stage_fade.sound_hw = &game->host.sound_hw;
+    game->stage_fade.SeqTrackClose = stage_fade_seq_track_close;
+    game->stage_fade.SeqTrackSetPlayState =
+        stage_fade_seq_track_set_play_state;
+    game->stage_fade.SoundBankFree = stage_fade_sound_bank_free;
     game->stage_fade.SoundStopAllVoices = stage_fade_stop_voices;
     game->pad.user = game;
     game->pad.pad_get_state = pad_get_state;

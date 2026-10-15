@@ -25,11 +25,21 @@ from generate_game_calls import SPECIAL
 import check_game as cg
 import exclusion_registry as reg
 
+# Their original entries never return. The owning checker proves one worker
+# iteration through its explicit test adapter, not a complete synchronous call.
+ITERATION_ONLY={'ae_SaveUi_CardStateThread','ae_SaveUi_CardResultThread'}
+
 
 def proof_identity(checker):
     digest=hashlib.sha256()
     paths=sorted((ROOT/'src').rglob('*'))
-    paths += [ROOT/checker, Path(__file__), ROOT/'tools/verified.csv']
+    paths += [ROOT/checker, Path(__file__), ROOT/'tools/verified.csv',
+              ROOT/'tools/mips/ovl187_test_api.c', ROOT/'tools/mips/ovl187_test_stubs.c',
+              ROOT/'tools/mips/ovl186b_test_api.c',ROOT/'tools/mips/ovl186a_shim.c',
+              ROOT/'tools/mips/ovl188_test_api.c',
+              ROOT/'tools/mips/boot_overlay_test_api.c',ROOT/'tools/mips/ovl_game_stub.c']
+    paths += [ROOT/'tools/mips/ovl188_test_api.c',ROOT/'tools/mips/ovl186b_test_api.c',
+              ROOT/'tools/mips/overlay_small_harness.py']
     for path in paths:
         if path.is_file():
             digest.update(path.relative_to(ROOT).as_posix().encode())
@@ -45,6 +55,15 @@ def build_proxy():
     renames='\n'.join(f'#define {n} private_{n}' for n in names)+'\n'
     out=ROOT/'extract/mips/call_proxy';out.mkdir(parents=True,exist_ok=True)
     overrides={}
+    # The 187 unit suite models its EXE dependencies explicitly. Keep those
+    # models inside the proxy too, while its public entries use real adapters.
+    model_source=(ROOT/'tools/mips/ovl187_test_stubs.c').read_text()
+    model_names=re.findall(r'^(?:void|int32_t|uint32_t) (ae_\w+)\(',model_source,re.M)
+    model_renames=''.join(f'#undef {name}\n#define {name} game_o187_{name}\n' for name in model_names)
+    models=out/'ovl187_proxy_models.c'
+    model_path=(ROOT/'tools/mips/ovl187_test_stubs.c').as_posix()
+    model_digest=hashlib.sha256(model_source.encode()).hexdigest()
+    models.write_text(model_renames+'#include "'+model_path+'"\n/* '+model_digest+' */\n')
     for source in sources|{'src/game/ae_calls.c','src/game/ae_calls_special.c','src/game/ae_calls_legacy.c','src/game/ae_game_body.c'}:
         target=out/(Path(source).stem+'.c')
         # Preserve the effects checker's explicit dependency models and its
@@ -55,7 +74,8 @@ def build_proxy():
             anchor='static void hud_play_sfx(AeRam *r, const AeHudHooks *h, int32_t id) {'
             assert anchor in source_text
             source_text=source_text.replace(anchor,anchor+'\n    extern void game_proxy_capture_sfx(int32_t);\n    game_proxy_capture_sfx(id);',1)
-        target.write_text(test_define+renames+source_text)
+        unit_models=model_renames if source=='src/modes/ae_ovl187.c' else ''
+        target.write_text(test_define+renames+unit_models+source_text)
         overrides[source]=target
     # Special declarations omitted from public headers by their modules.
     protos['ae_CollProbe_Slope']=('','int32_t',['AeRam *r','const AeCollProbeHooks *h','uint32_t shape','uint32_t probe','uint32_t out'])
@@ -75,7 +95,7 @@ def build_proxy():
         variables=[re.search(r'(\w+)\s*(?:\[.*\])?$',p)[1] for p in params]
         signature=', '.join(params)
         text += [f'extern {ret} private_{name}({signature});',f'{ret} {name}({signature}) {{']
-        if name in SPECIAL and name!='ae_GadgetSlotsInitForExit' or not any('AeRam' in p for p in params):
+        if name in ITERATION_ONLY or name in SPECIAL and name!='ae_GadgetSlotsInitForExit' or not any('AeRam' in p for p in params):
             text += [('    ' if ret=='void' else '    return ')+f'private_{name}('+', '.join(variables)+');','}']
             delegated.append(name);continue
         nullable=[v for p,v in zip(params,variables) if 'Hooks' in p or 'AeSoundHw' in p]
@@ -114,11 +134,34 @@ def build_proxy():
              'uint32_t game_proxy_hud_sfx_count(void) { return hud_sfx_count; }',
              'int32_t game_proxy_hud_sfx_id(uint32_t index) { return index < hud_sfx_count ? hud_sfx[index] : 0; }']
     proxy=out/'game_calls_proxy.c';proxy.write_text('\n'.join(text)+'\n')
-    additions=[str(proxy.relative_to(ROOT)).replace('\\','/'), 'tools/mips/effects_test_api.c']
+    # Save-menu indices are local to its own shim, independent of boot indices.
+    boot=(ROOT/'tools/mips/boot_overlay_test_api.c').read_text()
+    prefix=boot[:boot.index('int32_t game_proxy_overlay_call')]
+    prefix=prefix.replace('ae_ovl181.h','ae_ovl186a.h').replace('ae_ovl182.h','ae_ovl186a.h')
+    prefix=prefix.replace('"../../src/', '"'+(ROOT/'src').as_posix()+'/')
+    save=(ROOT/'tools/mips/ovl186a_shim.c').read_text()
+    dispatch=save[save.index('int32_t integration_overlay_call'):]
+    dispatch=dispatch[:dispatch.index('    case 30:')]
+    dispatch+='    default: (void)a4; (void)a5; (void)a6; return 0;\n    }\n}\n'
+    save_api=out/'save_overlay_test_api.c'
+    save_api.write_text(prefix+dispatch.replace('integration_overlay_call','game_proxy_save_overlay_call',1))
+    # Explicit dllexport in the unit API disables MinGW's automatic exports
+    # for the remaining proxy symbols. Keep the proxy's normal export policy.
+    start_api=out/'ovl188_proxy_api.c'
+    start_api.write_text((ROOT/'tools/mips/ovl188_test_api.c').read_text()
+        .replace('__declspec(dllexport)','')
+        .replace('"../../src/', '"'+(ROOT/'src').as_posix()+'/'))
+    additions=[str(proxy.relative_to(ROOT)).replace('\\','/'), 'tools/mips/effects_test_api.c',
+               'tools/mips/ovl187_test_api.c','tools/mips/ovl186b_test_api.c','tools/mips/boot_overlay_test_api.c',models.relative_to(ROOT).as_posix(),save_api.relative_to(ROOT).as_posix(),start_api.relative_to(ROOT).as_posix()]
     cg.SOURCES.extend(additions)
     try: library=cg.build_dll(overrides,'game_calls_proxy')
     finally:
         for source in additions: cg.SOURCES.remove(source)
+    exports=ctypes.CDLL(str(library))
+    for name in covered+['ovl188_call','o186_call','o187_call','game_proxy_hud_call']:
+        try: getattr(exports,name)
+        except AttributeError as error:
+            raise RuntimeError(f'central proxy is missing DLL export {name}') from error
     Path(str(library)+'.identities.json').write_text(json.dumps(identities))
     (out/'coverage.json').write_text(json.dumps(dict(wrappers=covered,delegated=delegated),indent=2))
     return library,covered,delegated
@@ -134,15 +177,33 @@ def run_checker(checker,library):
     # The loaded proxy DLL has a fixed ledger inventory. Re-reading the CSV
     # for every RAM-helper lookup made large suites spend minutes in Python.
     port_names={row['c_function'] for row in ledger()}
+    # Member 189 exports thin named unit wrappers rather than ae_* symbols.
+    # Redirect those public entries too; keep its dependency bridge private.
+    overlay_exports = ({spec[2]: 'ae_' + name for name,spec in module.FUNCS.items()}
+                       if Path(checker).stem == 'check_ovl189' else {})
     class Combined:
         def __init__(self,primary): self.primary=primary
         def __getattr__(self,name):
+            if name in overlay_exports: return getattr(proxy,overlay_exports[name])
             hud_exports={'ae_hud_test_call':'game_proxy_hud_call',
                          'ae_hud_test_clear_sfx':'game_proxy_hud_clear_sfx',
                          'ae_hud_test_sfx_count':'game_proxy_hud_sfx_count',
                          'ae_hud_test_sfx_id':'game_proxy_hud_sfx_id'}
             if name in hud_exports: return getattr(proxy,hud_exports[name])
             if name.startswith('effects_test_'): return getattr(proxy,name)
+            if name=='o187_call': return proxy.o187_call
+            if name=='o186_call': return proxy.o186_call
+            if name=='ovl188_call': return proxy.ovl188_call
+            if name=='integration_overlay_call':
+                if Path(checker).stem!='check_ovl186a':return proxy.game_proxy_overlay_call
+                primary=self.primary.integration_overlay_call
+                adapter=proxy.game_proxy_save_overlay_call
+                for fn in (primary,adapter):
+                    fn.argtypes=[ctypes.c_void_p]+[ctypes.c_uint32]*8
+                    fn.restype=ctypes.c_int32
+                def save_call(shim,index,*words):
+                    return (primary if index>=30 else adapter)(shim,index,*words)
+                return save_call
             if name.startswith('stagefade_call_'):
                 return getattr(proxy,'ae_'+name[len('stagefade_call_'):])
             if name.startswith('ae_player_'):
@@ -178,7 +239,13 @@ def run_checker(checker,library):
     old_stem=reg._stem
     reg._stem=Path(checker).stem
     try:
-        result=module.main()
+        if hasattr(module,'main'):
+            result=module.main()
+        else:
+            # Small overlay suites expose their member to a shared runner.
+            # Keep the same function-table guard as their script entry point.
+            assert set(module.FUNCTIONS)==set(module.shared.CONFIGS[module.MEMBER]['functions'])
+            result=module.shared.main(module.MEMBER)
         return result if isinstance(result,int) else 0
     finally:
         ctypes.CDLL=original_cdll; subprocess.run=original_run; sys.argv=old_argv; reg._stem=old_stem
@@ -250,7 +317,7 @@ def main():
     with ThreadPoolExecutor(max_workers=max(1,args.jobs)) as pool:
         for future in as_completed([pool.submit(execute,checker) for checker in checkers]):
             checker,result=future.result()
-            print('DONE',checker,'PASS' if not result else 'FAIL',flush=True)
+            print('DONE',checker,'PASS' if not result else f'FAIL ({result})',flush=True)
             if result:failures.append(checker)
     counts={row['c_function']:0 for row in ledger()}
     for checker in checkers:

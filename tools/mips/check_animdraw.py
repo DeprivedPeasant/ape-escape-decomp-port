@@ -172,7 +172,7 @@ class Player1Hooks(C.Structure):
     _fields_ = [("user", P)] + [(name, CALL) for name in (
         "CdIntToPos CdPosToInt CdControl CdReadyCallback VSync printf SoundSetVolumeMode "
         "EventCamCreate ModelEmitPrimsCycleColors DrawRibbonBetween ModelProjectVertices ModelEmitPrims"
-    ).split()] + [("sound_hw", P)]
+    ).split()] + [("sound_hw", P), ("CdMgrQueueCommand", CALL)]
 
 
 class ItemsHooks(C.Structure):

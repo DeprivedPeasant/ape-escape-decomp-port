@@ -185,8 +185,7 @@ HOOKS = {
     0x8002B380: ("DrawMove", 4),
     0x8002B3E0: ("SetDrawStp", 2),
     0x8002FAF0: ("SetGeomScreen", 1),
-    0x80030450: ("SetRotMatrix", 1),
-    0x800305B0: ("StoreMatrix", 2),
+    0x800305B0: ("ScaleMatrixL", 2),
     0x8002E520: ("VSync", 1),
     0x8005CFEC: ("CutsceneModeOff", 0),
     0x8005DF48: ("BeginFrame", 0),
@@ -220,13 +219,15 @@ def build(source=None, tag="ovl187"):
     subprocess.run([
         shutil.which("gcc"), "-std=c11", "-O2", "-Wall", "-Wextra", "-Werror",
         "-ffunction-sections", "-fdata-sections", "-Wl,--gc-sections", "-shared",
-        "-static-libgcc", "-I" + str(ROOT / "src/core"),
+        "-static-libgcc", "-iquote", str(ROOT / "src/modes"),
+        "-I" + str(ROOT / "src/core"),
         "-I" + str(ROOT / "src/world"), "-I" + str(ROOT / "src/player"),
         "-I" + str(ROOT / "src/ui"), "-I" + str(ROOT / "src/sound"),
         str(ROOT / "src/core/ae_ram.c"), str(ROOT / "src/core/ae_sdk.c"),
-        str(ROOT / "src/core/ae_sdk_matrix.c"), str(source or ROOT / "src/modes/ae_ovl187.c"),
-        str(ROOT / "extract/codex-task/ovl187_testwrap.c"),
-        str(ROOT / "extract/codex-task/ovl187_teststubs.c"), "-o", str(dll),
+        str(ROOT / "src/core/ae_sdk_matrix.c"),
+        str(ROOT / "src/math/native_sdk_apply.c"), str(source or ROOT / "src/modes/ae_ovl187.c"),
+        str(ROOT / "tools/mips/ovl187_test_api.c"),
+        str(ROOT / "tools/mips/ovl187_test_stubs.c"), "-o", str(dll),
     ], cwd=ROOT, check=True)
     return dll
 

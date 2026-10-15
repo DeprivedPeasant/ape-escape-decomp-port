@@ -509,6 +509,90 @@ static int32_t call_ae_StageExitSequenceUpdate(AeGame *g, uint32_t a0, uint32_t 
     return 0;
 }
 
+/* ---- src/camera/ae_missa_camera.c ---- */
+static int32_t call_ae_AimRequestStart(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_AimRequestStart(g->ram, &g->missa);
+    return 0;
+}
+
+static int32_t call_ae_BossAimSfx(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_BossAimSfx(g->ram, &g->missa);
+    return 0;
+}
+
+static int32_t call_ae_CallIndexedHandler(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CallIndexedHandler(g->ram, &g->missa, (uint32_t)a0, (uint32_t)a1, (uint32_t)a2, (uint32_t)a3);
+}
+
+static int32_t call_ae_CameraAreaScriptDispatch(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CameraAreaScriptDispatch(g->ram, &g->missa, (uint32_t)a0, (uint32_t)a1, (uint32_t)a2, (uint32_t)a3);
+}
+
+static int32_t call_ae_CameraGetSlotTarget(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_CameraGetSlotTarget(g->ram, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_CameraRadarFocusSelect(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_CameraRadarFocusSelect(g->ram, &g->missa);
+    return 0;
+}
+
+static int32_t call_ae_CameraRadarFocusUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_CameraRadarFocusUpdate(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_EventCamStartDefault(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_EventCamStartDefault(g->ram, &g->missa);
+    return 0;
+}
+
+static int32_t call_ae_EventCamStartVictory(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_EventCamStartVictory(g->ram, &g->missa);
+    return 0;
+}
+
+static int32_t call_ae_PadDirectionCode(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_PadDirectionCode(g->ram, &g->missa);
+    return 0;
+}
+
+static int32_t call_ae_PlayerAttachSet(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_PlayerAttachSet(g->ram, &g->missa, (uint32_t)a0, (uint32_t)a1, (uint32_t)a2, (uint32_t)a3);
+    return 0;
+}
+
+static int32_t call_ae_PlayerSetBounceFlag(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_PlayerSetBounceFlag(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_StageExitStart(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageExitStart(g->ram, &g->missa);
+    return 0;
+}
+
+/* ---- src/camera/ae_missa_rc_car.c ---- */
+static int32_t call_ae_CameraRcCarFollow(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_CameraRcCarFollow(g->ram, &g->missa, (uint32_t)a0);
+    return 0;
+}
+
 /* ---- src/collision/ae_collprobe.c ---- */
 static int32_t call_ae_CollProbe_Box(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
@@ -573,6 +657,60 @@ static int32_t call_ae_CollProbe_Trench(AeGame *g, uint32_t a0, uint32_t a1, uin
 static int32_t call_ae_CollProbe_Triangle(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
     return (int32_t)ae_CollProbe_Triangle(g->ram, &g->coll_probe, (uint32_t)a0, (uint32_t)a1, (uint32_t)a2);
+}
+
+/* ---- src/core/ae_missa_core.c ---- */
+static int32_t call_ae_AreaUsesAltMember(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_AreaUsesAltMember(g->ram, (int32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_DirIndexFromFlags(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_DirIndexFromFlags(g->ram, (uint32_t)a0);
+}
+
+static int32_t call_ae_FadeFrame(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_FadeFrame(g->ram, &g->missa);
+}
+
+static int32_t call_ae_ModelInitNormals(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_ModelInitNormals(g->ram, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_PadDemoPlaybackStep(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_PadDemoPlaybackStep(g->ram);
+}
+
+static int32_t call_ae_PlayTimeAdd(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_PlayTimeAdd(g->ram, (int32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_PlayerInput_StickGesture(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_PlayerInput_StickGesture(g->ram);
+}
+
+static int32_t call_ae_PointInBoxXZ(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_PointInBoxXZ(g->ram, (uint32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_ScreenFadeSet(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_ScreenFadeSet(g->ram, (uint32_t)a0, (uint32_t)a1, (uint32_t)a2);
+    return 0;
+}
+
+static int32_t call_ae_StickToButtons(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StickToButtons(g->ram, (uint32_t)a0);
 }
 
 /* ---- src/core/ae_pad.c ---- */
@@ -934,6 +1072,37 @@ static int32_t call_ae_RibbonDraw(AeGame *g, uint32_t a0, uint32_t a1, uint32_t 
     return 0;
 }
 
+/* ---- src/effects/ae_missa_spawn.c ---- */
+static int32_t call_ae_BreakableFinalizeVisualUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_BreakableFinalizeVisualUpdate(g->ram, &g->missa, (uint32_t)a0, (uint32_t)a1, (int32_t)a2);
+    return 0;
+}
+
+static int32_t call_ae_PlayerFxJumpBurst(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_PlayerFxJumpBurst(g->ram, &g->missa);
+    return 0;
+}
+
+static int32_t call_ae_PlayerFxSetMatrixPos(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_PlayerFxSetMatrixPos(g->ram, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_PlayerFxSpawn116(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_PlayerFxSpawn116(g->ram, &g->spawn);
+    return 0;
+}
+
+static int32_t call_ae_SpawnEffectGroupAt(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SpawnEffectGroupAt(g->ram, &g->missa, (int32_t)a0, (int32_t)a1, (int32_t)a2, (int32_t)a3);
+    return 0;
+}
+
 /* ---- src/effects/ae_spawn.c ---- */
 static int32_t call_ae_CameraShake(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
@@ -1091,6 +1260,1211 @@ static int32_t call_ae_StageRenderInit(AeGame *g, uint32_t a0, uint32_t a1, uint
 static int32_t call_ae_main(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
     return (int32_t)ae_main(g->ram, &g->mode);
+}
+
+/* ---- src/modes/ae_ovl180.c ---- */
+static int32_t call_ae_Mode_Title(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Mode_Title(g->ram, &g->ovl180);
+}
+
+static int32_t call_ae_SeqPlayer_AdvanceTransitionSweep(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_AdvanceTransitionSweep(g->ram, &g->ovl180, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_ApplyFlagOps(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_ApplyFlagOps(g->ram, (uint32_t)a0, (int32_t)a1, (uint32_t)a2);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_ClearObjectFlags(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_ClearObjectFlags(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_ClearObjectFlagsWrap(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_ClearObjectFlagsWrap(g->ram, &g->ovl180, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_CommandWriteObjectFlags(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_CommandWriteObjectFlags(g->ram, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_DisplayStateInit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SeqPlayer_DisplayStateInit(g->ram, &g->ovl180);
+}
+
+static int32_t call_ae_SeqPlayer_FadeIn(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_FadeIn(g->ram, &g->ovl180);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_FindRangeIndex(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SeqPlayer_FindRangeIndex(g->ram, (uint32_t)a0);
+}
+
+static int32_t call_ae_SeqPlayer_FindRecordByTime(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SeqPlayer_FindRecordByTime(g->ram, (uint32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_SeqPlayer_FreeObjects(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_FreeObjects(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_GetObject(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SeqPlayer_GetObject(g->ram, (uint32_t)a0);
+}
+
+static int32_t call_ae_SeqPlayer_GetObjectFlag(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SeqPlayer_GetObjectFlag(g->ram, (uint32_t)a0);
+}
+
+static int32_t call_ae_SeqPlayer_Hook2(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_Hook2(g->ram, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_Init(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SeqPlayer_Init(g->ram, &g->ovl180, (uint32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_SeqPlayer_InitHook(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_InitHook(g->ram, &g->ovl180, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_MeshInit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_MeshInit(g->ram, &g->ovl180, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_ModelInit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_ModelInit(g->ram, &g->ovl180, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_ParseObjects(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_ParseObjects(g->ram, &g->ovl180, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_Run(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SeqPlayer_Run(g->ram, &g->ovl180, (uint32_t)a0);
+}
+
+static int32_t call_ae_SeqPlayer_SetTransitionSweep(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SeqPlayer_SetTransitionSweep(g->ram, (uint32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_SeqPlayer_Stop(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_Stop(g->ram, &g->ovl180, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_StreamRingInit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqPlayer_StreamRingInit(g->ram, &g->ovl180, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_SeqPlayer_SumRecordSizes(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SeqPlayer_SumRecordSizes(g->ram, (uint32_t)a0, (int32_t)a1);
+}
+
+/* ---- src/modes/ae_ovl181.c ---- */
+static int32_t call_ae_Boot_ClearScreen(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Boot_ClearScreen(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_Boot_DrawLogoA(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Boot_DrawLogoA(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_Boot_DrawLogoB(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Boot_DrawLogoB(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_Boot_SetupDisplay(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Boot_SetupDisplay(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_Mode_02(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Mode_02(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_Mode_Boot(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Mode_Boot(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_Ovl181_CheckCdHardwareIntegrity(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl181_CheckCdHardwareIntegrity(g->ram, &g->overlay, (uint32_t)a0, (uint32_t)a1, (uint32_t)a2);
+}
+
+static int32_t call_ae_Ovl181_DrawIntegrityWarning(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl181_DrawIntegrityWarning(g->ram, &g->overlay);
+}
+
+/* ---- src/modes/ae_ovl182.c ---- */
+static int32_t call_ae_Mode_03(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Mode_03(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_Ovl182_DrawFade(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl182_DrawFade(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_Ovl182_DrawIntroState(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl182_DrawIntroState(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_Ovl182_DrawScene3D(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl182_DrawScene3D(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_Ovl182_FadeTick(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl182_FadeTick(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_Ovl182_Init(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl182_Init(g->ram, &g->overlay, (uint32_t)a0);
+}
+
+static int32_t call_ae_Ovl182_MenuInput(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl182_MenuInput(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_Ovl182_StateMachine(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl182_StateMachine(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_Ovl182_UpdateCamera(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl182_UpdateCamera(g->ram, &g->overlay);
+}
+
+/* ---- src/modes/ae_ovl183.c ---- */
+static int32_t call_ae_SoundTest_DrawCommonTest(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SoundTest_DrawCommonTest(g->ram, &g->ovl183);
+}
+
+static int32_t call_ae_SoundTest_DrawMainMenu(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SoundTest_DrawMainMenu(g->ram, &g->ovl183);
+}
+
+static int32_t call_ae_SoundTest_DrawSightTest(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SoundTest_DrawSightTest(g->ram, &g->ovl183);
+}
+
+static int32_t call_ae_SoundTest_Update(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SoundTest_Update(g->ram, &g->ovl183);
+}
+
+static int32_t call_ae_ovl183_entry_80136000(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ovl183_entry_80136000(g->ram, &g->ovl183);
+}
+
+/* ---- src/modes/ae_ovl184.c ---- */
+static int32_t call_ae_Ovl184_DemoLoop(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl184_DemoLoop(g->ram, &g->ovl184, (int32_t)a0);
+}
+
+static int32_t call_ae_Ovl184_DrawDemoPrompt(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl184_DrawDemoPrompt(g->ram, &g->ovl184, (int32_t)a0);
+}
+
+static int32_t call_ae_Ovl184_LoadListLoop(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl184_LoadListLoop(g->ram, &g->ovl184);
+}
+
+static int32_t call_ae_ovl184_entry_80136000(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ovl184_entry_80136000(g->ram, &g->ovl184);
+}
+
+/* ---- src/modes/ae_ovl185.c ---- */
+static int32_t call_ae_Ovl185_LoadScene(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl185_LoadScene(g->ram, &g->ovl185);
+}
+
+static int32_t call_ae_Ovl185_Run(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl185_Run(g->ram, &g->ovl185);
+}
+
+static int32_t call_ae_Ovl185_Update(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl185_Update(g->ram, &g->ovl185);
+}
+
+static int32_t call_ae_ovl185_entry_80146000(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ovl185_entry_80146000(g->ram, &g->ovl185);
+}
+
+/* ---- src/modes/ae_ovl186a.c ---- */
+static int32_t call_ae_Mode_SaveMenu(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Mode_SaveMenu(g->ram, &g->overlay, (uint32_t)a0);
+}
+
+static int32_t call_ae_SaveUi_CardResultThread(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SaveUi_CardResultThread(g->ram, &g->overlay);
+    return 0;
+}
+
+static int32_t call_ae_SaveUi_CardStateThread(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SaveUi_CardStateThread(g->ram, &g->overlay);
+    return 0;
+}
+
+static int32_t call_ae_SaveUi_CountEntries(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_CountEntries(g->ram, (uint32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_SaveUi_DrawFileSelect(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SaveUi_DrawFileSelect(g->ram, &g->overlay);
+    return 0;
+}
+
+static int32_t call_ae_SaveUi_DrawSlot(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SaveUi_DrawSlot(g->ram, &g->overlay, (int32_t)a0, (int32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_SaveUi_DrawText(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_DrawText(g->ram, &g->overlay, (uint32_t)a0, (int32_t)a1, (int32_t)a2, (int32_t)a3);
+}
+
+static int32_t call_ae_SaveUi_FileSelectInit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SaveUi_FileSelectInit(g->ram, &g->overlay);
+    return 0;
+}
+
+static int32_t call_ae_SaveUi_FormatNumber3(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_FormatNumber3(g->ram, (int32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_SaveUi_FrameReset(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SaveUi_FrameReset(g->ram, &g->overlay);
+    return 0;
+}
+
+static int32_t call_ae_SaveUi_LookAt(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SaveUi_LookAt(g->ram, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_SaveUi_MemCardStart(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_MemCardStart(g->ram, &g->overlay, (int32_t)a0);
+}
+
+static int32_t call_ae_SaveUi_MenuUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_MenuUpdate(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_OnCardResult_0(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_OnCardResult_0(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_OnCardResult_1(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_OnCardResult_1(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_OnCardResult_2(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_OnCardResult_2(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_OnCardResult_3(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_OnCardResult_3(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_OnCardResult_4(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_OnCardResult_4(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_OnCardResult_5(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_OnCardResult_5(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_OnCardResult_6(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_OnCardResult_6(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_RunMenuA(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_RunMenuA(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_RunMenuB(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_RunMenuB(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_RunMenuC(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_RunMenuC(g->ram, &g->overlay, (int32_t)a0);
+}
+
+static int32_t call_ae_SaveUi_SceneInit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_SceneInit(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_SetState(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_SetState(g->ram, &g->overlay, (int32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_SaveUi_StateMachine(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_StateMachine(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_StateTick(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_StateTick(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_StringTableIndex(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_StringTableIndex(g->ram, (uint32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_SaveUi_TextWidth(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_TextWidth(g->ram, (uint32_t)a0);
+}
+
+static int32_t call_ae_SaveUi_TotalMonkeyCount(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_TotalMonkeyCount(g->ram);
+}
+
+/* ---- src/modes/ae_ovl186b.c ---- */
+static int32_t call_ae_CardMgr_Init(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_Init(g->ram, &g->ovl186b);
+}
+
+static int32_t call_ae_CardMgr_Run(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_Run(g->ram, &g->ovl186b);
+}
+
+static int32_t call_ae_CardMgr_RunFileDetail(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_RunFileDetail(g->ram, &g->ovl186b);
+}
+
+static int32_t call_ae_CardMgr_RunFileList(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_RunFileList(g->ram, &g->ovl186b);
+}
+
+static int32_t call_ae_SaveUi_CancelPressed(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_CancelPressed(g->ram);
+}
+
+static int32_t call_ae_SaveUi_ConfirmDialogUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_ConfirmDialogUpdate(g->ram, &g->ovl186b);
+}
+
+static int32_t call_ae_SaveUi_ConfirmPressed(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_ConfirmPressed(g->ram);
+}
+
+static int32_t call_ae_SaveUi_DrawBackground3D(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SaveUi_DrawBackground3D(g->ram, &g->ovl186b);
+    return 0;
+}
+
+static int32_t call_ae_SaveUi_DrawDetail(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SaveUi_DrawDetail(g->ram, &g->ovl186b);
+    return 0;
+}
+
+static int32_t call_ae_SaveUi_DrawMainWindow(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_DrawMainWindow(g->ram, &g->ovl186b);
+}
+
+static int32_t call_ae_SaveUi_FadeTick(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_FadeTick(g->ram, &g->ovl186b);
+}
+
+static int32_t call_ae_SaveUi_FileSelectUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_FileSelectUpdate(g->ram, &g->ovl186b);
+}
+
+static int32_t call_ae_SaveUi_LastUsedEntry(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_LastUsedEntry(g->ram, (int32_t)a0);
+}
+
+static int32_t call_ae_SaveUi_NameEntryDraw(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SaveUi_NameEntryDraw(g->ram, &g->ovl186b);
+    return 0;
+}
+
+static int32_t call_ae_SaveUi_NameEntryInit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_NameEntryInit(g->ram, &g->ovl186b);
+}
+
+static int32_t call_ae_SaveUi_NameEntryUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_NameEntryUpdate(g->ram, &g->ovl186b);
+}
+
+static int32_t call_ae_SaveUi_OnCardResult_7(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_OnCardResult_7(g->ram, &g->ovl186b);
+}
+
+static int32_t call_ae_SaveUi_YesNoUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_YesNoUpdate(g->ram, &g->ovl186b);
+}
+
+/* ---- src/modes/ae_ovl186c.c ---- */
+static int32_t call_ae_CardMgr_AnimTick(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_AnimTick(g->ram, &g->overlay, (uint32_t)a0);
+}
+
+static int32_t call_ae_CardMgr_Draw(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_Draw(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_DrawBlinkingMenu(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_DrawBlinkingMenu(g->ram, &g->overlay, (uint32_t)a0);
+}
+
+static int32_t call_ae_CardMgr_DrawMenuItems(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_DrawMenuItems(g->ram, &g->overlay, (uint32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_CardMgr_DrawMenuItems2(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_DrawMenuItems2(g->ram, &g->overlay, (uint32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_CardMgr_DrawMenuLabels(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_DrawMenuLabels(g->ram, &g->overlay, (uint32_t)a0);
+}
+
+static int32_t call_ae_CardMgr_DrawMenuTexts(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_DrawMenuTexts(g->ram, &g->overlay, (uint32_t)a0);
+}
+
+static int32_t call_ae_CardMgr_DrawMessage(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_DrawMessage(g->ram, &g->overlay, (uint32_t)a0);
+}
+
+static int32_t call_ae_CardMgr_IsBusy(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_IsBusy(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_MenuUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_MenuUpdate(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_OnCardResult_0(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_OnCardResult_0(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_OnCardResult_1(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_OnCardResult_1(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_OnCardResult_2(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_OnCardResult_2(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_OnCardResult_3(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_OnCardResult_3(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_OnCardResult_4(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_OnCardResult_4(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_OnCardResult_5(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_OnCardResult_5(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_OnCardResult_6(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_OnCardResult_6(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_OnCardResult_7(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_OnCardResult_7(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_OnCardResult_8(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_OnCardResult_8(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_OnCardResult_9(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_OnCardResult_9(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_ResetSlots(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_ResetSlots(g->ram, &g->overlay, (uint32_t)a0);
+}
+
+static int32_t call_ae_CardMgr_RunMessage(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_RunMessage(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_SetState(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_SetState(g->ram, &g->overlay, (uint32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_CardMgr_StartOps(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_StartOps(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_CardMgr_StateMachine(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_CardMgr_StateMachine(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_MCXINIT_OBJ_104(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_MCXINIT_OBJ_104(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_MCXINIT_OBJ_144(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_MCXINIT_OBJ_144(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_MCXINIT_OBJ_184(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_MCXINIT_OBJ_184(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_MCXINIT_OBJ_2BC(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_MCXINIT_OBJ_2BC(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_MCXINIT_OBJ_B0(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_MCXINIT_OBJ_B0(g->ram, &g->overlay, (uint32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_MCXINIT_OBJ_FC(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_MCXINIT_OBJ_FC(g->ram, &g->overlay, (uint32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_McxAllInfoSync(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_McxAllInfoSync(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_McxCardTypeSync(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_McxCardTypeSync(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_McxHideTransSync(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_McxHideTransSync(g->ram, &g->overlay, (uint32_t)a0);
+}
+
+static int32_t call_ae_McxStartCom(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_McxStartCom(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_DrawEmptySlotText(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_DrawEmptySlotText(g->ram, &g->overlay, (uint32_t)a0);
+}
+
+static int32_t call_ae_SaveUi_DrawFileHeader(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_DrawFileHeader(g->ram, &g->overlay, (uint32_t)a0);
+}
+
+static int32_t call_ae_SaveUi_DrawStateOverlay(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_DrawStateOverlay(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_DrawStringPair(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_DrawStringPair(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_DrawYesNo(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_DrawYesNo(g->ram, &g->overlay, (uint32_t)a0);
+}
+
+static int32_t call_ae_SaveUi_GetBuffer2(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_GetBuffer2(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_GetColorBuffer(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_GetColorBuffer(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_Nop(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_Nop(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_ThreadClose(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_ThreadClose(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_ThreadSetHook(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_ThreadSetHook(g->ram, &g->overlay, (uint32_t)a0);
+}
+
+static int32_t call_ae_SaveUi_ThreadSetHookReset(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_ThreadSetHookReset(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SaveUi_ThreadSwitch(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_ThreadSwitch(g->ram, &g->overlay);
+}
+
+static int32_t call_ae_SsGetMute(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SsGetMute(g->ram, &g->overlay);
+}
+
+/* ---- src/modes/ae_ovl187.c ---- */
+static int32_t call_ae_Mode_StageClear(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Mode_StageClear(g->ram, &g->ovl187);
+}
+
+static int32_t call_ae_RippleGrid_Draw(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_RippleGrid_Draw(g->ram, &g->ovl187);
+    return 0;
+}
+
+static int32_t call_ae_RippleGrid_Init(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_RippleGrid_Init(g->ram, &g->ovl187);
+}
+
+static int32_t call_ae_RippleGrid_Smooth(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_RippleGrid_Smooth(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_CheckRequirements(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_CheckRequirements(g->ram, &g->ovl187);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_CopyStrip(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_CopyStrip(g->ram, &g->ovl187, (int32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_DrawBackdrop(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_DrawBackdrop(g->ram, &g->ovl187);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_DrawBlinkIcons(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_DrawBlinkIcons(g->ram, &g->ovl187);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_DrawBox(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_DrawBox(g->ram, &g->ovl187, (int32_t)a0, (int32_t)a1, (int32_t)a2, (int32_t)a3);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_DrawMessage(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_DrawMessage(g->ram, &g->ovl187, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_DrawScanlines(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_DrawScanlines(g->ram, &g->ovl187);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_DrawStars(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_DrawStars(g->ram, &g->ovl187);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_DrawText(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_DrawText(g->ram, &g->ovl187, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_DrawTimes(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_DrawTimes(g->ram, &g->ovl187);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_DrawWipe(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageClearUi_DrawWipe(g->ram, &g->ovl187);
+}
+
+static int32_t call_ae_StageClearUi_LookAt(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageClearUi_LookAt(g->ram, &g->ovl187, (uint32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_StageClearUi_ObjMatrix(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageClearUi_ObjMatrix(g->ram, &g->ovl187, (int32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_StageClearUi_PlayXa(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageClearUi_PlayXa(g->ram, &g->ovl187);
+}
+
+static int32_t call_ae_StageClearUi_RunScript(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_RunScript(g->ram, &g->ovl187);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_SetDrawStp(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_SetDrawStp(g->ram, &g->ovl187);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_Setup(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_Setup(g->ram, &g->ovl187);
+    return 0;
+}
+
+static int32_t call_ae_StageClearUi_StringTableIndex(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageClearUi_StringTableIndex(g->ram, (uint32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_StageClearUi_UpdateObjects(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_UpdateObjects(g->ram, &g->ovl187, (uint32_t)a0);
+    return 0;
+}
+
+/* ---- src/modes/ae_ovl188.c ---- */
+static int32_t call_ae_Mode_StageStart(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Mode_StageStart(g->ram, &g->ovl188);
+}
+
+static int32_t call_ae_RippleGrid_Draw2(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_RippleGrid_Draw2(g->ram, &g->ovl188);
+    return 0;
+}
+
+static int32_t call_ae_RippleGrid_Init2(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_RippleGrid_Init2(g->ram, &g->ovl188);
+    return 0;
+}
+
+static int32_t call_ae_RippleGrid_Smooth2(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_RippleGrid_Smooth2(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_AreaInit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_AreaInit(g->ram, &g->ovl188, (int32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_ClampVerts(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_ClampVerts(g->ram, (int32_t)a0, (int32_t)a1, (int32_t)a2);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_CopyBuffer(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_CopyBuffer(g->ram, &g->ovl188, (int32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_CopyStrip(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_CopyStrip(g->ram, &g->ovl188);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_DrawCounter(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_DrawCounter(g->ram, &g->ovl188, (int32_t)a0, (int32_t)a1, (int32_t)a2);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_DrawNumber(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_DrawNumber(g->ram, &g->ovl188);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_DrawObjectives(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_DrawObjectives(g->ram, &g->ovl188);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_DrawScanlines(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_DrawScanlines(g->ram, &g->ovl188);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_DrawStageIcon(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_DrawStageIcon(g->ram, &g->ovl188);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_DrawText(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_DrawText(g->ram, &g->ovl188, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_DrawTitleLines(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_DrawTitleLines(g->ram, &g->ovl188, (uint32_t)a0, (int32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_DrawWipeA(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageStartUi_DrawWipeA(g->ram, &g->ovl188);
+}
+
+static int32_t call_ae_StageStartUi_DrawWipeB(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageStartUi_DrawWipeB(g->ram, &g->ovl188);
+}
+
+static int32_t call_ae_StageStartUi_LookAt(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_LookAt(g->ram, &g->ovl188, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_MeshInit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_MeshInit(g->ram, &g->ovl188);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_RunA(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageStartUi_RunA(g->ram, &g->ovl188);
+}
+
+static int32_t call_ae_StageStartUi_RunB(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageStartUi_RunB(g->ram, &g->ovl188);
+}
+
+static int32_t call_ae_StageStartUi_RunScript(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_RunScript(g->ram, &g->ovl188);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_SetAreaMeshTable(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_SetAreaMeshTable(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_SetDrawStp(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_SetDrawStp(g->ram, &g->ovl188);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_StringTableIndex(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageStartUi_StringTableIndex(g->ram, (uint32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_StageStartUi_UpdateObjects(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_UpdateObjects(g->ram, &g->ovl188, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_WipeQuadA(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_WipeQuadA(g->ram, &g->ovl188, (int32_t)a0, (int32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_StageStartUi_WipeQuadB(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageStartUi_WipeQuadB(g->ram, &g->ovl188, (int32_t)a0, (int32_t)a1);
+    return 0;
+}
+
+/* ---- src/modes/ae_ovl189.c ---- */
+static int32_t call_ae_HubExitUi_DrawModelA(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_HubExitUi_DrawModelA(g->ram, &g->ovl189, (uint32_t)a0, (uint32_t)a1, (uint32_t)a2, (uint32_t)a3);
+    return 0;
+}
+
+static int32_t call_ae_HubExitUi_DrawModelB(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_HubExitUi_DrawModelB(g->ram, &g->ovl189, (uint32_t)a0, (uint32_t)a1, (uint32_t)a2, (uint32_t)a3);
+    return 0;
+}
+
+static int32_t call_ae_HubExitUi_DrawModelC(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_HubExitUi_DrawModelC(g->ram, &g->ovl189, (uint32_t)a0, (uint32_t)a1, (uint32_t)a2);
+    return 0;
+}
+
+static int32_t call_ae_HubExitUi_DrawText(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_HubExitUi_DrawText(g->ram, &g->ovl189, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_HubExitUi_GetFlags(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_HubExitUi_GetFlags(g->ram, &g->ovl189, (int32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_HubExitUi_GetProgress(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_HubExitUi_GetProgress(g->ram, &g->ovl189, (int32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_HubExitUi_Init(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_HubExitUi_Init(g->ram, &g->ovl189, (uint32_t)a0);
+}
+
+static int32_t call_ae_HubExitUi_IsDestinationUnlocked(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_HubExitUi_IsDestinationUnlocked(g->ram, &g->ovl189, (int32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_HubExitUi_Run(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_HubExitUi_Run(g->ram, &g->ovl189);
+}
+
+static int32_t call_ae_HubExitUi_TextWidth(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_HubExitUi_TextWidth(g->ram, (uint32_t)a0);
+}
+
+static int32_t call_ae_Mode_LeaveHub(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Mode_LeaveHub(g->ram, &g->ovl189, (uint32_t)a0);
+}
+
+static int32_t call_ae_SaveUi_LookAt_189(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SaveUi_LookAt_189(g->ram, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_SaveUi_StringTableIndex_189(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveUi_StringTableIndex_189(g->ram, (uint32_t)a0, (int32_t)a1);
+}
+
+/* ---- src/modes/ae_ovl18a.c ---- */
+static int32_t call_ae_Ovl18A_AdvanceAnim(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Ovl18A_AdvanceAnim(g->ram, &g->ovl18a);
+    return 0;
+}
+
+static int32_t call_ae_Ovl18A_PickScene(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Ovl18A_PickScene(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_Ovl18A_PlayXa(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl18A_PlayXa(g->ram, &g->ovl18a);
+}
+
+static int32_t call_ae_Ovl18A_SceneInit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl18A_SceneInit(g->ram, &g->ovl18a);
+}
+
+static int32_t call_ae_Ovl18A_StartClip(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Ovl18A_StartClip(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_Ovl18A_StringTableIndex(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl18A_StringTableIndex(g->ram, (uint32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_Ovl18A_UpdateSpin(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Ovl18A_UpdateSpin(g->ram, &g->ovl18a);
+    return 0;
+}
+
+static int32_t call_ae_Ovl18A_WaitInputTimeout(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Ovl18A_WaitInputTimeout(g->ram);
+}
+
+static int32_t call_ae_StageClearUi_LookAt_18A(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_StageClearUi_LookAt_18A(g->ram, &g->ovl18a, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_ovl18A_entry_80136208(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ovl18A_entry_80136208(g->ram, &g->ovl18a);
 }
 
 /* ---- src/modes/ae_ovl18b.c ---- */
@@ -2383,6 +3757,30 @@ static int32_t call_ae_GadgetUnlockMask(AeGame *g, uint32_t a0, uint32_t a1, uin
     return 0;
 }
 
+/* ---- src/player/ae_missa_gadget.c ---- */
+static int32_t call_ae_TargetListFindBest(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_TargetListFindBest(g->ram, &g->missa, (uint32_t)a0, (uint32_t)a1, (int32_t)a2);
+}
+
+/* ---- src/player/ae_missa_player.c ---- */
+static int32_t call_ae_PlayerInit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_PlayerInit(g->ram, &g->missa);
+    return 0;
+}
+
+static int32_t call_ae_PlayerPlaceAtEntry(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_PlayerPlaceAtEntry(g->ram, &g->missa, (int32_t)a0, (int32_t)a1, (int32_t)a2);
+}
+
+static int32_t call_ae_TrailRingPush(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_TrailRingPush(g->ram);
+    return 0;
+}
+
 /* ---- src/player/ae_player1.c ---- */
 static int32_t call_ae_ActorAnimDecodeEntry(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
@@ -3514,6 +4912,66 @@ static int32_t call_ae_SoundLoopsStopAll(AeGame *g, uint32_t a0, uint32_t a1, ui
     return (int32_t)ae_SoundLoopsStopAll(g->ram, &g->host.sound_hw);
 }
 
+/* ---- src/sound/ae_missb_sound.c ---- */
+static int32_t call_ae_BgmFadeOut(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_BgmFadeOut(g->ram, &g->missb);
+}
+
+static int32_t call_ae_SeqFadeTrackOut(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SeqFadeTrackOut(g->ram, &g->missb, (int32_t)a0, (int32_t)a1, (int32_t)a2);
+}
+
+static int32_t call_ae_SeqSetMonoFlag(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqSetMonoFlag(g->ram, (int32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_SeqTrackSetPlayState(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SeqTrackSetPlayState(g->ram, &g->missb, (int32_t)a0, (int32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_SfxVoiceSetPitch(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SfxVoiceSetPitch(g->ram, &g->missb, (int32_t)a0, (int32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_SoundBankSetVolume(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SoundBankSetVolume(g->ram, &g->missb, (int32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_SoundEmitterVolume(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SoundEmitterVolume(g->ram, &g->missb, (uint32_t)a0, (int32_t)a1, (int32_t)a2, (int32_t)a3);
+}
+
+static int32_t call_ae_SoundSetStereo(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SoundSetStereo(g->ram, (int32_t)a0);
+}
+
+static int32_t call_ae_SoundSilence(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SoundSilence(g->ram, &g->missb);
+}
+
+static int32_t call_ae_SoundStopAllVoices(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SoundStopAllVoices(g->ram, &g->missb, (int32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_SoundStopAndRestoreVolume(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SoundStopAndRestoreVolume(g->ram, &g->missb);
+}
+
 /* ---- src/sound/ae_sound.c ---- */
 static int32_t call_ae_PlaySfxAt(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
@@ -3777,6 +5235,72 @@ static int32_t call_ae_MenuWindowsRun(AeGame *g, uint32_t a0, uint32_t a1, uint3
 static int32_t call_ae_WriteSizedValue(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
     return (int32_t)ae_WriteSizedValue(g->ram, (uint32_t)a0, (uint32_t)a1, (int32_t)a2);
+}
+
+/* ---- src/ui/ae_missa_hud.c ---- */
+static int32_t call_ae_HudDrawMonkeyInfo(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_HudDrawMonkeyInfo(g->ram, &g->missa, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_HudDrawTimeRankIcon(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_HudDrawTimeRankIcon(g->ram, &g->missa, (int32_t)a0, (int32_t)a1, (uint32_t)a2, (uint32_t)a3);
+    return 0;
+}
+
+/* ---- src/ui/ae_missa_renderer.c ---- */
+static int32_t call_ae_TrailRingDraw(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_TrailRingDraw(g->ram, &g->missa, (uint32_t)a0, (uint32_t)a1, (uint32_t)a2, (uint32_t)a3, (uint32_t)ae_rd32(g->ram, g->call_stack_pointer + 16u));
+    return 0;
+}
+
+/* ---- src/ui/ae_missb_ui.c ---- */
+static int32_t call_ae_HudSetGeomOffsetThenDraw(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_HudSetGeomOffsetThenDraw(g->ram, &g->missb, (int32_t)a0, (int32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_HudTextWidth(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_HudTextWidth(g->ram, (uint32_t)a0);
+}
+
+static int32_t call_ae_MessageBoxOpen(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_MessageBoxOpen(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_PauseDrawCaptureGrid(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_PauseDrawCaptureGrid(g->ram, &g->missb);
+    return 0;
+}
+
+static int32_t call_ae_PauseDrawCounter(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_PauseDrawCounter(g->ram, &g->missb);
+    return 0;
+}
+
+static int32_t call_ae_PauseMenuDrawSubScreen(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_PauseMenuDrawSubScreen(g->ram, &g->missb);
+}
+
+static int32_t call_ae_PauseMenuInitVolumes(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_PauseMenuInitVolumes(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_StringTableIndex_Main(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StringTableIndex_Main(g->ram, (uint32_t)a0, (int32_t)a1);
 }
 
 /* ---- src/ui/ae_pausemenu.c ---- */
@@ -4914,6 +6438,279 @@ static int32_t call_ae_VramScrollUpdate(AeGame *g, uint32_t a0, uint32_t a1, uin
     return 0;
 }
 
+/* ---- src/world/ae_missa_area.c ---- */
+static int32_t call_ae_AreaCheckExits(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_AreaCheckExits(g->ram, &g->missa, (uint32_t)a0);
+}
+
+/* ---- src/world/ae_missa_indicator.c ---- */
+static int32_t call_ae_Indicator_Activate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Indicator_Activate(g->ram, &g->missa, (int32_t)a0, (int32_t)a1);
+    return 0;
+}
+
+/* ---- src/world/ae_missa_zako.c ---- */
+static int32_t call_ae_ZakoClearDefeatedBits(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_ZakoClearDefeatedBits(g->ram, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_ZakoSaveDefeatedMask(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_ZakoSaveDefeatedMask(g->ram, &g->missa);
+    return 0;
+}
+
+/* ---- src/world/ae_missb_boxes.c ---- */
+static int32_t call_ae_BodyInsideBox(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_BodyInsideBox(g->ram, (uint32_t)a0, (uint32_t)a1, (int32_t)a2, (uint32_t)a3);
+}
+
+static int32_t call_ae_ColliderBoxContainsPoint(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ColliderBoxContainsPoint(g->ram, (uint32_t)a0, (int32_t)a1, (int32_t)a2, (int32_t)a3);
+}
+
+static int32_t call_ae_GimmickTouchCheck(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_GimmickTouchCheck(g->ram, (int32_t)a0, (uint32_t)a1, (int32_t)a2, (int32_t)a3);
+}
+
+static int32_t call_ae_SlideDoorMove(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SlideDoorMove(g->ram, (uint32_t)a0, (int32_t)a1, (int32_t)a2);
+}
+
+static int32_t call_ae_SwingDoorBodyDelta(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SwingDoorBodyDelta(g->ram, (uint32_t)a0, (int32_t)a1);
+}
+
+/* ---- src/world/ae_missb_colliders.c ---- */
+static int32_t call_ae_ColliderScriptLiftUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ColliderScriptLiftUpdate(g->ram, &g->missb, (uint32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_ColliderScriptNoOpA(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ColliderScriptNoOpA(g->ram, (uint32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_ColliderScriptNoOpB(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ColliderScriptNoOpB(g->ram, (uint32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_ColliderScriptOrbitPlayer(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ColliderScriptOrbitPlayer(g->ram, &g->missb, (uint32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_ColliderScriptPropTransformUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ColliderScriptPropTransformUpdate(g->ram, &g->missb, (uint32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_ColliderScriptRiseToGround(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ColliderScriptRiseToGround(g->ram, &g->missb, (uint32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_ColliderScriptRotateUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ColliderScriptRotateUpdate(g->ram, &g->missb, (uint32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_GimmickColliderContactUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_GimmickColliderContactUpdate(g->ram, &g->missb, (uint32_t)a0, (uint32_t)a1);
+}
+
+/* ---- src/world/ae_missb_game.c ---- */
+static int32_t call_ae_AreaMonkeyQuotaMet(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_AreaMonkeyQuotaMet(g->ram, &g->missb, (uint32_t)a0);
+}
+
+static int32_t call_ae_HudPopupStart(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_HudPopupStart(g->ram, (int32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_PlayerAuxModelInit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_PlayerAuxModelInit(g->ram, &g->missb, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_PlayerEnterCutsceneMode(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_PlayerEnterCutsceneMode(g->ram, &g->missb);
+}
+
+static int32_t call_ae_SpecialActorPlaceAtCollider(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_SpecialActorPlaceAtCollider(g->ram, &g->missb, (int32_t)a0, (int32_t)a1, (int32_t)a2);
+    return 0;
+}
+
+static int32_t call_ae_StageGoalReached(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageGoalReached(g->ram, &g->missb);
+}
+
+static int32_t call_ae_StageGradeUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageGradeUpdate(g->ram);
+}
+
+static int32_t call_ae_StageIntroStart(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageIntroStart(g->ram, &g->missb);
+}
+
+static int32_t call_ae_StageIntroUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageIntroUpdate(g->ram, &g->missb);
+}
+
+static int32_t call_ae_StageType_Clear_Init(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageType_Clear_Init(g->ram, &g->missb);
+}
+
+static int32_t call_ae_StageType_Clear_Update(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageType_Clear_Update(g->ram, &g->missb);
+}
+
+static int32_t call_ae_StageVictoryStart(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_StageVictoryStart(g->ram, &g->missb);
+}
+
+/* ---- src/world/ae_missb_gimmicks.c ---- */
+static int32_t call_ae_AreaAggregateActiveMonkeyCount(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_AreaAggregateActiveMonkeyCount(g->ram, &g->missb);
+}
+
+static int32_t call_ae_GimmickApplyPropScale(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_GimmickApplyPropScale(g->ram, &g->missb, (uint32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_GimmickBreakableFloorAdjust(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_GimmickBreakableFloorAdjust(g->ram, &g->missb, (uint32_t)a0, (uint32_t)a1);
+}
+
+static int32_t call_ae_GimmickCylinderSetPlayerFlag(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_GimmickCylinderSetPlayerFlag(g->ram, (int32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_GimmickGetGrabOffset(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_GimmickGetGrabOffset(g->ram, (uint32_t)a0, (uint32_t)a1, (uint32_t)a2);
+}
+
+static int32_t call_ae_GimmickLinkedAreaActive(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_GimmickLinkedAreaActive(g->ram, (int32_t)a0);
+}
+
+static int32_t call_ae_GimmickMonkeyTouchingBox(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_GimmickMonkeyTouchingBox(g->ram, (uint32_t)a0);
+}
+
+static int32_t call_ae_GimmickPointWithinExpandedBox(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_GimmickPointWithinExpandedBox(g->ram, (uint32_t)a0, (uint32_t)a1, (int32_t)a2, (int32_t)a3);
+}
+
+static int32_t call_ae_GimmickSetPropRotation(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_GimmickSetPropRotation(g->ram, (uint32_t)a0, (int32_t)a1, (int32_t)a2);
+}
+
+/* ---- src/world/ae_missb_items.c ---- */
+static int32_t call_ae_ItemSaveCollectedMask(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_ItemSaveCollectedMask(g->ram, &g->missb);
+    return 0;
+}
+
+static int32_t call_ae_ItemsClearFlags(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_ItemsClearFlags(g->ram);
+    return 0;
+}
+
+/* ---- src/world/ae_missb_progress.c ---- */
+static int32_t call_ae_GetDAT_800B38B8(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_GetDAT_800B38B8(g->ram);
+}
+
+static int32_t call_ae_LevelCaughtCount(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_LevelCaughtCount(g->ram, (int32_t)a0);
+}
+
+static int32_t call_ae_LevelMonkeyCountGet(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_LevelMonkeyCountGet(g->ram, (int32_t)a0);
+}
+
+static int32_t call_ae_LevelProgressRecordExit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_LevelProgressRecordExit(g->ram, (int32_t)a0);
+}
+
+static int32_t call_ae_LevelTableGet(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_LevelTableGet(g->ram, (int32_t)a0);
+}
+
+static int32_t call_ae_ProgressChecksum(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ProgressChecksum(g->ram, (uint32_t)a0);
+}
+
+static int32_t call_ae_ProgressFlagSet(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ProgressFlagSet(g->ram, (int32_t)a0);
+}
+
+static int32_t call_ae_ProgressGetStageResult(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ProgressGetStageResult(g->ram, (int32_t)a0);
+}
+
+static int32_t call_ae_ProgressSetByte(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_ProgressSetByte(g->ram, (int32_t)a0, (int32_t)a1);
+}
+
+static int32_t call_ae_SaveBuildImage(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveBuildImage(g->ram);
+}
+
+static int32_t call_ae_SaveComputeChecksum(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_SaveComputeChecksum(g->ram, (uint32_t)a0);
+}
+
 /* ---- src/world/ae_ovl18c.c ---- */
 static int32_t call_ae_Area02_CopyEnemyModel(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
@@ -5059,6 +6856,218 @@ static int32_t call_ae_Area02_UpdateEnemyWake(AeGame *g, uint32_t a0, uint32_t a
 static int32_t call_ae_Area02_UpdateEnemyWakeOrigin(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
     ae_Area02_UpdateEnemyWakeOrigin(g->ram, (uint32_t)a0);
+    return 0;
+}
+
+/* ---- src/world/ae_ovl1a0.c ---- */
+static int32_t call_ae_Area46_BossInit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_BossInit(g->ram, &g->ovl1_a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_BossUpdate(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Area46_BossUpdate(g->ram, &g->ovl1_a0, (uint32_t)a0);
+}
+
+static int32_t call_ae_Area46_Boss_AddEntry(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_AddEntry(g->ram, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_AddShockwave(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_AddShockwave(g->ram, &g->ovl1_a0, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_ClearDebris(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_ClearDebris(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_ClearEntries(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_ClearEntries(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_ClearFlag(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_ClearFlag(g->ram, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_ClearShockwaves(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_ClearShockwaves(g->ram, &g->ovl1_a0, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_InitializeActorRecords(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_InitializeActorRecords(g->ram, &g->ovl1_a0, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_InitializeBackdrop(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_InitializeBackdrop(g->ram, &g->ovl1_a0, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_InitializeModelEntry(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_InitializeModelEntry(g->ram, &g->ovl1_a0, (uint32_t)a0, (uint32_t)a1, (uint32_t)a2, (uint32_t)a3);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_LoopStop(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_LoopStop(g->ram, &g->ovl1_a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_OnBossStart(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_OnBossStart(g->ram, &g->ovl1_a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_ProjectAndEmit(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Area46_Boss_ProjectAndEmit(g->ram, &g->ovl1_a0, (uint32_t)a0, (uint32_t)a1, (uint32_t)a2);
+}
+
+static int32_t call_ae_Area46_Boss_RegisterEntry(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Area46_Boss_RegisterEntry(g->ram, (uint32_t)a0);
+}
+
+static int32_t call_ae_Area46_Boss_ResetBoss(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_ResetBoss(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_ResetLoopHandle(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_ResetLoopHandle(g->ram);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_RumbleLong(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_RumbleLong(g->ram, &g->ovl1_a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_RumbleMedium(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_RumbleMedium(g->ram, &g->ovl1_a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_RumbleShort(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_RumbleShort(g->ram, &g->ovl1_a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_SetAnim(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_SetAnim(g->ram, (uint32_t)a0, (uint32_t)a1);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_SetBackdrop(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_SetBackdrop(g->ram, (int32_t)a0, (int32_t)a1, (int32_t)a2);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_SpawnDebris(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_SpawnDebris(g->ram, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_SpawnDropPickups(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_SpawnDropPickups(g->ram, &g->ovl1_a0, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_SpawnEffectNear(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_SpawnEffectNear(g->ram, &g->ovl1_a0, (uint32_t)a0, (uint32_t)a1, (int32_t)a2, (int32_t)a3, (int32_t)ae_rd32(g->ram, g->call_stack_pointer + 16u));
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_SpawnEffectNearWrap(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_SpawnEffectNearWrap(g->ram, &g->ovl1_a0, (uint32_t)a0, (uint32_t)a1, (int32_t)a2, (int32_t)a3);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_StartLoop(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Area46_Boss_StartLoop(g->ram, &g->ovl1_a0, (int32_t)a0);
+}
+
+static int32_t call_ae_Area46_Boss_StepAnim(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_StepAnim(g->ram, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_UpdateBackdrop(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_UpdateBackdrop(g->ram, &g->ovl1_a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_UpdateDebris(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_UpdateDebris(g->ram, &g->ovl1_a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_UpdateEncounterActor(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_UpdateEncounterActor(g->ram, &g->ovl1_a0, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_UpdateEntries(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_UpdateEntries(g->ram, &g->ovl1_a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_UpdateEntryProximity(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    return (int32_t)ae_Area46_Boss_UpdateEntryProximity(g->ram, &g->ovl1_a0, (uint32_t)a0);
+}
+
+static int32_t call_ae_Area46_Boss_UpdateHop(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_UpdateHop(g->ram, &g->ovl1_a0, (uint32_t)a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_UpdatePlayerKnockback(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_UpdatePlayerKnockback(g->ram, &g->ovl1_a0);
+    return 0;
+}
+
+static int32_t call_ae_Area46_Boss_UpdateShockwaves(AeGame *g, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)g; (void)a0; (void)a1; (void)a2; (void)a3;
+    ae_Area46_Boss_UpdateShockwaves(g->ram, &g->ovl1_a0);
     return 0;
 }
 
@@ -6208,8 +8217,10 @@ static const AeGameCall CALLS[] = {
     {0x80010CA4u, "ae_AreaGetKind", call_ae_AreaGetKind, 0x00000000u},
     {0x80010CC0u, "ae_AreaGetLevel", call_ae_AreaGetLevel, 0x00000000u},
     {0x80010D04u, "ae_AreaLoadStartSeek", call_ae_AreaLoadStartSeek, 0x00000000u},
+    {0x80010D80u, "ae_AreaCheckExits", call_ae_AreaCheckExits, 0x00000000u},
     {0x80011208u, "ae_AreaLoadQueueRead", call_ae_AreaLoadQueueRead, 0x00000000u},
     {0x800114D8u, "ae_AreaLoadStart", call_ae_AreaLoadStart, 0x00000000u},
+    {0x800115F4u, "ae_AreaUsesAltMember", call_ae_AreaUsesAltMember, 0x00000000u},
     {0x800119F4u, "ae_SaveSlotInfoPtr", call_ae_SaveSlotInfoPtr, 0x00000000u},
     {0x80011F6Cu, "ae_XaPlay", call_ae_XaPlay, 0x00000000u},
     {0x80012360u, "ae_CdMgrQueueCommand", call_ae_CdMgrQueueCommand, 0x00000000u},
@@ -6217,7 +8228,9 @@ static const AeGameCall CALLS[] = {
     {0x80012C0Cu, "ae_ArcGetMemberPos", call_ae_ArcGetMemberPos, 0x00000000u},
     {0x8001300Cu, "ae_pad_PadSampleStickHistory", call_ae_pad_PadSampleStickHistory, 0x00000000u},
     {0x800130E0u, "ae_pad_PadNormalizeSticks", call_ae_pad_PadNormalizeSticks, 0x00000000u},
+    {0x80013128u, "ae_PadDemoPlaybackStep", call_ae_PadDemoPlaybackStep, 0x00000000u},
     {0x8001325Cu, "ae_pad_PadUpdate", call_ae_pad_PadUpdate, 0x00000000u},
+    {0x800140B4u, "ae_StickToButtons", call_ae_StickToButtons, 0x00000000u},
     {0x8001413Cu, "ae_pad_QuadrantFromSigns", call_ae_pad_QuadrantFromSigns, 0x00000000u},
     {0x80014168u, "ae_PadRumble", call_ae_PadRumble, 0x00000000u},
     {0x80014208u, "ae_PadRumbleReset", call_ae_PadRumbleReset, 0x00000000u},
@@ -6239,6 +8252,7 @@ static const AeGameCall CALLS[] = {
     {0x80015504u, "ae_ModelBuildBoneMatrices", call_ae_ModelBuildBoneMatrices, 0x00000000u},
     {0x80015780u, "ae_ModelPoseBones", call_ae_ModelPoseBones, 0x00000000u},
     {0x80015AC0u, "ae_ModelInit", call_ae_ModelInit, 0x00000000u},
+    {0x80015B30u, "ae_ModelInitNormals", call_ae_ModelInitNormals, 0x00000000u},
     {0x80015BA0u, "ae_ModelInitAuto", call_ae_ModelInitAuto, 0x00000000u},
     {0x80015D10u, "ae_StaticModelInit", call_ae_StaticModelInit, 0x00000000u},
     {0x80015D58u, "ae_SetColorMatrixMode", call_ae_SetColorMatrixMode, 0x00000000u},
@@ -6248,6 +8262,8 @@ static const AeGameCall CALLS[] = {
     {0x80017D94u, "ae_ModelDrawWithOt", call_ae_ModelDrawWithOt, 0x00000000u},
     {0x8001D4A8u, "ae_ModelPrepCycleColors", call_ae_ModelPrepCycleColors, 0x00000000u},
     {0x8001F884u, "ae_TrailRingReset", call_ae_TrailRingReset, 0x00000000u},
+    {0x8001F8B0u, "ae_TrailRingPush", call_ae_TrailRingPush, 0x00000000u},
+    {0x8001F954u, "ae_TrailRingDraw", call_ae_TrailRingDraw, 0x00000000u},
     {0x8002FB50u, "ae_sdk_rsin", call_ae_sdk_rsin, 0x00000000u},
     {0x8002FC20u, "ae_sdk_rcos", call_ae_sdk_rcos, 0x00000000u},
     {0x8002FCC0u, "ae_sdk_RotMatrixZYX", call_ae_sdk_RotMatrixZYX, 0x00000000u},
@@ -6273,8 +8289,10 @@ static const AeGameCall CALLS[] = {
     {0x800323F8u, "ae_ApplyLevelFog", call_ae_ApplyLevelFog, 0x00000000u},
     {0x8003244Cu, "ae_AreaLoadGridAndProps", call_ae_AreaLoadGridAndProps, 0x00000000u},
     {0x80032708u, "ae_ClearWords", call_ae_ClearWords, 0x00000000u},
+    {0x8003272Cu, "ae_PlayerInit", call_ae_PlayerInit, 0x00000000u},
     {0x80032ADCu, "ae_PlayerIdleModelSetup", call_ae_PlayerIdleModelSetup, 0x00000000u},
     {0x80032BBCu, "ae_PlayerSpawnAtEntry", call_ae_PlayerSpawnAtEntry, 0x00000000u},
+    {0x80032D38u, "ae_PlayerPlaceAtEntry", call_ae_PlayerPlaceAtEntry, 0x00000000u},
     {0x80032E30u, "ae_MonkeyRand", call_ae_MonkeyRand, 0x00000000u},
     {0x80032E58u, "ae_MonkeyCaughtGroupValue", call_ae_MonkeyCaughtGroupValue, 0x00000000u},
     {0x80032E84u, "ae_MonkeyGetAnimIndex", call_ae_MonkeyGetAnimIndex, 0x00000000u},
@@ -6456,6 +8474,7 @@ static const AeGameCall CALLS[] = {
     {0x80046670u, "ae_pad_CameraRotMatrix", call_ae_pad_CameraRotMatrix, 0x00000000u},
     {0x800468ECu, "ae_RadarUsable", call_ae_RadarUsable, 0x00000000u},
     {0x80046970u, "ae_CameraKindFixed_Nop", call_ae_CameraKindFixed_Nop, 0x00000000u},
+    {0x80046978u, "ae_ScreenFadeSet", call_ae_ScreenFadeSet, 0x00000000u},
     {0x80046A78u, "ae_ScreenFadeUpdate", call_ae_ScreenFadeUpdate, 0x00000000u},
     {0x80046ACCu, "ae_HudDrawIconSprite", call_ae_HudDrawIconSprite, 0x00000000u},
     {0x80046BC4u, "ae_HudDrawGadgetIcons", call_ae_HudDrawGadgetIcons, 0x00000000u},
@@ -6474,12 +8493,16 @@ static const AeGameCall CALLS[] = {
     {0x80047754u, "ae_CameraResetAll", call_ae_CameraResetAll, 0x00000000u},
     {0x80047BD0u, "ae_CameraUpdate", call_ae_CameraUpdate, 0x00000000u},
     {0x80047DA4u, "ae_CameraSnapshotPlayer", call_ae_CameraSnapshotPlayer, 0x00000000u},
+    {0x80047E8Cu, "ae_CameraRadarFocusSelect", call_ae_CameraRadarFocusSelect, 0x00000000u},
+    {0x80047EE0u, "ae_CameraRadarFocusUpdate", call_ae_CameraRadarFocusUpdate, 0x00000000u},
     {0x80047FF0u, "ae_CameraApplySlot", call_ae_CameraApplySlot, 0x00000000u},
     {0x800482C0u, "ae_CameraFollowDispatch", call_ae_CameraFollowDispatch, 0x00000000u},
+    {0x80048398u, "ae_AimRequestStart", call_ae_AimRequestStart, 0x00000000u},
     {0x80048430u, "ae_AimRequestClear", call_ae_AimRequestClear, 0x00000000u},
     {0x80048454u, "ae_CameraKindAimUpdate", call_ae_CameraKindAimUpdate, 0x00000000u},
     {0x80048748u, "ae_CameraFixedModeOff", call_ae_CameraFixedModeOff, 0x00000000u},
     {0x8004875Cu, "ae_CameraKindFixedUpdate", call_ae_CameraKindFixedUpdate, 0x00000000u},
+    {0x8004898Cu, "ae_BossAimSfx", call_ae_BossAimSfx, 0x00000000u},
     {0x800489ECu, "ae_CameraShakeReset", call_ae_CameraShakeReset, 0x00000000u},
     {0x80048A00u, "ae_CameraShake", call_ae_CameraShake, 0x00000000u},
     {0x80048BBCu, "ae_CameraShakeApply", call_ae_CameraShakeApply, 0x00000000u},
@@ -6494,16 +8517,21 @@ static const AeGameCall CALLS[] = {
     {0x8004A940u, "ae_IsFlightArea", call_ae_IsFlightArea, 0x00000000u},
     {0x8004A978u, "ae_CameraRcCarActive", call_ae_CameraRcCarActive, 0x00000000u},
     {0x8004AA24u, "ae_CameraSlotFlagBit81", call_ae_CameraSlotFlagBit81, 0x00000000u},
+    {0x8004AA58u, "ae_CameraRcCarFollow", call_ae_CameraRcCarFollow, 0x00000000u},
     {0x8004AC84u, "ae_CameraFollowAimedVariant", call_ae_CameraFollowAimedVariant, 0x00000000u},
     {0x8004AF78u, "ae_CameraFollowGadgetVariant", call_ae_CameraFollowGadgetVariant, 0x00000000u},
     {0x8004B4B8u, "ae_AimModeEnter", call_ae_AimModeEnter, 0x00000000u},
     {0x8004B510u, "ae_AimModeLeave", call_ae_AimModeLeave, 0x00000000u},
+    {0x8004B54Cu, "ae_CameraGetSlotTarget", call_ae_CameraGetSlotTarget, 0x00000000u},
+    {0x8004B590u, "ae_CameraAreaScriptDispatch", call_ae_CameraAreaScriptDispatch, 0x00000000u},
     {0x8004B5FCu, "ae_CameraKind3FollowUpdate", call_ae_CameraKind3FollowUpdate, 0x00000000u},
     {0x8004B880u, "ae_CameraGetPlayerDir", call_ae_CameraGetPlayerDir, 0x00000000u},
     {0x8004B8F4u, "ae_CameraSlotGetFocusPoint", call_ae_CameraSlotGetFocusPoint, 0x00000000u},
     {0x8004BA0Cu, "ae_EventCamTrigger", call_ae_EventCamTrigger, 0x00000000u},
     {0x8004BAD8u, "ae_EventCamSetScript", call_ae_EventCamSetScript, 0x00000000u},
     {0x8004BB68u, "ae_EventCamCreate", call_ae_EventCamCreate, 0x00000000u},
+    {0x8004BBF0u, "ae_EventCamStartVictory", call_ae_EventCamStartVictory, 0x00000000u},
+    {0x8004BC5Cu, "ae_EventCamStartDefault", call_ae_EventCamStartDefault, 0x00000000u},
     {0x8004BC9Cu, "ae_EventCamStartRandom", call_ae_EventCamStartRandom, 0x00000000u},
     {0x8004BD98u, "ae_CameraRegionTest", call_ae_CameraRegionTest, 0x00000000u},
     {0x8004BF20u, "ae_CameraRegionUpdate", call_ae_CameraRegionUpdate, 0x00000000u},
@@ -6516,7 +8544,9 @@ static const AeGameCall CALLS[] = {
     {0x8004D39Cu, "ae_EventCamStart", call_ae_EventCamStart, 0x00000000u},
     {0x8004D40Cu, "ae_StageExitSequenceUpdate", call_ae_StageExitSequenceUpdate, 0x00000000u},
     {0x8004D6F4u, "ae_StageExitRequest", call_ae_StageExitRequest, 0x00000000u},
+    {0x8004D73Cu, "ae_StageExitStart", call_ae_StageExitStart, 0x00000000u},
     {0x8004D7A0u, "ae_EventCamUpdate", call_ae_EventCamUpdate, 0x00000000u},
+    {0x8004D880u, "ae_CallIndexedHandler", call_ae_CallIndexedHandler, 0x00000000u},
     {0x8004D8C0u, "ae_GetSolidHeight", call_ae_GetSolidHeight, 0x00000000u},
     {0x8004DF38u, "ae_ColliderHeightAt", call_ae_ColliderHeightAt, 0x00000000u},
     {0x8004E33Cu, "ae_CollShape_Box", call_ae_CollShape_Box, 0x00000000u},
@@ -6545,6 +8575,7 @@ static const AeGameCall CALLS[] = {
     {0x800505C8u, "ae_ZakoInit", call_ae_ZakoInit, 0x00000000u},
     {0x800508B8u, "ae_ZakoSpawnFromEntry", call_ae_ZakoSpawnFromEntry, 0x00000000u},
     {0x800509A4u, "ae_ZakoClearSlotTable", call_ae_ZakoClearSlotTable, 0x00000000u},
+    {0x800509CCu, "ae_ZakoSaveDefeatedMask", call_ae_ZakoSaveDefeatedMask, 0x00000000u},
     {0x80050AFCu, "ae_StageProgressRestore_Nop", call_ae_StageProgressRestore_Nop, 0x00000000u},
     {0x80050B04u, "ae_ZakoSpawnNearby", call_ae_ZakoSpawnNearby, 0x00000000u},
     {0x80050C34u, "ae_ZakoUpdateAll", call_ae_ZakoUpdateAll, 0x00000000u},
@@ -6602,6 +8633,7 @@ static const AeGameCall CALLS[] = {
     {0x800534E8u, "ae_ZakoReturnIfFar", call_ae_ZakoReturnIfFar, 0x00000000u},
     {0x80053550u, "ae_ZakoUpdateGenericEnemy", call_ae_ZakoUpdateGenericEnemy, 0x00000000u},
     {0x800546DCu, "ae_ZakoUpdateStageSpecificEnemy", call_ae_ZakoUpdateStageSpecificEnemy, 0x00000000u},
+    {0x80054A08u, "ae_ZakoClearDefeatedBits", call_ae_ZakoClearDefeatedBits, 0x00000000u},
     {0x80055370u, "ae_ObjTargetBeyondRange", call_ae_ObjTargetBeyondRange, 0x00000000u},
     {0x80055404u, "ae_ObjPlaySfx", call_ae_ObjPlaySfx, 0x00000000u},
     {0x80055460u, "ae_ObjWalkOnGround", call_ae_ObjWalkOnGround, 0x00000000u},
@@ -6688,6 +8720,7 @@ static const AeGameCall CALLS[] = {
     {0x8005DD18u, "ae_CutsceneModeOn", call_ae_CutsceneModeOn, 0x00000000u},
     {0x8005DD28u, "ae_CutsceneModeOff", call_ae_CutsceneModeOff, 0x00000000u},
     {0x8005DD34u, "ae_GetDAT_800B01C2", call_ae_GetDAT_800B01C2, 0x00000000u},
+    {0x8005DD44u, "ae_PlayTimeAdd", call_ae_PlayTimeAdd, 0x00000000u},
     {0x8005DD78u, "ae_StageTimerAdd", call_ae_StageTimerAdd, 0x00000000u},
     {0x8005DDE0u, "ae_ResetFrameFlip", call_ae_ResetFrameFlip, 0x00000000u},
     {0x8005E0F0u, "ae_StageDrawScreenOverlay", call_ae_StageDrawScreenOverlay, 0x00000000u},
@@ -6699,12 +8732,14 @@ static const AeGameCall CALLS[] = {
     {0x8005EAB0u, "ae_AreaTexCopyDraw", call_ae_AreaTexCopyDraw, 0x00000000u},
     {0x8005F2E0u, "ae_HudPanelA_DrawIcon", call_ae_HudPanelA_DrawIcon, 0x00000000u},
     {0x8005F5FCu, "ae_HudPanelB_DrawSprite", call_ae_HudPanelB_DrawSprite, 0x00000000u},
+    {0x8005F68Cu, "ae_HudDrawTimeRankIcon", call_ae_HudDrawTimeRankIcon, 0x00000000u},
     {0x8005F770u, "ae_HudDrawDigit", call_ae_HudDrawDigit, 0x00000000u},
     {0x8005F87Cu, "ae_HudDrawNumber", call_ae_HudDrawNumber, 0x00000000u},
     {0x8005F978u, "ae_HudDrawTime", call_ae_HudDrawTime, 0x00000000u},
     {0x8005FCA4u, "ae_HudDrawIcon16", call_ae_HudDrawIcon16, 0x00000000u},
     {0x8005FD80u, "ae_HudCounterC_Draw", call_ae_HudCounterC_Draw, 0x00000000u},
     {0x8005FFD4u, "ae_HudDrawTimerGauge", call_ae_HudDrawTimerGauge, 0x00000000u},
+    {0x80060448u, "ae_HudDrawMonkeyInfo", call_ae_HudDrawMonkeyInfo, 0x00000000u},
     {0x80060780u, "ae_PlayerUpdate", call_ae_PlayerUpdate, 0x00000000u},
     {0x80063628u, "ae_PlayerAnimateAndDraw", call_ae_PlayerAnimateAndDraw, 0x00000000u},
     {0x80063EC4u, "ae_PlayerTryLedgeGrab", call_ae_PlayerTryLedgeGrab, 0x00000000u},
@@ -6733,6 +8768,7 @@ static const AeGameCall CALLS[] = {
     {0x80064F90u, "ae_PlayerCond_RStickEvent04", call_ae_PlayerCond_RStickEvent04, 0x00000000u},
     {0x8006501Cu, "ae_PlayerCond_RStickEvent08", call_ae_PlayerCond_RStickEvent08, 0x00000000u},
     {0x800650A8u, "ae_PlayerCond_NoGestureR3Held", call_ae_PlayerCond_NoGestureR3Held, 0x00000000u},
+    {0x800650D8u, "ae_PlayerInput_StickGesture", call_ae_PlayerInput_StickGesture, 0x00000000u},
     {0x800650E8u, "ae_PlayerCond_RStickRotating", call_ae_PlayerCond_RStickRotating, 0x00000000u},
     {0x8006512Cu, "ae_PlayerCond_Gadget1RStickFwdFlick", call_ae_PlayerCond_Gadget1RStickFwdFlick, 0x00000000u},
     {0x80065178u, "ae_PlayerCond_Gadget3RStickBack", call_ae_PlayerCond_Gadget3RStickBack, 0x00000000u},
@@ -6824,6 +8860,8 @@ static const AeGameCall CALLS[] = {
     {0x80066C90u, "ae_TurnTowardsY", call_ae_TurnTowardsY, 0x00000000u},
     {0x80066E28u, "ae_PlayerSetClimbTarget", call_ae_PlayerSetClimbTarget, 0x00000000u},
     {0x80066E8Cu, "ae_PlayerSetRope", call_ae_PlayerSetRope, 0x00000000u},
+    {0x80066EECu, "ae_PlayerAttachSet", call_ae_PlayerAttachSet, 0x00000000u},
+    {0x80066F34u, "ae_PlayerSetBounceFlag", call_ae_PlayerSetBounceFlag, 0x00000000u},
     {0x80066F50u, "ae_player_can_switch_gadget", call_ae_player_can_switch_gadget, 0x00000000u},
     {0x80066FC8u, "ae_PlayerOnContact", call_ae_PlayerOnContact, 0x00000000u},
     {0x80067974u, "ae_player_gadget_select_request", call_ae_player_gadget_select_request, 0x00000000u},
@@ -6847,10 +8885,12 @@ static const AeGameCall CALLS[] = {
     {0x8006962Cu, "ae_SpawnOneParticle", call_ae_SpawnOneParticle, 0x00000000u},
     {0x800696ECu, "ae_SpawnEffectGroup", call_ae_SpawnEffectGroup, 0x00000000u},
     {0x800698B8u, "ae_SpawnParticle", call_ae_SpawnParticle, 0x00000000u},
+    {0x800698E4u, "ae_SpawnEffectGroupAt", call_ae_SpawnEffectGroupAt, 0x00000000u},
     {0x80069920u, "ae_ParticlesDraw", call_ae_ParticlesDraw, 0x00000000u},
     {0x80069BECu, "ae_EffectScriptUpdate", call_ae_EffectScriptUpdate, 0x00000000u},
     {0x8006A9B0u, "ae_EffectsResetSubsystems", call_ae_EffectsResetSubsystems, 0x00000000u},
     {0x8006A9F8u, "ae_EffectsUpdateAll", call_ae_EffectsUpdateAll, 0x00000000u},
+    {0x8006AA60u, "ae_BreakableFinalizeVisualUpdate", call_ae_BreakableFinalizeVisualUpdate, 0x00000000u},
     {0x8006B168u, "ae_PlayerFxTrailUpdate", call_ae_PlayerFxTrailUpdate, 0x00000000u},
     {0x8006B3CCu, "ae_SpawnPuff", call_ae_SpawnPuff, 0x00000000u},
     {0x8006B3F0u, "ae_EffectBigBurst", call_ae_EffectBigBurst, 0x00000000u},
@@ -6868,13 +8908,16 @@ static const AeGameCall CALLS[] = {
     {0x8006C2C0u, "ae_PlayerFxSpawn10C", call_ae_PlayerFxSpawn10C, 0x00000000u},
     {0x8006C2E8u, "ae_PlayerSetTintEffect", call_ae_PlayerSetTintEffect, 0x00000000u},
     {0x8006C334u, "ae_PlayerTintEffectUpdate", call_ae_PlayerTintEffectUpdate, 0x00000000u},
+    {0x8006C58Cu, "ae_PlayerFxJumpBurst", call_ae_PlayerFxJumpBurst, 0x00000000u},
     {0x8006C6A4u, "ae_GadgetFlashSet", call_ae_GadgetFlashSet, 0x00000000u},
     {0x8006C6D4u, "ae_GadgetFlashUpdate", call_ae_GadgetFlashUpdate, 0x00000000u},
     {0x8006C92Cu, "ae_PlayerFxSquashParticles", call_ae_PlayerFxSquashParticles, 0x00000000u},
     {0x8006CC28u, "ae_PlayerFxFlattenedParticles", call_ae_PlayerFxFlattenedParticles, 0x00000000u},
     {0x8006CDE0u, "ae_GadgetSelectFx", call_ae_GadgetSelectFx, 0x00000000u},
+    {0x8006CE9Cu, "ae_PlayerFxSpawn116", call_ae_PlayerFxSpawn116, 0x00000000u},
     {0x8006CEF0u, "ae_Gadget6SparkleFx", call_ae_Gadget6SparkleFx, 0x00000000u},
     {0x8006CFA4u, "ae_PlayerFxResetBlink", call_ae_PlayerFxResetBlink, 0x00000000u},
+    {0x8006CFBCu, "ae_PlayerFxSetMatrixPos", call_ae_PlayerFxSetMatrixPos, 0x00000000u},
     {0x8006D044u, "ae_Gadget7TrailUpdate", call_ae_Gadget7TrailUpdate, 0x00000000u},
     {0x8006D4C0u, "ae_SpriteEffectQueue", call_ae_SpriteEffectQueue, 0x00000000u},
     {0x8006D548u, "ae_SpriteEffectQueue0", call_ae_SpriteEffectQueue0, 0x00000000u},
@@ -6910,6 +8953,7 @@ static const AeGameCall CALLS[] = {
     {0x8007163Cu, "ae_AreaSetIndicatorModelA", call_ae_AreaSetIndicatorModelA, 0x00000000u},
     {0x80071694u, "ae_AreaSetIndicatorModelB", call_ae_AreaSetIndicatorModelB, 0x00000000u},
     {0x800716ECu, "ae_Indicator_Register", call_ae_Indicator_Register, 0x00000000u},
+    {0x800717B4u, "ae_Indicator_Activate", call_ae_Indicator_Activate, 0x00000000u},
     {0x800719F8u, "ae_IndicatorsUpdateDraw", call_ae_IndicatorsUpdateDraw, 0x00000000u},
     {0x80071D20u, "ae_CollProbeCounterInc", call_ae_CollProbeCounterInc, 0x00000000u},
     {0x80071D3Cu, "ae_CollisionBodiesReset", call_ae_CollisionBodiesReset, 0x00000000u},
@@ -6938,6 +8982,7 @@ static const AeGameCall CALLS[] = {
     {0x80073450u, "ae_CollisionResolveProbes", call_ae_CollisionResolveProbes, 0x00000000u},
     {0x800739FCu, "ae_SignedRangeOverlap", call_ae_SignedRangeOverlap, 0x00000000u},
     {0x80073AA0u, "ae_PointInBoxXYZ", call_ae_PointInBoxXYZ, 0x00000000u},
+    {0x80073B64u, "ae_PointInBoxXZ", call_ae_PointInBoxXZ, 0x00000000u},
     {0x80073BC8u, "ae_CollProbe_Box", call_ae_CollProbe_Box, 0x00000000u},
     {0x80073FD4u, "ae_CollProbe_Ramp", call_ae_CollProbe_Ramp, 0x00000000u},
     {0x8007449Cu, "ae_CollProbe_Triangle", call_ae_CollProbe_Triangle, 0x00000000u},
@@ -6952,6 +8997,7 @@ static const AeGameCall CALLS[] = {
     {0x8007734Cu, "ae_CollProbe_Strip", call_ae_CollProbe_Strip, 0x00000000u},
     {0x80077490u, "ae_CollProbe_NoContact", call_ae_CollProbe_NoContact, 0x00000000u},
     {0x800774B8u, "ae_DiagonalSignedDistance", call_ae_DiagonalSignedDistance, 0x00000000u},
+    {0x8007774Cu, "ae_DirIndexFromFlags", call_ae_DirIndexFromFlags, 0x00000000u},
     {0x800777ACu, "ae_BodyCollideWithBodies", call_ae_BodyCollideWithBodies, 0x00000000u},
     {0x80077C28u, "ae_CollisionBodyGetCenter", call_ae_CollisionBodyGetCenter, 0x00000000u},
     {0x80077D18u, "ae_BodyFindOverlapType1", call_ae_BodyFindOverlapType1, 0x00000000u},
@@ -6968,6 +9014,7 @@ static const AeGameCall CALLS[] = {
     {0x80079B10u, "ae_StageFadeUpdate", call_ae_StageFadeUpdate, 0x00000000u},
     {0x80079E78u, "ae_ScreenFlashFadeDraw", call_ae_ScreenFlashFadeDraw, 0x00000000u},
     {0x80079ECCu, "ae_FadeSpiralDraw", call_ae_FadeSpiralDraw, 0x00000000u},
+    {0x8007A14Cu, "ae_FadeFrame", call_ae_FadeFrame, 0x00000000u},
     {0x8007A180u, "ae_PlayerStopGadgetSounds", call_ae_PlayerStopGadgetSounds, 0x00000000u},
     {0x8007A304u, "ae_AimTableClear3", call_ae_AimTableClear3, 0x00000000u},
     {0x8007A32Cu, "ae_Gadget3FindAimTarget", call_ae_Gadget3FindAimTarget, 0x00000000u},
@@ -6997,6 +9044,7 @@ static const AeGameCall CALLS[] = {
     {0x8007CD60u, "ae_TargetListClear", call_ae_TargetListClear, 0x00000000u},
     {0x8007CD88u, "ae_TargetListAdd", call_ae_TargetListAdd, 0x00000000u},
     {0x8007CDC4u, "ae_TargetListRemove", call_ae_TargetListRemove, 0x00000000u},
+    {0x8007CDFCu, "ae_TargetListFindBest", call_ae_TargetListFindBest, 0x00000000u},
     {0x8007D0F0u, "ae_TableClearDAT_800BEF60", call_ae_TableClearDAT_800BEF60, 0x00000000u},
     {0x8007D118u, "ae_ReadSizedValue", call_ae_ReadSizedValue, 0x00000000u},
     {0x8007D188u, "ae_WriteSizedValue", call_ae_WriteSizedValue, 0x00000000u},
@@ -7009,6 +9057,7 @@ static const AeGameCall CALLS[] = {
     {0x8007D2D8u, "ae_MenuWindowAdd", call_ae_MenuWindowAdd, 0x00000000u},
     {0x8007D530u, "ae_MenuWindowsRun", call_ae_MenuWindowsRun, 0x00000000u},
     {0x8007F400u, "ae_ClearDAT_800BEF70", call_ae_ClearDAT_800BEF70, 0x00000000u},
+    {0x8007F40Cu, "ae_PadDirectionCode", call_ae_PadDirectionCode, 0x00000000u},
     {0x8007F56Cu, "ae_OpenPauseMenu", call_ae_OpenPauseMenu, 0x00000000u},
     {0x8007F5D4u, "ae_IsPauseMenuOpen", call_ae_IsPauseMenuOpen, 0x00000000u},
     {0x8007F5E4u, "ae_PauseMenuDrawButton", call_ae_PauseMenuDrawButton, 0x00000000u},
@@ -7028,8 +9077,15 @@ static const AeGameCall CALLS[] = {
     {0x80081F18u, "ae_HudDrawWindowFrame", call_ae_HudDrawWindowFrame, 0x00000000u},
     {0x80082030u, "ae_PauseItemEnabled", call_ae_PauseItemEnabled, 0x00000000u},
     {0x800821D4u, "ae_PauseMenuUpdate", call_ae_PauseMenuUpdate, 0x00000000u},
+    {0x80082230u, "ae_HudTextWidth", call_ae_HudTextWidth, 0x00000000u},
     {0x8008227Cu, "ae_SetDAT_800BEF80", call_ae_SetDAT_800BEF80, 0x00000000u},
     {0x80082288u, "ae_DrawTextSprites", call_ae_DrawTextSprites, 0x00000000u},
+    {0x80082398u, "ae_PauseDrawCaptureGrid", call_ae_PauseDrawCaptureGrid, 0x00000000u},
+    {0x800828F8u, "ae_HudSetGeomOffsetThenDraw", call_ae_HudSetGeomOffsetThenDraw, 0x00000000u},
+    {0x80082A04u, "ae_PauseDrawCounter", call_ae_PauseDrawCounter, 0x00000000u},
+    {0x80082D40u, "ae_PauseMenuInitVolumes", call_ae_PauseMenuInitVolumes, 0x00000000u},
+    {0x80082D6Cu, "ae_PauseMenuDrawSubScreen", call_ae_PauseMenuDrawSubScreen, 0x00000000u},
+    {0x800832FCu, "ae_StringTableIndex_Main", call_ae_StringTableIndex_Main, 0x00000000u},
     {0x80083470u, "ae_ItemsLoadForArea", call_ae_ItemsLoadForArea, 0x00000000u},
     {0x800836E0u, "ae_PickupSetPosition", call_ae_PickupSetPosition, 0x00000000u},
     {0x8008373Cu, "ae_PickupPickKindA", call_ae_PickupPickKindA, 0x00000000u},
@@ -7040,6 +9096,8 @@ static const AeGameCall CALLS[] = {
     {0x8008435Cu, "ae_ItemsDraw", call_ae_ItemsDraw, 0x00000000u},
     {0x80084598u, "ae_ItemsUpdateDraw", call_ae_ItemsUpdateDraw, 0x00000000u},
     {0x800846D8u, "ae_ItemDrawModelEnvMap", call_ae_ItemDrawModelEnvMap, 0x00000000u},
+    {0x800847C4u, "ae_ItemsClearFlags", call_ae_ItemsClearFlags, 0x00000000u},
+    {0x800847ECu, "ae_ItemSaveCollectedMask", call_ae_ItemSaveCollectedMask, 0x00000000u},
     {0x800848B0u, "ae_StageProgressRestore_Nop2", call_ae_StageProgressRestore_Nop2, 0x00000000u},
     {0x80084904u, "ae_CollectedItemsHas", call_ae_CollectedItemsHas, 0x00000000u},
     {0x80084964u, "ae_CollectedItemsAdd", call_ae_CollectedItemsAdd, 0x00000000u},
@@ -7056,6 +9114,8 @@ static const AeGameCall CALLS[] = {
     {0x80085254u, "ae_ProjectileGroupSpawn", call_ae_ProjectileGroupSpawn, 0x00000000u},
     {0x80085630u, "ae_ProjectileGroupSpawnSpread", call_ae_ProjectileGroupSpawnSpread, 0x00000000u},
     {0x800856FCu, "ae_ProjectileGroupsUpdate", call_ae_ProjectileGroupsUpdate, 0x00000000u},
+    {0x80086148u, "ae_SoundSilence", call_ae_SoundSilence, 0x00000000u},
+    {0x80086170u, "ae_SoundStopAndRestoreVolume", call_ae_SoundStopAndRestoreVolume, 0x00000000u},
     {0x80086248u, "ae_SoundSetVolumeMode", call_ae_SoundSetVolumeMode, 0x00000000u},
     {0x800862E4u, "ae_SoundSetVolumes", call_ae_SoundSetVolumes, 0x00000000u},
     {0x80086428u, "ae_SoundVolumesDefault", call_ae_SoundVolumesDefault, 0x00000000u},
@@ -7070,12 +9130,15 @@ static const AeGameCall CALLS[] = {
     {0x80087388u, "ae_BgmStart", call_ae_BgmStart, 0x00000000u},
     {0x8008740Cu, "ae_BgmModeWantsMusic", call_ae_BgmModeWantsMusic, 0x00000000u},
     {0x8008745Cu, "ae_BgmUpdateVolume", call_ae_BgmUpdateVolume, 0x00000000u},
+    {0x8008760Cu, "ae_BgmFadeOut", call_ae_BgmFadeOut, 0x00000000u},
     {0x80087654u, "ae_BgmApplyPlayerEffect", call_ae_BgmApplyPlayerEffect, 0x00000000u},
     {0x800877F8u, "ae_PlaySfx", call_ae_PlaySfx, 0x00000000u},
     {0x800878E0u, "ae_SoundLoopStart", call_ae_SoundLoopStart, 0x00000000u},
     {0x80087A20u, "ae_PlaySfxAt", call_ae_PlaySfxAt, 0x00000000u},
     {0x80087B34u, "ae_SoundEmitterPan", call_ae_SoundEmitterPan, 0x00000000u},
+    {0x80087BA4u, "ae_SoundEmitterVolume", call_ae_SoundEmitterVolume, 0x00000000u},
     {0x80087C28u, "ae_SoundEmitterPitch", call_ae_SoundEmitterPitch, 0x00000000u},
+    {0x80087C64u, "ae_SoundSetStereo", call_ae_SoundSetStereo, 0x00000000u},
     {0x80087C8Cu, "ae_SoundEmitterCalcPan", call_ae_SoundEmitterCalcPan, 0x00000000u},
     {0x80087EE0u, "ae_SoundEmitterAttenuation", call_ae_SoundEmitterAttenuation, 0x00000000u},
     {0x8008806Cu, "ae_SoundLoopStop", call_ae_SoundLoopStop, 0x00000000u},
@@ -7091,9 +9154,16 @@ static const AeGameCall CALLS[] = {
     {0x800889B4u, "ae_GetColliderQuadrantMaskXZ", call_ae_GetColliderQuadrantMaskXZ, 0x00000000u},
     {0x800889ECu, "ae_ColliderComputeQuadrantMask", call_ae_ColliderComputeQuadrantMask, 0x00000000u},
     {0x80088AB8u, "ae_ColliderScriptsUpdate", call_ae_ColliderScriptsUpdate, 0x00000000u},
+    {0x80088D78u, "ae_ColliderScriptRiseToGround", call_ae_ColliderScriptRiseToGround, 0x00000000u},
+    {0x80088F2Cu, "ae_ColliderScriptLiftUpdate", call_ae_ColliderScriptLiftUpdate, 0x00000000u},
     {0x800892C4u, "ae_ColliderScriptFollowPath", call_ae_ColliderScriptFollowPath, 0x00000000u},
+    {0x800895F0u, "ae_ColliderScriptRotateUpdate", call_ae_ColliderScriptRotateUpdate, 0x00000000u},
+    {0x80089B10u, "ae_ColliderScriptOrbitPlayer", call_ae_ColliderScriptOrbitPlayer, 0x00000000u},
+    {0x80089D64u, "ae_ColliderScriptNoOpA", call_ae_ColliderScriptNoOpA, 0x00000000u},
+    {0x80089D6Cu, "ae_ColliderScriptPropTransformUpdate", call_ae_ColliderScriptPropTransformUpdate, 0x00000000u},
     {0x8008A4B0u, "ae_ColliderScriptPlayerMove", call_ae_ColliderScriptPlayerMove, 0x00000000u},
     {0x8008A91Cu, "ae_ColliderScriptCarry", call_ae_ColliderScriptCarry, 0x00000000u},
+    {0x8008AA64u, "ae_ColliderScriptNoOpB", call_ae_ColliderScriptNoOpB, 0x00000000u},
     {0x8008AA6Cu, "ae_GimmickCarryBodiesByDelta", call_ae_GimmickCarryBodiesByDelta, 0x00000000u},
     {0x8008ABB0u, "ae_GimmickCarryBodiesSwing", call_ae_GimmickCarryBodiesSwing, 0x00000000u},
     {0x8008AD14u, "ae_GimmickSwingCarryPoint", call_ae_GimmickSwingCarryPoint, 0x00000000u},
@@ -7123,6 +9193,7 @@ static const AeGameCall CALLS[] = {
     {0x8008DDC8u, "ae_MessageBoxDrawString", call_ae_MessageBoxDrawString, 0x00000000u},
     {0x8008DE68u, "ae_TextWidthUntilGlyph", call_ae_TextWidthUntilGlyph, 0x00000000u},
     {0x8008DEE0u, "ae_MessageBoxClose", call_ae_MessageBoxClose, 0x00000000u},
+    {0x8008DEECu, "ae_MessageBoxOpen", call_ae_MessageBoxOpen, 0x00000000u},
     {0x8008DF20u, "ae_MessageBoxSetText", call_ae_MessageBoxSetText, 0x00000000u},
     {0x8008DF3Cu, "ae_MessageBoxBusy", call_ae_MessageBoxBusy, 0x00000000u},
     {0x8008DF4Cu, "ae_MessageBoxUpdateDraw", call_ae_MessageBoxUpdateDraw, 0x00000000u},
@@ -7133,19 +9204,24 @@ static const AeGameCall CALLS[] = {
     {0x8008E90Cu, "ae_Gimmick_SwingDoor_Update", call_ae_Gimmick_SwingDoor_Update, 0x00000000u},
     {0x8008EAE4u, "ae_GimmickPlayTypeSfx", call_ae_GimmickPlayTypeSfx, 0x00000000u},
     {0x8008EB58u, "ae_GimmickAnyBodyInside", call_ae_GimmickAnyBodyInside, 0x00000000u},
+    {0x8008EC70u, "ae_BodyInsideBox", call_ae_BodyInsideBox, 0x00000000u},
     {0x8008ECFCu, "ae_SwingDoorSetPivot", call_ae_SwingDoorSetPivot, 0x00000000u},
     {0x8008EF60u, "ae_Gimmick_LiftDoor_Init", call_ae_Gimmick_LiftDoor_Init, 0x00000000u},
     {0x8008F0BCu, "ae_Gimmick_LiftDoor_Update", call_ae_Gimmick_LiftDoor_Update, 0x00000000u},
+    {0x8008F308u, "ae_SwingDoorBodyDelta", call_ae_SwingDoorBodyDelta, 0x00000000u},
     {0x8008F468u, "ae_Gimmick_Init_ThresholdDoor", call_ae_Gimmick_Init_ThresholdDoor, 0x00000000u},
     {0x8008F53Cu, "ae_Gimmick_ThresholdDoor_Update", call_ae_Gimmick_ThresholdDoor_Update, 0x00000000u},
     {0x8008F720u, "ae_Gimmick_SlideDoor_Init", call_ae_Gimmick_SlideDoor_Init, 0x00000000u},
     {0x8008F8D4u, "ae_Gimmick_SlideDoor_Update", call_ae_Gimmick_SlideDoor_Update, 0x00000000u},
+    {0x8008FAD0u, "ae_SlideDoorMove", call_ae_SlideDoorMove, 0x00000000u},
     {0x8008FC30u, "ae_GimmickActivate", call_ae_GimmickActivate, 0x00000000u},
     {0x80090230u, "ae_GimmickDeactivateChain", call_ae_GimmickDeactivateChain, 0x00000000u},
     {0x80090370u, "ae_Gimmick_Switch_Init", call_ae_Gimmick_Switch_Init, 0x00000000u},
     {0x80090500u, "ae_Gimmick_Switch_Update", call_ae_Gimmick_Switch_Update, 0x00000000u},
     {0x800905A4u, "ae_Gimmick_Init_PairToggle", call_ae_Gimmick_Init_PairToggle, 0x00000000u},
     {0x80090660u, "ae_Gimmick_Hit_Update", call_ae_Gimmick_Hit_Update, 0x00000000u},
+    {0x80090754u, "ae_GimmickTouchCheck", call_ae_GimmickTouchCheck, 0x00000000u},
+    {0x8009091Cu, "ae_ColliderBoxContainsPoint", call_ae_ColliderBoxContainsPoint, 0x00000000u},
     {0x800909A8u, "ae_Gimmick_Init_Counter", call_ae_Gimmick_Init_Counter, 0x00000000u},
     {0x800909FCu, "ae_Gimmick_SpinRoller_Update", call_ae_Gimmick_SpinRoller_Update, 0x00000000u},
     {0x80090D6Cu, "ae_Gimmick_Init_MonkeyQuota", call_ae_Gimmick_Init_MonkeyQuota, 0x00000000u},
@@ -7159,6 +9235,7 @@ static const AeGameCall CALLS[] = {
     {0x80091178u, "ae_Gimmick_ProxTrigger_Update", call_ae_Gimmick_ProxTrigger_Update, 0x00000000u},
     {0x80091358u, "ae_Gimmick_Breakable_Init", call_ae_Gimmick_Breakable_Init, 0x00000000u},
     {0x800913ECu, "ae_Gimmick_Breakable_Update", call_ae_Gimmick_Breakable_Update, 0x00000000u},
+    {0x80091598u, "ae_GimmickBreakableFloorAdjust", call_ae_GimmickBreakableFloorAdjust, 0x00000000u},
     {0x80091688u, "ae_Gimmick_Init_Closed2", call_ae_Gimmick_Init_Closed2, 0x00000000u},
     {0x800916FCu, "ae_Gimmick_NopUpdate2", call_ae_Gimmick_NopUpdate2, 0x00000000u},
     {0x80091704u, "ae_Gimmick_Init_PropHidden", call_ae_Gimmick_Init_PropHidden, 0x00000000u},
@@ -7166,10 +9243,13 @@ static const AeGameCall CALLS[] = {
     {0x80091870u, "ae_Gimmick_Init_Closed3", call_ae_Gimmick_Init_Closed3, 0x00000000u},
     {0x800918FCu, "ae_Gimmick_Slider_Update", call_ae_Gimmick_Slider_Update, 0x00000000u},
     {0x80091A18u, "ae_Gimmick_SliderQuiet_Update", call_ae_Gimmick_SliderQuiet_Update, 0x00000000u},
+    {0x80091AF0u, "ae_GimmickApplyPropScale", call_ae_GimmickApplyPropScale, 0x00000000u},
+    {0x80091C04u, "ae_GimmickSetPropRotation", call_ae_GimmickSetPropRotation, 0x00000000u},
     {0x80091CF8u, "ae_Gimmick_PlayerBox_Update", call_ae_Gimmick_PlayerBox_Update, 0x00000000u},
     {0x80091D24u, "ae_GimmickPlayerInBox", call_ae_GimmickPlayerInBox, 0x00000000u},
     {0x80091FB0u, "ae_Gimmick_Init_RecordOrigin", call_ae_Gimmick_Init_RecordOrigin, 0x00000000u},
     {0x800920ACu, "ae_Gimmick_LinkedLift_Update", call_ae_Gimmick_LinkedLift_Update, 0x00000000u},
+    {0x80092324u, "ae_GimmickColliderContactUpdate", call_ae_GimmickColliderContactUpdate, 0x00000000u},
     {0x80092A68u, "ae_Gimmick_Init_PropTilt", call_ae_Gimmick_Init_PropTilt, 0x00000000u},
     {0x80092B0Cu, "ae_Gimmick_Oscillate_Update", call_ae_Gimmick_Oscillate_Update, 0x00000000u},
     {0x80092E74u, "ae_Gimmick_Init_PropMeshSet", call_ae_Gimmick_Init_PropMeshSet, 0x00000000u},
@@ -7178,18 +9258,28 @@ static const AeGameCall CALLS[] = {
     {0x800935F0u, "ae_Gimmick_PlayerBlast_Update", call_ae_Gimmick_PlayerBlast_Update, 0x00000000u},
     {0x80093740u, "ae_Gimmick_Init_Disabled", call_ae_Gimmick_Init_Disabled, 0x00000000u},
     {0x80093788u, "ae_Gimmick_Grab_Update", call_ae_Gimmick_Grab_Update, 0x00000000u},
+    {0x80093848u, "ae_GimmickGetGrabOffset", call_ae_GimmickGetGrabOffset, 0x00000000u},
     {0x8009391Cu, "ae_Gimmick_Init_PropFlag2000", call_ae_Gimmick_Init_PropFlag2000, 0x00000000u},
     {0x8009398Cu, "ae_Gimmick_Bounce_Update", call_ae_Gimmick_Bounce_Update, 0x00000000u},
     {0x80093E74u, "ae_Gimmick_Init_Hidden", call_ae_Gimmick_Init_Hidden, 0x00000000u},
     {0x80093F04u, "ae_Gimmick_Rotate_Update", call_ae_Gimmick_Rotate_Update, 0x00000000u},
+    {0x80094330u, "ae_GimmickPointWithinExpandedBox", call_ae_GimmickPointWithinExpandedBox, 0x00000000u},
     {0x8009468Cu, "ae_Gimmick_Falling_Update", call_ae_Gimmick_Falling_Update, 0x00000000u},
+    {0x80094A48u, "ae_GimmickLinkedAreaActive", call_ae_GimmickLinkedAreaActive, 0x00000000u},
     {0x80094B6Cu, "ae_GimmickMoveColliderTo", call_ae_GimmickMoveColliderTo, 0x00000000u},
     {0x80094C10u, "ae_GimmickMoveCollider", call_ae_GimmickMoveCollider, 0x00000000u},
+    {0x80094E5Cu, "ae_GimmickMonkeyTouchingBox", call_ae_GimmickMonkeyTouchingBox, 0x00000000u},
     {0x80094F20u, "ae_StageRequestExit", call_ae_StageRequestExit, 0x00000000u},
     {0x80094F40u, "ae_Gimmick_NopUpdate3", call_ae_Gimmick_NopUpdate3, 0x00000000u},
+    {0x80094F48u, "ae_StageType_Clear_Init", call_ae_StageType_Clear_Init, 0x00000000u},
+    {0x80095030u, "ae_StageType_Clear_Update", call_ae_StageType_Clear_Update, 0x00000000u},
     {0x80095244u, "ae_HudPanelA_Start", call_ae_HudPanelA_Start, 0x00000000u},
     {0x8009529Cu, "ae_HudPanelA_Update", call_ae_HudPanelA_Update, 0x00000000u},
+    {0x8009543Cu, "ae_StageVictoryStart", call_ae_StageVictoryStart, 0x00000000u},
     {0x80095464u, "ae_Gimmick_NopUpdate4", call_ae_Gimmick_NopUpdate4, 0x00000000u},
+    {0x8009546Cu, "ae_StageIntroStart", call_ae_StageIntroStart, 0x00000000u},
+    {0x800954C4u, "ae_StageIntroUpdate", call_ae_StageIntroUpdate, 0x00000000u},
+    {0x80095588u, "ae_PlayerEnterCutsceneMode", call_ae_PlayerEnterCutsceneMode, 0x00000000u},
     {0x800955C8u, "ae_StageRequestRetry", call_ae_StageRequestRetry, 0x00000000u},
     {0x80095600u, "ae_HudPanelB_Start", call_ae_HudPanelB_Start, 0x00000000u},
     {0x80095690u, "ae_HudPanelB_Update", call_ae_HudPanelB_Update, 0x00000000u},
@@ -7201,16 +9291,25 @@ static const AeGameCall CALLS[] = {
     {0x800961D0u, "ae_RecordBestTime", call_ae_RecordBestTime, 0x00000000u},
     {0x8009628Cu, "ae_SaveBlockPtr", call_ae_SaveBlockPtr, 0x00000000u},
     {0x800962A4u, "ae_GimmickStateTablePtr", call_ae_GimmickStateTablePtr, 0x00000000u},
+    {0x800962B0u, "ae_ProgressChecksum", call_ae_ProgressChecksum, 0x00000000u},
     {0x800962E8u, "ae_GetCollectedItemsTable", call_ae_GetCollectedItemsTable, 0x00000000u},
+    {0x800962F4u, "ae_ProgressFlagSet", call_ae_ProgressFlagSet, 0x00000000u},
     {0x8009632Cu, "ae_ProgressFlagGet", call_ae_ProgressFlagGet, 0x00000000u},
+    {0x80096360u, "ae_ProgressSetByte", call_ae_ProgressSetByte, 0x00000000u},
     {0x800963ACu, "ae_ProgressGetByte", call_ae_ProgressGetByte, 0x00000000u},
     {0x800963DCu, "ae_ProgressMarkStageResult", call_ae_ProgressMarkStageResult, 0x00000000u},
+    {0x800964B0u, "ae_ProgressGetStageResult", call_ae_ProgressGetStageResult, 0x00000000u},
     {0x80096514u, "ae_AreaKindVisitedGet", call_ae_AreaKindVisitedGet, 0x00000000u},
     {0x80096580u, "ae_LevelProgressGet", call_ae_LevelProgressGet, 0x00000000u},
+    {0x800965ECu, "ae_LevelMonkeyCountGet", call_ae_LevelMonkeyCountGet, 0x00000000u},
+    {0x80096638u, "ae_LevelProgressRecordExit", call_ae_LevelProgressRecordExit, 0x00000000u},
     {0x800966B4u, "ae_StageProgressOnEnter", call_ae_StageProgressOnEnter, 0x00000000u},
     {0x80096E0Cu, "ae_StageProgressStoreArea", call_ae_StageProgressStoreArea, 0x00000000u},
     {0x80096FACu, "ae_StageProgressOnExit", call_ae_StageProgressOnExit, 0x00000000u},
     {0x800972E0u, "ae_StageProgressRestore", call_ae_StageProgressRestore, 0x00000000u},
+    {0x80097454u, "ae_AreaMonkeyQuotaMet", call_ae_AreaMonkeyQuotaMet, 0x00000000u},
+    {0x80097504u, "ae_AreaAggregateActiveMonkeyCount", call_ae_AreaAggregateActiveMonkeyCount, 0x00000000u},
+    {0x80097620u, "ae_GetDAT_800B38B8", call_ae_GetDAT_800B38B8, 0x00000000u},
     {0x8009764Cu, "ae_GetLevelFirstArea", call_ae_GetLevelFirstArea, 0x00000000u},
     {0x80097678u, "ae_IsTimeAttack", call_ae_IsTimeAttack, 0x00000000u},
     {0x800976B8u, "ae_HubDestinationState", call_ae_HubDestinationState, 0x00000000u},
@@ -7218,11 +9317,19 @@ static const AeGameCall CALLS[] = {
     {0x80097820u, "ae_UnlockSpecialArea", call_ae_UnlockSpecialArea, 0x00000000u},
     {0x800978E0u, "ae_HubGateBitTest", call_ae_HubGateBitTest, 0x00000000u},
     {0x800978FCu, "ae_ExitSpecialArea", call_ae_ExitSpecialArea, 0x00000000u},
+    {0x80097A60u, "ae_StageGoalReached", call_ae_StageGoalReached, 0x00000000u},
+    {0x80097BFCu, "ae_StageGradeUpdate", call_ae_StageGradeUpdate, 0x00000000u},
+    {0x80097E60u, "ae_LevelTableGet", call_ae_LevelTableGet, 0x00000000u},
     {0x80097E88u, "ae_AreaGetMonkeyRecord", call_ae_AreaGetMonkeyRecord, 0x00000000u},
+    {0x80097FB0u, "ae_LevelCaughtCount", call_ae_LevelCaughtCount, 0x00000000u},
+    {0x80098088u, "ae_SaveBuildImage", call_ae_SaveBuildImage, 0x00000000u},
+    {0x8009816Cu, "ae_SaveComputeChecksum", call_ae_SaveComputeChecksum, 0x00000000u},
+    {0x80098330u, "ae_HudPopupStart", call_ae_HudPopupStart, 0x00000000u},
     {0x80098398u, "ae_HudPopupStartPickup", call_ae_HudPopupStartPickup, 0x00000000u},
     {0x800983E8u, "ae_HudPopupUpdate", call_ae_HudPopupUpdate, 0x00000000u},
     {0x800986E0u, "ae_Gadget4UpdateDraw", call_ae_Gadget4UpdateDraw, 0x00000000u},
     {0x80098DD0u, "ae_Gadget4BuildMatrix", call_ae_Gadget4BuildMatrix, 0x00000000u},
+    {0x80098FB0u, "ae_PlayerAuxModelInit", call_ae_PlayerAuxModelInit, 0x00000000u},
     {0x80098FECu, "ae_PlayerHeadLookUpdate", call_ae_PlayerHeadLookUpdate, 0x00000000u},
     {0x80099360u, "ae_RcCarSpawn", call_ae_RcCarSpawn, 0x00000000u},
     {0x8009946Cu, "ae_RcCarDespawn", call_ae_RcCarDespawn, 0x00000000u},
@@ -7239,7 +9346,9 @@ static const AeGameCall CALLS[] = {
     {0x8009ABF4u, "ae_GadgetDrawSlot0Attachment", call_ae_GadgetDrawSlot0Attachment, 0x00000000u},
     {0x8009AD60u, "ae_Gadget3UpdateDraw", call_ae_Gadget3UpdateDraw, 0x00000000u},
     {0x8009B1C0u, "ae_Gadget6UpdateSound", call_ae_Gadget6UpdateSound, 0x00000000u},
+    {0x8009B3B0u, "ae_GimmickCylinderSetPlayerFlag", call_ae_GimmickCylinderSetPlayerFlag, 0x00000000u},
     {0x8009B3CCu, "ae_AreaSetSpecialActor", call_ae_AreaSetSpecialActor, 0x00000000u},
+    {0x8009B578u, "ae_SpecialActorPlaceAtCollider", call_ae_SpecialActorPlaceAtCollider, 0x00000000u},
     {0x8009B6C8u, "ae_SpecialActorPlayerNear", call_ae_SpecialActorPlayerNear, 0x00000000u},
     {0x8009B7A0u, "ae_AreaFeature30GetState", call_ae_AreaFeature30GetState, 0x00000000u},
     {0x8009B7C8u, "ae_AreaSetFeature30", call_ae_AreaSetFeature30, 0x00000000u},
@@ -7255,66 +9364,332 @@ static const AeGameCall CALLS[] = {
     {0x800A119Cu, "ae_SpuVolumeClamp", call_ae_SpuVolumeClamp, 0x00000000u},
     {0x800A1378u, "ae_SeqSetTickFlag", call_ae_SeqSetTickFlag, 0x00000000u},
     {0x800A1DB0u, "ae_BgmSeqOpen", call_ae_BgmSeqOpen, 0x00000000u},
+    {0x800A2294u, "ae_SeqSetMonoFlag", call_ae_SeqSetMonoFlag, 0x00000000u},
     {0x800A2428u, "ae_BgmSeqSetVolume", call_ae_BgmSeqSetVolume, 0x00000000u},
     {0x800A25CCu, "ae_SeqFadeTrackProgram", call_ae_SeqFadeTrackProgram, 0x00000000u},
+    {0x800A2640u, "ae_SoundBankSetVolume", call_ae_SoundBankSetVolume, 0x00000000u},
     {0x800A2A14u, "ae_SpuSetMainVolume", call_ae_SpuSetMainVolume, 0x00000000u},
     {0x800A2ACCu, "ae_SeqTrackRearm", call_ae_SeqTrackRearm, 0x00000000u},
+    {0x800A2B6Cu, "ae_SeqTrackSetPlayState", call_ae_SeqTrackSetPlayState, 0x00000000u},
     {0x800A2E3Cu, "ae_SeqFadeTrackIn", call_ae_SeqFadeTrackIn, 0x00000000u},
+    {0x800A2F54u, "ae_SeqFadeTrackOut", call_ae_SeqFadeTrackOut, 0x00000000u},
     {0x800A30D8u, "ae_SeqGetChannelProgram", call_ae_SeqGetChannelProgram, 0x00000000u},
     {0x800A3158u, "ae_SfxVoiceStart", call_ae_SfxVoiceStart, 0x00000000u},
     {0x800A31B8u, "ae_SfxVoiceStartEx", call_ae_SfxVoiceStartEx, 0x00000000u},
     {0x800A329Cu, "ae_SfxVoiceStop", call_ae_SfxVoiceStop, 0x00000000u},
+    {0x800A342Cu, "ae_SoundStopAllVoices", call_ae_SoundStopAllVoices, 0x00000000u},
     {0x800A3570u, "ae_SfxVoiceSetPanVol", call_ae_SfxVoiceSetPanVol, 0x00000000u},
+    {0x800A35FCu, "ae_SfxVoiceSetPitch", call_ae_SfxVoiceSetPitch, 0x00000000u},
     {0x800A3700u, "ae_exit", call_ae_exit, 0x00000000u},
     {0x800A3720u, "ae_printf", call_ae_printf, 0x00000000u},
+    {0x80136000u, "ae_HubExitUi_Init", call_ae_HubExitUi_Init, 0x00000189u},
+    {0x80136000u, "ae_Mode_03", call_ae_Mode_03, 0x00000182u},
+    {0x80136000u, "ae_Mode_Boot", call_ae_Mode_Boot, 0x00000181u},
+    {0x80136000u, "ae_SaveUi_DrawText", call_ae_SaveUi_DrawText, 0x00000186u},
+    {0x80136000u, "ae_SeqPlayer_StreamRingInit", call_ae_SeqPlayer_StreamRingInit, 0x00000180u},
+    {0x80136000u, "ae_StageClearUi_LookAt", call_ae_StageClearUi_LookAt, 0x00000187u},
+    {0x80136000u, "ae_StageClearUi_LookAt_18A", call_ae_StageClearUi_LookAt_18A, 0x0000018Au},
     {0x80136000u, "ae_StageClearUi_LookAt_18B", call_ae_StageClearUi_LookAt_18B, 0x0000018Bu},
+    {0x80136000u, "ae_StageStartUi_LookAt", call_ae_StageStartUi_LookAt, 0x00000188u},
+    {0x80136000u, "ae_ovl183_entry_80136000", call_ae_ovl183_entry_80136000, 0x00000183u},
+    {0x80136000u, "ae_ovl184_entry_80136000", call_ae_ovl184_entry_80136000, 0x00000184u},
+    {0x80136038u, "ae_Ovl184_LoadListLoop", call_ae_Ovl184_LoadListLoop, 0x00000184u},
+    {0x8013606Cu, "ae_Mode_LeaveHub", call_ae_Mode_LeaveHub, 0x00000189u},
+    {0x80136074u, "ae_SeqPlayer_Run", call_ae_SeqPlayer_Run, 0x00000180u},
+    {0x80136120u, "ae_SaveUi_TextWidth", call_ae_SaveUi_TextWidth, 0x00000186u},
+    {0x801361BCu, "ae_SoundTest_Update", call_ae_SoundTest_Update, 0x00000183u},
+    {0x801361D0u, "ae_Ovl184_DemoLoop", call_ae_Ovl184_DemoLoop, 0x00000184u},
+    {0x801361D8u, "ae_Ovl18A_StringTableIndex", call_ae_Ovl18A_StringTableIndex, 0x0000018Au},
     {0x801361D8u, "ae_SaveUi_StringTableIndex_18B", call_ae_SaveUi_StringTableIndex_18B, 0x0000018Bu},
+    {0x801361D8u, "ae_StageClearUi_StringTableIndex", call_ae_StageClearUi_StringTableIndex, 0x00000187u},
+    {0x801361D8u, "ae_StageStartUi_StringTableIndex", call_ae_StageStartUi_StringTableIndex, 0x00000188u},
     {0x80136208u, "ae_Mode_SpecialAreaEnter", call_ae_Mode_SpecialAreaEnter, 0x0000018Bu},
+    {0x80136208u, "ae_Mode_StageClear", call_ae_Mode_StageClear, 0x00000187u},
+    {0x80136208u, "ae_ovl18A_entry_80136208", call_ae_ovl18A_entry_80136208, 0x0000018Au},
+    {0x80136244u, "ae_SoundTest_DrawMainMenu", call_ae_SoundTest_DrawMainMenu, 0x00000183u},
+    {0x801362A4u, "ae_Boot_ClearScreen", call_ae_Boot_ClearScreen, 0x00000181u},
+    {0x80136350u, "ae_Ovl184_DrawDemoPrompt", call_ae_Ovl184_DrawDemoPrompt, 0x00000184u},
+    {0x80136424u, "ae_Boot_SetupDisplay", call_ae_Boot_SetupDisplay, 0x00000181u},
+    {0x80136528u, "ae_Boot_DrawLogoA", call_ae_Boot_DrawLogoA, 0x00000181u},
+    {0x8013654Cu, "ae_Ovl182_DrawScene3D", call_ae_Ovl182_DrawScene3D, 0x00000182u},
+    {0x80136604u, "ae_SeqPlayer_DisplayStateInit", call_ae_SeqPlayer_DisplayStateInit, 0x00000180u},
+    {0x8013668Cu, "ae_SeqPlayer_Init", call_ae_SeqPlayer_Init, 0x00000180u},
+    {0x80136698u, "ae_SoundTest_DrawCommonTest", call_ae_SoundTest_DrawCommonTest, 0x00000183u},
+    {0x801366ECu, "ae_Boot_DrawLogoB", call_ae_Boot_DrawLogoB, 0x00000181u},
+    {0x80136724u, "ae_Ovl18A_WaitInputTimeout", call_ae_Ovl18A_WaitInputTimeout, 0x0000018Au},
+    {0x8013674Cu, "ae_Ovl182_UpdateCamera", call_ae_Ovl182_UpdateCamera, 0x00000182u},
+    {0x80136780u, "ae_Ovl18A_SceneInit", call_ae_Ovl18A_SceneInit, 0x0000018Au},
+    {0x8013683Cu, "ae_Mode_StageStart", call_ae_Mode_StageStart, 0x00000188u},
+    {0x8013684Cu, "ae_SoundTest_DrawSightTest", call_ae_SoundTest_DrawSightTest, 0x00000183u},
+    {0x80136894u, "ae_Mode_02", call_ae_Mode_02, 0x00000181u},
+    {0x801368CCu, "ae_Ovl18A_UpdateSpin", call_ae_Ovl18A_UpdateSpin, 0x0000018Au},
+    {0x801368E8u, "ae_SaveUi_LookAt", call_ae_SaveUi_LookAt, 0x00000186u},
+    {0x801368FCu, "ae_StageClearUi_DrawWipe", call_ae_StageClearUi_DrawWipe, 0x00000187u},
+    {0x80136940u, "ae_Ovl181_CheckCdHardwareIntegrity", call_ae_Ovl181_CheckCdHardwareIntegrity, 0x00000181u},
     {0x80136954u, "ae_SpecialEnterUi_DrawWipe", call_ae_SpecialEnterUi_DrawWipe, 0x0000018Bu},
+    {0x801369E0u, "ae_SeqPlayer_Stop", call_ae_SeqPlayer_Stop, 0x00000180u},
+    {0x80136A1Cu, "ae_StageStartUi_RunA", call_ae_StageStartUi_RunA, 0x00000188u},
+    {0x80136A88u, "ae_SaveUi_StringTableIndex", call_ae_SaveUi_StringTableIndex, 0x00000186u},
+    {0x80136AA0u, "ae_Ovl18A_AdvanceAnim", call_ae_Ovl18A_AdvanceAnim, 0x0000018Au},
+    {0x80136AB8u, "ae_Mode_SaveMenu", call_ae_Mode_SaveMenu, 0x00000186u},
+    {0x80136AC0u, "ae_Ovl182_Init", call_ae_Ovl182_Init, 0x00000182u},
+    {0x80136C04u, "ae_Ovl18A_StartClip", call_ae_Ovl18A_StartClip, 0x0000018Au},
+    {0x80136C5Cu, "ae_Ovl182_StateMachine", call_ae_Ovl182_StateMachine, 0x00000182u},
+    {0x80136C6Cu, "ae_Ovl18A_PlayXa", call_ae_Ovl18A_PlayXa, 0x0000018Au},
+    {0x80136C94u, "ae_Ovl18A_PickScene", call_ae_Ovl18A_PickScene, 0x0000018Au},
+    {0x80136D00u, "ae_Ovl182_DrawIntroState", call_ae_Ovl182_DrawIntroState, 0x00000182u},
+    {0x80136D18u, "ae_Ovl181_DrawIntegrityWarning", call_ae_Ovl181_DrawIntegrityWarning, 0x00000181u},
+    {0x80136D58u, "ae_SaveUi_FrameReset", call_ae_SaveUi_FrameReset, 0x00000186u},
+    {0x80136D90u, "ae_SaveUi_SceneInit", call_ae_SaveUi_SceneInit, 0x00000186u},
+    {0x80136EA8u, "ae_SeqPlayer_FadeIn", call_ae_SeqPlayer_FadeIn, 0x00000180u},
+    {0x80136EACu, "ae_StageStartUi_CopyStrip", call_ae_StageStartUi_CopyStrip, 0x00000188u},
+    {0x80136ED8u, "ae_SaveUi_RunMenuA", call_ae_SaveUi_RunMenuA, 0x00000186u},
+    {0x80136F54u, "ae_Ovl182_MenuInput", call_ae_Ovl182_MenuInput, 0x00000182u},
+    {0x80137104u, "ae_SaveUi_RunMenuB", call_ae_SaveUi_RunMenuB, 0x00000186u},
+    {0x80137198u, "ae_StageStartUi_DrawWipeA", call_ae_StageStartUi_DrawWipeA, 0x00000188u},
     {0x80137214u, "ae_SpecialEnterUi_DrawText", call_ae_SpecialEnterUi_DrawText, 0x0000018Bu},
+    {0x801372D0u, "ae_StageClearUi_DrawText", call_ae_StageClearUi_DrawText, 0x00000187u},
+    {0x8013730Cu, "ae_SaveUi_FileSelectInit", call_ae_SaveUi_FileSelectInit, 0x00000186u},
     {0x80137334u, "ae_SpecialEnterUi_DrawMessageShadow", call_ae_SpecialEnterUi_DrawMessageShadow, 0x0000018Bu},
     {0x801373A4u, "ae_SpecialEnterUi_DrawBlink", call_ae_SpecialEnterUi_DrawBlink, 0x0000018Bu},
+    {0x801373F8u, "ae_StageClearUi_DrawMessage", call_ae_StageClearUi_DrawMessage, 0x00000187u},
+    {0x80137424u, "ae_SaveUi_TotalMonkeyCount", call_ae_SaveUi_TotalMonkeyCount, 0x00000186u},
+    {0x80137454u, "ae_SaveUi_MenuUpdate", call_ae_SaveUi_MenuUpdate, 0x00000186u},
+    {0x801374C8u, "ae_StageClearUi_RunScript", call_ae_StageClearUi_RunScript, 0x00000187u},
     {0x801374D0u, "ae_SpecialEnterUi_RunScript", call_ae_SpecialEnterUi_RunScript, 0x0000018Bu},
+    {0x801374E4u, "ae_Ovl182_FadeTick", call_ae_Ovl182_FadeTick, 0x00000182u},
+    {0x8013758Cu, "ae_SaveUi_RunMenuC", call_ae_SaveUi_RunMenuC, 0x00000186u},
+    {0x801375B4u, "ae_StageStartUi_RunB", call_ae_StageStartUi_RunB, 0x00000188u},
+    {0x801375C0u, "ae_HubExitUi_DrawModelA", call_ae_HubExitUi_DrawModelA, 0x00000189u},
+    {0x801375C4u, "ae_Ovl182_DrawFade", call_ae_Ovl182_DrawFade, 0x00000182u},
+    {0x80137714u, "ae_HubExitUi_DrawModelB", call_ae_HubExitUi_DrawModelB, 0x00000189u},
+    {0x801377F8u, "ae_SaveUi_CountEntries", call_ae_SaveUi_CountEntries, 0x00000186u},
+    {0x8013784Cu, "ae_SaveUi_SetState", call_ae_SaveUi_SetState, 0x00000186u},
+    {0x8013786Cu, "ae_HubExitUi_DrawModelC", call_ae_HubExitUi_DrawModelC, 0x00000189u},
+    {0x80137950u, "ae_HubExitUi_Run", call_ae_HubExitUi_Run, 0x00000189u},
+    {0x80137AC0u, "ae_Mode_Title", call_ae_Mode_Title, 0x00000180u},
+    {0x80137C84u, "ae_SaveUi_FormatNumber3", call_ae_SaveUi_FormatNumber3, 0x00000186u},
+    {0x80137C88u, "ae_StageStartUi_DrawWipeB", call_ae_StageStartUi_DrawWipeB, 0x00000188u},
+    {0x80137CA8u, "ae_StageClearUi_SetDrawStp", call_ae_StageClearUi_SetDrawStp, 0x00000187u},
     {0x80137CD4u, "ae_StageClearUi_SetDrawStp_18B", call_ae_StageClearUi_SetDrawStp_18B, 0x0000018Bu},
+    {0x80137D20u, "ae_SeqPlayer_InitHook", call_ae_SeqPlayer_InitHook, 0x00000180u},
+    {0x80137D20u, "ae_StageClearUi_CopyStrip", call_ae_StageClearUi_CopyStrip, 0x00000187u},
     {0x80137D4Cu, "ae_StageClearUi_CopyStrip_18B", call_ae_StageClearUi_CopyStrip_18B, 0x0000018Bu},
+    {0x80137DA8u, "ae_SaveUi_MemCardStart", call_ae_SaveUi_MemCardStart, 0x00000186u},
+    {0x80137DC4u, "ae_StageClearUi_DrawBlinkIcons", call_ae_StageClearUi_DrawBlinkIcons, 0x00000187u},
     {0x80137DF0u, "ae_SpecialEnterUi_UpdateObjects", call_ae_SpecialEnterUi_UpdateObjects, 0x0000018Bu},
+    {0x80137E1Cu, "ae_SaveUi_StateTick", call_ae_SaveUi_StateTick, 0x00000186u},
+    {0x80137E4Cu, "ae_SaveUi_StateMachine", call_ae_SaveUi_StateMachine, 0x00000186u},
+    {0x80137F4Cu, "ae_StageClearUi_UpdateObjects", call_ae_StageClearUi_UpdateObjects, 0x00000187u},
     {0x801380D8u, "ae_SpecialEnterUi_DrawScene", call_ae_SpecialEnterUi_DrawScene, 0x0000018Bu},
+    {0x801380DCu, "ae_StageStartUi_MeshInit", call_ae_StageStartUi_MeshInit, 0x00000188u},
+    {0x80138118u, "ae_StageStartUi_SetAreaMeshTable", call_ae_StageStartUi_SetAreaMeshTable, 0x00000188u},
+    {0x80138138u, "ae_StageStartUi_AreaInit", call_ae_StageStartUi_AreaInit, 0x00000188u},
+    {0x80138258u, "ae_StageClearUi_DrawBox", call_ae_StageClearUi_DrawBox, 0x00000187u},
+    {0x8013829Cu, "ae_SaveUi_CardStateThread", call_ae_SaveUi_CardStateThread, 0x00000186u},
+    {0x801382D8u, "ae_HubExitUi_IsDestinationUnlocked", call_ae_HubExitUi_IsDestinationUnlocked, 0x00000189u},
+    {0x8013836Cu, "ae_StageClearUi_DrawBackdrop", call_ae_StageClearUi_DrawBackdrop, 0x00000187u},
+    {0x80138370u, "ae_SaveUi_CardResultThread", call_ae_SaveUi_CardResultThread, 0x00000186u},
     {0x801383B8u, "ae_SpecialEnterUi_SetAreaTablePointer", call_ae_SpecialEnterUi_SetAreaTablePointer, 0x0000018Bu},
     {0x801383D8u, "ae_SpecialEnterUi_TextWidth", call_ae_SpecialEnterUi_TextWidth, 0x0000018Bu},
+    {0x801383E0u, "ae_SaveUi_OnCardResult_0", call_ae_SaveUi_OnCardResult_0, 0x00000186u},
+    {0x801383ECu, "ae_HubExitUi_GetProgress", call_ae_HubExitUi_GetProgress, 0x00000189u},
+    {0x80138468u, "ae_HubExitUi_GetFlags", call_ae_HubExitUi_GetFlags, 0x00000189u},
     {0x80138468u, "ae_SpecialEnterUi_PlayXa", call_ae_SpecialEnterUi_PlayXa, 0x0000018Bu},
     {0x80138490u, "ae_StageClearUi_DrawScanlines_18B", call_ae_StageClearUi_DrawScanlines_18B, 0x0000018Bu},
+    {0x801384A0u, "ae_StageClearUi_DrawTimes", call_ae_StageClearUi_DrawTimes, 0x00000187u},
+    {0x801384BCu, "ae_SaveUi_OnCardResult_1", call_ae_SaveUi_OnCardResult_1, 0x00000186u},
+    {0x80138524u, "ae_SaveUi_OnCardResult_2", call_ae_SaveUi_OnCardResult_2, 0x00000186u},
+    {0x80138560u, "ae_SaveUi_LookAt_189", call_ae_SaveUi_LookAt_189, 0x00000189u},
+    {0x801385B0u, "ae_StageStartUi_RunScript", call_ae_StageStartUi_RunScript, 0x00000188u},
+    {0x801385ECu, "ae_SaveUi_OnCardResult_3", call_ae_SaveUi_OnCardResult_3, 0x00000186u},
+    {0x80138660u, "ae_StageClearUi_PlayXa", call_ae_StageClearUi_PlayXa, 0x00000187u},
+    {0x801386B8u, "ae_StageClearUi_DrawScanlines", call_ae_StageClearUi_DrawScanlines, 0x00000187u},
+    {0x801386CCu, "ae_SaveUi_OnCardResult_4", call_ae_SaveUi_OnCardResult_4, 0x00000186u},
+    {0x80138700u, "ae_HubExitUi_DrawText", call_ae_HubExitUi_DrawText, 0x00000189u},
+    {0x80138744u, "ae_SaveUi_OnCardResult_5", call_ae_SaveUi_OnCardResult_5, 0x00000186u},
+    {0x801387FCu, "ae_SaveUi_OnCardResult_6", call_ae_SaveUi_OnCardResult_6, 0x00000186u},
+    {0x801387FCu, "ae_SaveUi_StringTableIndex_189", call_ae_SaveUi_StringTableIndex_189, 0x00000189u},
+    {0x8013882Cu, "ae_HubExitUi_TextWidth", call_ae_HubExitUi_TextWidth, 0x00000189u},
+    {0x8013888Cu, "ae_SaveUi_DrawFileSelect", call_ae_SaveUi_DrawFileSelect, 0x00000186u},
+    {0x80138A9Cu, "ae_StageClearUi_CheckRequirements", call_ae_StageClearUi_CheckRequirements, 0x00000187u},
+    {0x80138B0Cu, "ae_RippleGrid_Init", call_ae_RippleGrid_Init, 0x00000187u},
+    {0x80138C24u, "ae_RippleGrid_Smooth", call_ae_RippleGrid_Smooth, 0x00000187u},
+    {0x80138DC0u, "ae_SaveUi_DrawSlot", call_ae_SaveUi_DrawSlot, 0x00000186u},
+    {0x80138E04u, "ae_StageStartUi_DrawNumber", call_ae_StageStartUi_DrawNumber, 0x00000188u},
+    {0x80138E20u, "ae_RippleGrid_Draw", call_ae_RippleGrid_Draw, 0x00000187u},
+    {0x80138F38u, "ae_StageClearUi_Setup", call_ae_StageClearUi_Setup, 0x00000187u},
+    {0x8013912Cu, "ae_StageStartUi_DrawTitleLines", call_ae_StageStartUi_DrawTitleLines, 0x00000188u},
+    {0x801391B0u, "ae_SaveUi_DrawDetail", call_ae_SaveUi_DrawDetail, 0x00000186u},
+    {0x80139248u, "ae_StageStartUi_DrawObjectives", call_ae_StageStartUi_DrawObjectives, 0x00000188u},
+    {0x801392B0u, "ae_StageClearUi_ObjMatrix", call_ae_StageClearUi_ObjMatrix, 0x00000187u},
+    {0x8013939Cu, "ae_StageClearUi_DrawStars", call_ae_StageClearUi_DrawStars, 0x00000187u},
+    {0x801394D0u, "ae_StageStartUi_DrawStageIcon", call_ae_StageStartUi_DrawStageIcon, 0x00000188u},
+    {0x80139628u, "ae_StageStartUi_DrawText", call_ae_StageStartUi_DrawText, 0x00000188u},
+    {0x80139710u, "ae_StageStartUi_SetDrawStp", call_ae_StageStartUi_SetDrawStp, 0x00000188u},
+    {0x801397F4u, "ae_StageStartUi_DrawCounter", call_ae_StageStartUi_DrawCounter, 0x00000188u},
+    {0x801398B0u, "ae_SeqPlayer_Hook2", call_ae_SeqPlayer_Hook2, 0x00000180u},
+    {0x801398D0u, "ae_SeqPlayer_GetObject", call_ae_SeqPlayer_GetObject, 0x00000180u},
+    {0x8013990Cu, "ae_SeqPlayer_ParseObjects", call_ae_SeqPlayer_ParseObjects, 0x00000180u},
+    {0x801399A4u, "ae_StageStartUi_UpdateObjects", call_ae_StageStartUi_UpdateObjects, 0x00000188u},
+    {0x801399E4u, "ae_SaveUi_LastUsedEntry", call_ae_SaveUi_LastUsedEntry, 0x00000186u},
+    {0x80139A3Cu, "ae_SaveUi_DrawMainWindow", call_ae_SaveUi_DrawMainWindow, 0x00000186u},
+    {0x80139A68u, "ae_SaveUi_DrawBackground3D", call_ae_SaveUi_DrawBackground3D, 0x00000186u},
+    {0x80139DACu, "ae_SeqPlayer_FreeObjects", call_ae_SeqPlayer_FreeObjects, 0x00000180u},
+    {0x80139DE4u, "ae_SeqPlayer_GetObjectFlag", call_ae_SeqPlayer_GetObjectFlag, 0x00000180u},
+    {0x80139E00u, "ae_SeqPlayer_ClearObjectFlags", call_ae_SeqPlayer_ClearObjectFlags, 0x00000180u},
+    {0x80139E0Cu, "ae_StageStartUi_CopyBuffer", call_ae_StageStartUi_CopyBuffer, 0x00000188u},
+    {0x80139E44u, "ae_SeqPlayer_MeshInit", call_ae_SeqPlayer_MeshInit, 0x00000180u},
+    {0x80139E88u, "ae_SeqPlayer_ModelInit", call_ae_SeqPlayer_ModelInit, 0x00000180u},
+    {0x80139EC4u, "ae_SeqPlayer_CommandWriteObjectFlags", call_ae_SeqPlayer_CommandWriteObjectFlags, 0x00000180u},
+    {0x80139EE0u, "ae_StageStartUi_ClampVerts", call_ae_StageStartUi_ClampVerts, 0x00000188u},
+    {0x80139F08u, "ae_SaveUi_YesNoUpdate", call_ae_SaveUi_YesNoUpdate, 0x00000186u},
+    {0x80139F0Cu, "ae_SeqPlayer_ClearObjectFlagsWrap", call_ae_SeqPlayer_ClearObjectFlagsWrap, 0x00000180u},
+    {0x80139F38u, "ae_SeqPlayer_SumRecordSizes", call_ae_SeqPlayer_SumRecordSizes, 0x00000180u},
+    {0x80139F6Cu, "ae_SeqPlayer_FindRecordByTime", call_ae_SeqPlayer_FindRecordByTime, 0x00000180u},
+    {0x80139FA0u, "ae_SeqPlayer_SetTransitionSweep", call_ae_SeqPlayer_SetTransitionSweep, 0x00000180u},
+    {0x80139FB8u, "ae_SeqPlayer_AdvanceTransitionSweep", call_ae_SeqPlayer_AdvanceTransitionSweep, 0x00000180u},
+    {0x80139FB8u, "ae_StageStartUi_WipeQuadA", call_ae_StageStartUi_WipeQuadA, 0x00000188u},
+    {0x80139FC8u, "ae_SaveUi_FileSelectUpdate", call_ae_SaveUi_FileSelectUpdate, 0x00000186u},
+    {0x8013A10Cu, "ae_StageStartUi_WipeQuadB", call_ae_StageStartUi_WipeQuadB, 0x00000188u},
+    {0x8013A3C4u, "ae_StageStartUi_DrawScanlines", call_ae_StageStartUi_DrawScanlines, 0x00000188u},
+    {0x8013A400u, "ae_SaveUi_ConfirmPressed", call_ae_SaveUi_ConfirmPressed, 0x00000186u},
+    {0x8013A43Cu, "ae_SaveUi_CancelPressed", call_ae_SaveUi_CancelPressed, 0x00000186u},
+    {0x8013A634u, "ae_SaveUi_FadeTick", call_ae_SaveUi_FadeTick, 0x00000186u},
+    {0x8013A7A8u, "ae_RippleGrid_Init2", call_ae_RippleGrid_Init2, 0x00000188u},
+    {0x8013A8C0u, "ae_RippleGrid_Smooth2", call_ae_RippleGrid_Smooth2, 0x00000188u},
+    {0x8013AABCu, "ae_RippleGrid_Draw2", call_ae_RippleGrid_Draw2, 0x00000188u},
+    {0x8013AC98u, "ae_SeqPlayer_FindRangeIndex", call_ae_SeqPlayer_FindRangeIndex, 0x00000180u},
+    {0x8013B400u, "ae_SaveUi_OnCardResult_7", call_ae_SaveUi_OnCardResult_7, 0x00000186u},
+    {0x8013B47Cu, "ae_SaveUi_ConfirmDialogUpdate", call_ae_SaveUi_ConfirmDialogUpdate, 0x00000186u},
+    {0x8013B550u, "ae_SaveUi_NameEntryInit", call_ae_SaveUi_NameEntryInit, 0x00000186u},
+    {0x8013B6C4u, "ae_SaveUi_NameEntryUpdate", call_ae_SaveUi_NameEntryUpdate, 0x00000186u},
+    {0x8013B8D0u, "ae_SeqPlayer_ApplyFlagOps", call_ae_SeqPlayer_ApplyFlagOps, 0x00000180u},
+    {0x8013BC64u, "ae_SaveUi_NameEntryDraw", call_ae_SaveUi_NameEntryDraw, 0x00000186u},
+    {0x8013C7F0u, "ae_CardMgr_Run", call_ae_CardMgr_Run, 0x00000186u},
+    {0x8013C8E8u, "ae_CardMgr_Init", call_ae_CardMgr_Init, 0x00000186u},
+    {0x8013C954u, "ae_CardMgr_RunFileList", call_ae_CardMgr_RunFileList, 0x00000186u},
+    {0x8013CB30u, "ae_CardMgr_RunFileDetail", call_ae_CardMgr_RunFileDetail, 0x00000186u},
+    {0x8013CD1Cu, "ae_CardMgr_SetState", call_ae_CardMgr_SetState, 0x00000186u},
     {0x8013D000u, "ae_Area02_SpawnAmbientParticle", call_ae_Area02_SpawnAmbientParticle, 0x0000018Cu},
+    {0x8013D000u, "ae_Area46_Boss_RegisterEntry", call_ae_Area46_Boss_RegisterEntry, 0x000001A0u},
+    {0x8013D06Cu, "ae_Area46_Boss_UpdateEncounterActor", call_ae_Area46_Boss_UpdateEncounterActor, 0x000001A0u},
     {0x8013D0B0u, "ae_Area02_InterpolateAnimValue", call_ae_Area02_InterpolateAnimValue, 0x0000018Cu},
+    {0x8013D19Cu, "ae_CardMgr_StartOps", call_ae_CardMgr_StartOps, 0x00000186u},
     {0x8013D1ACu, "ae_FUN_8013d1ac", call_ae_FUN_8013d1ac, 0xFFFFFFFFu},
     {0x8013D1C4u, "ae_Area02_PlayerWithinHeightAndRadius", call_ae_Area02_PlayerWithinHeightAndRadius, 0x0000018Cu},
+    {0x8013D1F8u, "ae_SsGetMute", call_ae_SsGetMute, 0x00000186u},
+    {0x8013D218u, "ae_CardMgr_IsBusy", call_ae_CardMgr_IsBusy, 0x00000186u},
     {0x8013D224u, "ae_Area02_PlayerOutsideHeightAndRadius", call_ae_Area02_PlayerOutsideHeightAndRadius, 0x0000018Cu},
+    {0x8013D238u, "ae_CardMgr_StateMachine", call_ae_CardMgr_StateMachine, 0x00000186u},
     {0x8013D294u, "ae_Area02_EnemyAnimationTriggerUpdate", call_ae_Area02_EnemyAnimationTriggerUpdate, 0x0000018Cu},
+    {0x8013D2A0u, "ae_Area46_Boss_UpdateEntryProximity", call_ae_Area46_Boss_UpdateEntryProximity, 0x000001A0u},
     {0x8013D3B8u, "ae_Area02_UpdateEnemyWakeOrigin", call_ae_Area02_UpdateEnemyWakeOrigin, 0x0000018Cu},
     {0x8013D430u, "ae_Area02_UpdateEnemyWake", call_ae_Area02_UpdateEnemyWake, 0x0000018Cu},
+    {0x8013D440u, "ae_Area46_Boss_InitializeModelEntry", call_ae_Area46_Boss_InitializeModelEntry, 0x000001A0u},
     {0x8013D518u, "ae_Area02_EnemyType0B_Update", call_ae_Area02_EnemyType0B_Update, 0x0000018Cu},
+    {0x8013D63Cu, "ae_Area46_Boss_ProjectAndEmit", call_ae_Area46_Boss_ProjectAndEmit, 0x000001A0u},
     {0x8013D660u, "ae_Area02_CopyEnemyModel", call_ae_Area02_CopyEnemyModel, 0x0000018Cu},
+    {0x8013D77Cu, "ae_Area46_Boss_SpawnEffectNear", call_ae_Area46_Boss_SpawnEffectNear, 0x000001A0u},
     {0x8013D7C8u, "ae_Area02_InitializeEffects", call_ae_Area02_InitializeEffects, 0x0000018Cu},
     {0x8013D81Cu, "ae_Area02_FindFreeEffectSlot", call_ae_Area02_FindFreeEffectSlot, 0x0000018Cu},
+    {0x8013D834u, "ae_CardMgr_OnCardResult_0", call_ae_CardMgr_OnCardResult_0, 0x00000186u},
     {0x8013D858u, "ae_Area02_SpawnRadialEffect", call_ae_Area02_SpawnRadialEffect, 0x0000018Cu},
+    {0x8013D890u, "ae_Area46_Boss_SpawnEffectNearWrap", call_ae_Area46_Boss_SpawnEffectNearWrap, 0x000001A0u},
+    {0x8013D8BCu, "ae_Area46_Boss_ClearDebris", call_ae_Area46_Boss_ClearDebris, 0x000001A0u},
+    {0x8013D8E4u, "ae_Area46_Boss_SpawnDebris", call_ae_Area46_Boss_SpawnDebris, 0x000001A0u},
+    {0x8013D92Cu, "ae_CardMgr_OnCardResult_1", call_ae_CardMgr_OnCardResult_1, 0x00000186u},
     {0x8013D990u, "ae_Area02_EffectBelowGround", call_ae_Area02_EffectBelowGround, 0x0000018Cu},
     {0x8013D9CCu, "ae_Area02_SpawnEffectParticle", call_ae_Area02_SpawnEffectParticle, 0x0000018Cu},
+    {0x8013DA00u, "ae_CardMgr_OnCardResult_2", call_ae_CardMgr_OnCardResult_2, 0x00000186u},
     {0x8013DA0Cu, "ae_Area02_SpawnEffectBurst", call_ae_Area02_SpawnEffectBurst, 0x0000018Cu},
     {0x8013DA10u, "ae_FUN_8013da10", call_ae_FUN_8013da10, 0xFFFFFFFFu},
+    {0x8013DA4Cu, "ae_Area46_Boss_UpdateDebris", call_ae_Area46_Boss_UpdateDebris, 0x000001A0u},
+    {0x8013DA7Cu, "ae_CardMgr_OnCardResult_3", call_ae_CardMgr_OnCardResult_3, 0x00000186u},
     {0x8013DA94u, "ae_Area02_UpdateEffects", call_ae_Area02_UpdateEffects, 0x0000018Cu},
     {0x8013DAE8u, "ae_FUN_8013dae8", call_ae_FUN_8013dae8, 0xFFFFFFFFu},
+    {0x8013DB48u, "ae_CardMgr_OnCardResult_4", call_ae_CardMgr_OnCardResult_4, 0x00000186u},
+    {0x8013DBF0u, "ae_CardMgr_OnCardResult_5", call_ae_CardMgr_OnCardResult_5, 0x00000186u},
     {0x8013DC68u, "ae_FUN_8013dc68", call_ae_FUN_8013dc68, 0xFFFFFFFFu},
     {0x8013DC70u, "ae_Area02_SpawnEnemyHitParticle", call_ae_Area02_SpawnEnemyHitParticle, 0x0000018Cu},
+    {0x8013DC78u, "ae_CardMgr_OnCardResult_6", call_ae_CardMgr_OnCardResult_6, 0x00000186u},
     {0x8013DC9Cu, "ae_Area02_EnemyHitUpdate", call_ae_Area02_EnemyHitUpdate, 0x0000018Cu},
     {0x8013DD2Cu, "ae_Area02_EnemyEnterHitReaction", call_ae_Area02_EnemyEnterHitReaction, 0x0000018Cu},
     {0x8013DDBCu, "ae_Area02_EnemySplashUpdate", call_ae_Area02_EnemySplashUpdate, 0x0000018Cu},
+    {0x8013DDF0u, "ae_CardMgr_OnCardResult_7", call_ae_CardMgr_OnCardResult_7, 0x00000186u},
+    {0x8013DE1Cu, "ae_Area46_Boss_RumbleLong", call_ae_Area46_Boss_RumbleLong, 0x000001A0u},
     {0x8013DE20u, "ae_Area02_EnemyEnterDefeat", call_ae_Area02_EnemyEnterDefeat, 0x0000018Cu},
+    {0x8013DE44u, "ae_Area46_Boss_RumbleShort", call_ae_Area46_Boss_RumbleShort, 0x000001A0u},
+    {0x8013DE6Cu, "ae_Area46_Boss_RumbleMedium", call_ae_Area46_Boss_RumbleMedium, 0x000001A0u},
+    {0x8013DE94u, "ae_Area46_Boss_SpawnDropPickups", call_ae_Area46_Boss_SpawnDropPickups, 0x000001A0u},
+    {0x8013DEB4u, "ae_CardMgr_OnCardResult_8", call_ae_CardMgr_OnCardResult_8, 0x00000186u},
     {0x8013DEF8u, "ae_Area02_EnemyPhase6Update", call_ae_Area02_EnemyPhase6Update, 0x0000018Cu},
+    {0x8013DF28u, "ae_Area46_Boss_ResetLoopHandle", call_ae_Area46_Boss_ResetLoopHandle, 0x000001A0u},
+    {0x8013DF38u, "ae_Area46_Boss_StartLoop", call_ae_Area46_Boss_StartLoop, 0x000001A0u},
+    {0x8013DF40u, "ae_CardMgr_OnCardResult_9", call_ae_CardMgr_OnCardResult_9, 0x00000186u},
     {0x8013DF54u, "ae_Area02_StageSpecificEnemyUpdate", call_ae_Area02_StageSpecificEnemyUpdate, 0x0000018Cu},
+    {0x8013DF60u, "ae_Area46_Boss_LoopStop", call_ae_Area46_Boss_LoopStop, 0x000001A0u},
+    {0x8013DF90u, "ae_Area46_BossInit", call_ae_Area46_BossInit, 0x000001A0u},
     {0x8013DF90u, "ae_FUN_8013df90", call_ae_FUN_8013df90, 0xFFFFFFFFu},
+    {0x8013E098u, "ae_McxCardTypeSync", call_ae_McxCardTypeSync, 0x00000186u},
+    {0x8013E114u, "ae_McxAllInfoSync", call_ae_McxAllInfoSync, 0x00000186u},
+    {0x8013E14Cu, "ae_Area46_Boss_InitializeActorRecords", call_ae_Area46_Boss_InitializeActorRecords, 0x000001A0u},
+    {0x8013E188u, "ae_CardMgr_ResetSlots", call_ae_CardMgr_ResetSlots, 0x00000186u},
+    {0x8013E1ACu, "ae_Area46_Boss_ClearEntries", call_ae_Area46_Boss_ClearEntries, 0x000001A0u},
+    {0x8013E1D0u, "ae_Area46_Boss_AddEntry", call_ae_Area46_Boss_AddEntry, 0x000001A0u},
     {0x8013E1E0u, "ae_Area02_SurfaceEffectsInit", call_ae_Area02_SurfaceEffectsInit, 0x0000018Cu},
+    {0x8013E22Cu, "ae_McxHideTransSync", call_ae_McxHideTransSync, 0x00000186u},
+    {0x8013E290u, "ae_CardMgr_Draw", call_ae_CardMgr_Draw, 0x00000186u},
+    {0x8013E2BCu, "ae_Area46_Boss_UpdateEntries", call_ae_Area46_Boss_UpdateEntries, 0x000001A0u},
+    {0x8013E30Cu, "ae_CardMgr_MenuUpdate", call_ae_CardMgr_MenuUpdate, 0x00000186u},
     {0x8013E33Cu, "ae_Area02_EffectDraw", call_ae_Area02_EffectDraw, 0x0000018Cu},
     {0x8013E950u, "ae_Area02_SurfaceDraw", call_ae_Area02_SurfaceDraw, 0x0000018Cu},
+    {0x8013EB14u, "ae_CardMgr_AnimTick", call_ae_CardMgr_AnimTick, 0x00000186u},
+    {0x8013EC5Cu, "ae_Area46_Boss_InitializeBackdrop", call_ae_Area46_Boss_InitializeBackdrop, 0x000001A0u},
+    {0x8013EC94u, "ae_Area46_Boss_SetBackdrop", call_ae_Area46_Boss_SetBackdrop, 0x000001A0u},
+    {0x8013ECD4u, "ae_Area46_Boss_UpdateBackdrop", call_ae_Area46_Boss_UpdateBackdrop, 0x000001A0u},
+    {0x8013EE74u, "ae_Area46_Boss_ResetBoss", call_ae_Area46_Boss_ResetBoss, 0x000001A0u},
+    {0x8013EEB8u, "ae_Area46_Boss_OnBossStart", call_ae_Area46_Boss_OnBossStart, 0x000001A0u},
+    {0x8013EF00u, "ae_Area46_Boss_ClearFlag", call_ae_Area46_Boss_ClearFlag, 0x000001A0u},
+    {0x8013EF0Cu, "ae_Area46_Boss_SetAnim", call_ae_Area46_Boss_SetAnim, 0x000001A0u},
+    {0x8013EF44u, "ae_Area46_Boss_StepAnim", call_ae_Area46_Boss_StepAnim, 0x000001A0u},
+    {0x8013EFCCu, "ae_Area46_Boss_UpdateHop", call_ae_Area46_Boss_UpdateHop, 0x000001A0u},
     {0x8013F0C0u, "ae_FUN_8013f0c0", call_ae_FUN_8013f0c0, 0x0000018Cu},
+    {0x8013F0E0u, "ae_Area46_Boss_UpdatePlayerKnockback", call_ae_Area46_Boss_UpdatePlayerKnockback, 0x000001A0u},
+    {0x8013F1ACu, "ae_Area46_BossUpdate", call_ae_Area46_BossUpdate, 0x000001A0u},
+    {0x8013F544u, "ae_Area46_Boss_ClearShockwaves", call_ae_Area46_Boss_ClearShockwaves, 0x000001A0u},
+    {0x8013F5A8u, "ae_Area46_Boss_AddShockwave", call_ae_Area46_Boss_AddShockwave, 0x000001A0u},
+    {0x8013F630u, "ae_CardMgr_RunMessage", call_ae_CardMgr_RunMessage, 0x00000186u},
+    {0x8013F6F8u, "ae_Area46_Boss_UpdateShockwaves", call_ae_Area46_Boss_UpdateShockwaves, 0x000001A0u},
+    {0x8013F808u, "ae_CardMgr_DrawMessage", call_ae_CardMgr_DrawMessage, 0x00000186u},
+    {0x8013FB30u, "ae_CardMgr_DrawMenuLabels", call_ae_CardMgr_DrawMenuLabels, 0x00000186u},
+    {0x8013FC20u, "ae_SaveUi_GetColorBuffer", call_ae_SaveUi_GetColorBuffer, 0x00000186u},
+    {0x8013FC2Cu, "ae_CardMgr_DrawMenuItems", call_ae_CardMgr_DrawMenuItems, 0x00000186u},
+    {0x8013FD44u, "ae_SaveUi_GetBuffer2", call_ae_SaveUi_GetBuffer2, 0x00000186u},
+    {0x8013FD50u, "ae_CardMgr_DrawMenuTexts", call_ae_CardMgr_DrawMenuTexts, 0x00000186u},
+    {0x8013FDE4u, "ae_CardMgr_DrawMenuItems2", call_ae_CardMgr_DrawMenuItems2, 0x00000186u},
+    {0x8013FEA0u, "ae_SaveUi_DrawStringPair", call_ae_SaveUi_DrawStringPair, 0x00000186u},
+    {0x8013FEFCu, "ae_CardMgr_DrawBlinkingMenu", call_ae_CardMgr_DrawBlinkingMenu, 0x00000186u},
+    {0x8013FFECu, "ae_SaveUi_DrawYesNo", call_ae_SaveUi_DrawYesNo, 0x00000186u},
+    {0x80140074u, "ae_SaveUi_DrawFileHeader", call_ae_SaveUi_DrawFileHeader, 0x00000186u},
+    {0x801400F4u, "ae_SaveUi_DrawEmptySlotText", call_ae_SaveUi_DrawEmptySlotText, 0x00000186u},
+    {0x8014016Cu, "ae_SaveUi_DrawStateOverlay", call_ae_SaveUi_DrawStateOverlay, 0x00000186u},
+    {0x80141A10u, "ae_SaveUi_ThreadSetHook", call_ae_SaveUi_ThreadSetHook, 0x00000186u},
+    {0x80141AB4u, "ae_SaveUi_ThreadClose", call_ae_SaveUi_ThreadClose, 0x00000186u},
+    {0x80141AF0u, "ae_SaveUi_Nop", call_ae_SaveUi_Nop, 0x00000186u},
+    {0x80141B00u, "ae_SaveUi_ThreadSwitch", call_ae_SaveUi_ThreadSwitch, 0x00000186u},
+    {0x80141B34u, "ae_SaveUi_ThreadSetHookReset", call_ae_SaveUi_ThreadSetHookReset, 0x00000186u},
+    {0x80141B90u, "ae_McxStartCom", call_ae_McxStartCom, 0x00000186u},
+    {0x80141C40u, "ae_MCXINIT_OBJ_B0", call_ae_MCXINIT_OBJ_B0, 0x00000186u},
+    {0x80141C8Cu, "ae_MCXINIT_OBJ_FC", call_ae_MCXINIT_OBJ_FC, 0x00000186u},
+    {0x80141C94u, "ae_MCXINIT_OBJ_104", call_ae_MCXINIT_OBJ_104, 0x00000186u},
+    {0x80141CD4u, "ae_MCXINIT_OBJ_144", call_ae_MCXINIT_OBJ_144, 0x00000186u},
+    {0x80141D14u, "ae_MCXINIT_OBJ_184", call_ae_MCXINIT_OBJ_184, 0x00000186u},
+    {0x80141E4Cu, "ae_MCXINIT_OBJ_2BC", call_ae_MCXINIT_OBJ_2BC, 0x00000186u},
+    {0x80146000u, "ae_ovl185_entry_80146000", call_ae_ovl185_entry_80146000, 0x00000185u},
+    {0x8014607Cu, "ae_Ovl185_Run", call_ae_Ovl185_Run, 0x00000185u},
+    {0x80146230u, "ae_Ovl185_Update", call_ae_Ovl185_Update, 0x00000185u},
+    {0x80146500u, "ae_Ovl185_LoadScene", call_ae_Ovl185_LoadScene, 0x00000185u},
 };
 
 size_t ae_game_call_count(void) { return sizeof(CALLS) / sizeof(CALLS[0]); }

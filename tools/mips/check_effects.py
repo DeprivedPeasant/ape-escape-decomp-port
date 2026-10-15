@@ -2037,7 +2037,7 @@ def run_mutations(seed: int) -> int:
                            "RandomParticlesUpdate", "TrailPointsDraw",
                            "EffectObjDraw", "EffectObjsUpdate"}
             differs = (original_result != mutant_result or
-                       bytes(cpu.ram[:stack_offset]) != bytes(ram.main[:stack_offset]) or
+                       bytes(cpu.ram[:stack_offset]) != bytes(memoryview(ram.main)[:stack_offset]) or
                        bytes(cpu.scratch) != bytes(ram.scratch) or
                        original_sfx_ids != mutant_sfx_ids or
                        (name in event_names and original_ring_events != mutant_sfx_ids) or

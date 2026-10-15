@@ -64,8 +64,7 @@ MISSING = {
     "CollisionRayTest": (0x80078C9C, 2), "GimmickTypeToSfx": (0x8005BB98, 1), "PickupCollect": (0x80078A18, 1),
     "CameraNudge": (0x80047690, 3), "EventCamStart": (0x8004D39C, 1), "FUN_8013d358 (area 0x29 overlay)": (0x8013D358, 3),
     "FUN_801414a0 (gimmick overlay)": (0x801414A0, 1), "PlayerEventCallback": (0x800B027C, 1),
-    "SfxVoiceSetPitch": (0x800A35FC, 2), "XaPlay": (0x80011F6C, 1),
-    "PointInBoxXZ": (0x80073B64, 4),
+    "XaPlay": (0x80011F6C, 1),
 }
 # Monkey hooks that ae_game.c sends to the host (everything else of the monkey hook table is wired to a port).
 MONKEY_HOST = {
@@ -111,7 +110,8 @@ SOURCES = ["src/game/ae_game.c", "src/game/ae_game_stage.c", "src/game/ae_game_h
            "src/world/ae_gimmick.c", "src/effects/ae_spawn.c", "src/sound/ae_sound.c", "src/player/ae_anim_events.c",
            "src/world/ae_area02.c", "src/world/ae_area02_paths.c",
            "src/player/native_player.c", "src/effects/ae_effects_mesh.c", "src/math/native_sdk_matrix.c", "src/math/native_sdk_apply.c",
-           "tools/mips/game_shim.c", "tools/mips/game_integration_shim.c", "src/game/ae_game_body.c"]
+           "tools/mips/game_shim.c", "tools/mips/game_integration_shim.c", "src/game/ae_game_body.c",
+           "src/modes/ae_ovl186d.c"]
 
 
 def build_dll(overrides=None, tag="game", trapv=False):
@@ -144,6 +144,7 @@ def build_dll(overrides=None, tag="game", trapv=False):
         raise SystemExit("gcc is required to build the game checker DLL")
     header_digest = hashlib.sha1()
     dependencies=list((ROOT / "src").rglob("*.h"))
+    dependencies+=list((ROOT / "src/game").glob("*.inc"))
     dependencies+=list((ROOT / "tools/mips").glob("game_integration_*.inc"))
     for header in sorted(dependencies):
         header_digest.update(str(header.relative_to(ROOT)).encode())

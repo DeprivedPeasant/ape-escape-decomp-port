@@ -47,11 +47,11 @@ static const struct { const char *name; uint32_t address; } MISSING[] = {
     {"CollisionRayTest", 0x80078C9Cu},    {"GimmickTypeToSfx", 0x8005BB98u},  {"PickupCollect", 0x80078A18u},
     {"CameraNudge", 0x80047690u},         {"EventCamStart", 0x8004D39Cu},     {"FUN_8013d358 (area 0x29 overlay)", 0x8013D358u},
     {"FUN_801414a0 (gimmick overlay)", 0x801414A0u}, {"PlayerEventCallback", 0x800B027Cu},
-    {"SfxVoiceSetPitch", 0x800A35FCu}, {"XaPlay", 0x80011F6Cu},
+    {"XaPlay", 0x80011F6Cu},
 };
 enum { M_ModelInit, M_PlaySfx, M_PlayPlayerVoice, M_SoundLoopStart, M_CollisionRayTest,
        M_GimmickTypeToSfx, M_PickupCollect, M_CameraNudge, M_EventCamStart, M_Ovl8013d358, M_Ovl801414a0,
-       M_PlayerEventCallback, M_SfxVoiceSetPitch, M_XaPlay, M_COUNT };
+       M_PlayerEventCallback, M_XaPlay, M_COUNT };
 
 static int32_t missing(AeGame *g, int which, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     if (g->host.missing)
@@ -170,7 +170,7 @@ static void body_sound_loop_stop(void *user, AeRam *r, int32_t id, int32_t handl
     (void)ae_SoundLoopStop(r, &g->host.sound_hw, id, handle);
 }
 static void body_sfx_voice_set_pitch(void *user, AeRam *r, int32_t voice, int32_t pitch) {
-    (void)r; missing(game_of(user), M_SfxVoiceSetPitch, (uint32_t)voice, (uint32_t)pitch, 0, 0);
+    ae_SfxVoiceSetPitch(r, &game_of(user)->missb, voice, pitch);
 }
 static void body_xa_play(void *user, AeRam *r, int32_t index) {
     (void)r; ae_game_call(game_of(user), 0x80011F6Cu, (uint32_t)index, 0, 0, 0);

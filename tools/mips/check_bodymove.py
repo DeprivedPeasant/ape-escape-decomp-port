@@ -166,7 +166,7 @@ class CGame:
             if n == "SoundKeyOff": m.voice_key_off(a[0], a[1]); return 0
             if n == "SoundVolume": m.set_voice_volume(a[0], a[1], a[2]); return 0
             if n == "Printf": return m.printf(a[0], a[1], a[2], a[3])
-            if n in {"CdIntToPos", "CdControl", "CdReadyCallback"}:
+            if n in {"CdIntToPos", "CdControl", "CdReadyCallback", "CdMgrQueueCommand"}:
                 return m.cd_boundary(n, a)
             if n in cg.MISSING:
                 return m.missing(n, address, a[0], a[1], a[2], a[3])
@@ -218,8 +218,13 @@ class BodyModel(cg.GameModel):
     """The game sound allocator returns valid voice slots, represented by a small fixed handle here."""
     def __init__(self, seed, mem): super().__init__(seed, mem, True)
     def cd_boundary(self, name, words):
-        arity={"CdIntToPos":2,"CdControl":3,"CdReadyCallback":1}[name]
-        self.log.append(("platform",name,*[cg.norm(w) for w in words[:arity]]))
+        arity={"CdIntToPos":2,"CdControl":3,"CdReadyCallback":1,"CdMgrQueueCommand":4}[name]
+        entry=("platform",name,*[cg.norm(w) for w in words[:arity]])
+        if name=='CdIntToPos': self.mem.wr32(words[1], words[0] ^ 0x5A37C91D)
+        if name=='CdMgrQueueCommand':
+            size={13:2,14:1,27:3}.get(words[0],0)
+            entry+=(tuple(self.mem.rd8(words[1]+i) for i in range(size)),)
+        self.log.append(entry)
         return 0
     def missing(self, name, address, a0, a1, a2, a3):
         result = super().missing(name, address, a0, a1, a2, a3)
@@ -234,11 +239,11 @@ class BodyModel(cg.GameModel):
 
 def body_intercepts(model):
     hooks=cg.mips_intercepts(model,None)
-    # XaPlay and its RAM-side CD queue/volume logic are verified ports.
+    # XaPlay/volume are ports; asynchronous CD queuing uses the host boundary.
     hooks.pop(0x80011F6C,None)
     # HalfPipeRangeTest is a direct C port now, so let the original execute.
     hooks.pop(0x80050490,None)
-    for address,name,n in [(0x80025D20,"CdIntToPos",2),(0x8002408C,"CdControl",3),(0x80024078,"CdReadyCallback",1)]:
+    for address,name,n in [(0x80025D20,"CdIntToPos",2),(0x8002408C,"CdControl",3),(0x80024078,"CdReadyCallback",1),(0x80012360,"CdMgrQueueCommand",4)]:
         hooks[address]=lambda cpu,regs,name=name,n=n: model.cd_boundary(name,regs[4:4+n])
     return hooks
 

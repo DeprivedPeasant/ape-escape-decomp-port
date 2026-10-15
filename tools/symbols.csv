@@ -2177,7 +2177,7 @@ ovl_182::80136d00,Ovl182_DrawIntroState,Draws the intro state (Tentative).
 ovl_182::80136f54,Ovl182_MenuInput,Menu input: left / right (0x1000 / 0x4000) changes the selection, confirm (0x900) advances.
 ovl_182::801374e4,Ovl182_FadeTick,Fade state counter (DAT_80137818 0 / 1 / other) (Tentative).
 ovl_182::801375c4,Ovl182_DrawFade,Draws the fade overlay polygon for the current fade state.
-ovl_188::80138118,SpecialEnterUi_Nop_188,Empty function (32 bytes).
+ovl_188::80138118,StageStartUi_SetAreaMeshTable,Reads the area zone-table offset and stores the resulting pointer at 0x8013B9C8.
 # --- batch 82: ovl_198 / 196 / 197 leftovers ---
 ovl_198::8013e4c4,Stage11_Nop1,Rename Boss198_Nop1: overlay loaded by areas 0x2D, 0x2E, 0x2F, 0x30, 0x31, 0x32, 0x33; behavior retained from existing symbol.
 ovl_198::8014006c,Stage11_Nop2,Rename Boss198_Nop2: overlay loaded by areas 0x2D, 0x2E, 0x2F, 0x30, 0x31, 0x32, 0x33; behavior retained from existing symbol.

@@ -18,7 +18,7 @@
 | AeAnimDrawHooks | Draw_Nop | 8005E000 | render |
 | AeAnimDrawHooks | EffectRingDraw | 8006E5B4 | render |
 | AeAnimDrawHooks | VertexWobble | 8001F434 | render |
-| AeAnimDrawHooks | SfxVoiceSetPitch | 800A35FC | missing |
+| AeAnimDrawHooks | SfxVoiceSetPitch | 800A35FC | ported |
 | AeAnimDrawHooks | SetRotMatrix | 8002FB00 | sdk |
 | AeAnimDrawHooks | SetTransMatrix | 8002FB30 | sdk |
 | AeAnimDrawHooks | SDK_80031230 | 80031230 | sdk |
@@ -41,14 +41,14 @@
 | AeAreaSetHooks | FUN_8013d52c | 8013D52C | missing |
 | AeAreaSetHooks | FUN_8013db98 | 8013DB98 | missing |
 | AeAreaSetHooks | FUN_8013dc00 | 8013DC00 | missing |
-| AeAreaSetHooks | FUN_8013d440 | 8013D440 | missing |
-| AeAreaSetHooks | Area46_Boss_SetAnim | 8013EF0C | missing |
-| AeAreaSetHooks | Area46_Boss_ClearFlag | 8013EF00 | missing |
-| AeAreaSetHooks | FUN_8013f544 | 8013F544 | missing |
-| AeAreaSetHooks | FUN_8013e14c | 8013E14C | missing |
-| AeAreaSetHooks | FUN_8013ec5c | 8013EC5C | missing |
-| AeAreaSetHooks | FUN_8013d8bc | 8013D8BC | missing |
-| AeAreaSetHooks | FUN_8013df28 | 8013DF28 | missing |
+| AeAreaSetHooks | FUN_8013d440 | 8013D440 | ported |
+| AeAreaSetHooks | Area46_Boss_SetAnim | 8013EF0C | ported |
+| AeAreaSetHooks | Area46_Boss_ClearFlag | 8013EF00 | ported |
+| AeAreaSetHooks | FUN_8013f544 | 8013F544 | ported |
+| AeAreaSetHooks | FUN_8013e14c | 8013E14C | ported |
+| AeAreaSetHooks | FUN_8013ec5c | 8013EC5C | ported |
+| AeAreaSetHooks | FUN_8013d8bc | 8013D8BC | ported |
+| AeAreaSetHooks | FUN_8013df28 | 8013DF28 | ported |
 | AeAreaSetHooks | FUN_8013d10c | 8013D10C | missing |
 | AeAreaSetHooks | FUN_8013f4f0 | 8013F4F0 | missing |
 | AeAreaSetHooks | FUN_8013e8c0 | 8013E8C0 | missing |
@@ -71,7 +71,7 @@
 | AeAreaSetHooks | FUN_8013d9a8 | 8013D9A8 | missing |
 | AeAreaSetHooks | FUN_8013ee9c | 8013EE9C | missing |
 | AeBodyMoveHooks | LocalDirectionPadding | 00000000 | padding |
-| AeBodyMoveHooks | SfxVoiceSetPitch | 800A35FC | missing |
+| AeBodyMoveHooks | SfxVoiceSetPitch | 800A35FC | ported |
 | AeBodyMoveHooks | XaPlay | 80011F6C | ported |
 | AeCameraHooks | Atan2Safe | 80046340 | ported |
 | AeCameraHooks | VectorNormalSS | 800301E0 | ported |
@@ -86,44 +86,44 @@
 | AeCameraHooks | PlayerCanExitStage | 8005DC78 | ported |
 | AeCameraHooks | PlayerIsSubmerged | 8006B9F8 | ported |
 | AeCameraHooks | CameraRcCarActive | 8004A978 | ported |
-| AeCameraHooks | CameraRcCarFollow | 8004AA58 | missing |
+| AeCameraHooks | CameraRcCarFollow | 8004AA58 | ported |
 | AeCameraHooks | IsFlightArea | 8004A940 | ported |
 | AeCameraHooks | FUN_8013d000 | 8013D000 | ported |
 | AeCameraHooks | BossUpdate | 8005AC28 | ported |
-| AeCameraHooks | CameraAreaScriptDispatch | 8004B590 | missing |
-| AeCameraHooks | CallIndexedHandler | 8004D880 | missing |
+| AeCameraHooks | CameraAreaScriptDispatch | 8004B590 | ported |
+| AeCameraHooks | CallIndexedHandler | 8004D880 | ported |
 | AeCameraHooks | RotMatrixY | 80030890 | ported |
 | AeCameraHooks | ApplyMatrixSV | 800300B0 | ported |
 | AeCameraHooks | MatrixIdentity | 8004637C | ported |
 | AeCameraHooks | CameraGetPlayerDir | 8004B880 | ported |
-| AeCameraHooks | AimRequestStart | 80048398 | missing |
+| AeCameraHooks | AimRequestStart | 80048398 | ported |
 | AeCameraHooks | AimRequestClear | 80048430 | ported |
 | AeCameraHooks | AimModeEnter | 8004B4B8 | ported |
 | AeCameraHooks | AimModeLeave | 8004B510 | ported |
 | AeCameraHooks | CameraFixedModeOff | 80048748 | ported |
 | AeCameraHooks | StageExitPending | 8004D104 | ported |
-| AeCameraHooks | BossAimSfx | 8004898C | missing |
+| AeCameraHooks | BossAimSfx | 8004898C | ported |
 | AeCameraHooks | BossKindForArea | 8005AB00 | ported |
-| AeCameraHooks | ScreenFadeSet | 80046978 | missing |
+| AeCameraHooks | ScreenFadeSet | 80046978 | ported |
 | AeCameraHooks | PlaySfx | 800877F8 | ported |
-| AeCameraHooks | HudDrawMonkeyInfo | 80060448 | missing |
+| AeCameraHooks | HudDrawMonkeyInfo | 80060448 | ported |
 | AeCameraHooks | RadarUsable | 800468EC | ported |
 | AeCameraHooks | MonkeyFlag248Set | 8009A17C | ported |
-| AeCameraHooks | CameraRadarFocusUpdate | 80047EE0 | missing |
-| AeCameraHooks | CameraRadarFocusSelect | 80047E8C | missing |
+| AeCameraHooks | CameraRadarFocusUpdate | 80047EE0 | ported |
+| AeCameraHooks | CameraRadarFocusSelect | 80047E8C | ported |
 | AeCamupdHooks | PadGetState | 8002B52C | sdk |
 | AeCamupdHooks | SpawnParticle | 800698B8 | ported |
 | AeCamupdHooks | Printf | 800A3720 | sdk |
 | AeCamupdHooks | memset | 800A3740 | sdk |
-| AeCamupdHooks | CameraAreaScriptDispatch | 8004B590 | missing |
+| AeCamupdHooks | CameraAreaScriptDispatch | 8004B590 | ported |
 | AeCamupdHooks | CameraLookAt | 80046670 | render |
 | AeCamupdHooks | RenderScreenFlash | 00000000 | render |
 | AeCamupdHooks | RenderCameraTransition | 00000000 | render |
-| AeCollProbeHooks | PointInBoxXZ | 80073B64 | missing |
+| AeCollProbeHooks | PointInBoxXZ | 80073B64 | ported |
 | AeCollProbeHooks | printf | 800A3720 | sdk |
 | AeCollProbeHooks | HalfPipeRangeTest | 80050490 | ported |
 | AeCollProbeHooks | ColliderSlopeContactDir | 8004F884 | ported |
-| AeCollProbeHooks | DirIndexFromFlags | 8007774C | missing |
+| AeCollProbeHooks | DirIndexFromFlags | 8007774C | ported |
 | AeCollProbeHooks | PlayerSetClimbTarget | 80066E28 | ported |
 | AeCollProbeHooks | PlayerSetRope | 80066E8C | ported |
 | AeEffectsHooks | EffectRingDraw | 8006E5B4 | render |
@@ -174,8 +174,8 @@
 | AeGadgetHooks | SpawnParticle | 800698B8 | ported |
 | AeGadgetHooks | TrailSpawn | 8006ED78 | ported |
 | AeGadgetHooks | PlaySfx | 800877F8 | ported |
-| AeGadgetHooks | CameraGetSlotTarget | 8004B54C | missing |
-| AeGadgetHooks | TargetListFindBest | 8007CDFC | missing |
+| AeGadgetHooks | CameraGetSlotTarget | 8004B54C | ported |
+| AeGadgetHooks | TargetListFindBest | 8007CDFC | ported |
 | AeGadgetHooks | SdkVectorHelper_80031330 | 80031330 | sdk |
 | AeGadgetHooks | AimReticleDrawCircle | 80085E08 | missing |
 | AeGadgetHooks | PlayerSetState | 80064208 | ported |
@@ -189,16 +189,16 @@
 | AeGadgetHooks | PlayerCanActivateGadget | 8007CA48 | ported |
 | AeGadgetHooks | SoundLoopStart | 800878E0 | ported |
 | AeGadgetHooks | SoundLoopStop | 8008806C | ported |
-| AeGadgetHooks | SoundEmitterVolume | 80087BA4 | missing |
+| AeGadgetHooks | SoundEmitterVolume | 80087BA4 | ported |
 | AeGadgetHooks | MatrixRotYMul | 80014750 | ported |
 | AeGadgetHooks | SdkVectorHelper_800305B0 | 800305B0 | sdk |
-| AeGadgetHooks | PlayerFxSetMatrixPos | 8006CFBC | missing |
+| AeGadgetHooks | PlayerFxSetMatrixPos | 8006CFBC | ported |
 | AeGadgetHooks | RadarDrawModel | 8009A574 | ported |
 | AeGadgetHooks | SdkVectorHelper_8002FB00 | 8002FB00 | sdk |
 | AeGadgetHooks | SdkVectorHelper_8002FB30 | 8002FB30 | sdk |
 | AeGadgetHooks | SdkVectorHelper_80031230 | 80031230 | sdk |
-| AeGadgetHooks | TrailRingPush | 8001F8B0 | missing |
-| AeGadgetHooks | TrailRingDraw | 8001F954 | missing |
+| AeGadgetHooks | TrailRingPush | 8001F8B0 | ported |
+| AeGadgetHooks | TrailRingDraw | 8001F954 | ported |
 | AeGadgetHooks | DrawRibbonBetween | 8002020C | render |
 | AeGadgetHooks | ProjectileGroupSpawnSpread | 80085630 | ported |
 | AeGadgetHooks | PlayerSelectGadget | 8007AC64 | ported |
@@ -219,8 +219,8 @@
 | AeGadgetHooks | GpuProjectGadget3Aim | 00000000 | render |
 | AeGadgetHooks | GpuDrawGadget3AimLine | 00000000 | render |
 | AeGimmickAHooks | CameraNudge | 80047690 | ported |
-| AeGimmickAHooks | BodyInsideBox | 8008EC70 | missing |
-| AeGimmickAHooks | GimmickTouchCheck | 80090754 | missing |
+| AeGimmickAHooks | BodyInsideBox | 8008EC70 | ported |
+| AeGimmickAHooks | GimmickTouchCheck | 80090754 | ported |
 | AeGimmickAHooks | MeshInitFromAreaTable | 80015CC8 | render |
 | AeGimmickAHooks | PropSetMesh | 80090E54 | render |
 | AeGimmickAHooks | PlaySfx | 800877F8 | ported |
@@ -229,42 +229,42 @@
 | AeGimmickAHooks | SoundEmitterPan | 80087B34 | ported |
 | AeGimmickAHooks | SoundLoopStop | 8008806C | ported |
 | AeGimmickAHooks | ProgressFlagGet | 8009632C | ported |
-| AeGimmickAHooks | ProgressFlagSet | 800962F4 | missing |
+| AeGimmickAHooks | ProgressFlagSet | 800962F4 | ported |
 | AeGimmickAHooks | ProgressGetByte | 800963AC | ported |
-| AeGimmickAHooks | ProgressSetByte | 80096360 | missing |
+| AeGimmickAHooks | ProgressSetByte | 80096360 | ported |
 | AeGimmickAHooks | GetSolidHeight | 8004D8C0 | ported |
-| AeGimmickAHooks | SwingDoorBodyDelta | 8008F308 | missing |
-| AeGimmickAHooks | SlideDoorMove | 8008FAD0 | missing |
+| AeGimmickAHooks | SwingDoorBodyDelta | 8008F308 | ported |
+| AeGimmickAHooks | SlideDoorMove | 8008FAD0 | ported |
 | AeGimmickAHooks | GimmickHandler | 00000000 | indirect |
-| AeGimmickBHooks | AreaMonkeyQuotaMet | 80097454 | missing |
-| AeGimmickBHooks | FUN_80097504 | 80097504 | missing |
-| AeGimmickBHooks | SpecialActorPlaceAtCollider | 8009B578 | missing |
-| AeGimmickBHooks | FUN_8009B3B0 | 8009B3B0 | missing |
+| AeGimmickBHooks | AreaMonkeyQuotaMet | 80097454 | ported |
+| AeGimmickBHooks | FUN_80097504 | 80097504 | ported |
+| AeGimmickBHooks | SpecialActorPlaceAtCollider | 8009B578 | ported |
+| AeGimmickBHooks | FUN_8009B3B0 | 8009B3B0 | ported |
 | AeGimmickBHooks | IsTimeAttack | 80097678 | ported |
 | AeGimmickBHooks | Indicator_Register | 800716EC | ported |
-| AeGimmickBHooks | Indicator_Activate | 800717B4 | missing |
-| AeGimmickBHooks | SpawnEffectGroupAt | 800698E4 | missing |
+| AeGimmickBHooks | Indicator_Activate | 800717B4 | ported |
+| AeGimmickBHooks | SpawnEffectGroupAt | 800698E4 | ported |
 | AeGimmickBHooks | PadRumble | 80014168 | ported |
-| AeGimmickBHooks | FUN_8006AA60 | 8006AA60 | missing |
+| AeGimmickBHooks | FUN_8006AA60 | 8006AA60 | ported |
 | AeGimmickBHooks | MeshInitFromAreaTable | 80015CC8 | render |
-| AeGimmickBHooks | FUN_80091598 | 80091598 | missing |
-| AeGimmickBHooks | FUN_80091AF0 | 80091AF0 | missing |
+| AeGimmickBHooks | FUN_80091598 | 80091598 | ported |
+| AeGimmickBHooks | FUN_80091AF0 | 80091AF0 | ported |
 | AeGimmickBHooks | SoundLoopStart | 800878E0 | ported |
 | AeGimmickBHooks | SoundEmitterPan | 80087B34 | ported |
 | AeGimmickBHooks | SoundLoopStop | 8008806C | ported |
-| AeGimmickBHooks | FUN_80092324 | 80092324 | missing |
-| AeGimmickBHooks | FUN_80091C04 | 80091C04 | missing |
+| AeGimmickBHooks | FUN_80092324 | 80092324 | ported |
+| AeGimmickBHooks | FUN_80091C04 | 80091C04 | ported |
 | AeGimmickBHooks | EventCamStart | 8004D39C | ported |
-| AeGimmickBHooks | FUN_80093848 | 80093848 | missing |
-| AeGimmickBHooks | PlayerAttachSet | 80066EEC | missing |
+| AeGimmickBHooks | FUN_80093848 | 80093848 | ported |
+| AeGimmickBHooks | PlayerAttachSet | 80066EEC | ported |
 | AeGimmickBHooks | PlaySfx | 800877F8 | ported |
-| AeGimmickBHooks | FUN_80066F34 | 80066F34 | missing |
+| AeGimmickBHooks | FUN_80066F34 | 80066F34 | ported |
 | AeGimmickBHooks | SvecToDiagMatrix | 800147D0 | ported |
-| AeGimmickBHooks | FUN_80094330 | 80094330 | missing |
+| AeGimmickBHooks | FUN_80094330 | 80094330 | ported |
 | AeGimmickBHooks | DiagonalSignedDistance | 800774B8 | ported |
-| AeGimmickBHooks | FUN_80094A48 | 80094A48 | missing |
-| AeGimmickBHooks | FUN_80094E5C | 80094E5C | missing |
-| AeGimmickBHooks | ColliderBoxContainsPoint | 8009091C | missing |
+| AeGimmickBHooks | FUN_80094A48 | 80094A48 | ported |
+| AeGimmickBHooks | FUN_80094E5C | 80094E5C | ported |
+| AeGimmickBHooks | ColliderBoxContainsPoint | 8009091C | ported |
 | AeGimmickBHooks | CameraNudge | 80047690 | ported |
 | AeGimmickHooks | PlaySfx | 800877F8 | ported |
 | AeGimmickHooks | PlaySfxAt | 80087A20 | ported |
@@ -301,12 +301,12 @@
 | AeMenuWinHooks | DrawOTag | 80028CC0 | sdk |
 | AeMenuWinHooks | ModelTransformRigid | 800161C0 | render |
 | AeMenuWinHooks | ModelDraw | 80017CD4 | render |
-| AeMenuWinHooks | DrawMenuChrome | 8007D71C | missing |
-| AeMenuWinHooks | DrawMenuRows | 8007D9F0 | missing |
-| AeMenuWinHooks | DrawMenuHighlight | 8007E030 | missing |
-| AeMenuWinHooks | DrawMenuItem | 8007E1B8 | missing |
-| AeMenuWinHooks | DrawMenuSelection | 8007E3F8 | missing |
-| AeMenuWinHooks | DrawMenuCursor | 8007F148 | missing |
+| AeMenuWinHooks | DrawMenuChrome | 8007D71C | render |
+| AeMenuWinHooks | DrawMenuRows | 8007D9F0 | render |
+| AeMenuWinHooks | DrawMenuHighlight | 8007E030 | render |
+| AeMenuWinHooks | DrawMenuItem | 8007E1B8 | render |
+| AeMenuWinHooks | DrawMenuSelection | 8007E3F8 | render |
+| AeMenuWinHooks | DrawMenuCursor | 8007F148 | render |
 | AeMenuWinHooks | item_callback | 00000000 | missing |
 | AeMiscHooks | MulMatrix | 80031470 | sdk |
 | AeMiscHooks | SetRotMatrix | 8002FB00 | sdk |
@@ -354,18 +354,18 @@
 | AeMiscHooks | FUN_801402d8 | 801402D8 | missing |
 | AeMiscHooks | Area53_BossUpdate | 8013D57C | missing |
 | AeMiscHooks | FUN_80143854 | 80143854 | missing |
-| AeMiscHooks | Area46_BossUpdate | 8013F1AC | missing |
+| AeMiscHooks | Area46_BossUpdate | 8013F1AC | ported |
 | AeMiscHooks | Area57_BossUpdate | 8013E4B4 | missing |
 | AeMiscHooks | FUN_80137248 | 80137248 | missing |
 | AeMiscHooks | FUN_8013fc18 | 8013FC18 | missing |
 | AeMiscHooks | FUN_8013fe4c | 8013FE4C | missing |
-| AeMiscHooks | FUN_80088d78 | 80088D78 | missing |
-| AeMiscHooks | FUN_80088f2c | 80088F2C | missing |
-| AeMiscHooks | FUN_800895f0 | 800895F0 | missing |
-| AeMiscHooks | FUN_80089b10 | 80089B10 | missing |
-| AeMiscHooks | FUN_80089d64 | 80089D64 | missing |
-| AeMiscHooks | FUN_80089d6c | 80089D6C | missing |
-| AeMiscHooks | FUN_8008aa64 | 8008AA64 | missing |
+| AeMiscHooks | FUN_80088d78 | 80088D78 | ported |
+| AeMiscHooks | FUN_80088f2c | 80088F2C | ported |
+| AeMiscHooks | FUN_800895f0 | 800895F0 | ported |
+| AeMiscHooks | FUN_80089b10 | 80089B10 | ported |
+| AeMiscHooks | FUN_80089d64 | 80089D64 | ported |
+| AeMiscHooks | FUN_80089d6c | 80089D6C | ported |
+| AeMiscHooks | FUN_8008aa64 | 8008AA64 | ported |
 | AeMiscHooks | GetSolidHeight | 8004D8C0 | ported |
 | AeMiscHooks | GetColliderQuadrantMaskXZ | 800889B4 | ported |
 | AeMiscHooks | CdIntToPos | 80025D20 | sdk |
@@ -381,12 +381,34 @@
 | AeMiscHooks | CollisionProbe5 | 00000000 | missing |
 | AeMiscHooks | CollisionProbe6 | 00000000 | missing |
 | AeMiscHooks | CollisionProbe7 | 00000000 | missing |
-| AeMiscHooks | PointInBoxXZ | 80073B64 | missing |
+| AeMiscHooks | PointInBoxXZ | 80073B64 | ported |
 | AeMiscHooks | HalfPipeRangeTest | 80050490 | ported |
 | AeMiscHooks | ColliderSlopeContactDir | 8004F884 | ported |
-| AeMiscHooks | DirIndexFromFlags | 8007774C | missing |
+| AeMiscHooks | DirIndexFromFlags | 8007774C | ported |
 | AeMiscHooks | PlayerSetClimbTarget | 80066E28 | ported |
 | AeMiscHooks | PlayerSetRope | 80066E8C | ported |
+| AeMissaHooks | BeginFrame | 8005DF48 | frame |
+| AeMissaHooks | PlaySfx | 800877F8 | ported |
+| AeMissaHooks | ClearWords | 800A3740 | sdk |
+| AeMissaHooks | PropVisualUpdate | 80071120 | missing |
+| AeMissaHooks | Printf | 800A3720 | sdk |
+| AeMissaHooks | PlayerAuxModelInit | 80098FB0 | ported |
+| AeMissaHooks | HudDrawTimeRankIcon | 8005F70C | render |
+| AeMissaHooks | HudDrawStatPips | 80060224 | render |
+| AeMissaHooks | HudDrawFrameBox | 80060334 | render |
+| AeMissaHooks | HudTextWidth | 80082230 | ported |
+| AeMissaHooks | MessageBoxOpen | 8008DEEC | ported |
+| AeMissaHooks | DrawMenuChrome | 8007D71C | render |
+| AeMissaHooks | DrawMenuRows | 8007D9F0 | render |
+| AeMissaHooks | DrawMenuHighlight | 8007E030 | render |
+| AeMissaHooks | DrawMenuItem | 8007E1B8 | render |
+| AeMissaHooks | DrawMenuSelection | 8007E3F8 | render |
+| AeMissaHooks | DrawMenuCursor | 8007F148 | render |
+| AeMissaHooks | SetRotMatrix | 8002FB00 | sdk |
+| AeMissaHooks | SetTransMatrix | 8002FB30 | sdk |
+| AeMissaHooks | RendererHudMonkeyBadge | 00000000 | render |
+| AeMissaHooks | TrailRingDraw | 00000000 | render |
+| AeMissaHooks | CallIndirect | 00000000 | indirect |
 | AeMonkeyHooks | Printf | 800A3720 | sdk |
 | AeMonkeyHooks | GimmickGetInfo | 8005B7BC | ported |
 | AeMonkeyHooks | PlaySfxAt | 80087A20 | ported |
@@ -429,12 +451,13 @@
 | AeMonkeyHooks | ClearWords | 80032708 | ported |
 | AeMonkeyHooks | VSync | 8002E520 | sdk |
 | AeMonkeyHooks | StageExitIsActive | 8005DCE4 | ported |
+| AeOvl188Hooks | xa_padding | 00000000 | xa_padding |
 | AePadHooks | pad_get_state | 8002B52C | sdk |
 | AePadHooks | pad_info_mode | 8002B5F8 | sdk |
 | AePadHooks | pad_setup_dualshock | 80012CA0 | missing |
-| AePadHooks | pad_demo_step | 80013128 | missing |
+| AePadHooks | pad_demo_step | 80013128 | ported |
 | AePadHooks | stage_request | 8005D100 | ported |
-| AePadHooks | stick_to_buttons | 800140B4 | missing |
+| AePadHooks | stick_to_buttons | 800140B4 | ported |
 | AePadHooks | pad_rumble_reset | 80014208 | ported |
 | AePauseMenuHooks | WaitFrameFlip | 8005DE8C | missing |
 | AePauseMenuHooks | PauseMenuOverlay1B | 8013FB20 | missing |
@@ -449,11 +472,11 @@
 | AePauseMenuHooks | HeapAlloc | 8008C09C | ported |
 | AePauseMenuHooks | HeapFree | 8008C064 | ported |
 | AePauseMenuHooks | ColorFadeReset | 8008C390 | ported |
-| AePauseMenuHooks | PadDirectionCode | 8007F40C | missing |
+| AePauseMenuHooks | PadDirectionCode | 8007F40C | ported |
 | AePauseMenuHooks | TextSetCursor | 8008DDB0 | ported |
 | AePauseMenuHooks | PlaySfx | 800877F8 | ported |
-| AePauseMenuHooks | PauseMenuInitVolumes | 80082D40 | missing |
-| AePauseMenuHooks | HudTextWidth | 80082230 | missing |
+| AePauseMenuHooks | PauseMenuInitVolumes | 80082D40 | ported |
+| AePauseMenuHooks | HudTextWidth | 80082230 | ported |
 | AePauseMenuHooks | DrawTextSprites | 80082288 | ported |
 | AePauseMenuHooks | DrawMenuArrows | 8008211C | missing |
 | AePauseMenuHooks | IsTimeAttack | 80097678 | ported |
@@ -466,9 +489,9 @@
 | AePauseMenuHooks | SetPriority | 80012C70 | missing |
 | AePauseMenuHooks | CutsceneModeOffCaller | 8005DD28 | ported |
 | AePauseMenuHooks | CutsceneModeOn | 8005DD18 | ported |
-| AePauseMenuHooks | PauseDrawCounter | 80082A04 | missing |
-| AePauseMenuHooks | PauseDrawCaptureGrid | 80082398 | missing |
-| AePauseMenuHooks | PauseMenuDrawSubScreen | 80082D6C | missing |
+| AePauseMenuHooks | PauseDrawCounter | 80082A04 | ported |
+| AePauseMenuHooks | PauseDrawCaptureGrid | 80082398 | ported |
+| AePauseMenuHooks | PauseMenuDrawSubScreen | 80082D6C | ported |
 | AePauseMenuHooks | HudDrawIcon16 | 8005FCA4 | ported |
 | AePauseMenuHooks | HudDrawTime | 8005F978 | ported |
 | AePauseMenuHooks | GetDAT_800B01C2 | 8005DD34 | ported |
@@ -483,7 +506,7 @@
 | AePauseMenuHooks | CdMgrUpdate | 800125B8 | archive |
 | AePauseMenuHooks | Printf | 800A3720 | sdk |
 | AePauseMenuHooks | SoundLoopStop | 8008806C | ported |
-| AePauseMenuHooks | SfxVoiceSetPanVol | 800A3570 | sdk |
+| AePauseMenuHooks | SfxVoiceSetPanVol | 800A3570 | ported |
 | AePauseMenuHooks | TextNextGlyph | 8008DD68 | ported |
 | AePauseMenuHooks | FontDrawGlyph | 8008D9D0 | ported |
 | AePauseMenuHooks | RotMatrixZ | 800306F0 | ported |
@@ -518,6 +541,7 @@
 | AePlayer1Hooks | DrawRibbonBetween | 8002020C | render |
 | AePlayer1Hooks | ModelProjectVertices | 00000000 | render |
 | AePlayer1Hooks | ModelEmitPrims | 800180B8 | render |
+| AePlayer1Hooks | CdMgrQueueCommand | 80012360 | archive |
 | AePlayer2Hooks | position_padding | 00000000 | padding |
 | AePlayer2Hooks | PlaySfx | 800877F8 | ported |
 | AePlayer2Hooks | AimModeLeave | 8004B510 | ported |
@@ -551,7 +575,7 @@
 | AePlayer2Hooks | EventCamStartRandom | 8004BC9C | ported |
 | AePlayerActHooks | AimRequestClear | 80048430 | ported |
 | AePlayerActHooks | PlayerCond_JumpHeld | 80064AF8 | ported |
-| AePlayerActHooks | PlayerInput_StickGesture | 800650D8 | missing |
+| AePlayerActHooks | PlayerInput_StickGesture | 800650D8 | ported |
 | AePlayerActHooks | PadRumble | 80014168 | ported |
 | AePlayerActHooks | Gadget3AimUpdateAmmo | 8007AA98 | ported |
 | AePlayerActHooks | AimModeEnter | 8004B4B8 | ported |
@@ -562,10 +586,10 @@
 | AePlayerActHooks | PlaySfx | 800877F8 | ported |
 | AePlayerActHooks | StageRequest | 8005D100 | ported |
 | AePlayerActHooks | EffectBigBurst | 8006B3F0 | ported |
-| AePlayerActHooks | StageGoalReached | 80097A60 | missing |
+| AePlayerActHooks | StageGoalReached | 80097A60 | ported |
 | AePlayerActHooks | HudPanelA_Start | 80095244 | ported |
 | AePlayerActHooks | HeapFree | 8008C064 | ported |
-| AePlayerActHooks | CameraAreaScriptDispatch | 8004B590 | missing |
+| AePlayerActHooks | CameraAreaScriptDispatch | 8004B590 | ported |
 | AePlayerActHooks | PlayerSelectGadget | 8007AC64 | ported |
 | AePlayerActHooks | PlayerIdleModelSetup | 80032ADC | ported |
 | AePlayerActHooks | AnimFramePtr | 80015240 | ported |
@@ -573,7 +597,7 @@
 | AePlayerActHooks | PlayerModeCallback | 00000000 | indirect |
 | AePlayerCondHooks | PlayerIsOnGround | 800652E4 | ported |
 | AePlayerCondHooks | PlayerSplash | 8006B950 | ported |
-| AePlayerCondHooks | PlayerFxJumpBurst | 8006C58C | missing |
+| AePlayerCondHooks | PlayerFxJumpBurst | 8006C58C | ported |
 | AePlayerSpawnHooks | AreaBumpAlloc | 8008C1B8 | ported |
 | AePlayerSpawnHooks | printf | 800A3720 | sdk |
 | AePlayerSpawnHooks | CameraLookAt | 80046670 | render |
@@ -593,7 +617,7 @@
 | AePlayerUpdateHooks | RotMatrixY | 80030890 | ported |
 | AeProgressHooks | SoundLoopsSetPan | 80086788 | ported |
 | AeProgressHooks | FUN_8013FB20 | 8013FB20 | missing |
-| AeProgressHooks | SoundBankSetVolume | 800A2640 | sdk |
+| AeProgressHooks | SoundBankSetVolume | 800A2640 | ported |
 | AeProgressHooks | SetDrawTPage | 8002B410 | sdk |
 | AeSpawnHooks | PlaySfx | 800877F8 | ported |
 | AeSpawnHooks | MatrixLookDir | 8001484C | ported |
@@ -601,29 +625,29 @@
 | AeSpawnHooks | position_padding | 00000000 | padding |
 | AeStageFadeHooks | DebugTextPrintf | 8008C6F0 | ported |
 | AeStageFadeHooks | SeqTrackClose | 800A1F3C | missing |
-| AeStageFadeHooks | SeqTrackSetPlayState | 800A2B6C | missing |
+| AeStageFadeHooks | SeqTrackSetPlayState | 800A2B6C | ported |
 | AeStageFadeHooks | SoundBankFree | 800A1CCC | missing |
-| AeStageFadeHooks | SoundStopAllVoices | 800A342C | missing |
+| AeStageFadeHooks | SoundStopAllVoices | 800A342C | ported |
 | AeStageFadeHooks | RenderScreenFlash | 00000000 | render |
 | AeStageFadeHooks | RenderFadeSpiral | 00000000 | render |
-| AeStageHooks | AreaUsesAltMember | 800115F4 | missing |
+| AeStageHooks | AreaUsesAltMember | 800115F4 | ported |
 | AeStageHooks | ArcGetMemberPos | 80012C0C | ported |
 | AeStageHooks | FUN_80025E24 | 80025E24 | archive |
 | AeStageHooks | CdMgrQueueCommand | 80012360 | archive |
-| AeStageHooks | StageExitStart | 8004D73C | missing |
+| AeStageHooks | StageExitStart | 8004D73C | ported |
 | AeStageHooks | IsTimeAttack | 80097678 | ported |
 | AeStageHooks | GetLevelFirstArea | 8009764C | ported |
 | AeStageHooks | GimmickSaveStates | 8005ADF8 | ported |
 | AeStageHooks | GimmickSaveApplyProgress | 8005B480 | ported |
-| AeStageHooks | ItemSaveCollectedMask | 800847EC | missing |
-| AeStageHooks | ZakoSaveDefeatedMask | 800509CC | missing |
+| AeStageHooks | ItemSaveCollectedMask | 800847EC | ported |
+| AeStageHooks | ZakoSaveDefeatedMask | 800509CC | ported |
 | AeStageHooks | AreaGetKind | 80010CA4 | ported |
 | AeStageHooks | AreaGetLevel | 80010CC0 | ported |
 | AeStageHooks | GimmickSaveTableReset | 8005AD90 | ported |
-| AeStageHooks | ItemsClearFlags | 800847C4 | missing |
+| AeStageHooks | ItemsClearFlags | 800847C4 | ported |
 | AeStageHooks | ZakoClearSlotTable | 800509A4 | ported |
-| AeStageHooks | SoundSilence | 80086148 | missing |
-| AeStageHooks | LevelMonkeyCountGet | 800965EC | missing |
+| AeStageHooks | SoundSilence | 80086148 | ported |
+| AeStageHooks | LevelMonkeyCountGet | 800965EC | ported |
 | AeStageHooks | AreaBumpAlloc | 8008C1B8 | ported |
 | AeStageHooks | MeshInit | 80015C34 | render |
 | AeStageHooks | GetZoneMask | 8004626C | ported |
@@ -673,31 +697,31 @@
 | AeStageHooks | Printf | 800A3720 | sdk |
 | AeStageHooks | CutsceneModeOff | 8005DD28 | ported |
 | AeStageHooks | CutsceneModeOn | 8005DD18 | ported |
-| AeStageHooks | PlayerInit | 8003272C | missing |
+| AeStageHooks | PlayerInit | 8003272C | ported |
 | AeStageHooks | PlayerSetMode | 8007B374 | ported |
 | AeStageHooks | FUN_80028850 | 80028850 | sdk |
 | AeStageHooks | FUN_800286CC | 800286CC | sdk |
 | AeStageHooks | WaitFrameFlip | 8005DE8C | missing |
-| AeStageHooks | BgmFadeOut | 8008760C | missing |
+| AeStageHooks | BgmFadeOut | 8008760C | ported |
 | AeStageHooks | SoundStop | 80086FD0 | ported |
 | AeStageHooks | PlaySfx | 800877F8 | ported |
-| AeStageHooks | ProgressSetByte | 80096360 | missing |
-| AeStageHooks | PlayTimeAdd | 8005DD44 | missing |
-| AeStageHooks | StageGradeUpdate | 80097BFC | missing |
-| AeStageHooks | StageVictoryStart | 8009543C | missing |
-| AeStageHooks | StageTypeClearInit | 80094F48 | missing |
-| AeStageHooks | StageTypeClearUpdate | 80095030 | missing |
-| AeStageHooks | StageIntroStart | 8009546C | missing |
-| AeStageHooks | PlayerEnterCutsceneMode | 80095588 | missing |
-| AeStageHooks | StageIntroUpdate | 800954C4 | missing |
+| AeStageHooks | ProgressSetByte | 80096360 | ported |
+| AeStageHooks | PlayTimeAdd | 8005DD44 | ported |
+| AeStageHooks | StageGradeUpdate | 80097BFC | ported |
+| AeStageHooks | StageVictoryStart | 8009543C | ported |
+| AeStageHooks | StageTypeClearInit | 80094F48 | ported |
+| AeStageHooks | StageTypeClearUpdate | 80095030 | ported |
+| AeStageHooks | StageIntroStart | 8009546C | ported |
+| AeStageHooks | PlayerEnterCutsceneMode | 80095588 | ported |
+| AeStageHooks | StageIntroUpdate | 800954C4 | ported |
 | AeStageHooks | GimmickNopUpdate3 | 80094F40 | ported |
 | AeStageHooks | GimmickNopUpdate4 | 80095464 | ported |
 | AeStageHooks | XaPlay | 80011F6C | ported |
-| AeStageHooks | AreaCheckExits | 80010D80 | missing |
+| AeStageHooks | AreaCheckExits | 80010D80 | ported |
 | AeStageHooks | CdMgrUpdate | 800125B8 | archive |
-| AeStageHooks | FadeFrame | 8007A14C | missing |
+| AeStageHooks | FadeFrame | 8007A14C | ported |
 | AeStageHooks | LoadListStep | 800116C0 | archive |
-| AeStageHooks | FUN_80096638 | 80096638 | missing |
+| AeStageHooks | FUN_80096638 | 80096638 | ported |
 | AeStageHooks | FUN_8013EA24 | 8013EA24 | missing |
 | AeStageHooks | AimRequestClear | 80048430 | ported |
 | AeStageHooks | AimModeLeave | 8004B510 | ported |
@@ -759,6 +783,29 @@ These typed callbacks retain native name/argument pointers. Game calls use the c
 
 | Module | Hook | Route |
 |---|---|---|
+| AeMissbHooks | call | central member/address table and named native callbacks; unported calls remain missing |
 | AeModeHooks | original_call | named native boundaries and central table, with loaded-member guard |
+| AeOverlayHooks | call | central member/address table and named native callbacks; unported calls remain missing |
+| AeOverlayHooks | render | AeGameHost.render_words |
+| AeOvl180Hooks | native_call | central member/address table and named native callbacks; unported calls remain missing |
+| AeOvl180Hooks | renderer | AeGameHost.render_words |
+| AeOvl183Hooks | native_call | central member/address table and named native callbacks; unported calls remain missing |
+| AeOvl183Hooks | renderer | AeGameHost.render_words |
+| AeOvl184Hooks | native_call | central member/address table and named native callbacks; unported calls remain missing |
+| AeOvl184Hooks | renderer | AeGameHost.render_words |
+| AeOvl185Hooks | native_call | central member/address table and named native callbacks; unported calls remain missing |
+| AeOvl185Hooks | renderer | AeGameHost.render_words |
+| AeOvl186bHooks | native_call | central member/address table and named native callbacks; unported calls remain missing |
+| AeOvl186bHooks | overlay_call | central member/address table and named native callbacks; unported calls remain missing |
+| AeOvl186bHooks | renderer | AeGameHost.render_words |
+| AeOvl187Hooks | call | central member/address table and named native callbacks; unported calls remain missing |
+| AeOvl188Hooks | call | central member/address table and named native callbacks; unported calls remain missing |
+| AeOvl188Hooks | render | AeGameHost.render_words (void callback) |
+| AeOvl18aHooks | native_call | central member/address table and named native callbacks; unported calls remain missing |
+| AeOvl18aHooks | renderer | AeGameHost.render_words |
+| AeOvl18bHooks | native_call | central member/address table and named native callbacks; unported calls remain missing |
+| AeOvl18bHooks | renderer | AeGameHost.render_words |
 | AeOvl18cHooks | original_call | central table, with loaded-member guard |
 | AeOvl18cHooks | renderer | AeGameHost.render_words |
+| AeOvl1A0Hooks | original_call | central table, with loaded-member guard |
+| AeOvl1A0Hooks | renderer | AeGameHost.render_words |

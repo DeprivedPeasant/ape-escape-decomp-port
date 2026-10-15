@@ -1,5 +1,180 @@
 # Integration module findings (2026-10-14)
 
+
+## Pass 7/8 merge: bounded mode guards (2026-10-15)
+
+The former mode-35 missing-entry guard became invalid when save-menu part 1
+was merged. It entered the now-ported synchronous Mode_SaveMenu loop after
+the last native-leaf guard, with raw tracing bypassing the normal log limit.
+The seeded native-leaf words and SeqPlayer_SaveRestoreVram callback were not
+the cause. The guard now checks the merged ledger before probing an absent
+entry. The sequence-6 fixture stops at the member-186 entry through the existing
+host continuation service; the oracle stops before the same first instruction.
+It does not claim save-menu execution coverage. Its owning
+module checker and central-wrapper suite retain that coverage.
+
+The test shim caps each bounded native invocation at 20,000 callbacks and
+reports an AeRam error before unwinding. Raw tracing also caps the log, and
+Python callback failures request an immediate unwind. Public mode-word test
+calls now use that bounded scope. Existing MIPS instruction limits remain.
+
+The full central-wrapper sweep also found a stale boot-unit boundary:
+check_ovl181 forced a StickToButtons callback while the merged host called
+its verified port. It now executes the original dependency instructions when
+that port exists, retaining the fallback hook for a tree without the port.
+The enclosing Mode_03 comparison still checks all RAM, scratchpad and calls.
+
+## Pass 7: Stage Start (member 188)
+
+The integrated sequence-0 fixture executes the opening with real member-188
+archive assets and compares every non-stack RAM byte, scratchpad, frame hashes,
+and native calls. Its test-only renderer executes original packet-building
+instructions from the C semantic requests; no renderer/gameplay RAM mask was
+added. Scanline timer/seed writes from that renderer fixture are restored to
+the C-produced values before comparison, keeping the gameplay check independent.
+
+| Original evidence | Minimal correction / independent old-source rejection |
+| --- | --- |
+| `80136168` calls SDK ApplyMatrixLV at `80030450` with the view matrix and its translation as both input/output vector. This is byte-identical to the member-187 helper repaired in pass 6. | Call the existing exact `ae_sdk_apply_matrix_lv` helper, rather than delegating the result to a renderer callback. Both checkers now execute the original SDK instructions. Two whole-RAM LookAt cases reject the discarded translation; the following ScaleMatrixL callback retains its actual two-word ABI. |
+| `8013685C..8013687C`, `80136A4C..80136A6C`, `801375E4..80137604` copy the eight-byte template at `8013ADB0` to each local RECT. | Initialize all three local rectangles. Six bounded instruction comparisons vary the template and compare the actual ClearImage bytes; each former source is rejected separately. |
+| `8013689C` writes zero to `8013AE60`, including modes other than 8. | Initialize the wipe mode on entry. The rectangle probe starts with `12345678` and compares all non-stack RAM; omitting this store fails. |
+| `8013827C..80138290` form mask `FFFF1FFF` using LUI/ORI and AND the mesh header. | Retain the upper halfword. The former `00001FFF` mask destroys real asset header bits and fails integrated RAM comparison. |
+| `80137318..80137334` multiply the timer by 192, multiply by `66666667`, then shift the high word right once: signed division by 5. The reverse wipe repeats this at `80137448..80137464`. | Divide by 5 rather than 10. Native packet fixture comparisons reject the former half-speed horizontal coordinates. |
+| `8013975C` / `80139FE8` read the display-buffer index at `800EC35C`; `8013A034` / `8013A0B8` read texture-page selection at UI `+2C`. | Rendering requests use the frame global rather than RAM `0000000C`, and the page field rather than animation-frame `+28`. Six full-RAM renderer cases vary buffer index and keep animation/page values distinct; both former requests fail independently. |
+| XaPlay `80012000` onward writes only two filter bytes and one mode byte; CdMgrQueueCommand copies full parameter words. | Supply the untouched high bytes explicitly through `AeOvl188Hooks.xa_padding` / `AeGameHost.xa_caller_padding`, defaulting to zero in a native session. The oracle observer reads the actual caller bytes and resumes the entire original function. Zeroing the observed filter padding fails queue RAM comparison. |
+
+The new `check_game_modes` shared-input row for XaPlay padding needs owner
+review under the ledger rules. It shares only unwritten caller bytes; it does
+not mask outputs, seed game state from the original, lower case minima, or
+skip any original gameplay instruction.
+
+## Pass 9: MissB ABI and XA archive boundary (2026-10-15)
+
+AeMissbCallFn declares `(user, ram, name, address, args[4], argc)`.
+The generator recognized only pointer spellings and treated `args[4]` as an
+o32 scalar, producing invalid C. It now recognizes both array and pointer
+spellings and emits a typed array-before-count adapter. The adapter reuses
+the central member/address and named native API dispatcher. `Renderer*`
+requests keep their names and complete arrays through render_words; ported
+entries still execute their C adapters. No native pointer is cast to a word.
+
+The first integrated area-05 divergence was frame 47, when the player's death
+path reached XaPlay. Other callers of CdMgrQueueCommand already used the
+native asynchronous archive boundary, but XaPlay called the queue C port
+directly. Original calls are `jal 80012360` at 80011FF0, 8001202C, 80012060,
+80012084, 80012098, 800120AC, 800120C0 and 800120D4. Its sector conversion is
+`jal 80025D20` at 80012070. Running one queue implementation and intercepting
+the other left different queue records and call sequences. This is host
+interface closure, not a queue arithmetic change: XaPlay now accepts the same
+native queue callback as the frame host, with the existing queue C port as
+its standalone fallback. The eight commands, order and arguments are retained.
+The original queue implementation still runs in its standalone differential
+cases, and all 48 existing XaPlay cases still use it.
+
+Eight additional check_player1 cases select the native queue path and compare
+all commands, meaningful parameter bytes (filter, mode and CD position),
+result/done pointers and all non-stack RAM against original instructions.
+The body-movement unit host uses that same asynchronous queue boundary on
+both sides and compares its meaningful payload bytes; its former oracle-only
+queue execution caused two stale-host failures during the wrapper sweep.
+The ctypes owners retain the full extended hook layout. The central area
+checker adds 144 named MissB port/renderer/missing and XA comparisons; the
+module regression independently reconstructs the former queue bypass and
+requires rejection. Wiring mutations also remove the adapter, lose its count,
+misroute renderer names and restore the queue bypass. The oracle budget is
+2,000,000 instructions per call.
+
+SfxVoiceSetPitch's old body callback and missing interception are removed;
+its new port now receives those calls. SoundBankSetVolume and the existing
+SfxVoiceSetPanVol likewise use their ported adapters instead of stale SDK
+classification. No comparison mask, exclusion row or ledger minimum changes.
+
+The full wrapper sweep also exposed older boot/save unit hosts that had no
+MissB sound table or SpuWaitIdle service. Their existing native SPU boundary
+is now supplied, and their former whole-function SoundStopAllVoices and
+SeqTrackSetPlayState doubles are replaced by the new ports. Boot's stale
+StickToButtons interception is removed too. SaveUi_SetState's score==1000
+branch now receives actual save-image score bytes, derived with a bounded
+original SaveScore call, instead of relying on its retired constant double.
+All 518 save and 108 boot/intro cases pass with their original coverage rules.
+Member 189's named unit exports also redirect to the central public adapters;
+its private EXE-dependency bridge remains the owning unit's interface.
+
+## Pass 8: PlayerInit boot input and aliased model outputs (2026-10-15)
+
+The failing area-load fixture did not load player member 008 at 80103000.
+PlayerInit (8003272C) is now reachable and requires that boot input. The
+viewer also loaded it only after StageRequest; both now supply it before
+stage entry. With the actual member, all four loads and all 360 frames
+match, followed by the original frame-11 net catch and saved activity 2.
+
+The empty header also exposed a genuine PlayerInit port bug. At 80032978
+the auxiliary count is stored as a halfword; 800329B8 reloads it after each
+StaticModelInit. Its output instances start at 800EC060 with stride 16.
+For a zero header the initial count is 65535, and those outputs eventually
+alias the stored count and stage model pointers. The old C cached the count
+and pointers and continued overwriting unrelated RAM. Preserve the count
+reload and the table reloads at 80032998, 800329DC, 80032A28 and 80032A90;
+the auxiliary header uses the loop's actual final index (800329E0).
+
+check_missa's last PlayerInit case now supplies an empty header. It compares
+all non-stack RAM, scratchpad and calls with the original instructions under
+the existing 2,000,000-instruction budget. check_game_module_regressions also
+restores the cached count independently and requires a RAM mismatch. The
+ordinary 31 real-member cases remain. No exclusions or ledger minima change.
+
+The load call-log fixture now records PlayerAuxModelInit's single meaningful
+argument: 800329F4 calls it with the header in a0; a1-a3 are caller leftovers.
+Area 44's 90-frame original trace reaches state 2D after falling and landing
+and starts state 80, without reaching 81/83 in this interval. Its assertion
+now requires that observed path while every frame remains differentially
+compared.
+
+The full wrapper sweep exposed additional test-host closure defects. Small
+overlay scripts 183/184/185 expose a shared member runner rather than main();
+the wrapper runner now retains their function-table guard and invokes that
+runner. Save-menu 186a's dispatcher indices are independent of boot's: its
+index 0 means SaveUi_DrawText, not Mode_Boot. The proxy now derives its typed
+dispatcher from the owning shim and selects it for that checker. The old
+worker was terminated after identifying its DLL/PID in this worktree; its
+incorrect boot dispatch is a failed run, never a passing comparison.
+
+Save-menu 186b referenced absent ignored teststubs/testwrap files. Its tracked
+ovl186b_test_api.c dispatcher now links the verified dependency closure and is
+also used by the proxy to exercise public adapters. The two 186a worker
+entries loop forever; the existing checker exposes one iteration using its
+explicit adapter. Those two iteration-only interfaces are now explicitly
+delegated in wrapper coverage rather than misreported as complete entry
+proofs. Their existing module cases and ledger requirements remain unchanged.
+Member 188's unit-only ovl188_call dispatcher likewise bypassed the public
+adapters. The proxy now reuses that declaration-only dispatcher, retaining
+its normal automatic export policy, and records all 28 wrapper entries across
+192 invocations. The original unit comparisons still run unchanged.
+
+The 186a rerun then exposed the production pad adapter's discarded input:
+800133E8..800133F4 combines raw packet bytes 2/3 and NORs them into a0;
+80013404 calls StickToButtons when PadUpdate flag 2 is set. The historical
+AePadHooks callback has no argument, so generation had supplied zero. Its
+adapter now reconstructs the same word from AE_PAD_BUF1, preserving all 32
+bits, before entering the port. The unit-host stub uses that real route too.
+Sixteen enclosing PadUpdate comparisons vary held buttons and stick axes;
+a wiring mutation restores the discarded word and must fail those cases.
+
+Enabled-demo profiles now provide neutral records and a valid buffer/frame
+cursor. The newly ported playback correctly treats a zero record as an end
+request, which made the old empty fixture enter a stage transition. FadeFrame
+also makes FadeSpiralDraw reachable in transition profiles. Integration reuses
+check_stagefade's registered 8007A02C renderer block and its cursor-store
+epilogue, and both the native viewer notification and checker renderer retain
+the original 32 * 24-byte cursor advance. No packet or game-RAM mask is added.
+
+The corrected catch fixture no longer loads an archive member through the
+stage's ArcGetMemberPos hook. Retain its existing wrong-address mutation and
+exercise that exact hook directly for four real member-table entries instead:
+poison its output record, run original 80012C0C, and compare the offset write,
+CdIntToPos request and returned output pointer. The unchanged net-catch proof
+still compares all 109 encounter frames and the final saved activity.
+
 ## Pass 5: member 18C integration defects (2026-10-15)
 
 The real area-02 run now executes the 26 overlay ports and their ported EXE
@@ -327,3 +502,81 @@ verified dependency closure. Their old source list omitted the bodymove
 functions called by merged CollisionUpdate. No link-only gameplay stubs were
 introduced. Old-behavior proof scripts/logs are ignored under
 extract/codex-task/prove_old.py and old_proof_final2.log.
+
+
+## Wiring pass 6: stage-clear view translation
+
+Member 187 `StageClearUi_LookAt` called `80030450` through a one-word
+`SetRotMatrix` hook. The original `80136118..80136120` supplies the view
+matrix in a0 and its translation at +20 in both a1 and a2. The call at
+`80136168` is ApplyMatrixLV: `80030478..80030480` reads the input vector,
+and `8003059C..800305A4` writes the transformed vector. A renderer
+notification discarded that in-place translation.
+
+The port now calls the existing exact `ae_sdk_apply_matrix_lv` arithmetic
+helper on those three pointers. `801361A4` is also named correctly as
+ScaleMatrixL (two words), retaining its existing native SDK boundary.
+The strengthened check_ovl187 no longer intercepts ApplyMatrixLV: its
+original instructions execute against the GTE oracle, and the complete
+view matrix remains compared. The standalone build links the existing
+native_sdk_apply.c source. check_game_module_regressions exercises eight
+LookAt fixtures and reconstructs the former one-word call; that old source
+must fail on RAM, independently of hook-label differences. No ledger
+minimum or exclusion is changed.
+
+The mode headers also exposed an include cycle: ae_overlay_hooks.h included
+all of AeGame while AeGame's generated fields needed AeOverlayHooks.
+The public call declarations now live in ae_calls_api.h; ae_calls.h keeps
+its existing full-host include contract. The overlay header includes only
+the API declarations. This changes no gameplay behavior.
+
+
+The merged 187 checker also referenced two absent temporary files under
+extract/codex-task. Its dispatcher and the existing named EXE dependency
+models are now tracked as tools/mips/ovl187_test_api.c and
+ovl187_test_stubs.c. These files are test-only; game/viewer builds link the
+real dependency ports. The central ABI proxy redirects o187_call to its
+public adapters and keeps those same unit dependency models in its private
+187 copy, so all 23 original entries receive actual adapter counts. The
+proxy proof identity includes both support files.
+
+
+The 181/182 unit host predated the resident-mode merge and left AeModeHooks
+empty. Mode_03's original StageInitMemory instructions completed, while C
+failed at its ClearWords boundary. ovl_game_stub.c now binds that existing
+mode table to ae_game_mode_call; its normal dependencies still run as ports.
+This is test-host closure, with no new game behavior or comparison mask.
+
+
+The existing CollProbe_Box vertical-return regression still attempted to
+force HalfPipeRangeTest=1 after that helper became ported. Both former
+inputs actually returned 0 from the original broad phase; C matched them,
+but the fixture asserted 1. It now uses (y,height)=(32,16) and (95,94).
+The original 80050490 subtracts 96, placing the sample at -64/-1 inside
+(-128,0); the later Box y-height test is 16/1 >= shape top 0 and returns 1.
+Both the helper and Box execute original instructions. The stale double is
+removed, both cases remain, and no mask, minimum or exclusion is weakened.
+
+
+## Wiring pass 6: boot/minigame clear-image payloads
+
+Comparing the eight RECT bytes consumed by ClearImage/ClearImage2 exposed two
+member-181 errors hidden by the existing stack-window comparison:
+
+- Mode_Boot writes height 512 at 8013613C/80136150 and retains that caller-local
+  rectangle until ClearImage2 at 801361CC. The C logo helpers reused their
+  common temporary rectangle and the caller incorrectly rebuilt height 256.
+  The final clear now reconstructs the original 640x512 rectangle.
+- Mode_02 loads eight bytes from 80136918 at 801368AC..801368CC and passes
+  them to ClearImage at 801368D0. The real template is (0,0,384,512), while C
+  invented (0,0,640,256). The fix copies both original template words, through
+  the named AE_MODE02_CLEAR_TEMPLATE address, rather than hardcoding its size.
+
+check_ovl181 now records both RECT payloads in native call comparisons.
+Mode_02 keeps its four cases: one real template and three edited templates,
+so replacing the copy with even the corrected fixed dimensions fails.
+check_game_modes compares these payloads during original main -> boot ->
+title too. Its --mutate run independently rejects the former final boot
+height and reconstructs/rejects the former Mode_02 rectangle through the
+original-instruction boot unit host. The lost-member mutation remains caught.
+No stack mask is widened, no case minimum changes, and no new exclusion is used.

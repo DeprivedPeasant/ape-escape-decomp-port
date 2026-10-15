@@ -459,7 +459,8 @@ class Harness:
             0x8002B5F8: ("PadInfoMode", 3),
             0x80012CA0: ("PadSetupDualShock", 1),
             0x80014208: ("PadRumbleReset", 1),
-            0x800A342C: ("SoundStopAllVoices", 1),
+            0x800A1398: ("SpuWaitIdle", 0),
+            0x8009D79C: ("SpuWaitLoop", 1),
             0x800315E0: ("SetBackColor", 3),
             0x80031600: ("SetColorMatrix", 1),
             0x80031630: ("SetFarColor", 3),
@@ -479,10 +480,12 @@ class Harness:
         for exclusion in NATIVE_ENTRY_EXCLUSIONS:
             reg.declare("unreachable", exclusion, checker=CHECKER)
         modeled_boundaries = {0x8002B52C, 0x8002B5F8, 0x80012CA0,
-                              0x80014208, 0x800A342C, 0x800315E0,
+                              0x80014208, 0x800315E0,
                               0x80031600, 0x80031630, 0x800180B8,
-                              0x8001D530, 0x800140B4, 0x8008CBFC,
+                              0x8001D530, 0x8008CBFC,
                               0x8008CC60, 0x8005EF28, 0x8005EC9C}
+        # StickToButtons now has a verified port. Let its original instructions
+        # execute too, rather than retaining the former synthetic callback.
         self.site_specs = {address: spec for address, spec in self.site_specs.items()
                            if address in modeled_boundaries or
                            address in native_boundaries or
@@ -520,6 +523,10 @@ class Harness:
             return 0
         target = self.m_events if mips else self.c_events
         observed_args = args
+        if name in ("ClearImage", "ClearImage2"):
+            rectangle = (self.cpu.read_bytes(args[0], 8) if mips else
+                         bytes(self.main[args[0] - 0x80000000:args[0] - 0x80000000 + 8]))
+            observed_args += (rectangle,)
         if name in RENDER_HOOKS:
             address = 0
         if name in ("Ovl181_DrawEncodedWarningText",
@@ -773,6 +780,11 @@ class Harness:
             cpu.write32(0x800E38B0, index & 1)
         elif name == "Mode_02":
             cpu.write16(GAME_GLOBALS + 0x120, rng.randrange(0x10000))
+            if index:
+                # Original copies this embedded rectangle, rather than fixed
+                # framebuffer dimensions. Keep case zero on the real data.
+                for field,value in enumerate((4+index,8+index,320+index,240+index)):
+                    cpu.write16(0x80136918+field*2,value)
         elif name == "Mode_03":
             self._install_camera_fixture(cpu)
             cpu.write16(OVERLAY_SELECTION, 0)

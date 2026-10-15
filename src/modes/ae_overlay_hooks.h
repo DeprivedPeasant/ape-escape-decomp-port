@@ -2,7 +2,7 @@
 #define AE_OVERLAY_HOOKS_H
 
 #include "../core/ae_ram.h"
-#include "../game/ae_calls.h"
+#include "../game/ae_calls_api.h"
 
 /* Overlay code runs against AeRam.  Calls to already ported EXE functions go
  * through AeGame's address dispatcher (and therefore their native C ports).

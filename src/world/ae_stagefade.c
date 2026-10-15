@@ -199,12 +199,14 @@ int32_t ae_SoundStop(AeRam *r, const AeStageFadeHooks *h, int32_t mode)
 
     if (mode != 0 && mode != 1 && mode != 3) return 0;
 
-    sound_stop_wait_track(r, h, bgm_track);
-    if (ae_ram_failed(r)) return 0;
-    ae_wr16(r, AE_STAGEFADE_G_SOUND_BANKS + AE_STAGEFADE_SOUND_SLOT_BGM,
-            0xFFFFu);
-    ae_wr16(r, AE_STAGEFADE_G_SOUND_BANKS +
-               AE_STAGEFADE_SOUND_SLOT_BGM_MIRROR, 0xFFFFu);
+    if (bgm_track >= 0) {
+        sound_stop_wait_track(r, h, bgm_track);
+        if (ae_ram_failed(r)) return 0;
+        ae_wr16(r, AE_STAGEFADE_G_SOUND_BANKS + AE_STAGEFADE_SOUND_SLOT_BGM,
+                0xFFFFu);
+        ae_wr16(r, AE_STAGEFADE_G_SOUND_BANKS +
+                   AE_STAGEFADE_SOUND_SLOT_BGM_MIRROR, 0xFFFFu);
+    }
 
     if (mode == 3) return 0;
 

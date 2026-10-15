@@ -1,4 +1,5 @@
 #include "ae_ovl187.h"
+#include "../math/native_sdk_apply.h"
 
 #include "../player/ae_player_spawn.h"
 #include "../sound/ae_bgm.h"
@@ -546,7 +547,7 @@ static int32_t ovl187_divide(int32_t numerator, int32_t denominator);
 static int32_t ovl187_sub32(int32_t left, int32_t right);
 
 /* 80136000: build the view rotation from the eye/target vectors, store the
- * negated eye translation, and run the original GTE matrix setup boundary. */
+ * negated eye translation, then transform it through the view basis. */
 uint32_t ae_StageClearUi_LookAt(AeRam *r, const AeOvl187Hooks *h,
                                 uint32_t eye, uint32_t target)
 {
@@ -617,8 +618,9 @@ uint32_t ae_StageClearUi_LookAt(AeRam *r, const AeOvl187Hooks *h,
     ae_wr16(r, view_matrix + 16u, (uint32_t)matrix_up_z);
     if (ae_ram_failed(r)) return 0u;
 
-    (void)ovl187_call1(r, h, "SetRotMatrix", O187_ADDR_GTE_SET_MATRIX,
-                       view_matrix);
+    (void)ae_sdk_apply_matrix_lv(ae_ptr(r, view_matrix, 32u),
+        ae_ptr(r, view_matrix + O187_MATRIX_TRANSLATION_X, 12u),
+        ae_ptr(r, view_matrix + O187_MATRIX_TRANSLATION_X, 12u));
     if (ae_ram_failed(r)) return 0u;
 
     uint32_t view = ae_sdk_CompMatrix(r, 0x800AF0A0u,
@@ -635,7 +637,7 @@ uint32_t ae_StageClearUi_LookAt(AeRam *r, const AeOvl187Hooks *h,
     (void)ae_sdk_MatrixIdentity(r, saved_matrix);
     if (ae_ram_failed(r)) return 0u;
     uint32_t store_args[] = {saved_matrix, stored_matrix};
-    (void)ovl187_call(r, h, "StoreMatrix", O187_ADDR_GTE_STORE_MATRIX,
+    (void)ovl187_call(r, h, "ScaleMatrixL", O187_ADDR_GTE_STORE_MATRIX,
                       2u, store_args);
     if (ae_ram_failed(r)) return 0u;
     return ae_sdk_CompMatrix(r, saved_matrix, view, view);

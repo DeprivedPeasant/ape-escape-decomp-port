@@ -29,7 +29,8 @@ def standalone(harness='tools/codex/viewer_game_harness.c', name='viewer_game_ho
                     'src/collision/native_ground.c',
                     'src/collision/native_collision.c', 'src/camera/native_camera_math.c',
                     harness))
-    headers = b''.join(p.read_bytes() for p in sorted((ROOT/'src').rglob('*.h')))
+    headers = b''.join(p.read_bytes() for pattern in ('*.h','*.inc')
+                       for p in sorted((ROOT/'src').rglob(pattern)))
     flags = ['-std=c11', '-O2', '-Wall', '-Wextra', '-Werror', '-I',
              str(locate()/'include'), '-DAE_NATIVE_PLAYER']
     cache = OUT/'viewer_obj'

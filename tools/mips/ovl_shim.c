@@ -73,6 +73,8 @@ Integration *integration_create(Trace trace, void *user) {
     host.render = render_call;
     host.debug = debug_call;
     integration_callbacks(&host);
+    host.sound_hw.user = s;
+    host.sound_hw.wait_idle = test_platform_SpuWaitIdle;
     ae_game_init_legacy(&s->game, ram, &host);
     ae_game_wire_modules(&s->game);
     ae_game_wire_body(&s->game);

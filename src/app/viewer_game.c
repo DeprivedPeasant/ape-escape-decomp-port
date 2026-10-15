@@ -70,10 +70,6 @@ static int32_t pad_mode(void *u,AeRam *r,uint32_t a,uint32_t b,uint32_t c){(void
 /* Boot owns file loading and the initial spawn. Runtime gameplay remains in
  * AeRam; this never copies native movement results into the game image. */
 static int player_boot_data(ViewerGame *v) {
-    size_t size=0;uint8_t *bytes=read_member(8,&size);
-    if(!bytes)return 0;
-    int ok=ae_ram_load(v->ram,VIEWER_PLAYER_DATA,bytes,size);free(bytes);
-    if(!ok)return 0;
     AeRam *r=v->ram;const AePlayer *initial=&v->player->player;
     for(uint32_t set=0;set<10;++set)
         for(uint32_t field=0;field<4;++field)
@@ -153,7 +149,9 @@ static int32_t display_command(void *u,AeRam *r,uint32_t command){return present
  * Original packet emission remains a named renderer notification. */
 static int32_t render_notification(void *u,AeRam *r,const char *name,
                                    uint32_t a,uint32_t b,uint32_t c,uint32_t d) {
-    (void)name;return presentation(u,r,a,b,c,d);
+    if(!strcmp(name,"RenderFadeSpiral"))
+        ae_wr32(r,0x800EC354u,ae_rd32(r,0x800EC354u)+32u*24u);
+    return presentation(u,r,a,b,c,d);
 }
 static int32_t render_words(void *u,AeRam *r,const char *name,uint32_t address,uint32_t count,const uint32_t *args) {
     if(address==AE_OVL18C_EFFECT_DRAW_RENDER_HOOK && count==8) return (int32_t)args[7];
@@ -172,8 +170,6 @@ static void sound_delay(void *u,AeRam *r,uint32_t n){(void)u;(void)r;(void)n;}
 static void sound_adsr(void *u,AeRam *r,uint32_t n,uint16_t a,uint16_t b){(void)u;(void)r;(void)n;(void)a;(void)b;}
 static void sound_off(void *u,AeRam *r,uint32_t n,uint16_t a){(void)u;(void)r;(void)n;(void)a;}
 static void sound_volume(void *u,AeRam *r,uint32_t n,uint32_t side,uint16_t a){(void)u;(void)r;(void)n;(void)side;(void)a;}
-static int32_t sound_pan_volume(void *u,AeRam *r,uint32_t voice,uint32_t pan,uint32_t volume){(void)u;(void)r;(void)voice;(void)pan;(void)volume;return 0;}
-static int32_t sound_bank_volume(void *u,AeRam *r,uint32_t bank,uint32_t volume){(void)u;(void)r;(void)bank;(void)volume;return 0;}
 static void sound_error(void *u,AeRam *r,uint32_t fmt,uint32_t argc,int32_t a,int32_t b,int32_t c){(void)u;(void)r;(void)argc;(void)a;(void)b;(void)c;static int reported;if(!reported++){printf("GAME sound diagnostic @%08X (further diagnostics suppressed)\n",fmt);}}
 int viewer_game_start(ViewerGame *v,AePlayerHost *player,const char *exe,int area,int entry) {
     memset(v,0,sizeof(*v));v->player=player;v->ram=ae_ram_create();v->game=calloc(1,sizeof(*v->game));if(!v->ram||!v->game)return 0;
@@ -193,7 +189,6 @@ int viewer_game_start(ViewerGame *v,AePlayerHost *player,const char *exe,int are
     AeGameHost h={0};h.user=v;h.area_member=area_member;h.area_overlay=area_overlay;
     h.missing=missing;h.platform.VSync=vsync;h.platform.PadGetState=pad_state;h.platform.PadInfoMode=pad_mode;
     h.renderer.CameraLookAt=camera_look_at;h.platform.memset=memory_set;
-    h.platform.SfxVoiceSetPanVol=sound_pan_volume;h.platform.SoundBankSetVolume=sound_bank_volume;
     h.render=render_notification;h.render_words=render_words;h.renderer.ModelFillVertexColors=fill_colors;
     h.hud_draw=hud_draw;
     h.frame.DrawTerrain=presentation;h.frame.DrawAreaProps=presentation;
@@ -206,6 +201,12 @@ int viewer_game_start(ViewerGame *v,AePlayerHost *player,const char *exe,int are
     h.sound_hw=(AeSoundHw){v,sound_idle,sound_delay,sound_adsr,sound_off,sound_error,sound_volume};
     puts("GAME sound: wait_idle native synchronization; SoundStop ported; native voice mapping pending; CPU wait_loop no-op; ADSR/key-off/volume/pan/bank-volume logged no-ops (native voice mapping pending); BGM remains native bank playback");
     ae_game_init(v->game,r,&h);
+    /* Original boot supplies member 008 before StageRequest calls PlayerInit. */
+    size_t player_size=0;uint8_t *player_bytes=read_member(8,&player_size);
+    if(!player_bytes)return 0;
+    int player_loaded=ae_ram_load(r,VIEWER_PLAYER_DATA,player_bytes,player_size);
+    free(player_bytes);
+    if(!player_loaded)return 0;
     ae_game_load_area(v->game,area,entry);
     if(!player_boot_data(v))return 0;
     player_presentation(v);

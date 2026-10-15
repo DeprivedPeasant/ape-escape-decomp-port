@@ -28,7 +28,8 @@ enum {
     AE_ADDR_GET_VIDEO_MODE = 0x8002EE04u,
     AE_ADDR_EXIT = 0x800A3700u,
     AE_ADDR_RUN_MINIGAME = 0x80011A2Cu,
-    AE_ADDR_SOUND_STOP = 0x80086FD0u
+    AE_ADDR_SOUND_STOP = 0x80086FD0u,
+    AE_MODE02_CLEAR_TEMPLATE = 0x80136918u
 };
 
 enum {
@@ -307,7 +308,9 @@ int32_t ae_Mode_Boot(AeRam *ram, const AeOverlayHooks *hooks)
         if (status < 0) return 0;
     }
     CALL1(ram, hooks, "SoundStop", AE_ADDR_SOUND_STOP, 1u);
-    ae_ovl181_rect(ram, 0u, 0u, 640u, 256u);
+    /* The original caller rectangle stays 640x512 across the logo helpers.
+     * Rebuild it after their reuse of the host's temporary rectangle. */
+    ae_ovl181_rect(ram, 0u, 0u, 640u, 512u);
     CALL4(ram, hooks, "ClearImage2", AE_ADDR_CLEAR_IMAGE2, AE_OVERLAY_LOCAL_RECT, 0u, 0u, 0u);
     CALL1(ram, hooks, "DrawSync", AE_ADDR_DRAW_SYNC, 0u);
     CALL0(ram, hooks, "InitDisplay", AE_ADDR_INIT_DISPLAY);
@@ -326,7 +329,9 @@ int32_t ae_Mode_Boot(AeRam *ram, const AeOverlayHooks *hooks)
 
 int32_t ae_Mode_02(AeRam *ram, const AeOverlayHooks *hooks)
 {
-    ae_ovl181_rect(ram, 0u, 0u, 640u, 256u);
+    ae_wr32(ram, AE_OVERLAY_LOCAL_RECT, ae_rd32(ram, AE_MODE02_CLEAR_TEMPLATE));
+    ae_wr32(ram, AE_OVERLAY_LOCAL_RECT + 4u,
+            ae_rd32(ram, AE_MODE02_CLEAR_TEMPLATE + 4u));
     CALL4(ram, hooks, "ClearImage", AE_ADDR_CLEAR_IMAGE, AE_OVERLAY_LOCAL_RECT, 0u, 0u, 0u);
     CALL1(ram, hooks, "DrawSync", AE_ADDR_DRAW_SYNC, 0u);
     CALL1(ram, hooks, "RunMinigameExe", AE_ADDR_RUN_MINIGAME, 1u);

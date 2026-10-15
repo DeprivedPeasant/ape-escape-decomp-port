@@ -1,5 +1,14 @@
 # Resident modes (2026-10-15)
 
+Wiring pass 7 fills the merged small-mode and Stage Start hook tables while
+retaining the generated member/address entry guards. The original-main
+checker now proves 665 frame boundaries through title selection 0 and member
+188, stopping at unported AreaKindVisitedSet (`800964DC`). Title selection 6
+also reaches mode 35 / member 186 and reports the unmerged Mode_SaveMenu
+entry (`80136AB8`). No new resident or overlay game function was ported.
+See game.md for native fixture assumptions and game_module_bugs.md for the
+member-188 fixes and the caller-padding input awaiting owner review.
+
 `src/game/ae_modes.c` contains handwritten, structured RAM-image ports. The
 instruction evidence is SCUS_944.23 at the addresses below, read with
 `tools/mips/mips_ram.py`; no decompiler exports or instruction-to-C generators
@@ -143,3 +152,69 @@ Changed files (23):
 - Documentation: notes/port/modes.md, game.md, game_hooks.md, viewer_game.md.
 
 Changes are left uncommitted for the project owner's review.
+
+
+## Game-host mode entry, wiring pass 6
+
+`ae_game_run` enters the existing `ae_main` port with the fully wired mode
+hooks. main reads the real mode table at 800AFA30, invokes the native
+ArcLoadMember callback, waits for the archive, and calls the port selected
+by member and address. The archive callback copies the member to its
+requested AeRam destination and reports failure through ae_ram_fail.
+Successful loads at 80136000 update AeGame.loaded_overlay. ModeEntry checks
+all entries at a shared address; an unavailable member/entry is reported
+through missing and stops the dispatcher. A host may supply mode_continue
+to end a session at a mode boundary.
+
+AeOverlayHooks, AeOvl180Hooks, AeOvl187Hooks and AeOvl18bHooks now bind their
+named calls to the common mode adapter. EXE/overlay ports use the central
+table, native APIs use generated platform/archive/renderer callbacks, and
+unported game calls retain missing. Renderer arrays keep all their words;
+the ordinary native adapter preserves up to seven original words.
+Overlay-local native leaves carry the same member guards as C ports.
+Adding another merged mode requires its normal public declarations and
+ledger member identity, its viewer source entry, and generator runs;
+new native API identities belong in the generator's declaration tables.
+
+check_game_modes runs the original main, boot, title and sequence-player
+instructions against the actual complete host. Both sides begin with the
+same real EXE RAM. Scripted native archive callbacks load real members 181
+then 180, supply a small title command stream and empty scene, and preserve
+the original mode table and boot-selected sequence 2. Native VSync scripts
+pad input. All 574 BeginFrame boundaries hash every non-stack RAM byte and
+all scratchpad bytes; final RAM and the full normalized call sequence also
+match. The run compares 4,861 callbacks, 822 VSync calls and 1,247,124
+original instructions. Only the existing check_game stack window is omitted.
+
+The original oracle resumes with member-specific hook sets after each
+archive load and clears cached instruction decodes. Its register state
+exists only inside tools/mips, never in the production host. The native
+fixture stops after title returns to mode 3, at main's next CdMgrUpdate;
+no ported function entry is intercepted or replaced. This validates the
+mode flow and wiring, with scripted archive/display services; it does not
+claim a finished native CD sequence renderer. The debug viewer retains
+its direct stage entry and links all these mode sources.
+
+The member-identity mutation is rejected. The checker additionally rejects
+unloaded mode entries/native leaves and checks the native five-word ABI.
+See game_module_bugs.md for the independently proved member-187
+ApplyMatrixLV fix discovered during the wiring audit.
+
+
+The bounded main run reaches five named unported helpers: PadSetupDualShock
+(80012CA0), SeqTrackSetPlayState (800A2B6C), SeqTrackClose (800A1F3C),
+SoundStopAllVoices (800A342C), and SoundBankFree (800A1CCC). The deterministic
+fixture supplies their boundary results; their implementations are not claimed
+as ported. Title sequence 0 selects mode 8, whose original table entry is
+member 188 / 8013683C. The check separately proves that missing-entry stop;
+it automatically retires that assertion when member 188's ledger entry merges.
+The integrated sequence-2 run itself ends at mode 3, before intro execution.
+
+
+ClearImage/ClearImage2 call comparisons also include all eight rectangle
+bytes, even when the pointer lies in the excluded stack window. This exposed
+two repaired member-181 defects: the final boot clear is 640x512, and Mode_02
+copies the embedded rectangle at 80136918 (384x512 in the real data). The
+updated boot suite varies that template in three existing cases. The main
+checker rejects both former rectangle sources, in addition to the lost-member
+mutation. See game_module_bugs.md for instruction addresses and details.

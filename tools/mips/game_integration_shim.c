@@ -2,6 +2,7 @@
 #include "../../src/game/ae_calls.h"
 #include <stdlib.h>
 #include <string.h>
+#include <setjmp.h>
 
 typedef int32_t (*Trace)(void *, const char *, uint32_t, uint32_t, const uint32_t *);
 typedef struct Integration {
@@ -17,9 +18,49 @@ typedef struct Integration {
     uint16_t spawn_padding[64];
     uint32_t spawn_padding_count, spawn_padding_index;
     uint32_t renderer_words_calls;
+    char missing_labels[1024][128];
+    jmp_buf stop;
+    int bounded, stop_requested;
+    uint32_t bounded_callbacks;
+    uint32_t xa_padding[64][2], xa_count, xa_index;
 } Integration;
 
+void integration_set_xa_padding(Integration *s, const uint32_t *words, uint32_t count) {
+    s->xa_count = count > 64u ? 64u : count;
+    s->xa_index = 0;
+    if (s->xa_count) memcpy(s->xa_padding, words, s->xa_count * sizeof(s->xa_padding[0]));
+}
+static uint32_t xa_caller_padding(void *user, AeRam *ram, uint32_t local) {
+    (void)ram;
+    Integration *s = user;
+    if (local > 1u || s->xa_index >= s->xa_count) return 0;
+    uint32_t value = s->xa_padding[s->xa_index][local];
+    if (local == 1u) ++s->xa_index;
+    return value;
+}
+
+void integration_stop(Integration *s) { s->stop_requested = 1; }
+static int32_t integration_trace(Integration *s, const char *name, uint32_t address,
+                                 uint32_t count, const uint32_t *words) {
+    if (s->bounded && ++s->bounded_callbacks > 20000u) {
+        ae_ram_fail(s->game.ram, "integration native callback budget exhausted");
+        longjmp(s->stop, 1);
+    }
+    int32_t result = s->trace(s->user, name, address, count, words);
+    if (s->bounded && s->stop_requested) longjmp(s->stop, 1);
+    return result;
+}
+
 void integration_set_direction_padding(Integration *s, uint32_t padding) { s->direction_padding = (uint16_t)padding; }
+int32_t integration_missa_trail_words(Integration *s, uint32_t a0, uint32_t a1,
+                                     uint32_t a2, uint32_t a3, uint32_t a4) {
+    AeGameRenderer saved = s->game.host.renderer;
+    s->game.host.renderer.RenderTrailRingSegment = NULL;
+    int32_t result = s->game.missa.TrailRingDraw(s->game.missa.user,
+        s->game.ram, a0, a1, a2, a3, a4);
+    s->game.host.renderer = saved;
+    return result;
+}
 static uint32_t direction_padding(void *user, AeRam *ram) {
     (void)ram; return ((Integration *)user)->direction_padding;
 }
@@ -34,31 +75,55 @@ static uint16_t integration_spawn_position_padding(void *user, AeRam *ram, uint3
 static int32_t trace_call(Integration *s, const char *name, uint32_t address, uint32_t argc,
                            uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a4, uint32_t a5) {
     const uint32_t args[6] = {a0, a1, a2, a3, a4, a5};
-    return s->trace(s->user, name, address, argc, args);
+    return integration_trace(s, name, address, argc, args);
+}
+static void record_missing(Integration *s, const char *name, uint32_t address) {
+    AeGame *g = &s->game;
+    for (size_t i = 0; i < g->missing_address_count; ++i)
+        if (g->missing_addresses[i] == address && !strcmp(g->missing_names[i], name)) return;
+    if (g->missing_address_count < 1024) {
+        size_t index = g->missing_address_count++;
+        strncpy(s->missing_labels[index], name, 127);
+        s->missing_labels[index][127] = 0;
+        g->missing_names[index] = s->missing_labels[index];
+        g->missing_addresses[index] = address;
+    }
 }
 static int32_t missing_call(void *user, AeRam *r, const char *name, uint32_t address,
                               uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)r;
+    record_missing(user, name, address);
     return trace_call(user, name, address, 4, a0, a1, a2, a3, 0, 0);
 }
 static int32_t missing_words(void *user, AeRam *r, const char *name, uint32_t address,
                              uint32_t count, const uint32_t *words) {
     Integration *s = user;
     (void)r;
-    return s->trace(s->user, name, address, count, words);
+    record_missing(s, name, address);
+    return integration_trace(s, name, address, count, words);
 }
 static int32_t render_call(void *user, AeRam *r, const char *name,
                              uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
-    return missing_call(user, r, name, 0, a0, a1, a2, a3);
+    (void)r;
+    return trace_call(user, name, 0, 4, a0, a1, a2, a3, 0, 0);
 }
 static int32_t render_words_call(void *user, AeRam *r, const char *name, uint32_t address,
                                  uint32_t count, const uint32_t *words) {
     ++((Integration *)user)->renderer_words_calls;
-    return missing_words(user, r, name, address, count, words);
+    (void)r;
+    Integration *s = user;
+    return integration_trace(s, name, address, count, words);
+}
+static int32_t card_call(void *user, AeRam *r, const char *name, uint32_t address,
+                         uint32_t count, const uint32_t *words) {
+    (void)r;
+    Integration *s = user;
+    return integration_trace(s, name, address, count, words);
 }
 static void debug_call(void *user, AeRam *r, const char *name,
                         uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
-    (void)missing_call(user, r, name, 0x800A3720u, a0, a1, a2, a3);
+    (void)r;
+    (void)trace_call(user, name, 0x800A3720u, 4, a0, a1, a2, a3, 0, 0);
 }
 static int area_member(void *user, int32_t area, const uint8_t **bytes, size_t *size) {
     Integration *s = user;
@@ -103,6 +168,8 @@ Integration *integration_create(Trace trace, void *user) {
     AeGameHost host;
     memset(&host, 0, sizeof(host));
     host.user = s;
+    host.card_call = card_call;
+    host.xa_caller_padding = xa_caller_padding;
     host.missing = missing_call; host.missing_words = missing_words; host.render = render_call; host.render_words = render_words_call; host.debug = debug_call;
     host.body_direction_padding = direction_padding;
     host.area_member = area_member;
@@ -194,4 +261,56 @@ int32_t integration_stack7(Integration *s, uint32_t a0, uint32_t a1, uint32_t a2
     int32_t result = ae_game_call7(&s->game, 0, a0, a1, a2, a3, a4, a5, a6);
     s->game.host = saved;
     return result;
+}
+
+static int mode_continue(void *user, AeRam *r) {
+    Integration *s = user;
+    return trace_call(s, "ModeContinue", 0, 1, ae_rd16(r, 0x800F4470u), 0, 0, 0, 0, 0);
+}
+int32_t integration_run(Integration *s) {
+    s->game.host.mode_continue = mode_continue;
+    s->stop_requested = 0;
+    s->bounded_callbacks = 0;
+    s->bounded = 1;
+    int32_t result = 0;
+    if (!setjmp(s->stop)) result = ae_game_run(&s->game);
+    s->bounded = 0;
+    return result;
+}
+
+int32_t integration_bounded_call(Integration *s, uint32_t address) {
+    s->stop_requested = 0;
+    s->bounded_callbacks = 0;
+    s->bounded = 1;
+    int32_t result = 0;
+    if (!setjmp(s->stop)) result = ae_game_call(&s->game, address, 0, 0, 0, 0);
+    s->bounded = 0;
+    return result;
+}
+
+size_t integration_missing_count(Integration *s) { return s->game.missing_address_count; }
+const char *integration_missing_name(Integration *s, size_t index) {
+    return index < s->game.missing_address_count ? s->game.missing_names[index] : NULL;
+}
+uint32_t integration_missing_address(Integration *s, size_t index) {
+    return index < s->game.missing_address_count ? s->game.missing_addresses[index] : 0;
+}
+int32_t integration_mode_words(Integration *s, const char *name, uint32_t address,
+                                uint32_t count, const uint32_t *words) {
+    s->stop_requested = 0;
+    s->bounded_callbacks = 0;
+    s->bounded = 1;
+    int32_t result = 0;
+    if (!setjmp(s->stop)) result = ae_game_mode_call(&s->game, s->game.ram, name, address, count, words);
+    s->bounded = 0;
+    return result;
+}
+
+int32_t integration_missb_words(Integration *s, const char *name, uint32_t address,
+                                uint32_t count, const uint32_t *words) {
+    uint32_t a[4] = {0};
+    if (count > 4u) { ae_ram_fail(s->game.ram, "MissB test exceeds four words"); return 0; }
+    for (uint32_t i = 0; i < count; ++i) a[i] = words[i];
+    return ae_missb_call(s->game.ram, &s->game.missb, name, address,
+                         count, a[0], a[1], a[2], a[3]);
 }

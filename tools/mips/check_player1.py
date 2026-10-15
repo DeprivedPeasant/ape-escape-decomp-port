@@ -103,7 +103,7 @@ class Player1Hooks(C.Structure):
                 ("ModelEmitPrimsCycleColors", PLAYER1_HOOK),
                 ("DrawRibbonBetween", PLAYER1_HOOK),
                 ("ModelProjectVertices", PLAYER1_HOOK), ("ModelEmitPrims", PLAYER1_HOOK),
-                ("sound_hw", P)]
+                ("sound_hw", P), ("CdMgrQueueCommand", PLAYER1_HOOK)]
 
 
 class HookModel:
@@ -115,6 +115,13 @@ class HookModel:
         self.control_calls = 0
         self.expected_scratch = None
         self.expected_main = None
+
+    def queue(self, read_bytes, args):
+        command, parameters, result, done = args
+        size = {13: 2, 14: 1, 27: 3}.get(command, 0)
+        payload = bytes(read_bytes(parameters, size)) if size else b''
+        self.log.append(('CdMgrQueueCommand', command, payload, result, done))
+        return 0
 
     def _record(self, name: str, args: tuple[int, ...]):
         if name == "ModelEmitPrimsCycleColors":
@@ -307,6 +314,14 @@ class Harness:
                       model.mips(hook_name, cpu, regs))
             for address, hook_name in HOOK_ADDRS.items()
         }
+        native_queue = bool(hook_config and hook_config.get('native_cd_queue'))
+        if native_queue:
+            mips_hooks[0x80012360] = lambda cpu, regs: model.queue(cpu.read_bytes, tuple(regs[4:8]))
+        queue_callback = PLAYER1_HOOK(lambda user, ram, a0, a1, a2, a3:
+            self.c_model.queue(lambda address, size: bytes(
+                self.lib.ae_rd8(ram, address + offset) for offset in range(size)),
+                (a0, a1, a2, a3))) if native_queue else PLAYER1_HOOK()
+        self.player1_hooks.CdMgrQueueCommand = queue_callback
         mips_trap = None
         try:
             mret = self.m.call(address, args=args, hooks=mips_hooks)[2]
@@ -365,7 +380,7 @@ class Harness:
             if self.c_model.renderer_calls != expected_call:
                 problems.append(f"ribbon renderer inputs differ: expected {expected_call}, "
                                 f"C {self.c_model.renderer_calls}")
-        if bytes(self.m.ram[:STACK_LO]) != bytes(self.main[:STACK_LO]):
+        if bytes(self.m.ram[:STACK_LO]) != bytes(memoryview(self.main)[:STACK_LO]):
             diffs = [i for i in range(STACK_LO) if self.m.ram[i] != self.main[i]]
             problems.append("RAM differs at " + ", ".join(
                 f"{0x80000000 + i:08X} (MIPS {self.m.ram[i]:02X}, C {self.main[i]:02X})" for i in diffs[:8]))
@@ -643,6 +658,9 @@ def run_cd_functions(h: Harness, scale: float, seed: int, only: set[str] | None)
                 m.write16(manager + 0x76, write_index)
                 m.write32(manager, 0x55550000)
             h.run("XaPlay", case, (index,), setup, (C.byref(h.player1_hooks), index))
+            if case < 8:
+                h.run("XaPlay", xa_total + case, (index,), setup,
+                      (C.byref(h.player1_hooks), index), hook_config={'native_cd_queue': True})
 
 
 def run_render_helpers(h: Harness, scale: float, seed: int, only: set[str] | None):

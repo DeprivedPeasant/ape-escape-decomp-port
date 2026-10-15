@@ -218,6 +218,8 @@ typedef struct AePlayer1Hooks {
     AePlayer1HookFn ModelProjectVertices; /* native GTE projection boundary */
     AePlayer1HookFn ModelEmitPrims;      /* renderer boundary @800180B8 */
     const AeSoundHw *sound_hw;
+    /* The game host owns asynchronous CD queuing; unit hosts may run the port. */
+    AePlayer1HookFn CdMgrQueueCommand;  /* 80012360 */
 } AePlayer1Hooks;
 
 void ae_TrailRingReset(AeRam *r);                         /* 8001F884 */

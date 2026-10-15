@@ -89,6 +89,8 @@ class Harness:
         self.main=(C.c_ubyte*mr.RAM_SIZE).from_address(self.ram)
         self.scratch=(C.c_ubyte*mr.SCRATCH_SIZE).from_address(self.ram+mr.RAM_SIZE)
         self.cpu=mr.MipsRam.from_extract(); self.cpu.attach_gte_oracle()
+        # Boot loads the player models before any StageRequest / PlayerInit.
+        self.cpu.write_bytes(0x80103000,(ROOT/'extract/members/008.bin').read_bytes())
         self.base=self.cpu.snapshot()
         self.spec={}
         records=hook_inventory()
@@ -146,6 +148,7 @@ class Harness:
                           0x8009D79C:('SpuWaitLoop',1)})
         self.spec.update({0x80028D30:('PutDrawEnv',1),0x80028EFC:('PutDispEnv',1),0x80028CC0:('DrawOTag',1)})
         self.spec[0x8005CFEC]=('InitDisplay',0)
+        self.spec[0x80098FB0]=('PlayerAuxModelInit',1)
         self.spec.update({0x800A1F3C:('SeqTrackClose',1),
                           0x800A2B6C:('SeqTrackSetPlayState',2),
                           0x800A1CCC:('SoundBankFree',1),
@@ -226,6 +229,13 @@ class Harness:
                 C.memset(self.ram+target,value,size)
             return dst
         (self.mlog if mips else self.clog).append((name,address,tuple(norm(a) for a in args)))
+        if name=='RenderFadeSpiral':
+            # Match check_stagefade's existing packet renderer contract. The
+            # original cursor store executes in its epilogue on the oracle.
+            if not mips:
+                cursor=struct.unpack_from('<I',self.main,0xEC354)[0]
+                struct.pack_into('<I',self.main,0xEC354,(cursor+32*24)&MASK)
+            return 0
         if name=='Area02_EffectDrawRecord': return args[7]
         if name in {'Area02_SurfaceProjectPoint','Area02_SurfaceProjectVertex'}:
             for output in args[3:5]:
@@ -511,6 +521,94 @@ class Harness:
             if actual!=saved:raise AssertionError('call7 did not restore all three stack words')
         print('Extended hook ABI: 48 comparisons; 16 three-word stack restoration checks')
 
+    def direct_missb_routes(self):
+        self.lib.integration_missb_words.argtypes=[P,C.c_char_p,U,U,C.POINTER(U)]
+        self.lib.integration_missb_words.restype=I
+        for case in range(16):
+            for name,address,words in (
+                    ('ProgressSetByte',0x80096360,[case,0x89ABCDEF ^ case]),
+                    ('HudTextWidth',0x80082230,[0x801D0000]),
+                    ('LevelMonkeyCountGet',0x800965EC,[case % 4])):
+                self.cpu.restore(self.base)
+                self.cpu.write_bytes(0x801D0000,b'APE\0')
+                self.sync()
+                result=self.lib.integration_missb_words(self.shim,name.encode(),address,len(words),(U*len(words))(*words))
+                original=self.cpu.call(address,words,hooks=self.hooks(address),limit=2_000_000)
+                self.compare(f'missb named port {name} #{case}')
+                if name!='ProgressSetByte':assert result&MASK==original[2], 'missb return lost'
+            for name,address,count in (
+                    ('RendererPauseDrawCaptureGrid',0,4),
+                    ('RendererPauseMenuDrawSubScreen',0,4),
+                    ('RendererSetGeomOffset',0,2),
+                    ('RendererDrawMenuArrows',0,3),
+                    ('MissbUnportedName',0x80000004,3)):
+                self.cpu.restore(self.base);self.sync()
+                words=[0x89ABCDEF ^ case,0xFEDCBA98,0x12345678,0x80000001][:count]
+                self.models[name]=-321
+                rendered=self.lib.integration_renderer_words_calls(self.shim)
+                result=self.lib.integration_missb_words(self.shim,name.encode(),address,count,(U*count)(*words))
+                self.model(name,address,words,True)
+                self.compare(f'missb named boundary {name} #{case}')
+                assert result==-321, 'missb boundary return lost'
+                assert self.lib.integration_renderer_words_calls(self.shim)-rendered==int(name.startswith('Renderer')), 'missb renderer route lost'
+            self.cpu.restore(self.base);self.sync()
+            self.lib.integration_call(self.shim,0x80011F6C,case,0,0,0)
+            self.cpu.call(0x80011F6C,(case,),hooks=self.hooks(0x80011F6C),limit=2_000_000)
+            self.compare(f'XaPlay native CD queue #{case}')
+        print('Missb routes: 144 port / renderer / missing / XA comparisons',flush=True)
+
+    def direct_missa_routes(self):
+        for root,table,area in ((0x8004D880,0x800AF140,1),
+                                (0x8004B590,0x80141390,56),
+                                (0x8004B590,0x8014440C,66)):
+            for index in range(4):
+                self.cpu.restore(self.base)
+                self.cpu.write16(0x800F4476,area)
+                self.cpu.write32(table+index*4,0x80046978)
+                words=(0x12345678,index,0x89ABCDEF,0xFEDCBA98) if root==0x8004D880 else (index,0x12345678,0x89ABCDEF,0xFEDCBA98)
+                self.sync()
+                self.lib.integration_call(self.shim,root,*words)
+                self.cpu.call(root,words,hooks=self.hooks(root),limit=2_000_000)
+                self.compare(f'missa indirect {root:08X} index {index}')
+        print('Missa indirect routes: 12 original-instruction comparisons',flush=True)
+        self.lib.integration_missa_trail_words.argtypes=[P,U,U,U,U,U]
+        self.lib.integration_missa_trail_words.restype=I
+        for index in range(16):
+            self.cpu.restore(self.base);self.sync()
+            words=[0xFEDCBA98^index,0x80000000+index,0x7FFFFFFF-index,0x12345678,0x89ABCDEF^index]
+            self.models['RenderTrailRingSegment']=-123
+            result=self.lib.integration_missa_trail_words(self.shim,*words)
+            self.model('RenderTrailRingSegment',0,words,True)
+            self.compare(f'missa trail renderer five-word fallback #{index}')
+            assert result==-123, 'trail renderer result lost'
+        print('Missa trail renderer fallback: 16 five-word comparisons',flush=True)
+        self.models['PadGetState']=6;self.models['PadInfoMode']=7
+        for index in range(16):
+            self.cpu.restore(self.base)
+            self.cpu.write32(0x800E5494,3)
+            self.cpu.write32(0x800A8A58,0)
+            packet=bytes((0,0x73,0xA5^index,0x5A^index,128,128,
+                          255 if index&1 else 128,0 if index&2 else 128))
+            self.cpu.write_bytes(0x800E52D0,packet)
+            self.cpu.write8(0x800E52F2,255)
+            self.sync()
+            self.lib.integration_call(self.shim,0x8001325C,2,0,0,0)
+            self.cpu.call(0x8001325C,(2,),hooks=self.hooks(0x8001325C),limit=2_000_000)
+            self.compare(f'PadUpdate stick-button input #{index}')
+        print('Missa pad adapter: 16 real PadUpdate / StickToButtons comparisons',flush=True)
+        record_index=next(i for i,r in enumerate(hook_inventory())
+                          if r['table']=='AeStageHooks' and r['name']=='ArcGetMemberPos')
+        for member in (0,8,0x5B,0x5E):
+            self.cpu.restore(self.base)
+            output=0x801F1000
+            self.cpu.write_bytes(output,bytes([0xA5])*16)
+            self.sync()
+            result=self.lib.integration_hook(self.shim,record_index,output,member,0,0,0,0,0)
+            regs=self.cpu.call(0x80012C0C,(output,member),hooks=self.hooks(0x80012C0C),limit=2_000_000)
+            self.compare(f'stage archive position member {member:03X}')
+            assert result&MASK==regs[2]==output, 'archive position output pointer lost'
+        print('Stage archive route: 4 original output-pointer comparisons',flush=True)
+
     def direct_frame_branches(self):
         profiles=[('inactive pause mode '+str(value),{},[(0x800BEF74,1,value)]) for value in (2,3)]
         profiles += [('fade exit '+str(value),{},[(0x800F4472,2,value),
@@ -564,7 +662,7 @@ class Harness:
         if error: raise AssertionError(f'{label}: C fault: {error}; last calls {self.clog[-6:]}')
         if self.callback_error: raise AssertionError(self.callback_error)
         lo=0x1FF000
-        a=bytes(self.cpu.ram[:lo]); b=bytes(self.main[:lo])
+        a=bytes(self.cpu.ram[:lo]); b=bytes(memoryview(self.main)[:lo])
         # Existing check_game exclusion: never-initialized fourth position halfword.
         reg.declare('stack_window','801FF000..80200000',checker='check_game')
         reg.declare('ram_mask','800B9900+0x34x100+0x1B:1',checker='check_game')
@@ -685,8 +783,8 @@ class Harness:
     def prepare_player(self):
         """Boot fixture: real player tables and ready controller, before frames.
 
-        PlayerInit is outside this batch. These explicit initial conditions do
-        not intercept PlayerUpdate or replace any of its per-frame behavior.
+        PlayerInit has already run during the compared stage entry. These
+        debug initial conditions do not replace per-frame player behavior.
         """
         import check_player2
         check_player2.player_state_tables(self.cpu)
@@ -712,6 +810,11 @@ class Harness:
         # those slots as -1; zero would claim a loaded bank with null tables.
         for slot in range(12):self.cpu.write16(0x800BF670+slot*2,65535)
         self.models['PadGetState']=6;self.models['PadInfoMode']=7
+        # Debug/mutation profiles enable demo playback. Supply actual neutral
+        # records; an empty buffer now correctly requests a stage transition.
+        self.cpu.write32(0x800A8A50,0x801D3000)
+        self.cpu.write32(0x800A8A54,0)
+        self.cpu.write_bytes(0x801D3000,struct.pack('<II',0,0xFFFF)*4)
         self.sync()
         self.lib.integration_call(self.shim,0x80064208,0,0,0,0)
         self.cpu.call(0x80064208,(0,),hooks=self.hooks(0x80064208))
@@ -822,6 +925,10 @@ class Harness:
         projection=SimpleNamespace(last_projection_depth=0,
             call=lambda name,words:self.model(name,0,words,True))
         patches.update(fxscript.Harness.mips_patches(None,projection))
+        from check_stagefade import FadeHarness
+        reg.declare('unreachable','FadeSpiralDraw 80079F90 8007A000..8007A004 8007A02C..8007A10C',checker='check_stagefade')
+        fade_renderer=SimpleNamespace(call=lambda name,words:self.model(name,0,words,True))
+        patches[0x8007A02C]=lambda cpu,regs: FadeHarness._mips_fade_spiral_renderer(None,fade_renderer,cpu,regs)
         ambient_padding=[]
         effect_matrix_padding=[]
         def effect_matrix_local(cpu,regs):
@@ -915,9 +1022,17 @@ def main():
     parser.add_argument('--pause-maths-only',action='store_true')
     parser.add_argument('--overlay-routes-only',action='store_true')
     parser.add_argument('--net-catch-only',action='store_true')
+    parser.add_argument('--missa-routes-only',action='store_true')
+    parser.add_argument('--missb-routes-only',action='store_true')
     args=parser.parse_args()
     overrides={}
     h=Harness(overrides)
+    if args.missb_routes_only:
+        h.direct_missb_routes()
+        return 0
+    if args.missa_routes_only:
+        h.direct_missa_routes()
+        return 0
     if args.net_catch_only:
         result=h.net_catch()
         (ROOT/'extract/mips/game_net_catch.json').write_text(json.dumps(result,indent=2))
@@ -946,6 +1061,8 @@ def main():
         return 0
     failures=[]
     player_states={}
+    h.direct_missa_routes()
+    h.direct_missb_routes()
     for area in args.areas:
         try:
             h.load(area)
@@ -970,7 +1087,7 @@ def main():
                 if area==5:
                     assert {0x24,0x25,0x80,0x81,0x83}.issubset(h.player_states), 'original stage-entry position must fall, land and complete the net swing'
                 if area==0x44:
-                    assert {0x24,0x25,0x80,0x81,0x83}.issubset(h.player_states), 'original stage-entry position must fall, land and complete the net swing'
+                    assert {0x24,0x25,0x2D,0x80}.issubset(h.player_states), 'original stage-entry position must fall, land, reach state 2D and start the net swing'
         except (AssertionError,mr.MipsError) as error:
             failures.append(str(error));print('FAIL',error)
             if not args.keep_going:raise

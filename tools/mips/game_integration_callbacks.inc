@@ -7,17 +7,33 @@ static int32_t test_platform_CdIntToPos(void *user, AeRam *r, uint32_t a0, uint3
     (void)r;
     return trace_call(user, "CdIntToPos", 0x80025D20u, 2, a0, a1, 0, 0, 0, 0);
 }
+static int32_t test_platform_CdPlayXa(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2) {
+    (void)r;
+    return trace_call(user, "CdPlayXa", 0x800242FCu, 3, a0, a1, a2, 0, 0, 0);
+}
 static int32_t test_platform_CdPosToInt(void *user, AeRam *r, uint32_t a0) {
     (void)r;
     return trace_call(user, "CdPosToInt", 0x80025E24u, 1, a0, 0, 0, 0, 0, 0);
+}
+static int32_t test_platform_CdReady(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2) {
+    (void)r;
+    return trace_call(user, "CdReady", 0x8002408Cu, 3, a0, a1, a2, 0, 0, 0);
 }
 static int32_t test_platform_CdReadyCallback(void *user, AeRam *r, uint32_t a0) {
     (void)r;
     return trace_call(user, "CdReadyCallback", 0x80024078u, 1, a0, 0, 0, 0, 0, 0);
 }
+static int32_t test_platform_CdSync(void *user, AeRam *r) {
+    (void)r;
+    return trace_call(user, "CdSync", 0x80026A50u, 0, 0, 0, 0, 0, 0, 0);
+}
 static int32_t test_platform_ClearImage(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)r;
     return trace_call(user, "ClearImage", 0x80028850u, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t test_platform_ClearImage2(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "ClearImage2", 0x800288E0u, 4, a0, a1, a2, a3, 0, 0);
 }
 static int32_t test_platform_ClearOTagR(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
     (void)r;
@@ -43,6 +59,10 @@ static int32_t test_platform_Exit(void *user, AeRam *r, uint32_t a0) {
     (void)r;
     return trace_call(user, "Exit", 0x800A3700u, 1, a0, 0, 0, 0, 0, 0);
 }
+static int32_t test_platform_GetVideoMode(void *user, AeRam *r) {
+    (void)r;
+    return trace_call(user, "GetVideoMode", 0x8002EE04u, 0, 0, 0, 0, 0, 0, 0);
+}
 static int32_t test_platform_InitDisplay(void *user, AeRam *r) {
     (void)r;
     return trace_call(user, "InitDisplay", 0x8005CFECu, 0, 0, 0, 0, 0, 0, 0);
@@ -55,9 +75,17 @@ static int32_t test_platform_LoadImage(void *user, AeRam *r, uint32_t a0, uint32
     (void)r;
     return trace_call(user, "LoadImage", 0x80028978u, 2, a0, a1, 0, 0, 0, 0);
 }
+static int32_t test_platform_LoadTimList(void *user, AeRam *r, uint32_t a0) {
+    (void)r;
+    return trace_call(user, "LoadTimList", 0x80068D10u, 1, a0, 0, 0, 0, 0, 0);
+}
 static int32_t test_platform_MatrixNormal(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
     (void)r;
     return trace_call(user, "MatrixNormal", 0x800302D0u, 2, a0, a1, 0, 0, 0, 0);
+}
+static int32_t test_platform_MemCardOp(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
+    (void)r;
+    return trace_call(user, "MemCardOp", 0x80010000u, 2, a0, a1, 0, 0, 0, 0);
 }
 static int32_t test_platform_MoveImage(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2) {
     (void)r;
@@ -91,6 +119,10 @@ static int32_t test_platform_PutDrawEnv(void *user, AeRam *r, uint32_t a0) {
     (void)r;
     return trace_call(user, "PutDrawEnv", 0x80028D30u, 1, a0, 0, 0, 0, 0, 0);
 }
+static int32_t test_platform_ReadGeomScreen(void *user, AeRam *r) {
+    (void)r;
+    return trace_call(user, "ReadGeomScreen", 0x800315D0u, 0, 0, 0, 0, 0, 0, 0);
+}
 static int32_t test_platform_ResetGraph(void *user, AeRam *r, uint32_t a0) {
     (void)r;
     return trace_call(user, "ResetGraph", 0x80028350u, 1, a0, 0, 0, 0, 0, 0);
@@ -115,6 +147,10 @@ static int32_t test_platform_ScaleMatrixL(void *user, AeRam *r, uint32_t a0, uin
     (void)r;
     return trace_call(user, "ScaleMatrixL", 0x800305B0u, 2, a0, a1, 0, 0, 0, 0);
 }
+static int32_t test_platform_SeqPlayer_SetupDisplay(void *user, AeRam *r) {
+    (void)r;
+    return trace_call(user, "SeqPlayer_SetupDisplay", 0x80136BD4u, 0, 0, 0, 0, 0, 0, 0);
+}
 static int32_t test_platform_SetBackColor(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2) {
     (void)r;
     return trace_call(user, "SetBackColor", 0x800315E0u, 3, a0, a1, a2, 0, 0, 0);
@@ -122,6 +158,22 @@ static int32_t test_platform_SetBackColor(void *user, AeRam *r, uint32_t a0, uin
 static int32_t test_platform_SetColorMatrix(void *user, AeRam *r, uint32_t a0) {
     (void)r;
     return trace_call(user, "SetColorMatrix", 0x80031600u, 1, a0, 0, 0, 0, 0, 0);
+}
+static int32_t test_platform_SetDefDispEnv(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a4) {
+    (void)r;
+    return trace_call(user, "SetDefDispEnv", 0x8002B340u, 5, a0, a1, a2, a3, a4, 0);
+}
+static int32_t test_platform_SetDefDrawEnv(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a4) {
+    (void)r;
+    return trace_call(user, "SetDefDrawEnv", 0x8002B280u, 5, a0, a1, a2, a3, a4, 0);
+}
+static int32_t test_platform_SetDispMask(void *user, AeRam *r, uint32_t a0) {
+    (void)r;
+    return trace_call(user, "SetDispMask", 0x80028634u, 1, a0, 0, 0, 0, 0, 0);
+}
+static int32_t test_platform_SetDrawStp(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
+    (void)r;
+    return trace_call(user, "SetDrawStp", 0x8002B3E0u, 2, a0, a1, 0, 0, 0, 0);
 }
 static int32_t test_platform_SetDrawTPage(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)r;
@@ -131,9 +183,17 @@ static int32_t test_platform_SetFarColor(void *user, AeRam *r, uint32_t a0, uint
     (void)r;
     return trace_call(user, "SetFarColor", 0x80031630u, 3, a0, a1, a2, 0, 0, 0);
 }
+static int32_t test_platform_SetGeomOffset(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
+    (void)r;
+    return trace_call(user, "SetGeomOffset", 0x8002FAD0u, 2, a0, a1, 0, 0, 0, 0);
+}
 static int32_t test_platform_SetGeomScreen(void *user, AeRam *r, uint32_t a0) {
     (void)r;
     return trace_call(user, "SetGeomScreen", 0x8002FAF0u, 1, a0, 0, 0, 0, 0, 0);
+}
+static int32_t test_platform_SetGraphDebug(void *user, AeRam *r, uint32_t a0) {
+    (void)r;
+    return trace_call(user, "SetGraphDebug", 0x800284C4u, 1, a0, 0, 0, 0, 0, 0);
 }
 static int32_t test_platform_SetRotMatrix(void *user, AeRam *r, uint32_t a0) {
     (void)r;
@@ -147,29 +207,65 @@ static int32_t test_platform_SetVideoMode(void *user, AeRam *r, uint32_t a0) {
     (void)r;
     return trace_call(user, "SetVideoMode", 0x8002EDF0u, 1, a0, 0, 0, 0, 0, 0);
 }
-static int32_t test_platform_SfxVoiceSetPanVol(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2) {
+static int32_t test_platform_SoundRestoreVolume(void *user, AeRam *r) {
     (void)r;
-    return trace_call(user, "SfxVoiceSetPanVol", 0x800A3570u, 3, a0, a1, a2, 0, 0, 0);
+    return trace_call(user, "SoundRestoreVolume", 0x80086170u, 0, 0, 0, 0, 0, 0, 0);
 }
-static int32_t test_platform_SoundBankSetVolume(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
+static int32_t test_platform_SoundStopAndRestoreVolume(void *user, AeRam *r, uint32_t a0) {
     (void)r;
-    return trace_call(user, "SoundBankSetVolume", 0x800A2640u, 2, a0, a1, 0, 0, 0, 0);
+    return trace_call(user, "SoundStopAndRestoreVolume", 0x80086248u, 1, a0, 0, 0, 0, 0, 0);
 }
 static int32_t test_platform_SpuWaitIdle(void *user, AeRam *r) {
     (void)r;
     return trace_call(user, "SpuWaitIdle", 0x800A1398u, 0, 0, 0, 0, 0, 0, 0);
 }
+static int32_t test_platform_StFree(void *user, AeRam *r, uint32_t a0) {
+    (void)r;
+    return trace_call(user, "StFree", 0x80025EB0u, 1, a0, 0, 0, 0, 0, 0);
+}
+static int32_t test_platform_StRingStatus(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
+    (void)r;
+    return trace_call(user, "StRingStatus", 0x80025F60u, 2, a0, a1, 0, 0, 0, 0);
+}
+static int32_t test_platform_StSetRing(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
+    (void)r;
+    return trace_call(user, "StSetRing", 0x80025C60u, 2, a0, a1, 0, 0, 0, 0);
+}
+static int32_t test_platform_StSetStream(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a4) {
+    (void)r;
+    return trace_call(user, "StSetStream", 0x80025C90u, 5, a0, a1, a2, a3, a4, 0);
+}
+static int32_t test_platform_StopCallback(void *user, AeRam *r) {
+    (void)r;
+    return trace_call(user, "StopCallback", 0x8002E824u, 0, 0, 0, 0, 0, 0, 0);
+}
 static int32_t test_platform_StoreImage(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
     (void)r;
     return trace_call(user, "StoreImage", 0x800289D8u, 2, a0, a1, 0, 0, 0, 0);
+}
+static int32_t test_platform_TextLineWidth(void *user, AeRam *r, uint32_t a0) {
+    (void)r;
+    return trace_call(user, "TextLineWidth", 0x8008DE1Cu, 1, a0, 0, 0, 0, 0, 0);
 }
 static int32_t test_platform_VSync(void *user, AeRam *r, uint32_t a0) {
     (void)r;
     return trace_call(user, "VSync", 0x8002E520u, 1, a0, 0, 0, 0, 0, 0);
 }
+static int32_t test_platform_VSyncCallback(void *user, AeRam *r, uint32_t a0) {
+    (void)r;
+    return trace_call(user, "VSyncCallback", 0x8002E7C0u, 1, a0, 0, 0, 0, 0, 0);
+}
+static int32_t test_platform_memcpy(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2) {
+    (void)r;
+    return trace_call(user, "memcpy", 0x800A3760u, 3, a0, a1, a2, 0, 0, 0);
+}
 static int32_t test_platform_memset(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2) {
     (void)r;
     return trace_call(user, "memset", 0x800A3740u, 3, a0, a1, a2, 0, 0, 0);
+}
+static int32_t test_platform_srand(void *user, AeRam *r, uint32_t a0) {
+    (void)r;
+    return trace_call(user, "srand", 0x800A3750u, 1, a0, 0, 0, 0, 0, 0);
 }
 static int32_t test_renderer_AlertIconDraw(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)r;
@@ -182,6 +278,30 @@ static int32_t test_renderer_CameraLookAt(void *user, AeRam *r, uint32_t a0, uin
 static int32_t test_renderer_DrawDebugGlyph(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a4, uint32_t a5) {
     (void)r;
     return trace_call(user, "DrawDebugGlyph", 0x00000000u, 6, a0, a1, a2, a3, a4, a5);
+}
+static int32_t test_renderer_DrawMenuChrome(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "DrawMenuChrome", 0x8007D71Cu, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t test_renderer_DrawMenuCursor(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "DrawMenuCursor", 0x8007F148u, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t test_renderer_DrawMenuHighlight(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "DrawMenuHighlight", 0x8007E030u, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t test_renderer_DrawMenuItem(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "DrawMenuItem", 0x8007E1B8u, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t test_renderer_DrawMenuRows(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "DrawMenuRows", 0x8007D9F0u, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t test_renderer_DrawMenuSelection(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "DrawMenuSelection", 0x8007E3F8u, 4, a0, a1, a2, a3, 0, 0);
 }
 static int32_t test_renderer_DrawParticleQuad(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a4) {
     (void)r;
@@ -258,6 +378,18 @@ static int32_t test_renderer_GpuProjectGadget3Aim(void *user, AeRam *r, uint32_t
 static int32_t test_renderer_GpuProjectMesh(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)r;
     return trace_call(user, "GpuProjectMesh", 0x00000000u, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t test_renderer_HudDrawFrameBox(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "HudDrawFrameBox", 0x80060334u, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t test_renderer_HudDrawStatPips(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "HudDrawStatPips", 0x80060224u, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t test_renderer_HudDrawTimeRankIcon(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "HudDrawTimeRankIcon", 0x8005F70Cu, 4, a0, a1, a2, a3, 0, 0);
 }
 static int32_t test_renderer_ItemDrawModel(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)r;
@@ -347,6 +479,10 @@ static int32_t test_renderer_RenderScreenFlash(void *user, AeRam *r, uint32_t a0
     (void)r;
     return trace_call(user, "RenderScreenFlash", 0x00000000u, 4, a0, a1, a2, a3, 0, 0);
 }
+static int32_t test_renderer_RenderTrailRingSegment(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a4) {
+    (void)r;
+    return trace_call(user, "RenderTrailRingSegment", 0x00000000u, 5, a0, a1, a2, a3, a4, 0);
+}
 static int32_t test_renderer_RendererGetProjectionDistance(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)r;
     return trace_call(user, "RendererGetProjectionDistance", 0x00000000u, 4, a0, a1, a2, a3, 0, 0);
@@ -354,6 +490,10 @@ static int32_t test_renderer_RendererGetProjectionDistance(void *user, AeRam *r,
 static int32_t test_renderer_RendererHudDrawWindowFrame(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)r;
     return trace_call(user, "RendererHudDrawWindowFrame", 0x00000000u, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t test_renderer_RendererHudMonkeyBadge(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "RendererHudMonkeyBadge", 0x00000000u, 4, a0, a1, a2, a3, 0, 0);
 }
 static int32_t test_renderer_RendererIrgbToIr123(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)r;
@@ -395,6 +535,74 @@ static int32_t test_renderer_ZakoDebugDrawPrimitive(void *user, AeRam *r, uint32
     (void)r;
     return trace_call(user, "ZakoDebugDrawPrimitive", 0x00000000u, 4, a0, a1, a2, a3, 0, 0);
 }
+static int32_t test_renderer_Ovl185_DrawText(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "Ovl185_DrawText", 0x8014666Cu, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t test_renderer_SaveUi_DrawPortrait(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
+    (void)r;
+    return trace_call(user, "SaveUi_DrawPortrait", 0x80139570u, 2, a0, a1, 0, 0, 0, 0);
+}
+static int32_t test_renderer_SaveUi_DrawCursorAnim(void *user, AeRam *r) {
+    (void)r;
+    return trace_call(user, "SaveUi_DrawCursorAnim", 0x80139CF0u, 0, 0, 0, 0, 0, 0, 0);
+}
+static int32_t test_renderer_SaveUi_DrawFileIcons(void *user, AeRam *r) {
+    (void)r;
+    return trace_call(user, "SaveUi_DrawFileIcons", 0x8013A478u, 0, 0, 0, 0, 0, 0, 0);
+}
+static int32_t test_renderer_SaveUi_FadeDraw(void *user, AeRam *r) {
+    (void)r;
+    return trace_call(user, "SaveUi_FadeDraw", 0x8013A70Cu, 0, 0, 0, 0, 0, 0, 0);
+}
+static int32_t test_renderer_SaveUi_DrawModel(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "SaveUi_DrawModel", 0x8013A804u, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t test_renderer_SaveUi_DrawIcon(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2) {
+    (void)r;
+    return trace_call(user, "SaveUi_DrawIcon", 0x8013946Cu, 3, a0, a1, a2, 0, 0, 0);
+}
+static int32_t test_renderer_SeqPlayer_CopyScreenToBack(void *user, AeRam *r) {
+    (void)r;
+    return trace_call(user, "SeqPlayer_CopyScreenToBack", 0x801367DCu, 0, 0, 0, 0, 0, 0, 0);
+}
+static int32_t test_renderer_SeqPlayer_Present(void *user, AeRam *r, uint32_t a0) {
+    (void)r;
+    return trace_call(user, "SeqPlayer_Present", 0x80136FF0u, 1, a0, 0, 0, 0, 0, 0);
+}
+static int32_t test_renderer_SeqPlayer_LoadSavedImage(void *user, AeRam *r) {
+    (void)r;
+    return trace_call(user, "SeqPlayer_LoadSavedImage", 0x8013AA70u, 0, 0, 0, 0, 0, 0, 0);
+}
+static int32_t test_renderer_SeqPlayer_SaveRestoreVram(void *user, AeRam *r, uint32_t a0) {
+    (void)r;
+    return trace_call(user, "SeqPlayer_SaveRestoreVram", 0x8013BA80u, 1, a0, 0, 0, 0, 0, 0);
+}
+static int32_t test_renderer_DebugTextSetCursor(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
+    (void)r;
+    return trace_call(user, "DebugTextSetCursor", 0x8008CC60u, 2, a0, a1, 0, 0, 0, 0);
+}
+static int32_t test_renderer_DrawMenuArrows(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2) {
+    (void)r;
+    return trace_call(user, "DrawMenuArrows", 0x8008211Cu, 3, a0, a1, a2, 0, 0, 0);
+}
+static int32_t test_renderer_ModelEmitPrimsAlt(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2) {
+    (void)r;
+    return trace_call(user, "ModelEmitPrimsAlt", 0x8001A414u, 3, a0, a1, a2, 0, 0, 0);
+}
+static int32_t test_renderer_MatrixBuild(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2) {
+    (void)r;
+    return trace_call(user, "MatrixBuild", 0x80030450u, 3, a0, a1, a2, 0, 0, 0);
+}
+static int32_t test_renderer_ModelTransform(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2) {
+    (void)r;
+    return trace_call(user, "ModelTransform", 0x800160ECu, 3, a0, a1, a2, 0, 0, 0);
+}
+static int32_t test_renderer_ModelDrawTransformed(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "ModelDrawTransformed", 0x80017EFCu, 4, a0, a1, a2, a3, 0, 0);
+}
 static int32_t test_archive_ArcGetMemberPos(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
     (void)r;
     return trace_call(user, "ArcGetMemberPos", 0x80012C0Cu, 2, a0, a1, 0, 0, 0, 0);
@@ -427,6 +635,38 @@ static int32_t test_archive_LoadListInit(void *user, AeRam *r, uint32_t a0, uint
     (void)r;
     return trace_call(user, "LoadListInit", 0x80011104u, 2, a0, a1, 0, 0, 0, 0);
 }
+static int32_t test_archive_ArcLoadEntry(void *user, AeRam *r, uint32_t a0) {
+    (void)r;
+    return trace_call(user, "ArcLoadEntry", 0x80011194u, 1, a0, 0, 0, 0, 0, 0);
+}
+static int32_t test_archive_CdMgrStopStream(void *user, AeRam *r) {
+    (void)r;
+    return trace_call(user, "CdMgrStopStream", 0x8001231Cu, 0, 0, 0, 0, 0, 0, 0);
+}
+static int32_t test_archive_Ovl181_CdCommand(void *user, AeRam *r, uint32_t a0) {
+    (void)r;
+    return trace_call(user, "Ovl181_CdCommand", 0x80136AECu, 1, a0, 0, 0, 0, 0, 0);
+}
+static int32_t test_archive_SeqPlayer_CdReadSeek(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
+    (void)r;
+    return trace_call(user, "SeqPlayer_CdReadSeek", 0x80136454u, 2, a0, a1, 0, 0, 0, 0);
+}
+static int32_t test_archive_SeqPlayer_CdPlayXaRange(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, "SeqPlayer_CdPlayXaRange", 0x801364B0u, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t test_archive_SeqPlayer_LoadFiles(void *user, AeRam *r, uint32_t a0) {
+    (void)r;
+    return trace_call(user, "SeqPlayer_LoadFiles", 0x80136884u, 1, a0, 0, 0, 0, 0, 0);
+}
+static int32_t test_archive_SeqPlayer_CdSetFilter(void *user, AeRam *r, uint32_t a0) {
+    (void)r;
+    return trace_call(user, "SeqPlayer_CdSetFilter", 0x80136E68u, 1, a0, 0, 0, 0, 0, 0);
+}
+static int32_t test_archive_SeqPlayer_StGetNextWait(void *user, AeRam *r, uint32_t a0, uint32_t a1) {
+    (void)r;
+    return trace_call(user, "SeqPlayer_StGetNextWait", 0x80136E00u, 2, a0, a1, 0, 0, 0, 0);
+}
 static int32_t test_frame_BeginFrame(void *user, AeRam *r, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
     (void)r;
     return trace_call(user, "BeginFrame", 0x8005DF48u, 4, a0, a1, a2, a3, 0, 0);
@@ -450,19 +690,26 @@ static int32_t test_frame_WaitFrameFlip(void *user, AeRam *r, uint32_t a0, uint3
 static void integration_callbacks(AeGameHost *host) {
     host->platform.CdControl = test_platform_CdControl;
     host->platform.CdIntToPos = test_platform_CdIntToPos;
+    host->platform.CdPlayXa = test_platform_CdPlayXa;
     host->platform.CdPosToInt = test_platform_CdPosToInt;
+    host->platform.CdReady = test_platform_CdReady;
     host->platform.CdReadyCallback = test_platform_CdReadyCallback;
+    host->platform.CdSync = test_platform_CdSync;
     host->platform.ClearImage = test_platform_ClearImage;
+    host->platform.ClearImage2 = test_platform_ClearImage2;
     host->platform.ClearOTagR = test_platform_ClearOTagR;
     host->platform.DR_MOVE = test_platform_DR_MOVE;
     host->platform.DrawOTag = test_platform_DrawOTag;
     host->platform.DrawPrim = test_platform_DrawPrim;
     host->platform.DrawSync = test_platform_DrawSync;
     host->platform.Exit = test_platform_Exit;
+    host->platform.GetVideoMode = test_platform_GetVideoMode;
     host->platform.InitDisplay = test_platform_InitDisplay;
     host->platform.InitSystem = test_platform_InitSystem;
     host->platform.LoadImage = test_platform_LoadImage;
+    host->platform.LoadTimList = test_platform_LoadTimList;
     host->platform.MatrixNormal = test_platform_MatrixNormal;
+    host->platform.MemCardOp = test_platform_MemCardOp;
     host->platform.MoveImage = test_platform_MoveImage;
     host->platform.MulMatrix = test_platform_MulMatrix;
     host->platform.MulMatrix0 = test_platform_MulMatrix0;
@@ -471,29 +718,52 @@ static void integration_callbacks(AeGameHost *host) {
     host->platform.Printf = test_platform_Printf;
     host->platform.PutDispEnv = test_platform_PutDispEnv;
     host->platform.PutDrawEnv = test_platform_PutDrawEnv;
+    host->platform.ReadGeomScreen = test_platform_ReadGeomScreen;
     host->platform.ResetGraph = test_platform_ResetGraph;
     host->platform.RotTrans = test_platform_RotTrans;
     host->platform.RotTransPers = test_platform_RotTransPers;
     host->platform.RotTransSV = test_platform_RotTransSV;
     host->platform.RunMinigameExe = test_platform_RunMinigameExe;
     host->platform.ScaleMatrixL = test_platform_ScaleMatrixL;
+    host->platform.SeqPlayer_SetupDisplay = test_platform_SeqPlayer_SetupDisplay;
     host->platform.SetBackColor = test_platform_SetBackColor;
     host->platform.SetColorMatrix = test_platform_SetColorMatrix;
+    host->platform.SetDefDispEnv = test_platform_SetDefDispEnv;
+    host->platform.SetDefDrawEnv = test_platform_SetDefDrawEnv;
+    host->platform.SetDispMask = test_platform_SetDispMask;
+    host->platform.SetDrawStp = test_platform_SetDrawStp;
     host->platform.SetDrawTPage = test_platform_SetDrawTPage;
     host->platform.SetFarColor = test_platform_SetFarColor;
+    host->platform.SetGeomOffset = test_platform_SetGeomOffset;
     host->platform.SetGeomScreen = test_platform_SetGeomScreen;
+    host->platform.SetGraphDebug = test_platform_SetGraphDebug;
     host->platform.SetRotMatrix = test_platform_SetRotMatrix;
     host->platform.SetTransMatrix = test_platform_SetTransMatrix;
     host->platform.SetVideoMode = test_platform_SetVideoMode;
-    host->platform.SfxVoiceSetPanVol = test_platform_SfxVoiceSetPanVol;
-    host->platform.SoundBankSetVolume = test_platform_SoundBankSetVolume;
+    host->platform.SoundRestoreVolume = test_platform_SoundRestoreVolume;
+    host->platform.SoundStopAndRestoreVolume = test_platform_SoundStopAndRestoreVolume;
     host->platform.SpuWaitIdle = test_platform_SpuWaitIdle;
+    host->platform.StFree = test_platform_StFree;
+    host->platform.StRingStatus = test_platform_StRingStatus;
+    host->platform.StSetRing = test_platform_StSetRing;
+    host->platform.StSetStream = test_platform_StSetStream;
+    host->platform.StopCallback = test_platform_StopCallback;
     host->platform.StoreImage = test_platform_StoreImage;
+    host->platform.TextLineWidth = test_platform_TextLineWidth;
     host->platform.VSync = test_platform_VSync;
+    host->platform.VSyncCallback = test_platform_VSyncCallback;
+    host->platform.memcpy = test_platform_memcpy;
     host->platform.memset = test_platform_memset;
+    host->platform.srand = test_platform_srand;
     host->renderer.AlertIconDraw = test_renderer_AlertIconDraw;
     host->renderer.CameraLookAt = test_renderer_CameraLookAt;
     host->renderer.DrawDebugGlyph = test_renderer_DrawDebugGlyph;
+    host->renderer.DrawMenuChrome = test_renderer_DrawMenuChrome;
+    host->renderer.DrawMenuCursor = test_renderer_DrawMenuCursor;
+    host->renderer.DrawMenuHighlight = test_renderer_DrawMenuHighlight;
+    host->renderer.DrawMenuItem = test_renderer_DrawMenuItem;
+    host->renderer.DrawMenuRows = test_renderer_DrawMenuRows;
+    host->renderer.DrawMenuSelection = test_renderer_DrawMenuSelection;
     host->renderer.DrawParticleQuad = test_renderer_DrawParticleQuad;
     host->renderer.DrawProjectileSprite = test_renderer_DrawProjectileSprite;
     host->renderer.DrawRibbonBetween = test_renderer_DrawRibbonBetween;
@@ -513,6 +783,9 @@ static void integration_callbacks(AeGameHost *host) {
     host->renderer.GpuDrawTrailPoint = test_renderer_GpuDrawTrailPoint;
     host->renderer.GpuProjectGadget3Aim = test_renderer_GpuProjectGadget3Aim;
     host->renderer.GpuProjectMesh = test_renderer_GpuProjectMesh;
+    host->renderer.HudDrawFrameBox = test_renderer_HudDrawFrameBox;
+    host->renderer.HudDrawStatPips = test_renderer_HudDrawStatPips;
+    host->renderer.HudDrawTimeRankIcon = test_renderer_HudDrawTimeRankIcon;
     host->renderer.ItemDrawModel = test_renderer_ItemDrawModel;
     host->renderer.MeshInit = test_renderer_MeshInit;
     host->renderer.MeshInitFromAreaTable = test_renderer_MeshInitFromAreaTable;
@@ -535,8 +808,10 @@ static void integration_callbacks(AeGameHost *host) {
     host->renderer.RenderHudPopup = test_renderer_RenderHudPopup;
     host->renderer.RenderIndicator = test_renderer_RenderIndicator;
     host->renderer.RenderScreenFlash = test_renderer_RenderScreenFlash;
+    host->renderer.RenderTrailRingSegment = test_renderer_RenderTrailRingSegment;
     host->renderer.RendererGetProjectionDistance = test_renderer_RendererGetProjectionDistance;
     host->renderer.RendererHudDrawWindowFrame = test_renderer_RendererHudDrawWindowFrame;
+    host->renderer.RendererHudMonkeyBadge = test_renderer_RendererHudMonkeyBadge;
     host->renderer.RendererIrgbToIr123 = test_renderer_RendererIrgbToIr123;
     host->renderer.RendererPackIrgb = test_renderer_RendererPackIrgb;
     host->renderer.RendererPauseMenuDrawButtons = test_renderer_RendererPauseMenuDrawButtons;
@@ -547,6 +822,23 @@ static void integration_callbacks(AeGameHost *host) {
     host->renderer.ScreenBandDraw = test_renderer_ScreenBandDraw;
     host->renderer.VertexWobble = test_renderer_VertexWobble;
     host->renderer.ZakoDebugDrawPrimitive = test_renderer_ZakoDebugDrawPrimitive;
+    host->renderer.Ovl185_DrawText = test_renderer_Ovl185_DrawText;
+    host->renderer.SaveUi_DrawPortrait = test_renderer_SaveUi_DrawPortrait;
+    host->renderer.SaveUi_DrawCursorAnim = test_renderer_SaveUi_DrawCursorAnim;
+    host->renderer.SaveUi_DrawFileIcons = test_renderer_SaveUi_DrawFileIcons;
+    host->renderer.SaveUi_FadeDraw = test_renderer_SaveUi_FadeDraw;
+    host->renderer.SaveUi_DrawModel = test_renderer_SaveUi_DrawModel;
+    host->renderer.SaveUi_DrawIcon = test_renderer_SaveUi_DrawIcon;
+    host->renderer.SeqPlayer_CopyScreenToBack = test_renderer_SeqPlayer_CopyScreenToBack;
+    host->renderer.SeqPlayer_Present = test_renderer_SeqPlayer_Present;
+    host->renderer.SeqPlayer_LoadSavedImage = test_renderer_SeqPlayer_LoadSavedImage;
+    host->renderer.SeqPlayer_SaveRestoreVram = test_renderer_SeqPlayer_SaveRestoreVram;
+    host->renderer.DebugTextSetCursor = test_renderer_DebugTextSetCursor;
+    host->renderer.DrawMenuArrows = test_renderer_DrawMenuArrows;
+    host->renderer.ModelEmitPrimsAlt = test_renderer_ModelEmitPrimsAlt;
+    host->renderer.MatrixBuild = test_renderer_MatrixBuild;
+    host->renderer.ModelTransform = test_renderer_ModelTransform;
+    host->renderer.ModelDrawTransformed = test_renderer_ModelDrawTransformed;
     host->archive.ArcGetMemberPos = test_archive_ArcGetMemberPos;
     host->archive.CdMgrQueueCommand = test_archive_CdMgrQueueCommand;
     host->archive.CdMgrUpdate = test_archive_CdMgrUpdate;
@@ -555,6 +847,14 @@ static void integration_callbacks(AeGameHost *host) {
     host->archive.ArcLoadMember = test_archive_ArcLoadMember;
     host->archive.CdMgrWaitIdle = test_archive_CdMgrWaitIdle;
     host->archive.LoadListInit = test_archive_LoadListInit;
+    host->archive.ArcLoadEntry = test_archive_ArcLoadEntry;
+    host->archive.CdMgrStopStream = test_archive_CdMgrStopStream;
+    host->archive.Ovl181_CdCommand = test_archive_Ovl181_CdCommand;
+    host->archive.SeqPlayer_CdReadSeek = test_archive_SeqPlayer_CdReadSeek;
+    host->archive.SeqPlayer_CdPlayXaRange = test_archive_SeqPlayer_CdPlayXaRange;
+    host->archive.SeqPlayer_LoadFiles = test_archive_SeqPlayer_LoadFiles;
+    host->archive.SeqPlayer_CdSetFilter = test_archive_SeqPlayer_CdSetFilter;
+    host->archive.SeqPlayer_StGetNextWait = test_archive_SeqPlayer_StGetNextWait;
     host->frame.BeginFrame = test_frame_BeginFrame;
     host->frame.DrawTerrain = test_frame_DrawTerrain;
     host->frame.DrawAreaProps = test_frame_DrawAreaProps;

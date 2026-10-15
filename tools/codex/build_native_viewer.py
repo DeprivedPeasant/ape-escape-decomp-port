@@ -49,7 +49,8 @@ def build(player_source_dir=None):
         player_sources += [ROOT/'src/core'/name for name in ['ae_ram.c','ae_ram.h','ae_pad.c','ae_pad.h','ae_vecnorm.h']]
     game_sources = [ROOT / line for line in (ROOT/'tools/codex/viewer_game_sources.txt').read_text().splitlines()] if player_source_dir is not None else []
     game_sources += [ROOT/'src/app/viewer_game.c'] if player_source_dir is not None else []
-    headers=b''.join(p.read_bytes() for p in sorted((ROOT/'src').rglob('*.h')))
+    headers=b''.join(p.read_bytes() for pattern in ('*.h','*.inc')
+                     for p in sorted((ROOT/'src').rglob(pattern)))
     digest = hashlib.sha256(VERSION.encode()+headers+b''.join(p.read_bytes() for p in player_sources + game_sources)+Path(__file__).read_bytes()+b''.join(Path(src(n)).read_bytes() for n in sources)
                             +(ROOT/'src/audio/sp_player.c').read_bytes()+(ROOT/'src/audio/sp_player.h').read_bytes()
                             +(ROOT/'src/audio/sp_voice_pool.h').read_bytes()

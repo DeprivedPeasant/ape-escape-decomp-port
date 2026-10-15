@@ -12,6 +12,32 @@ from check_game_area import Harness, ROOT, mr, duplicate_overlay_fixture
 
 def mutations():
     source='src/game/ae_game_hooks.c';text=(ROOT/source).read_text()
+    for label,old,new in [
+        ('missb missing typed adapter','g->missb.call = wire_missb_words;','g->missb.call = NULL;'),
+        ('missb lost array word','name, address, count, args);\n}\n\nstatic','name, address, 0, args);\n}\n\nstatic'),
+        ('missb renderer becomes missing','return ae_game_mode_call(user, ram, name, address, count, args);',
+         'return wire_original_words(user, ram, name, address, count, args);'),
+    ]:
+        assert old in text,label
+        yield label,source,text.replace(old,new,1),'missb'
+    source='src/player/ae_player1.c';text=(ROOT/source).read_text()
+    old='if (hooks && hooks->CdMgrQueueCommand)'
+    assert old in text
+    yield 'XA bypassed native queue',source,text.replace(old,'if (0)',1),'missb'
+    source='src/game/ae_game_hooks.c';text=(ROOT/source).read_text()
+    old='g->missa.PlayerAuxModelInit = wire_missa_PlayerAuxModelInit;'
+    assert old in text
+    yield 'missing missa player init callback',source,text.replace(old,'g->missa.PlayerAuxModelInit = NULL;',1),'load'
+    old='g->missa.CallIndirect = wire_missa_CallIndirect;'
+    assert old in text
+    yield 'missing missa indirect',source,text.replace(old,'g->missa.CallIndirect = NULL;',1),'missa'
+    old='"RenderTrailRingSegment", 0, 5, (const uint32_t[])'
+    assert old in text
+    yield 'missa renderer lost fifth word',source,text.replace(old,'"RenderTrailRingSegment", 0, 4, (const uint32_t[])',1),'missa'
+    old='~(uint32_t)(ae_rd8(g->ram, AE_PAD_BUF1 + 3u) | (ae_rd8(g->ram, AE_PAD_BUF1 + 2u) << 8))'
+    assert old in text
+    yield 'missa pad lost buttons',source,text.replace(old,'0',1),'missa'
+    source='src/game/ae_game_hooks.c';text=(ROOT/source).read_text()
     for name,address,old_address in [('ActorAnimDecodeEntry','80014EF0','80014E34'),
                                      ('ArcGetMemberPos','80012C0C','8005E000')]:
         prefix='player2' if name=='ActorAnimDecodeEntry' else 'stage'
@@ -19,7 +45,8 @@ def mutations():
         assert match
         body=match[0]
         assert '0x'+address+'u' in body
-        yield 'net catch wrong '+name,source,text.replace(body,body.replace('0x'+address+'u','0x'+old_address+'u'),1),'net_catch'
+        layer='missa' if name=='ArcGetMemberPos' else 'net_catch'
+        yield 'net catch wrong '+name,source,text.replace(body,body.replace('0x'+address+'u','0x'+old_address+'u'),1),layer
     for label,old,new in [
         ('overlay lost named EXE fifth word', 'words[4], words[5], words[6]);', '0, words[5], words[6]);'),
         ('overlay renderer dropped tail', 'ram, name, address, count, args) : 0;', 'ram, name, address, count > 4 ? 4 : count, args) : 0;'),
@@ -154,7 +181,9 @@ def main():
             results.append(dict(label=label,status='build error',reason=str(error)))
             print(label,'BUILD ERROR',flush=True);continue
         try:
-            if layer=='helpers':h.direct_helpers()
+            if layer=='missb':h.direct_missb_routes()
+            elif layer=='helpers':h.direct_helpers()
+            elif layer=='missa':h.direct_missa_routes()
             elif layer=='hud':h.direct_hud_hooks()
             elif layer=='extended':h.direct_extended_hooks()
             elif layer=='pause_math':h.direct_pause_math_hooks()

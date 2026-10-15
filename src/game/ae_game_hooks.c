@@ -12,6 +12,16 @@ static int32_t wire_renderer_words(void *user, AeRam *ram, const char *name, uin
     AeGame *g = user;
     return g->host.render_words ? g->host.render_words(g->host.user, ram, name, address, count, args) : 0;
 }
+static int32_t wire_overlay_render(void *user, AeRam *ram, const char *name, uint32_t count, const uint32_t *args) {
+    return wire_renderer_words(user, ram, name, 0, count, args);
+}
+static void wire_overlay_render_void(void *user, AeRam *ram, const char *name, uint32_t count, const uint32_t *args) {
+    (void)wire_renderer_words(user, ram, name, 0, count, args);
+}
+/* MissB retains its array-before-count public ABI. */
+static int32_t wire_missb_words(void *user, AeRam *ram, const char *name, uint32_t address, const uint32_t args[4], uint32_t count) {
+    return ae_game_mode_call(user, ram, name, address, count, args);
+}
 
 static int32_t wire_anim_draw_SoundLoopStart(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
     AeGame *g = (AeGame *)p0;
@@ -181,7 +191,7 @@ static int32_t wire_anim_draw_SfxVoiceSetPitch(void * p0, AeRam * p1, uint32_t p
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "SfxVoiceSetPitch", 0x800A35FCu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x800A35FCu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_anim_draw_SetRotMatrix(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -411,7 +421,7 @@ static int32_t wire_area_set_FUN_8013d440(void * p0, AeRam * p1, uint32_t p2, ui
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_8013d440", 0x8013D440u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8013D440u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_area_set_Area46_Boss_SetAnim(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -421,7 +431,7 @@ static int32_t wire_area_set_Area46_Boss_SetAnim(void * p0, AeRam * p1, uint32_t
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "Area46_Boss_SetAnim", 0x8013EF0Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8013EF0Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_area_set_Area46_Boss_ClearFlag(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -431,7 +441,7 @@ static int32_t wire_area_set_Area46_Boss_ClearFlag(void * p0, AeRam * p1, uint32
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "Area46_Boss_ClearFlag", 0x8013EF00u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8013EF00u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_area_set_FUN_8013f544(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -441,7 +451,7 @@ static int32_t wire_area_set_FUN_8013f544(void * p0, AeRam * p1, uint32_t p2, ui
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_8013f544", 0x8013F544u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8013F544u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_area_set_FUN_8013e14c(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -451,7 +461,7 @@ static int32_t wire_area_set_FUN_8013e14c(void * p0, AeRam * p1, uint32_t p2, ui
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_8013e14c", 0x8013E14Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8013E14Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_area_set_FUN_8013ec5c(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -461,7 +471,7 @@ static int32_t wire_area_set_FUN_8013ec5c(void * p0, AeRam * p1, uint32_t p2, ui
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_8013ec5c", 0x8013EC5Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8013EC5Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_area_set_FUN_8013d8bc(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -471,7 +481,7 @@ static int32_t wire_area_set_FUN_8013d8bc(void * p0, AeRam * p1, uint32_t p2, ui
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_8013d8bc", 0x8013D8BCu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8013D8BCu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_area_set_FUN_8013df28(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -481,7 +491,7 @@ static int32_t wire_area_set_FUN_8013df28(void * p0, AeRam * p1, uint32_t p2, ui
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_8013df28", 0x8013DF28u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8013DF28u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_area_set_FUN_8013d10c(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -706,7 +716,7 @@ static void wire_body_move_SfxVoiceSetPitch(void * p0, AeRam * p1, int32_t p2, i
     (void)p1;
     (void)p2;
     (void)p3;
-    (void)(ae_game_missing_call(g, "SfxVoiceSetPitch", 0x800A35FCu, (uint32_t)p2, (uint32_t)p3, 0, 0));
+    (void)(ae_game_call(g, 0x800A35FCu, (uint32_t)p2, (uint32_t)p3, 0, 0));
 }
 
 static void wire_body_move_XaPlay(void * p0, AeRam * p1, int32_t p2) {
@@ -853,7 +863,7 @@ static int32_t wire_camera_CameraRcCarFollow(void * p0, AeRam * p1, uint32_t p2,
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "CameraRcCarFollow", 0x8004AA58u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8004AA58u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_camera_IsFlightArea(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -893,7 +903,7 @@ static int32_t wire_camera_CameraAreaScriptDispatch(void * p0, AeRam * p1, uint3
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "CameraAreaScriptDispatch", 0x8004B590u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8004B590u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_camera_CallIndexedHandler(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -903,7 +913,7 @@ static int32_t wire_camera_CallIndexedHandler(void * p0, AeRam * p1, uint32_t p2
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "CallIndexedHandler", 0x8004D880u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8004D880u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_camera_RotMatrixY(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -953,7 +963,7 @@ static int32_t wire_camera_AimRequestStart(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "AimRequestStart", 0x80048398u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80048398u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_camera_AimRequestClear(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -1013,7 +1023,7 @@ static int32_t wire_camera_BossAimSfx(void * p0, AeRam * p1, uint32_t p2, uint32
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "BossAimSfx", 0x8004898Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8004898Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_camera_BossKindForArea(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -1033,7 +1043,7 @@ static int32_t wire_camera_ScreenFadeSet(void * p0, AeRam * p1, uint32_t p2, uin
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "ScreenFadeSet", 0x80046978u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80046978u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_camera_PlaySfx(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -1053,7 +1063,7 @@ static int32_t wire_camera_HudDrawMonkeyInfo(void * p0, AeRam * p1, uint32_t p2,
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "HudDrawMonkeyInfo", 0x80060448u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80060448u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_camera_RadarUsable(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -1083,7 +1093,7 @@ static int32_t wire_camera_CameraRadarFocusUpdate(void * p0, AeRam * p1, uint32_
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "CameraRadarFocusUpdate", 0x80047EE0u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80047EE0u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_camera_CameraRadarFocusSelect(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -1093,7 +1103,7 @@ static int32_t wire_camera_CameraRadarFocusSelect(void * p0, AeRam * p1, uint32_
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "CameraRadarFocusSelect", 0x80047E8Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80047E8Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_camupd_PadGetState(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -1143,7 +1153,7 @@ static int32_t wire_camupd_CameraAreaScriptDispatch(void * p0, AeRam * p1, uint3
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "CameraAreaScriptDispatch", 0x8004B590u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8004B590u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_camupd_CameraLookAt(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5, uint32_t p6) {
@@ -1184,7 +1194,7 @@ static int32_t wire_coll_probe_PointInBoxXZ(void * p0, AeRam * p1, uint32_t p2, 
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "PointInBoxXZ", 0x80073B64u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80073B64u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_coll_probe_printf(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -1224,7 +1234,7 @@ static int32_t wire_coll_probe_DirIndexFromFlags(void * p0, AeRam * p1, uint32_t
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "DirIndexFromFlags", 0x8007774Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8007774Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_coll_probe_PlayerSetClimbTarget(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5, uint32_t p6, uint32_t p7) {
@@ -1765,7 +1775,7 @@ static int32_t wire_gadget_CameraGetSlotTarget(void * p0, AeRam * p1, uint32_t p
     (void)p4;
     (void)p5;
     (void)p6;
-    return (int32_t)(ae_game_missing_words(g, "CameraGetSlotTarget", 0x8004B54Cu, 5, (const uint32_t[]){(uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6}));
+    return (int32_t)(ae_game_call5(g, 0x8004B54Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6));
 }
 
 static int32_t wire_gadget_TargetListFindBest(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5, uint32_t p6) {
@@ -1776,7 +1786,7 @@ static int32_t wire_gadget_TargetListFindBest(void * p0, AeRam * p1, uint32_t p2
     (void)p4;
     (void)p5;
     (void)p6;
-    return (int32_t)(ae_game_missing_words(g, "TargetListFindBest", 0x8007CDFCu, 5, (const uint32_t[]){(uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6}));
+    return (int32_t)(ae_game_call5(g, 0x8007CDFCu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6));
 }
 
 static int32_t wire_gadget_SdkVectorHelper_80031330(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5, uint32_t p6) {
@@ -1930,7 +1940,7 @@ static int32_t wire_gadget_SoundEmitterVolume(void * p0, AeRam * p1, uint32_t p2
     (void)p4;
     (void)p5;
     (void)p6;
-    return (int32_t)(ae_game_missing_words(g, "SoundEmitterVolume", 0x80087BA4u, 5, (const uint32_t[]){(uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6}));
+    return (int32_t)(ae_game_call5(g, 0x80087BA4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6));
 }
 
 static int32_t wire_gadget_MatrixRotYMul(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5, uint32_t p6) {
@@ -1963,7 +1973,7 @@ static int32_t wire_gadget_PlayerFxSetMatrixPos(void * p0, AeRam * p1, uint32_t 
     (void)p4;
     (void)p5;
     (void)p6;
-    return (int32_t)(ae_game_missing_words(g, "PlayerFxSetMatrixPos", 0x8006CFBCu, 5, (const uint32_t[]){(uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6}));
+    return (int32_t)(ae_game_call5(g, 0x8006CFBCu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6));
 }
 
 static int32_t wire_gadget_RadarDrawModel(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5, uint32_t p6) {
@@ -2018,7 +2028,7 @@ static int32_t wire_gadget_TrailRingPush(void * p0, AeRam * p1, uint32_t p2, uin
     (void)p4;
     (void)p5;
     (void)p6;
-    return (int32_t)(ae_game_missing_words(g, "TrailRingPush", 0x8001F8B0u, 5, (const uint32_t[]){(uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6}));
+    return (int32_t)(ae_game_call5(g, 0x8001F8B0u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6));
 }
 
 static int32_t wire_gadget_TrailRingDraw(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5, uint32_t p6) {
@@ -2029,7 +2039,7 @@ static int32_t wire_gadget_TrailRingDraw(void * p0, AeRam * p1, uint32_t p2, uin
     (void)p4;
     (void)p5;
     (void)p6;
-    return (int32_t)(ae_game_missing_words(g, "TrailRingDraw", 0x8001F954u, 5, (const uint32_t[]){(uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6}));
+    return (int32_t)(ae_game_call5(g, 0x8001F954u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6));
 }
 
 static int32_t wire_gadget_DrawRibbonBetween(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5, uint32_t p6) {
@@ -2258,7 +2268,7 @@ static int32_t wire_gimmick_a_BodyInsideBox(void * p0, AeRam * p1, uint32_t p2, 
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "BodyInsideBox", 0x8008EC70u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8008EC70u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_a_GimmickTouchCheck(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2268,7 +2278,7 @@ static int32_t wire_gimmick_a_GimmickTouchCheck(void * p0, AeRam * p1, uint32_t 
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "GimmickTouchCheck", 0x80090754u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80090754u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_a_MeshInitFromAreaTable(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2358,7 +2368,7 @@ static int32_t wire_gimmick_a_ProgressFlagSet(void * p0, AeRam * p1, uint32_t p2
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "ProgressFlagSet", 0x800962F4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x800962F4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_a_ProgressGetByte(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2378,7 +2388,7 @@ static int32_t wire_gimmick_a_ProgressSetByte(void * p0, AeRam * p1, uint32_t p2
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "ProgressSetByte", 0x80096360u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80096360u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_a_GetSolidHeight(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2398,7 +2408,7 @@ static int32_t wire_gimmick_a_SwingDoorBodyDelta(void * p0, AeRam * p1, uint32_t
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "SwingDoorBodyDelta", 0x8008F308u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8008F308u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_a_SlideDoorMove(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2408,7 +2418,7 @@ static int32_t wire_gimmick_a_SlideDoorMove(void * p0, AeRam * p1, uint32_t p2, 
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "SlideDoorMove", 0x8008FAD0u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8008FAD0u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_a_GimmickHandler(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4) {
@@ -2427,7 +2437,7 @@ static int32_t wire_gimmick_b_AreaMonkeyQuotaMet(void * p0, AeRam * p1, uint32_t
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "AreaMonkeyQuotaMet", 0x80097454u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80097454u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_FUN_80097504(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2437,7 +2447,7 @@ static int32_t wire_gimmick_b_FUN_80097504(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80097504", 0x80097504u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80097504u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_SpecialActorPlaceAtCollider(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2447,7 +2457,7 @@ static int32_t wire_gimmick_b_SpecialActorPlaceAtCollider(void * p0, AeRam * p1,
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "SpecialActorPlaceAtCollider", 0x8009B578u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8009B578u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_FUN_8009B3B0(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2457,7 +2467,7 @@ static int32_t wire_gimmick_b_FUN_8009B3B0(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_8009B3B0", 0x8009B3B0u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8009B3B0u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_IsTimeAttack(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2487,7 +2497,7 @@ static int32_t wire_gimmick_b_Indicator_Activate(void * p0, AeRam * p1, uint32_t
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "Indicator_Activate", 0x800717B4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x800717B4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_SpawnEffectGroupAt(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2497,7 +2507,7 @@ static int32_t wire_gimmick_b_SpawnEffectGroupAt(void * p0, AeRam * p1, uint32_t
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "SpawnEffectGroupAt", 0x800698E4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x800698E4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_PadRumble(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2517,7 +2527,7 @@ static int32_t wire_gimmick_b_FUN_8006AA60(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_8006AA60", 0x8006AA60u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8006AA60u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_MeshInitFromAreaTable(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2537,7 +2547,7 @@ static int32_t wire_gimmick_b_FUN_80091598(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80091598", 0x80091598u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80091598u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_FUN_80091AF0(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2547,7 +2557,7 @@ static int32_t wire_gimmick_b_FUN_80091AF0(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80091AF0", 0x80091AF0u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80091AF0u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_SoundLoopStart(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2587,7 +2597,7 @@ static int32_t wire_gimmick_b_FUN_80092324(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80092324", 0x80092324u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80092324u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_FUN_80091C04(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2597,7 +2607,7 @@ static int32_t wire_gimmick_b_FUN_80091C04(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80091C04", 0x80091C04u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80091C04u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_EventCamStart(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2617,7 +2627,7 @@ static int32_t wire_gimmick_b_FUN_80093848(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80093848", 0x80093848u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80093848u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_PlayerAttachSet(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2627,7 +2637,7 @@ static int32_t wire_gimmick_b_PlayerAttachSet(void * p0, AeRam * p1, uint32_t p2
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "PlayerAttachSet", 0x80066EECu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80066EECu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_PlaySfx(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2647,7 +2657,7 @@ static int32_t wire_gimmick_b_FUN_80066F34(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80066F34", 0x80066F34u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80066F34u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_SvecToDiagMatrix(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2667,7 +2677,7 @@ static int32_t wire_gimmick_b_FUN_80094330(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80094330", 0x80094330u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80094330u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_DiagonalSignedDistance(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2687,7 +2697,7 @@ static int32_t wire_gimmick_b_FUN_80094A48(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80094A48", 0x80094A48u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80094A48u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_FUN_80094E5C(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2697,7 +2707,7 @@ static int32_t wire_gimmick_b_FUN_80094E5C(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80094E5C", 0x80094E5Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80094E5Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_ColliderBoxContainsPoint(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -2707,7 +2717,7 @@ static int32_t wire_gimmick_b_ColliderBoxContainsPoint(void * p0, AeRam * p1, ui
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "ColliderBoxContainsPoint", 0x8009091Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8009091Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_gimmick_b_CameraNudge(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3011,7 +3021,7 @@ static uint32_t wire_menu_win_DrawMenuChrome(void * p0, AeRam * p1, uint32_t p2,
     (void)p3;
     (void)p4;
     (void)p5;
-    return (uint32_t)(ae_game_missing_call(g, "DrawMenuChrome", 0x8007D71Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (uint32_t)(g->host.renderer.DrawMenuChrome ? g->host.renderer.DrawMenuChrome(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "DrawMenuChrome", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
 }
 
 static uint32_t wire_menu_win_DrawMenuRows(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3021,7 +3031,7 @@ static uint32_t wire_menu_win_DrawMenuRows(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (uint32_t)(ae_game_missing_call(g, "DrawMenuRows", 0x8007D9F0u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (uint32_t)(g->host.renderer.DrawMenuRows ? g->host.renderer.DrawMenuRows(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "DrawMenuRows", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
 }
 
 static uint32_t wire_menu_win_DrawMenuHighlight(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3031,7 +3041,7 @@ static uint32_t wire_menu_win_DrawMenuHighlight(void * p0, AeRam * p1, uint32_t 
     (void)p3;
     (void)p4;
     (void)p5;
-    return (uint32_t)(ae_game_missing_call(g, "DrawMenuHighlight", 0x8007E030u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (uint32_t)(g->host.renderer.DrawMenuHighlight ? g->host.renderer.DrawMenuHighlight(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "DrawMenuHighlight", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
 }
 
 static uint32_t wire_menu_win_DrawMenuItem(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3041,7 +3051,7 @@ static uint32_t wire_menu_win_DrawMenuItem(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (uint32_t)(ae_game_missing_call(g, "DrawMenuItem", 0x8007E1B8u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (uint32_t)(g->host.renderer.DrawMenuItem ? g->host.renderer.DrawMenuItem(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "DrawMenuItem", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
 }
 
 static uint32_t wire_menu_win_DrawMenuSelection(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3051,7 +3061,7 @@ static uint32_t wire_menu_win_DrawMenuSelection(void * p0, AeRam * p1, uint32_t 
     (void)p3;
     (void)p4;
     (void)p5;
-    return (uint32_t)(ae_game_missing_call(g, "DrawMenuSelection", 0x8007E3F8u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (uint32_t)(g->host.renderer.DrawMenuSelection ? g->host.renderer.DrawMenuSelection(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "DrawMenuSelection", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
 }
 
 static uint32_t wire_menu_win_DrawMenuCursor(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3061,7 +3071,7 @@ static uint32_t wire_menu_win_DrawMenuCursor(void * p0, AeRam * p1, uint32_t p2,
     (void)p3;
     (void)p4;
     (void)p5;
-    return (uint32_t)(ae_game_missing_call(g, "DrawMenuCursor", 0x8007F148u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (uint32_t)(g->host.renderer.DrawMenuCursor ? g->host.renderer.DrawMenuCursor(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "DrawMenuCursor", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
 }
 
 static uint32_t wire_menu_win_item_callback(void * p0, AeRam * p1, uint32_t p2, uint32_t p3) {
@@ -3539,7 +3549,7 @@ static int32_t wire_misc_Area46_BossUpdate(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "Area46_BossUpdate", 0x8013F1ACu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8013F1ACu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_misc_Area57_BossUpdate(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3589,7 +3599,7 @@ static int32_t wire_misc_FUN_80088d78(void * p0, AeRam * p1, uint32_t p2, uint32
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80088d78", 0x80088D78u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80088D78u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_misc_FUN_80088f2c(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3599,7 +3609,7 @@ static int32_t wire_misc_FUN_80088f2c(void * p0, AeRam * p1, uint32_t p2, uint32
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80088f2c", 0x80088F2Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80088F2Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_misc_FUN_800895f0(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3609,7 +3619,7 @@ static int32_t wire_misc_FUN_800895f0(void * p0, AeRam * p1, uint32_t p2, uint32
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_800895f0", 0x800895F0u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x800895F0u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_misc_FUN_80089b10(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3619,7 +3629,7 @@ static int32_t wire_misc_FUN_80089b10(void * p0, AeRam * p1, uint32_t p2, uint32
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80089b10", 0x80089B10u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80089B10u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_misc_FUN_80089d64(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3629,7 +3639,7 @@ static int32_t wire_misc_FUN_80089d64(void * p0, AeRam * p1, uint32_t p2, uint32
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80089d64", 0x80089D64u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80089D64u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_misc_FUN_80089d6c(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3639,7 +3649,7 @@ static int32_t wire_misc_FUN_80089d6c(void * p0, AeRam * p1, uint32_t p2, uint32
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80089d6c", 0x80089D6Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80089D6Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_misc_FUN_8008aa64(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3649,7 +3659,7 @@ static int32_t wire_misc_FUN_8008aa64(void * p0, AeRam * p1, uint32_t p2, uint32
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_8008aa64", 0x8008AA64u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8008AA64u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_misc_GetSolidHeight(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3809,7 +3819,7 @@ static int32_t wire_misc_PointInBoxXZ(void * p0, AeRam * p1, uint32_t p2, uint32
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "PointInBoxXZ", 0x80073B64u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80073B64u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_misc_HalfPipeRangeTest(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -3839,7 +3849,7 @@ static int32_t wire_misc_DirIndexFromFlags(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "DirIndexFromFlags", 0x8007774Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8007774Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_misc_PlayerSetClimbTarget(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5, uint32_t p6, uint32_t p7) {
@@ -3862,6 +3872,228 @@ static int32_t wire_misc_PlayerSetRope(void * p0, AeRam * p1, uint32_t p2, uint3
     (void)p4;
     (void)p5;
     return (int32_t)(ae_game_call(g, 0x80066E8Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+}
+
+static int32_t wire_missa_BeginFrame(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(ae_game_mode_call(g, g->ram, "BeginFrame", 0x8005DF48u, 4, (const uint32_t[]){(uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5}));
+}
+
+static int32_t wire_missa_PlaySfx(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(ae_game_call(g, 0x800877F8u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+}
+
+static int32_t wire_missa_ClearWords(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.platform.memset ? g->host.platform.memset(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4) : 0);
+}
+
+static int32_t wire_missa_PropVisualUpdate(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(ae_game_missing_call(g, "PropVisualUpdate", 0x80071120u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+}
+
+static int32_t wire_missa_Printf(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.platform.Printf ? g->host.platform.Printf(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0);
+}
+
+static int32_t wire_missa_PlayerAuxModelInit(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(ae_game_call(g, 0x80098FB0u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+}
+
+static int32_t wire_missa_HudDrawTimeRankIcon(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.renderer.HudDrawTimeRankIcon ? g->host.renderer.HudDrawTimeRankIcon(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "HudDrawTimeRankIcon", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
+}
+
+static int32_t wire_missa_HudDrawStatPips(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.renderer.HudDrawStatPips ? g->host.renderer.HudDrawStatPips(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "HudDrawStatPips", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
+}
+
+static int32_t wire_missa_HudDrawFrameBox(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.renderer.HudDrawFrameBox ? g->host.renderer.HudDrawFrameBox(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "HudDrawFrameBox", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
+}
+
+static int32_t wire_missa_HudTextWidth(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(ae_game_call(g, 0x80082230u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+}
+
+static int32_t wire_missa_MessageBoxOpen(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(ae_game_call(g, 0x8008DEECu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+}
+
+static int32_t wire_missa_DrawMenuChrome(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.renderer.DrawMenuChrome ? g->host.renderer.DrawMenuChrome(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "DrawMenuChrome", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
+}
+
+static int32_t wire_missa_DrawMenuRows(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.renderer.DrawMenuRows ? g->host.renderer.DrawMenuRows(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "DrawMenuRows", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
+}
+
+static int32_t wire_missa_DrawMenuHighlight(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.renderer.DrawMenuHighlight ? g->host.renderer.DrawMenuHighlight(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "DrawMenuHighlight", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
+}
+
+static int32_t wire_missa_DrawMenuItem(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.renderer.DrawMenuItem ? g->host.renderer.DrawMenuItem(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "DrawMenuItem", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
+}
+
+static int32_t wire_missa_DrawMenuSelection(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.renderer.DrawMenuSelection ? g->host.renderer.DrawMenuSelection(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "DrawMenuSelection", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
+}
+
+static int32_t wire_missa_DrawMenuCursor(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.renderer.DrawMenuCursor ? g->host.renderer.DrawMenuCursor(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "DrawMenuCursor", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
+}
+
+static int32_t wire_missa_SetRotMatrix(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.platform.SetRotMatrix ? g->host.platform.SetRotMatrix(g->host.user, g->ram, (uint32_t)p2) : 0);
+}
+
+static int32_t wire_missa_SetTransMatrix(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.platform.SetTransMatrix ? g->host.platform.SetTransMatrix(g->host.user, g->ram, (uint32_t)p2) : 0);
+}
+
+static int32_t wire_missa_RendererHudMonkeyBadge(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (int32_t)(g->host.renderer.RendererHudMonkeyBadge ? g->host.renderer.RendererHudMonkeyBadge(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "RendererHudMonkeyBadge", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
+}
+
+static int32_t wire_missa_TrailRingDraw(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5, uint32_t p6) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    (void)p6;
+    return (int32_t)(g->host.renderer.RenderTrailRingSegment ? g->host.renderer.RenderTrailRingSegment(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6) : (g->host.render_words ? g->host.render_words(g->host.user, g->ram, "RenderTrailRingSegment", 0, 5, (const uint32_t[]){(uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6}) : 0));
+}
+
+static int32_t wire_missa_CallIndirect(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5, uint32_t p6) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    (void)p6;
+    return (int32_t)(ae_game_call(g, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5, (uint32_t)p6));
 }
 
 static int32_t wire_monkey_Printf(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -4284,6 +4516,13 @@ static int32_t wire_monkey_StageExitIsActive(void * p0, AeRam * p1, uint32_t p2,
     return (int32_t)(ae_game_call(g, 0x8005DCE4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
+static uint32_t wire_ovl188_xa_padding(void * p0, AeRam * p1, uint32_t p2) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    return (uint32_t)(g->host.xa_caller_padding ? g->host.xa_caller_padding(g->host.user, g->ram, p2) : 0);
+}
+
 static int32_t wire_pad_pad_get_state(void * p0, AeRam * p1, int32_t p2) {
     AeGame *g = (AeGame *)p0;
     (void)p1;
@@ -4310,7 +4549,7 @@ static void wire_pad_pad_setup_dualshock(void * p0, AeRam * p1, int32_t p2) {
 static int32_t wire_pad_pad_demo_step(void * p0, AeRam * p1) {
     AeGame *g = (AeGame *)p0;
     (void)p1;
-    return (int32_t)(ae_game_missing_call(g, "PadDemoPlaybackStep", 0x80013128u, 0, 0, 0, 0));
+    return (int32_t)(ae_game_call(g, 0x80013128u, 0, 0, 0, 0));
 }
 
 static void wire_pad_stage_request(void * p0, AeRam * p1, int32_t p2, int32_t p3, int32_t p4) {
@@ -4325,7 +4564,7 @@ static void wire_pad_stage_request(void * p0, AeRam * p1, int32_t p2, int32_t p3
 static uint32_t wire_pad_stick_to_buttons(void * p0, AeRam * p1) {
     AeGame *g = (AeGame *)p0;
     (void)p1;
-    return (uint32_t)(ae_game_missing_call(g, "StickToButtons", 0x800140B4u, 0, 0, 0, 0));
+    return (uint32_t)(ae_game_call(g, 0x800140B4u, ~(uint32_t)(ae_rd8(g->ram, AE_PAD_BUF1 + 3u) | (ae_rd8(g->ram, AE_PAD_BUF1 + 2u) << 8)), 0, 0, 0));
 }
 
 static void wire_pad_pad_rumble_reset(void * p0, AeRam * p1, int32_t p2) {
@@ -4472,7 +4711,7 @@ static int32_t wire_pause_menu_PadDirectionCode(void * p0, AeRam * p1, uint32_t 
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "PadDirectionCode", 0x8007F40Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8007F40Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_pause_menu_TextSetCursor(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -4502,7 +4741,7 @@ static int32_t wire_pause_menu_PauseMenuInitVolumes(void * p0, AeRam * p1, uint3
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "PauseMenuInitVolumes", 0x80082D40u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80082D40u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_pause_menu_HudTextWidth(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -4512,7 +4751,7 @@ static int32_t wire_pause_menu_HudTextWidth(void * p0, AeRam * p1, uint32_t p2, 
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "HudTextWidth", 0x80082230u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80082230u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_pause_menu_DrawTextSprites(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -4642,7 +4881,7 @@ static int32_t wire_pause_menu_PauseDrawCounter(void * p0, AeRam * p1, uint32_t 
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "PauseDrawCounter", 0x80082A04u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80082A04u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_pause_menu_PauseDrawCaptureGrid(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -4652,7 +4891,7 @@ static int32_t wire_pause_menu_PauseDrawCaptureGrid(void * p0, AeRam * p1, uint3
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "PauseDrawCaptureGrid", 0x80082398u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80082398u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_pause_menu_PauseMenuDrawSubScreen(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -4662,7 +4901,7 @@ static int32_t wire_pause_menu_PauseMenuDrawSubScreen(void * p0, AeRam * p1, uin
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "PauseMenuDrawSubScreen", 0x80082D6Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80082D6Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_pause_menu_HudDrawIcon16(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -4812,7 +5051,7 @@ static int32_t wire_pause_menu_SfxVoiceSetPanVol(void * p0, AeRam * p1, uint32_t
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(g->host.platform.SfxVoiceSetPanVol ? g->host.platform.SfxVoiceSetPanVol(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4) : 0);
+    return (int32_t)(ae_game_call(g, 0x800A3570u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_pause_menu_TextNextGlyph(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -5155,6 +5394,16 @@ static uint32_t wire_player1_ModelEmitPrims(void * p0, AeRam * p1, uint32_t p2, 
     return (uint32_t)(g->host.renderer.ModelEmitPrims ? g->host.renderer.ModelEmitPrims(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : (g->host.render ? g->host.render(g->host.user, g->ram, "ModelEmitPrims", (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0));
 }
 
+static uint32_t wire_player1_CdMgrQueueCommand(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
+    AeGame *g = (AeGame *)p0;
+    (void)p1;
+    (void)p2;
+    (void)p3;
+    (void)p4;
+    (void)p5;
+    return (uint32_t)(g->host.archive.CdMgrQueueCommand ? g->host.archive.CdMgrQueueCommand(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5) : 0);
+}
+
 static uint16_t wire_player2_position_padding(void * p0, AeRam * p1, uint32_t p2) {
     AeGame *g = (AeGame *)p0;
     (void)p1;
@@ -5438,7 +5687,7 @@ static int32_t wire_player_act_PlayerCond_JumpHeld(void * p0, AeRam * p1) {
 static int32_t wire_player_act_PlayerInput_StickGesture(void * p0, AeRam * p1) {
     AeGame *g = (AeGame *)p0;
     (void)p1;
-    return (int32_t)(ae_game_missing_call(g, "PlayerInput_StickGesture", 0x800650D8u, 0, 0, 0, 0));
+    return (int32_t)(ae_game_call(g, 0x800650D8u, 0, 0, 0, 0));
 }
 
 static void wire_player_act_PadRumble(void * p0, AeRam * p1, int32_t p2, int32_t p3, int32_t p4) {
@@ -5516,7 +5765,7 @@ static void wire_player_act_EffectBigBurst(void * p0, AeRam * p1, int32_t p2, in
 static int32_t wire_player_act_StageGoalReached(void * p0, AeRam * p1) {
     AeGame *g = (AeGame *)p0;
     (void)p1;
-    return (int32_t)(ae_game_missing_call(g, "StageGoalReached", 0x80097A60u, 0, 0, 0, 0));
+    return (int32_t)(ae_game_call(g, 0x80097A60u, 0, 0, 0, 0));
 }
 
 static void wire_player_act_HudPanelA_Start(void * p0, AeRam * p1, int32_t p2) {
@@ -5539,7 +5788,7 @@ static void wire_player_act_CameraAreaScriptDispatch(void * p0, AeRam * p1, int3
     (void)p2;
     (void)p3;
     (void)p4;
-    (void)(ae_game_missing_call(g, "CameraAreaScriptDispatch", 0x8004B590u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, 0));
+    (void)(ae_game_call(g, 0x8004B590u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, 0));
 }
 
 static void wire_player_act_PlayerSelectGadget(void * p0, AeRam * p1, int32_t p2, int32_t p3) {
@@ -5598,7 +5847,7 @@ static void wire_player_cond_PlayerSplash(void * p0, AeRam * p1) {
 static void wire_player_cond_PlayerFxJumpBurst(void * p0, AeRam * p1) {
     AeGame *g = (AeGame *)p0;
     (void)p1;
-    (void)(ae_game_missing_call(g, "PlayerFxJumpBurst", 0x8006C58Cu, 0, 0, 0, 0));
+    (void)(ae_game_call(g, 0x8006C58Cu, 0, 0, 0, 0));
 }
 
 static uint32_t wire_player_spawn_AreaBumpAlloc(void * p0, AeRam * p1, uint32_t p2) {
@@ -5756,7 +6005,7 @@ static int32_t wire_progress_SoundBankSetVolume(void * p0, AeRam * p1, uint32_t 
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(g->host.platform.SoundBankSetVolume ? g->host.platform.SoundBankSetVolume(g->host.user, g->ram, (uint32_t)p2, (uint32_t)p3) : 0);
+    return (int32_t)(ae_game_call(g, 0x800A2640u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_progress_SetDrawTPage(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -5834,7 +6083,7 @@ static int32_t wire_stage_fade_SeqTrackSetPlayState(void * p0, AeRam * p1, uint3
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "SeqTrackSetPlayState", 0x800A2B6Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x800A2B6Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_fade_SoundBankFree(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -5854,7 +6103,7 @@ static int32_t wire_stage_fade_SoundStopAllVoices(void * p0, AeRam * p1, uint32_
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "SoundStopAllVoices", 0x800A342Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x800A342Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_fade_RenderScreenFlash(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -5884,7 +6133,7 @@ static int32_t wire_stage_AreaUsesAltMember(void * p0, AeRam * p1, uint32_t p2, 
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "AreaUsesAltMember", 0x800115F4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x800115F4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_ArcGetMemberPos(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -5924,7 +6173,7 @@ static int32_t wire_stage_StageExitStart(void * p0, AeRam * p1, uint32_t p2, uin
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "StageExitStart", 0x8004D73Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8004D73Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_IsTimeAttack(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -5974,7 +6223,7 @@ static int32_t wire_stage_ItemSaveCollectedMask(void * p0, AeRam * p1, uint32_t 
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "ItemSaveCollectedMask", 0x800847ECu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x800847ECu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_ZakoSaveDefeatedMask(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -5984,7 +6233,7 @@ static int32_t wire_stage_ZakoSaveDefeatedMask(void * p0, AeRam * p1, uint32_t p
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "ZakoSaveDefeatedMask", 0x800509CCu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x800509CCu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_AreaGetKind(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6024,7 +6273,7 @@ static int32_t wire_stage_ItemsClearFlags(void * p0, AeRam * p1, uint32_t p2, ui
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "ItemsClearFlags", 0x800847C4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x800847C4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_ZakoClearSlotTable(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6044,7 +6293,7 @@ static int32_t wire_stage_SoundSilence(void * p0, AeRam * p1, uint32_t p2, uint3
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "SoundSilence", 0x80086148u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80086148u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_LevelMonkeyCountGet(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6054,7 +6303,7 @@ static int32_t wire_stage_LevelMonkeyCountGet(void * p0, AeRam * p1, uint32_t p2
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "LevelMonkeyCountGet", 0x800965ECu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x800965ECu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_AreaBumpAlloc(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6554,7 +6803,7 @@ static int32_t wire_stage_PlayerInit(void * p0, AeRam * p1, uint32_t p2, uint32_
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "PlayerInit", 0x8003272Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8003272Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_PlayerSetMode(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6604,7 +6853,7 @@ static int32_t wire_stage_BgmFadeOut(void * p0, AeRam * p1, uint32_t p2, uint32_
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "BgmFadeOut", 0x8008760Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8008760Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_SoundStop(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6634,7 +6883,7 @@ static int32_t wire_stage_ProgressSetByte(void * p0, AeRam * p1, uint32_t p2, ui
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "ProgressSetByte", 0x80096360u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80096360u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_PlayTimeAdd(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6644,7 +6893,7 @@ static int32_t wire_stage_PlayTimeAdd(void * p0, AeRam * p1, uint32_t p2, uint32
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "PlayTimeAdd", 0x8005DD44u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8005DD44u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_StageGradeUpdate(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6654,7 +6903,7 @@ static int32_t wire_stage_StageGradeUpdate(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "StageGradeUpdate", 0x80097BFCu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80097BFCu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_StageVictoryStart(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6664,7 +6913,7 @@ static int32_t wire_stage_StageVictoryStart(void * p0, AeRam * p1, uint32_t p2, 
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "StageVictoryStart", 0x8009543Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8009543Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_StageTypeClearInit(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6674,7 +6923,7 @@ static int32_t wire_stage_StageTypeClearInit(void * p0, AeRam * p1, uint32_t p2,
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "StageTypeClearInit", 0x80094F48u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80094F48u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_StageTypeClearUpdate(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6684,7 +6933,7 @@ static int32_t wire_stage_StageTypeClearUpdate(void * p0, AeRam * p1, uint32_t p
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "StageTypeClearUpdate", 0x80095030u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80095030u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_StageIntroStart(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6694,7 +6943,7 @@ static int32_t wire_stage_StageIntroStart(void * p0, AeRam * p1, uint32_t p2, ui
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "StageIntroStart", 0x8009546Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8009546Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_PlayerEnterCutsceneMode(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6704,7 +6953,7 @@ static int32_t wire_stage_PlayerEnterCutsceneMode(void * p0, AeRam * p1, uint32_
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "PlayerEnterCutsceneMode", 0x80095588u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80095588u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_StageIntroUpdate(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6714,7 +6963,7 @@ static int32_t wire_stage_StageIntroUpdate(void * p0, AeRam * p1, uint32_t p2, u
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "StageIntroUpdate", 0x800954C4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x800954C4u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_GimmickNopUpdate3(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6754,7 +7003,7 @@ static int32_t wire_stage_AreaCheckExits(void * p0, AeRam * p1, uint32_t p2, uin
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "AreaCheckExits", 0x80010D80u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80010D80u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_CdMgrUpdate(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6774,7 +7023,7 @@ static int32_t wire_stage_FadeFrame(void * p0, AeRam * p1, uint32_t p2, uint32_t
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FadeFrame", 0x8007A14Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x8007A14Cu, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_LoadListStep(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -6794,7 +7043,7 @@ static int32_t wire_stage_FUN_80096638(void * p0, AeRam * p1, uint32_t p2, uint3
     (void)p3;
     (void)p4;
     (void)p5;
-    return (int32_t)(ae_game_missing_call(g, "FUN_80096638", 0x80096638u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
+    return (int32_t)(ae_game_call(g, 0x80096638u, (uint32_t)p2, (uint32_t)p3, (uint32_t)p4, (uint32_t)p5));
 }
 
 static int32_t wire_stage_FUN_8013EA24(void * p0, AeRam * p1, uint32_t p2, uint32_t p3, uint32_t p4, uint32_t p5) {
@@ -7542,12 +7791,126 @@ void ae_game_wire_modules(AeGame *g) {
     g->misc.user = g;
     g->misc.stack_pointer = g->call_stack_pointer;
     g->misc.sound_hw = &g->host.sound_hw;
+    g->missa.user = g;
+    g->missa.stack_pointer = g->call_stack_pointer;
+    g->missa.spawn = &g->spawn;
+    g->missa.stage = &g->stage;
+    g->missa.world = &g->world;
+    g->missa.area_set = &g->area_set;
+    g->missa.camera = &g->camera;
+    g->missa.progress = &g->progress;
+    g->missa.player1 = &g->player1;
+    g->missa.player_act = &g->player_act;
+    g->missa.zako2 = &g->zako2;
+    g->missa.stage_fade = &g->stage_fade;
+    g->missa.camupd = &g->camupd;
+    g->missa.sound = &g->host.sound_hw;
+    g->missb.user = g;
+    g->missb.call = wire_missb_words;
+    g->missb.stack_pointer = g->call_stack_pointer;
+    g->missb.misc = &g->misc;
+    g->missb.progress = &g->progress;
+    g->missb.pause_menu = &g->pause_menu;
+    g->missb.hud = &g->hud;
+    g->missb.sound_hw = &g->host.sound_hw;
+    g->missb.stage_fade = &g->stage_fade;
+    g->missb.camupd = &g->camupd;
+    g->missb.player_act = &g->player_act;
+    g->missb.area_set = &g->area_set;
+    g->missb.gimmick_a = &g->gimmick_a;
+    g->missb.zones = &g->zones;
+    g->missb.world = &g->world;
+    g->missb.player1 = &g->player1;
+    g->missb.stage = &g->stage;
     g->mode.user = g;
     g->mode.original_call = ae_game_mode_call;
     g->mode.stack_pointer = g->call_stack_pointer;
     g->monkey.user = g;
     g->monkey.body = &g->body;
+    g->overlay.user = g;
+    g->overlay.game = g;
+    g->overlay.call = ae_game_mode_call;
+    g->overlay.render = wire_overlay_render;
+    g->ovl180.user = g;
+    g->ovl180.native_call = ae_game_mode_call;
+    g->ovl180.renderer = wire_renderer_words;
+    g->ovl180.ram_stack_pointer = g->call_stack_pointer;
+    g->ovl183.user = g;
+    g->ovl183.native_call = ae_game_mode_call;
+    g->ovl183.renderer = wire_renderer_words;
+    g->ovl183.stack_pointer = g->call_stack_pointer;
+    g->ovl183.pad = &g->pad;
+    g->ovl183.sound_hw = &g->host.sound_hw;
+    g->ovl183.progress = &g->progress;
+    g->ovl183.stage_fade = &g->stage_fade;
+    g->ovl183.text = &g->zako2;
+    g->ovl184.user = g;
+    g->ovl184.native_call = ae_game_mode_call;
+    g->ovl184.renderer = wire_renderer_words;
+    g->ovl184.stack_pointer = g->call_stack_pointer;
+    g->ovl184.pad = &g->pad;
+    g->ovl184.sound_hw = &g->host.sound_hw;
+    g->ovl184.stage_fade = &g->stage_fade;
+    g->ovl184.text = &g->zako2;
+    g->ovl185.user = g;
+    g->ovl185.native_call = ae_game_mode_call;
+    g->ovl185.renderer = wire_renderer_words;
+    g->ovl185.stack_pointer = g->call_stack_pointer;
+    g->ovl185.pad = &g->pad;
+    g->ovl185.sound_hw = &g->host.sound_hw;
+    g->ovl185.text = &g->zako2;
+    g->ovl185.stage = &g->stage;
+    g->ovl185.misc = &g->misc;
+    g->ovl186b.user = g;
+    g->ovl186b.native_call = ae_game_mode_call;
+    g->ovl186b.overlay_call = ae_game_mode_call;
+    g->ovl186b.renderer = wire_renderer_words;
+    g->ovl186b.stack_pointer = g->call_stack_pointer;
+    g->ovl186b.pad = &g->pad;
+    g->ovl187.user = g;
+    g->ovl187.call = ae_game_mode_call;
+    g->ovl187.stack_pointer = g->call_stack_pointer;
+    g->ovl187.pad = &g->pad;
+    g->ovl187.area = &g->area_set;
+    g->ovl187.items = &g->items_init;
+    g->ovl187.misc = &g->misc;
+    g->ovl187.stage = &g->stage;
+    g->ovl187.stage_fade = &g->stage_fade;
+    g->ovl187.player1 = &g->player1;
+    g->ovl187.hud = &g->hud;
+    g->ovl187.sound = &g->host.sound_hw;
+    g->ovl188.user = g;
+    g->ovl188.call = ae_game_mode_call;
+    g->ovl188.render = wire_overlay_render_void;
+    g->ovl188.stack_pointer = g->call_stack_pointer;
+    g->ovl188.stage_hooks = &g->stage;
+    g->ovl189.user = g;
+    g->ovl189.area_set = &g->area_set;
+    g->ovl189.items_init = &g->items_init;
+    g->ovl189.vram_anim = &g->vram_anim;
+    g->ovl189.progress = &g->progress;
+    g->ovl189.misc = &g->misc;
+    g->ovl189.pad = &g->pad;
+    g->ovl189.effects = &g->effects;
+    g->ovl189.hud = &g->hud;
+    g->ovl189.debug_text = &g->zako2;
+    g->ovl189.stage_fade = &g->stage_fade;
+    g->ovl189.sound_hw = &g->host.sound_hw;
+    g->ovl18a.user = g;
+    g->ovl18a.native_call = ae_game_mode_call;
+    g->ovl18a.renderer = wire_renderer_words;
+    g->ovl18a.stack_pointer = g->call_stack_pointer;
+    g->ovl18a.pad = &g->pad;
+    g->ovl18a.sound_hw = &g->host.sound_hw;
+    g->ovl18a.player1 = &g->player1;
+    g->ovl18a.area_set = &g->area_set;
+    g->ovl18a.items = &g->items_init;
+    g->ovl18a.progress = &g->progress;
+    g->ovl18a.stage_fade = &g->stage_fade;
+    g->ovl18a.text = &g->zako2;
     g->ovl18b.user = g;
+    g->ovl18b.native_call = ae_game_mode_call;
+    g->ovl18b.renderer = wire_renderer_words;
     g->ovl18b.stack_pointer = g->call_stack_pointer;
     g->ovl18b.area = &g->area_set;
     g->ovl18b.pad = &g->pad;
@@ -7561,6 +7924,16 @@ void ae_game_wire_modules(AeGame *g) {
     g->ovl18c.zako1_hooks = &g->zako1;
     g->ovl18c.spawn_hooks = &g->spawn;
     g->ovl18c.world_hooks = &g->world;
+    g->ovl1_a0.user = g;
+    g->ovl1_a0.original_call = wire_original_words;
+    g->ovl1_a0.renderer = wire_renderer_words;
+    g->ovl1_a0.body_hooks = &g->body;
+    g->ovl1_a0.spawn_hooks = &g->spawn;
+    g->ovl1_a0.camera_hooks = &g->camera;
+    g->ovl1_a0.camupd_hooks = &g->camupd;
+    g->ovl1_a0.zako2_hooks = &g->zako2;
+    g->ovl1_a0.sound_hw = &g->host.sound_hw;
+    g->ovl1_a0.stagefade_hooks = &g->stage_fade;
     g->pad.user = g;
     g->pause_menu.user = g;
     g->pause_menu.stack_pointer = g->call_stack_pointer;
@@ -8018,6 +8391,28 @@ void ae_game_wire_modules(AeGame *g) {
     g->misc.DirIndexFromFlags = wire_misc_DirIndexFromFlags;
     g->misc.PlayerSetClimbTarget = wire_misc_PlayerSetClimbTarget;
     g->misc.PlayerSetRope = wire_misc_PlayerSetRope;
+    g->missa.BeginFrame = wire_missa_BeginFrame;
+    g->missa.PlaySfx = wire_missa_PlaySfx;
+    g->missa.ClearWords = wire_missa_ClearWords;
+    g->missa.PropVisualUpdate = wire_missa_PropVisualUpdate;
+    g->missa.Printf = wire_missa_Printf;
+    g->missa.PlayerAuxModelInit = wire_missa_PlayerAuxModelInit;
+    g->missa.HudDrawTimeRankIcon = wire_missa_HudDrawTimeRankIcon;
+    g->missa.HudDrawStatPips = wire_missa_HudDrawStatPips;
+    g->missa.HudDrawFrameBox = wire_missa_HudDrawFrameBox;
+    g->missa.HudTextWidth = wire_missa_HudTextWidth;
+    g->missa.MessageBoxOpen = wire_missa_MessageBoxOpen;
+    g->missa.DrawMenuChrome = wire_missa_DrawMenuChrome;
+    g->missa.DrawMenuRows = wire_missa_DrawMenuRows;
+    g->missa.DrawMenuHighlight = wire_missa_DrawMenuHighlight;
+    g->missa.DrawMenuItem = wire_missa_DrawMenuItem;
+    g->missa.DrawMenuSelection = wire_missa_DrawMenuSelection;
+    g->missa.DrawMenuCursor = wire_missa_DrawMenuCursor;
+    g->missa.SetRotMatrix = wire_missa_SetRotMatrix;
+    g->missa.SetTransMatrix = wire_missa_SetTransMatrix;
+    g->missa.RendererHudMonkeyBadge = wire_missa_RendererHudMonkeyBadge;
+    g->missa.TrailRingDraw = wire_missa_TrailRingDraw;
+    g->missa.CallIndirect = wire_missa_CallIndirect;
     g->monkey.Printf = wire_monkey_Printf;
     g->monkey.GimmickGetInfo = wire_monkey_GimmickGetInfo;
     g->monkey.PlaySfxAt = wire_monkey_PlaySfxAt;
@@ -8060,6 +8455,7 @@ void ae_game_wire_modules(AeGame *g) {
     g->monkey.ClearWords = wire_monkey_ClearWords;
     g->monkey.VSync = wire_monkey_VSync;
     g->monkey.StageExitIsActive = wire_monkey_StageExitIsActive;
+    g->ovl188.xa_padding = wire_ovl188_xa_padding;
     g->pad.pad_get_state = wire_pad_pad_get_state;
     g->pad.pad_info_mode = wire_pad_pad_info_mode;
     g->pad.pad_setup_dualshock = wire_pad_pad_setup_dualshock;
@@ -8149,6 +8545,7 @@ void ae_game_wire_modules(AeGame *g) {
     g->player1.DrawRibbonBetween = wire_player1_DrawRibbonBetween;
     g->player1.ModelProjectVertices = wire_player1_ModelProjectVertices;
     g->player1.ModelEmitPrims = wire_player1_ModelEmitPrims;
+    g->player1.CdMgrQueueCommand = wire_player1_CdMgrQueueCommand;
     g->player2.position_padding = wire_player2_position_padding;
     g->player2.PlaySfx = wire_player2_PlaySfx;
     g->player2.AimModeLeave = wire_player2_AimModeLeave;
