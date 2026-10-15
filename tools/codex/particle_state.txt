@@ -1,0 +1,28 @@
+# Evidence: EffectScriptUpdate 80069BEC, SpawnOneParticle 8006962C,
+# ParticleAlloc 80069548, ParticlesDraw 80069920; notes/54-effect-vm.md.
+# This is a proposal; apply only to the private Codex Ghidra project.
+struct ParticleState 0x34
+0x00 u8 type ; Zero means free; local script types start at 200
+0x01 u8 freeze_position ; Nonzero suppresses velocity integration
+0x02 u8 anchor_mode ; Opcodes 25/26/27 set 0/1/2; allocator fallback tests zero
+0x03 s8 loop_depth ; -1 means no active loop; valid slots 0 and 1
+0x04 u16* script_pc
+0x08 u16*[2] loop_body
+0x10 u8[2] loop_remaining
+0x12 u8 width
+0x13 u8 height
+0x14 s16[3] position
+0x1A s8 fade_step ; Positive values subtract from RGB with zero clamp
+0x1B u8 unknown_1b ; Initially copied as part of the input SVECTOR pad
+0x1C s16[3] velocity
+0x22 s16 wait_frames
+0x24 u16 uv0 ; Low byte U, high byte V
+0x26 u16 clut
+0x28 u16 uv1
+0x2A u16 tpage
+0x2C u16 uv2
+0x2E u16 uv3
+0x30 u8[3] rgb
+0x33 u8 primitive_code ; Textured quad command; raw/semitransparent flags
+end
+apply 800b9900 ParticleState[100]

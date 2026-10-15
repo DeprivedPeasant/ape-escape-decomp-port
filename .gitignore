@@ -1,0 +1,48 @@
+# Copyrighted game data - never commit
+disc/
+extract/
+*.bin
+*.cue
+*.iso
+
+# Third-party tools (re-download per notes/00-setup.md)
+tools/_downloads/
+tools/ghidra_12.1.2_PUBLIC/
+tools/pcsx-redux/
+
+# Ghidra project databases (large, contain game code)
+ghidra-projects/
+
+# Reference clone (PolyForm Noncommercial - do not copy its generated code into src/)
+reference/
+
+.venv/
+__pycache__/
+
+# Decompiler output contains game code
+notes/decomp/
+
+# Sony BIOS - never commit
+bios/
+
+# Runtime logs
+notes/runtime/*.txt
+
+# Local tool state / third-party binaries (re-download per notes/00-setup.md)
+.sentry-native/
+tools/.sentry-native/
+tools/ghidra-settings/
+tools/mkpsxiso/
+notes/runtime/
+
+# Codex agent private Ghidra copy (see notes/COORDINATION.md)
+ghidra-projects-codex/
+
+# Local tool / agent state
+.claude/
+.mcp.json
+.codex/
+
+# Game text dumps (generate locally with tools/dump_text.py)
+notes/26-hint-text.md
+notes/28-game-strings.md

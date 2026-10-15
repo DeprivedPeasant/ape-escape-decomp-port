@@ -1,0 +1,1179 @@
+address,name,c_function,source,checker,status,min_cases,notes
+8001300C,PadSampleStickHistory,ae_pad_PadSampleStickHistory,src/core/ae_pad.c,tools/mips/check_player_input.py,diffed,600,
+800130E0,PadNormalizeSticks,ae_pad_PadNormalizeSticks,src/core/ae_pad.c,tools/mips/check_player_input.py,diffed,600,
+8001325C,PadUpdate,ae_pad_PadUpdate,src/core/ae_pad.c,tools/mips/check_player_input.py,diffed,932,
+8001413C,QuadrantFromSigns,ae_pad_QuadrantFromSigns,src/core/ae_pad.c,tools/mips/check_player_input.py,diffed,81,
+80014498,Square0,ae_sdk_square0_lane,src/core/ae_sdk.c,tools/mips/check_monkey_base.py,diffed,0,lane helper of SquareRoot0: diffed through it (no count of its own)
+800145D0,ratan2 (SDK),ae_sdk_ratan2,src/core/ae_sdk.c,tools/mips/check_monkey_base.py,diffed,320,
+8002FB50,rsin (SDK),ae_sdk_rsin,src/core/ae_sdk.c,tools/mips/check_monkey_level1.py,diffed,824,
+8002FC20,rcos (SDK),ae_sdk_rcos,src/core/ae_sdk.c,tools/mips/check_monkey_level1.py,diffed,824,
+800300B0,ApplyMatrixSV,ae_pad_ApplyMatrixSV,src/core/ae_pad.c,tools/mips/check_player_input.py,diffed,1400,second port of the same original (the first is ae_sdk_ApplyMatrixSV)
+800300B0,ApplyMatrixSV (SDK),ae_sdk_ApplyMatrixSV,src/core/ae_sdk.c,tools/mips/check_monkey_base.py,diffed,240,
+8003019C,VectorNormalS,ae_VectorNormalS,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,600,
+800301B0,VectorNormal,ae_pad_VectorNormal,src/core/ae_pad.c,tools/mips/check_player_input.py,diffed,1200,second port of the same original (the first is ae_sdk_VectorNormal)
+800301B0,VectorNormal (player-side),ae_player_normalize,src/player/native_player.c,tools/mips/check_player_input.py,diffed,1200,"player-side VectorNormal with the built-in and the EXE table, incl. the add-overflow traps"
+800301B0,VectorNormal (SDK),ae_sdk_VectorNormal,src/core/ae_sdk.c,tools/mips/check_monkey_base.py,diffed,200,
+800301E0,VectorNormalSS,ae_pad_VectorNormalSS,src/core/ae_pad.c,tools/mips/check_player_input.py,diffed,1600,second port of the same original (the first is ae_sdk_VectorNormalSS)
+800301E0,VectorNormalSS (SDK),ae_sdk_VectorNormalSS,src/core/ae_sdk.c,tools/mips/check_monkey_base.py,diffed,200,
+80030210,VectorNormal core,ae_sdk_normalize_core,src/core/ae_sdk.c,tools/mips/check_monkey_base.py,diffed,0,shared core of VectorNormal / VectorNormalSS: diffed through them (no count of its own)
+800303C0,SquareRoot0 (SDK),ae_sdk_SquareRoot0,src/core/ae_sdk.c,tools/mips/check_monkey_base.py,diffed,320,
+80030BD0,RotMatrix (SDK),ae_sdk_RotMatrix,src/core/ae_sdk.c,tools/mips/check_monkey_level10.py,diffed,48,
+80030FA0,RotMatrixYXZ (SDK),ae_sdk_RotMatrixYXZ,src/core/ae_sdk.c,tools/mips/check_monkey_level1.py,diffed,320,
+80032E30,MonkeyRand,ae_MonkeyRand,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,120,
+80032E58,MonkeyCaughtGroupValue,ae_MonkeyCaughtGroupValue,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,40,
+80032E84,MonkeyGetAnimIndex,ae_MonkeyGetAnimIndex,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,160,
+80032F24,MonkeyRandomHesitate,ae_MonkeyRandomHesitate,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,200,
+80033000,MonkeyNop,ae_MonkeyNop,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,1,
+80033008,MonkeyBodyRegister,ae_MonkeyBodyRegister,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,120,
+80033068,MonkeyBodyUnregister,ae_MonkeyBodyUnregister,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,120,
+800330C8,MonkeyAdvanceAnimFrame,ae_MonkeyAdvanceAnimFrame,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,187,
+8003317C,MonkeyActivityReset,ae_MonkeyActivityReset,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,16,
+800331B0,MonkeyPickAnim,ae_MonkeyPickAnim,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,187,
+80033220,MonkeySetState,ae_MonkeySetState,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,232,
+800332F8,MonkeyRestoreActivities,ae_MonkeyRestoreActivities,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,280,
+800334C8,MonkeyStoreActivities,ae_MonkeyStoreActivities,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,160,
+800335D0,GimmickAllowsMonkeyPassage,ae_GimmickAllowsMonkeyPassage,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,200,
+80033708,MonkeyVoiceQueueReset,ae_MonkeyVoiceQueueReset,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,8,
+80033744,MonkeyQueueVoice,ae_MonkeyQueueVoice,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,120,
+800337C4,DelayedSfxUpdate,ae_DelayedSfxUpdate,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,120,
+8003386C,NavNodeGetLink,ae_NavNodeGetLink,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,480,
+8003398C,AreaIsSpecialMonkeyArea,ae_AreaIsSpecialMonkeyArea,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,84,
+800339CC,MonkeyIsState1E_to_20,ae_MonkeyIsState1E_to_20,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,78,
+800339EC,AreaIsBossArena,ae_AreaIsBossArena,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,84,
+80033A3C,MonkeyAnimFinished,ae_MonkeyAnimFinished,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,187,
+80033ACC,MonkeyAnimAtStart,ae_MonkeyAnimAtStart,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,187,
+80033B10,MonkeyIsIdleActivityState,ae_MonkeyIsIdleActivityState,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,78,
+80033B9C,MonkeyIsIdleEndState,ae_MonkeyIsIdleEndState,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,78,
+80033BE0,MonkeyIsAltAnimState,ae_MonkeyIsAltAnimState,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,78,
+80033C00,MonkeyIsState0C_or_24,ae_MonkeyIsState0C_or_24,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,78,
+80033C34,MonkeyIsJumpArcState,ae_MonkeyIsJumpArcState,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,78,
+80033C80,MonkeyIsAttackState,ae_MonkeyIsAttackState,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,78,
+80033CCC,MonkeySpawnProjectile,ae_MonkeySpawnProjectile,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,160,
+80033DF0,MonkeyFireProjectile6,ae_MonkeyFireProjectile6,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,80,
+80033E4C,MonkeyAimAtTarget,ae_MonkeyAimAtTarget,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,600,
+8003429C,MonkeyFireProjectileAimed,ae_MonkeyFireProjectileAimed,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,160,
+800343B0,MonkeyFireProjectile7,ae_MonkeyFireProjectile7,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,80,
+8003440C,MonkeyFireProjectile8,ae_MonkeyFireProjectile8,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,80,
+800344C8,AngleBetweenXZ,ae_AngleBetweenXZ,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,304,
+8003455C,MonkeyAngleToTarget,ae_MonkeyAngleToTarget,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,280,
+800345D4,DistanceIntToShort3D,ae_DistanceIntToShort3D,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,280,
+80034684,Distance3D,ae_Distance3D,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,280,
+8003473C,DistanceXZ,ae_DistanceXZ,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,280,
+800347D8,MonkeyCalcMoveDir,ae_MonkeyCalcMoveDir,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,280,
+80034834,MonkeyApplyMoveDir,ae_MonkeyApplyMoveDir,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,240,
+800348CC,DotXZ_SV,ae_DotXZ_SV,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,280,
+80034940,DotXZ_V,ae_DotXZ_V,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,280,
+800349B4,Atan2Angle4096,ae_Atan2Angle4096,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,280,
+800349F4,NavNodeIsSpecial,ae_NavNodeIsSpecial,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,120,
+80034B74,NavNodeGetLinkIds,ae_NavNodeGetLinkIds,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,160,
+80034C08,NavNodeGetLinkIdsEx,ae_NavNodeGetLinkIdsEx,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,160,
+80034D30,ObjGetBonePos,ae_ObjGetBonePos,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,200,
+80034EF8,NavNodeGetPos,ae_NavNodeGetPos,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,360,
+80035080,MonkeySetNavNode,ae_MonkeySetNavNode,src/monkeys/ae_monkey_level4.c,tools/mips/check_monkey_level4.py,diffed,611,
+8003516C,MonkeyReachedNode,ae_MonkeyReachedNode,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,360,
+80035370,MonkeyUpdateLinkSlope,ae_MonkeyUpdateLinkSlope,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,256,
+80035474,MonkeyUpdateGoalPos,ae_MonkeyUpdateGoalPos,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,288,
+800355DC,MonkeyUpdateGoal,ae_MonkeyUpdateGoal,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,200,
+80035604,MonkeyNavBacktracked,ae_MonkeyNavBacktracked,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,240,
+800356C0,MonkeyGetCallVoice,ae_MonkeyGetCallVoice,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,48,
+80035750,MonkeyGetCallVoice2,ae_MonkeyGetCallVoice2,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,48,
+800357E0,MonkeyStartNotice,ae_MonkeyStartNotice,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,100,
+8003581C,MonkeyEnterState_1E,ae_MonkeyEnterState_1E,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,240,
+80035918,MonkeyEnterState_32,ae_MonkeyEnterState_32,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,160,
+800359B4,MonkeyEnterState_34,ae_MonkeyEnterState_34,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,60,
+800359F0,MonkeyEnterState_1D,ae_MonkeyEnterState_1D,src/monkeys/ae_monkey_level4.c,tools/mips/check_monkey_level4.py,diffed,150,
+80035A7C,MonkeyEnterState_04,ae_MonkeyEnterState_04,src/monkeys/ae_monkey_level4.c,tools/mips/check_monkey_level4.py,diffed,150,
+80035BD0,MonkeyEnterKnockdown,ae_MonkeyEnterKnockdown,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,240,
+80035D18,MonkeyEnterState2F,ae_MonkeyEnterState2F,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,100,
+80035DD8,MonkeyEnterState_30,ae_MonkeyEnterState_30,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,100,
+80035E6C,MonkeyEnterState_36,ae_MonkeyEnterState_36,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,80,
+80035EA4,MonkeyEnterState_20,ae_MonkeyEnterState_20,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,80,
+80035F1C,MonkeyEnterState_24,ae_MonkeyEnterState_24,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,100,
+80035F54,MonkeyEnterState_0C,ae_MonkeyEnterState_0C,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,100,
+80035F8C,MonkeyEnterState_35,ae_MonkeyEnterState_35,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,60,
+80035FBC,MonkeyEnterState_1A,ae_MonkeyEnterState_1A,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,120,
+8003601C,MonkeyEnterState_09,ae_MonkeyEnterState_09,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,240,
+800360D8,MonkeyEnterState_3D,ae_MonkeyEnterState_3D,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,64,
+8003612C,MonkeyEnterState_3E,ae_MonkeyEnterState_3E,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,64,
+80036174,MonkeyEnterState_3F,ae_MonkeyEnterState_3F,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,64,
+800361B4,MonkeyTargetInSightRange,ae_MonkeyTargetInSightRange,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,360,
+80036300,MonkeyEnterIdleWait,ae_MonkeyEnterIdleWait,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,160,
+800363A4,MonkeyResumeIdle,ae_MonkeyResumeIdle,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,60,
+800363E4,MonkeyEnterRandomLook,ae_MonkeyEnterRandomLook,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,80,
+8003641C,MonkeyEnterState_17,ae_MonkeyEnterState_17,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,64,
+80036460,MonkeyEnterState_2A,ae_MonkeyEnterState_2A,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,96,
+800364BC,MonkeyPrepareJumpArc,ae_MonkeyPrepareJumpArc,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,992,
+80036964,MonkeyEnterState_2C,ae_MonkeyEnterState_2C,src/monkeys/ae_monkey_level4.c,tools/mips/check_monkey_level4.py,diffed,125,
+80036B24,MonkeyBodyOff,ae_MonkeyBodyOff,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,120,
+80036B78,MonkeyBodyOn,ae_MonkeyBodyOn,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,120,
+80036BD0,MonkeyFacingFromLinkCode,ae_MonkeyFacingFromLinkCode,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,60,
+80036C84,MonkeyDefeatBurst,ae_MonkeyDefeatBurst,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,48,
+80036CD0,MonkeyNodeActionDispatch,ae_MonkeyNodeActionDispatch,src/monkeys/ae_monkey_level5.c,tools/mips/check_monkey_level5.py,diffed,966,
+80037068,MonkeyAttackChance,ae_MonkeyAttackChance,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,160,
+8003710C,MonkeyTryAttackKind,ae_MonkeyTryAttackKind,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,800,
+8003738C,MonkeyPickAttackA,ae_MonkeyPickAttackA,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,480,
+80037420,MonkeyPickAttackB,ae_MonkeyPickAttackB,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,480,
+800374B8,MonkeyPickAttackC,ae_MonkeyPickAttackC,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,480,
+80037550,MonkeyAlertedDecide,ae_MonkeyAlertedDecide,src/monkeys/ae_monkey_level6.c,tools/mips/check_monkey_level6.py,diffed,733,
+800378C0,MonkeyDecideAction,ae_MonkeyDecideAction,src/monkeys/ae_monkey_level8.c,tools/mips/check_monkey_level8.py,diffed,48,
+80037908,MonkeyPatrolDecide,ae_MonkeyPatrolDecide,src/monkeys/ae_monkey_level7.c,tools/mips/check_monkey_level7.py,diffed,638,
+80037D6C,MonkeyApproachAngleNear,ae_MonkeyApproachAngleNear,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,160,
+80037DEC,MonkeyApproachAngleFar,ae_MonkeyApproachAngleFar,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,160,
+80037E8C,MonkeyNavLinkAllowed,ae_MonkeyNavLinkAllowed,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,800,
+80038054,MonkeyMarkBlockedLinks,ae_MonkeyMarkBlockedLinks,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,360,
+80038120,MonkeyPickBestLink,ae_MonkeyPickBestLink,src/monkeys/ae_monkey_level4.c,tools/mips/check_monkey_level4.py,diffed,600,
+80038608,NavNodeLinkFlag,ae_NavNodeLinkFlag,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,240,
+80038694,MonkeySwapNavNodes,ae_MonkeySwapNavNodes,src/monkeys/ae_monkey_level4.c,tools/mips/check_monkey_level4.py,diffed,100,
+800386C8,MonkeyConsiderTurnBack,ae_MonkeyConsiderTurnBack,src/monkeys/ae_monkey_level5.c,tools/mips/check_monkey_level5.py,diffed,690,
+80038914,MonkeyConsiderTurnBackRandom,ae_MonkeyConsiderTurnBackRandom,src/monkeys/ae_monkey_level5.c,tools/mips/check_monkey_level5.py,diffed,690,
+80038A1C,MonkeyChooseNextNodeA,ae_MonkeyChooseNextNodeA,src/monkeys/ae_monkey_level6.c,tools/mips/check_monkey_level6.py,diffed,375,
+80038A9C,MonkeyChooseNextNodeB,ae_MonkeyChooseNextNodeB,src/monkeys/ae_monkey_level6.c,tools/mips/check_monkey_level6.py,diffed,1200,
+80038F00,MonkeyFootDust,ae_MonkeyFootDust,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,160,
+80038FD8,MonkeyDebrisBurst6,ae_MonkeyDebrisBurst6,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,60,
+800390F8,MonkeyDebrisBurst1,ae_MonkeyDebrisBurst1,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,60,
+80039200,MonkeyPuff14,ae_MonkeyPuff14,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,40,
+80039248,MonkeyAlertPuff,ae_MonkeyAlertPuff,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,60,
+8003929C,MonkeyPuff5,ae_MonkeyPuff5,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,40,
+800392E4,BodyContactType,ae_BodyContactType,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,200,
+800392F0,MonkeyUpdateContact,ae_MonkeyUpdateContact,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,2592,
+800393E4,MonkeyProjectToScreen,ae_MonkeyProjectToScreen,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,360,
+8003958C,MonkeySpawnAll,ae_MonkeySpawnAll,src/monkeys/ae_monkey_level10.c,tools/mips/check_monkey_level10.py,diffed,32,
+80039B30,MonkeyUpdateTargetDistance,ae_MonkeyUpdateTargetDistance,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,270,
+80039B90,MonkeyAlertIconKind,ae_MonkeyAlertIconKind,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,120,
+80039C38,MonkeyDrawAlertIcon,ae_MonkeyDrawAlertIcon,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,358,
+80039E50,StaticModelDraw,ae_StaticModelDraw,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,48,
+80039ED4,MonkeyDrawModel,ae_MonkeyDrawModel,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,1000,
+8003A334,MonkeyStub_ReturnZero,ae_MonkeyStub_ReturnZero,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,1,
+8003A33C,MonkeySelectLod,ae_MonkeySelectLod,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,160,
+8003A414,MonkeyInit,ae_MonkeyInit,src/monkeys/ae_monkey_level8.c,tools/mips/check_monkey_level8.py,diffed,504,
+8003AC54,MonkeyScoreLinksByTarget,ae_MonkeyScoreLinksByTarget,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,288,
+8003AD9C,MonkeyPickGoalNode,ae_MonkeyPickGoalNode,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,480,
+8003B074,MonkeySelectNextNode,ae_MonkeySelectNextNode,src/monkeys/ae_monkey_level7.c,tools/mips/check_monkey_level7.py,diffed,700,
+8003B534,MonkeyNodeTargetCosines,ae_MonkeyNodeTargetCosines,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,224,
+8003B674,MonkeyLoadLinkExtra,ae_MonkeyLoadLinkExtra,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,360,
+8003B880,NavLinkLookupExtra,ae_NavLinkLookupExtra,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,360,
+8003B9C0,MonkeyMoveStep,ae_MonkeyMoveStep,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,947,
+8003C204,MonkeyUpdateFacing,ae_MonkeyUpdateFacing,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,2022,
+8003C568,MonkeyInterpolateLinkVector,ae_MonkeyInterpolateLinkVector,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,240,
+8003C6D4,MonkeyAi_MoveAlerted,ae_MonkeyAi_MoveAlerted,src/monkeys/ae_monkey_level8.c,tools/mips/check_monkey_level8.py,diffed,680,
+8003CC3C,MonkeyTurnTowardTarget,ae_MonkeyTurnTowardTarget,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,400,
+8003CD24,MonkeyFireProjectileByKind,ae_MonkeyFireProjectileByKind,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,128,
+8003CD84,MonkeyAi_State1E_20,ae_MonkeyAi_State1E_20,src/monkeys/ae_monkey_level8.c,tools/mips/check_monkey_level8.py,diffed,816,
+8003D9D4,MonkeyAi_MoveUnalerted,ae_MonkeyAi_MoveUnalerted,src/monkeys/ae_monkey_level8.c,tools/mips/check_monkey_level8.py,diffed,480,
+8003DC7C,MonkeyAi_Patrol,ae_MonkeyAi_Patrol,src/monkeys/ae_monkey_level9_patrol.c,tools/mips/check_monkey_level9.py,diffed,1360,
+8003F18C,MonkeyAi_IdleActivityStart,ae_MonkeyAi_IdleActivityStart,src/monkeys/ae_monkey_level7.c,tools/mips/check_monkey_level7.py,diffed,434,
+8003F308,MonkeyAi_IdleActivityLoop,ae_MonkeyAi_IdleActivityLoop,src/monkeys/ae_monkey_level7.c,tools/mips/check_monkey_level7.py,diffed,434,
+8003F4B4,MonkeyAi_IdleActivityEnd,ae_MonkeyAi_IdleActivityEnd,src/monkeys/ae_monkey_level8.c,tools/mips/check_monkey_level8.py,diffed,56,
+8003F530,MonkeyAi_JumpArc,ae_MonkeyAi_JumpArc,src/monkeys/ae_monkey_level9.c,tools/mips/check_monkey_level9.py,diffed,368,
+8003F86C,MonkeyAi_JumpArcPhased,ae_MonkeyAi_JumpArcPhased,src/monkeys/ae_monkey_level9.c,tools/mips/check_monkey_level9.py,diffed,368,
+8003FB44,MonkeyAi_State3D,ae_MonkeyAi_State3D,src/monkeys/ae_monkey_level9.c,tools/mips/check_monkey_level9.py,diffed,112,
+8003FC08,MonkeyAi_State3E,ae_MonkeyAi_State3E,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,200,
+8003FCD8,MonkeyAi_Fall,ae_MonkeyAi_Fall,src/monkeys/ae_monkey_level4.c,tools/mips/check_monkey_level4.py,diffed,150,
+8003FD7C,MonkeyAi_JumpArcB,ae_MonkeyAi_JumpArcB,src/monkeys/ae_monkey_level9.c,tools/mips/check_monkey_level9.py,diffed,328,
+8004002C,MonkeyAi_GoToFlaggedNode,ae_MonkeyAi_GoToFlaggedNode,src/monkeys/ae_monkey_level7.c,tools/mips/check_monkey_level7.py,diffed,410,
+80040170,MonkeyAi_State07,ae_MonkeyAi_State07,src/monkeys/ae_monkey_level8.c,tools/mips/check_monkey_level8.py,diffed,80,
+800401F4,MonkeyLineOfSight,ae_MonkeyLineOfSight,src/monkeys/ae_monkey_level1.c,tools/mips/check_monkey_level1.py,diffed,280,
+800405C4,MonkeyUpdateSight,ae_MonkeyUpdateSight,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,1440,
+800407F0,MonkeyResetNavVisits,ae_MonkeyResetNavVisits,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,120,
+8004086C,MonkeyNavVisitUpdate,ae_MonkeyNavVisitUpdate,src/monkeys/ae_monkey_level3.c,tools/mips/check_monkey_level3.py,diffed,600,
+80040BDC,NavGroundHeightBetween,ae_NavGroundHeightBetween,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,320,
+80040CFC,MonkeyGetWaypointPos,ae_MonkeyGetWaypointPos,src/monkeys/ae_monkey_level2.c,tools/mips/check_monkey_level2.py,diffed,256,
+80040D90,MonkeyArriveAtNode,ae_MonkeyArriveAtNode,src/monkeys/ae_monkey_level4.c,tools/mips/check_monkey_level4.py,diffed,488,
+80041280,ActorContactOwnerType,ae_ActorContactOwnerType,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,120,
+800412B0,MonkeyAiStateUpdate,ae_MonkeyAiStateUpdate,src/monkeys/ae_monkey_level10.c,tools/mips/check_monkey_level10.py,diffed,1009,
+800424D4,MonkeyThinkActive,ae_MonkeyThinkActive,src/monkeys/ae_monkey_level10.c,tools/mips/check_monkey_level10.py,diffed,120,
+800426C4,MonkeySelectActive,ae_MonkeySelectActive,src/monkeys/ae_monkey_level9.c,tools/mips/check_monkey_level9.py,diffed,200,
+80042B68,MonkeyUpdateVisuals,ae_MonkeyUpdateVisuals,src/monkeys/ae_monkey_level4.c,tools/mips/check_monkey_level4.py,diffed,200,
+80042E18,MonkeyUpdateAll,ae_MonkeyUpdateAll,src/monkeys/ae_monkey_level10.c,tools/mips/check_monkey_level10.py,diffed,64,
+80043060,MonkeyDebugMenuInit,ae_MonkeyDebugMenuInit,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,1,
+800430F0,MonkeyDebugMenuInit2,ae_MonkeyDebugMenuInit2,src/monkeys/ae_monkey_base.c,tools/mips/check_monkey_base.py,diffed,80,
+80046618,VecLength3,ae_player_vec_length3,src/player/native_player.c,tools/mips/check_bodies.py,diffed,600,used by the collision bodies; checked by check_bodies.py
+80046670,CameraLookAt,ae_pad_CameraRotMatrix,src/core/ae_pad.c,tools/mips/check_player_input.py,diffed,1000,partial port: only the g_CameraRotMatrix part; the checker compares the 18 matrix bytes (see check_exclusions.csv)
+80066F50,CanSwitchGadget,ae_player_can_switch_gadget,src/player/native_player.c,tools/mips/check_player_input.py,diffed,374,
+80067974,PlayerCheckGadgetSelect,ae_player_gadget_select_request,src/player/native_player.c,tools/mips/check_player_input.py,diffed,1000,"the decision only (which PlayerSelectGadget call, if any)"
+80068B7C,IsPlayerSwimming,ae_player_is_swimming,src/player/native_player.c,tools/mips/check_player_input.py,diffed,292,
+80071D3C,CollisionBodiesReset,ae_CollisionBodiesReset,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,40,
+80071E44,CollisionBodyRegister,ae_CollisionBodyRegister,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,200,
+80071FDC,CollisionBodyAllocSlot,ae_CollisionBodyAllocSlot,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,40,
+80072018,CollisionBodyUnregister,ae_CollisionBodyUnregister,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,240,
+80072170,GetObjectByIndex,ae_GetObjectByIndex,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,100,
+800721B4,CollisionBodyIndexOf,ae_CollisionBodyIndexOf,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,100,
+80072220,CollisionBodyAlloc,ae_CollisionBodyAlloc,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,100,
+8007228C,CollisionBodyClear,ae_CollisionBodyClear,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,100,
+800722D4,CollisionBodyFree,ae_CollisionBodyFree,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,100,
+80072334,LoopSlotAdd,ae_LoopSlotAdd,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,120,
+80072380,LoopSlotRef,ae_LoopSlotRef,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,120,
+800723E8,LoopSlotSweep,ae_LoopSlotSweep,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,120,
+80072454,LoopSlotClearAll,ae_LoopSlotClearAll,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,120,
+8007247C,CollisionUpdate,ae_CollisionUpdate,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,360,
+800777AC,BodyCollideWithBodies,ae_BodyCollideWithBodies,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,640,
+80077C28,CollisionBodyGetCenter,ae_CollisionBodyGetCenter,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,200,
+80077D18,BodyFindOverlapType1,ae_BodyFindOverlapType1,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,380,
+80077EE8,BodyFindOverlapType3to5,ae_BodyFindOverlapType3to5,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,380,
+80078088,BodyCollideBodiesDetailed,ae_BodyCollideBodiesDetailed,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,800,
+80078808,BodyContactSfx,ae_BodyContactSfx,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,120,
+80078864,BodyTypeOfActor,ae_BodyTypeOfActor,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,120,
+800788B8,BodyCheckPickupContact,ae_BodyCheckPickupContact,src/bodies/ae_bodies.c,tools/mips/check_bodies.py,diffed,380,
+8007AFC4,GadgetSlotsInitForArea,ae_GadgetSlotsInitForArea,src/player/native_gadget_slots.c,tools/mips/check_player_input.py,diffed,160,
+8007B16C,GadgetSlotsInitForExit,ae_GadgetSlotsInitForExit,src/player/native_gadget_slots.c,tools/mips/check_player_input.py,diffed,1642,
+8007C9D8,GadgetSlotsSave,ae_GadgetSlotsSave,src/player/native_gadget_slots.c,tools/mips/check_player_input.py,diffed,160,
+8007CA10,GadgetSlotsRestore,ae_GadgetSlotsRestore,src/player/native_gadget_slots.c,tools/mips/check_player_input.py,diffed,160,
+80032708,ClearWords,ae_ClearWords,src/world/ae_world.c,tools/mips/check_world.py,diffed,9,World queries/events; see notes/port/world.md
+8005DCE4,StageExitIsActive,ae_StageExitIsActive,src/world/ae_world.c,tools/mips/check_world.py,diffed,256,World queries/events; see notes/port/world.md
+8007CD88,TargetListAdd,ae_TargetListAdd,src/world/ae_world.c,tools/mips/check_world.py,diffed,33,World queries/events; see notes/port/world.md
+8007CDC4,TargetListRemove,ae_TargetListRemove,src/world/ae_world.c,tools/mips/check_world.py,diffed,3,World queries/events; see notes/port/world.md
+80052C4C,ObjSlotGetAnimIndex,ae_ObjSlotGetAnimIndex,src/world/ae_world.c,tools/mips/check_world.py,diffed,40,World queries/events; see notes/port/world.md
+80052CA0,ObjSlotSetField_CF,ae_ObjSlotSetField_CF,src/world/ae_world.c,tools/mips/check_world.py,diffed,40,World queries/events; see notes/port/world.md
+80052D04,ObjSlotGetTarget,ae_ObjSlotGetTarget,src/world/ae_world.c,tools/mips/check_world.py,diffed,44,World queries/events; see notes/port/world.md
+80052CEC,SetDAT_800E77E2,ae_SetDAT_800E77E2,src/world/ae_world.c,tools/mips/check_world.py,diffed,6,World queries/events; see notes/port/world.md
+8005B7BC,GimmickGetInfo,ae_GimmickGetInfo,src/world/ae_world.c,tools/mips/check_world.py,diffed,60,World queries/events; see notes/port/world.md
+8005B880,GimmickEvent,ae_GimmickEvent,src/world/ae_world.c,tools/mips/check_world.py,diffed,714,World queries/events; see notes/port/world.md
+800433B0,GetGroundHeightEx,ae_GetGroundHeightEx,src/world/ae_world.c,tools/mips/check_world.py,diffed,453,World queries/events; see notes/port/world.md
+80043400,GetGroundHeight,ae_GetGroundHeight,src/world/ae_world.c,tools/mips/check_world.py,diffed,459,World queries/events; see notes/port/world.md
+80071D20,CollProbeCounterInc,ae_CollProbeCounterInc,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,4,Readable hand port; full instruction coverage or registered impossible-branch proofs
+800889B4,GetColliderQuadrantMaskXZ,ae_GetColliderQuadrantMaskXZ,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,144,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004FE48,ColliderSlopeCorner,ae_ColliderSlopeCorner,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,276,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004FC8C,ColliderSlopeSide,ae_ColliderSlopeSide,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,448,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004FF20,ColliderHalfSpaceInside,ae_ColliderHalfSpaceInside,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,288,Readable hand port; full instruction coverage or registered impossible-branch proofs
+80079A28,ColliderTypeActive,ae_ColliderTypeActive,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,480,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004F548,ColliderStripHeight,ae_ColliderStripHeight,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,110,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004F514,ColliderStripHeightOut,ae_ColliderStripHeightOut,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,110,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004E33C,CollShape_Box,ae_CollShape_Box,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,195,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004ED30,CollShape_Ramp2,ae_CollShape_Ramp2,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,197,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004EE94,CollShape_Ramp4,ae_CollShape_Ramp4,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,197,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004EA1C,CollShape_Ramp45,ae_CollShape_Ramp45,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,197,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004F000,CollShape_Wedge,ae_CollShape_Wedge,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,198,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004FFC8,CollHalfPipeHeight,ae_CollHalfPipeHeight,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,66,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004EC3C,CollShape_Cylinder,ae_CollShape_Cylinder,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,398,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004F438,ColliderRingHeight,ae_ColliderRingHeight,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,64,Readable hand port; full instruction coverage or registered impossible-branch proofs
+800774B8,DiagonalSignedDistance,ae_DiagonalSignedDistance,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,42,Readable hand port; full instruction coverage or registered impossible-branch proofs
+800500D8,ColliderTrenchHeight,ae_ColliderTrenchHeight,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,98,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004E444,CollShape_WallThin,ae_CollShape_WallThin,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,384,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004E63C,CollShape_WallEdge,ae_CollShape_WallEdge,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,245,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004E8F8,CollShape_WallDiagonal,ae_CollShape_WallDiagonal,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,108,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004F330,CollShape_DiagonalBox,ae_CollShape_DiagonalBox,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,104,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004F984,ColliderSlopeHeight,ae_ColliderSlopeHeight,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,178,Readable hand port; full instruction coverage or registered impossible-branch proofs
+800797F8,GetSurfaceType,ae_GetSurfaceType,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,55,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004DF38,ColliderHeightAt,ae_ColliderHeightAt,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,641,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8004D8C0,GetSolidHeight,ae_GetSolidHeight,src/world/ae_solid.c,tools/mips/check_solid.py,diffed,344,Readable hand port; full instruction coverage or registered impossible-branch proofs
+8003019C,VectorNormalS,ae_sdk_VectorNormalS,src/core/ae_sdk.c,tools/mips/check_solid.py,diffed,5,Readable hand port; full instruction coverage or registered impossible-branch proofs
+80014804,MatrixFromDirXZ,ae_sdk_MatrixFromDirXZ,src/core/ae_sdk_matrix.c,tools/mips/check_pose.py,diffed,72,
+8001484C,MatrixLookDir,ae_sdk_MatrixLookDir,src/core/ae_sdk_matrix.c,tools/mips/check_pose.py,diffed,160,
+80014E34,ActorAnimDecode,ae_ActorAnimDecode,src/core/ae_pose.c,tools/mips/check_pose.py,diffed,100,
+80014FA0,AnimDecodeLerp,ae_AnimDecodeLerp,src/core/ae_pose.c,tools/mips/check_pose.py,diffed,180,
+80015504,ModelBuildBoneMatrices,ae_ModelBuildBoneMatrices,src/core/ae_pose.c,tools/mips/check_pose.py,diffed,100,
+80015780,ModelPoseBones,ae_ModelPoseBones,src/core/ae_pose.c,tools/mips/check_pose.py,diffed,140,
+8002FCC0,RotMatrixZYX (SDK),ae_sdk_RotMatrixZYX,src/core/ae_sdk_matrix.c,tools/mips/check_pose.py,diffed,180,
+800306F0,RotMatrixZ (SDK),ae_sdk_RotMatrixZ,src/core/ae_sdk_matrix.c,tools/mips/check_pose.py,diffed,160,
+80030890,RotMatrixY (SDK),ae_sdk_RotMatrixY,src/core/ae_sdk_matrix.c,tools/mips/check_pose.py,diffed,160,
+80030A30,RotMatrixX (SDK),ae_sdk_RotMatrixX,src/core/ae_sdk_matrix.c,tools/mips/check_pose.py,diffed,160,
+8002FF50,CompMatrix (SDK),ae_sdk_CompMatrix,src/core/ae_sdk_matrix.c,tools/mips/check_pose.py,diffed,220,
+80030E60,ScaleMatrix (SDK),ae_sdk_ScaleMatrix,src/core/ae_sdk_matrix.c,tools/mips/check_pose.py,diffed,120,
+8004637C,MatrixIdentity,ae_sdk_MatrixIdentity,src/core/ae_sdk_matrix.c,tools/mips/check_pose.py,diffed,12,
+80059304,ProjectileSpawn,ae_ProjectileSpawn,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,209,Effect spawning; notes/port/spawn.md
+80069548,ParticleAlloc,ae_ParticleAlloc,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,44,Effect spawning; notes/port/spawn.md
+8006962c,SpawnOneParticle,ae_SpawnOneParticle,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,37,Effect spawning; notes/port/spawn.md
+8006ed78,TrailSpawn,ae_TrailSpawn,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,9,Effect spawning; notes/port/spawn.md
+8006fe7c,EffectObjAlloc,ae_EffectObjAlloc,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,32,Effect spawning; notes/port/spawn.md
+80070130,EffectObjSpawn,ae_EffectObjSpawn,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,12,Effect spawning; notes/port/spawn.md
+80070284,EffectSpawnFromDef,ae_EffectSpawnFromDef,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,12,Effect spawning; notes/port/spawn.md
+800696ec,SpawnEffectGroup,ae_SpawnEffectGroup,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,24,Effect spawning; notes/port/spawn.md
+800698b8,SpawnParticle,ae_SpawnParticle,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,182,Effect spawning; notes/port/spawn.md
+80084ac8,ProjectileAllocSlot,ae_ProjectileAllocSlot,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,65,Effect spawning; notes/port/spawn.md
+80084b48,ProjectileInit,ae_ProjectileInit,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,32,Effect spawning; notes/port/spawn.md
+80084b74,ProjectileSetColor,ae_ProjectileSetColor,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,32,Effect spawning; notes/port/spawn.md
+80084bb8,ProjectileSetByte2,ae_ProjectileSetByte2,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,32,Effect spawning; notes/port/spawn.md
+80084c78,ProjectileSetUpdate,ae_ProjectileSetUpdate,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,32,Effect spawning; notes/port/spawn.md
+8006e054,SparkAdd,ae_SparkAdd,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,32,Effect spawning; notes/port/spawn.md
+8006e0dc,SparkAddRandom,ae_SparkAddRandom,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,32,Effect spawning; notes/port/spawn.md
+80048a00,CameraShake,ae_CameraShake,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,72,Effect spawning; notes/port/spawn.md
+8006b3cc,SpawnPuff,ae_SpawnPuff,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,32,Effect spawning; notes/port/spawn.md
+8006b3f0,EffectBigBurst,ae_EffectBigBurst,src/effects/ae_spawn.c,tools/mips/check_spawn.py,diffed,32,Effect spawning; notes/port/spawn.md
+800885A8,SfxIsQueued,ae_SfxIsQueued,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,26,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+800885FC,SoundDelayedQueueAdd,ae_SoundDelayedQueueAdd,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,79,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+800881D0,SoundLoopAllocSlot,ae_SoundLoopAllocSlot,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,25,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+8008820C,SoundLoopFree,ae_SoundLoopFree,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,50,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+800A1378,SeqSetTickFlag,ae_SeqSetTickFlag,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,7,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+800A119C,SpuVolumeClamp,ae_SpuVolumeClamp,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,98,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+8009E82C,SfxLookupTone,ae_SfxLookupTone,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,207,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+8009E940,SfxVoiceAlloc,ae_SfxVoiceAlloc,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,299,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+800A3158,SfxVoiceStart,ae_SfxVoiceStart,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,101,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+800A31B8,SfxVoiceStartEx,ae_SfxVoiceStartEx,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,101,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+800A329C,SfxVoiceStop,ae_SfxVoiceStop,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,26,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+80087C8C,SoundEmitterCalcPan,ae_SoundEmitterCalcPan,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,383,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+80087A20,PlaySfxAt,ae_PlaySfxAt,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,207,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+800882C4,SoundLoopStartEx,ae_SoundLoopStartEx,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,241,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+800880D0,SoundLoopStopAndFree,ae_SoundLoopStopAndFree,src/sound/ae_sound.c,tools/mips/check_sound.py,diffed,11,Readable sound request port; ordered native hardware hooks; full coverage or registered proof
+80064454,PlayerRunAnimEvents,ae_PlayerRunAnimEvents,src/player/ae_anim_events.c,tools/mips/check_anim_events.py,diffed,361,"Real member 008 records and every frame boundary; 352/353 instructions with 800644D4 proven unreachable."
+8007C468,PlayerAnimEventAddHitBodies,ae_PlayerAnimEventAddHitBodies,src/player/ae_anim_events.c,tools/mips/check_anim_events.py,diffed,8,"Direct and event-driven cases cover interpolation and body/slot exhaustion."
+8007304C,CollisionBuildProbePoints,ae_CollisionBuildProbePoints,src/bodies/ae_probe.c,tools/mips/check_probe.py,diffed,195,
+8004F6E8,CollisionPointInGrid,ae_CollisionPointInGrid,src/bodies/ae_probe.c,tools/mips/check_probe.py,diffed,193,
+800733DC,CollisionShiftProbePoints,ae_CollisionShiftProbePoints,src/bodies/ae_probe.c,tools/mips/check_probe.py,diffed,48,
+80073AA0,PointInBoxXYZ,ae_PointInBoxXYZ,src/bodies/ae_probe.c,tools/mips/check_probe.py,diffed,150,
+80072D28,BodyProbeGround,ae_BodyProbeGround,src/bodies/ae_probe.c,tools/mips/check_probe.py,diffed,150,
+8008FC30,GimmickActivate,ae_GimmickActivate,src/world/ae_gimmick.c,tools/mips/check_gimmick.py,diffed,315,"Structured type dispatcher; renderer, sound and overlay calls remain hooks."
+80090230,GimmickDeactivateChain,ae_GimmickDeactivateChain,src/world/ae_gimmick.c,tools/mips/check_gimmick.py,diffed,4,"Recursive three-link deactivation helper."
+8008ECFC,SwingDoorSetPivot,ae_SwingDoorSetPivot,src/world/ae_gimmick.c,tools/mips/check_gimmick.py,diffed,22,"Eight direction cases and two pivot formula modes."
+80064AF0,PlayerCond_False,ae_PlayerCond_False,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064AF8,PlayerCond_JumpHeld,ae_PlayerCond_JumpHeld,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064B08,PlayerCond_JumpPressed,ae_PlayerCond_JumpPressed,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064B24,PlayerCond_RStickEvent02,ae_PlayerCond_RStickEvent02,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064BBC,PlayerCond_RStickEvent40,ae_PlayerCond_RStickEvent40,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064C3C,PlayerCond_RStickBackHard,ae_PlayerCond_RStickBackHard,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064C74,PlayerCond_GadgetBusyOrGesture,ae_PlayerCond_GadgetBusyOrGesture,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064CC8,PlayerCond_FacingDesiredDir,ae_PlayerCond_FacingDesiredDir,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064D18,PlayerCond_RStickSideNeg,ae_PlayerCond_RStickSideNeg,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064D4C,PlayerCond_RStickSidePos,ae_PlayerCond_RStickSidePos,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064D7C,PlayerCond_RStickFwd,ae_PlayerCond_RStickFwd,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064DAC,PlayerCond_RStickBack,ae_PlayerCond_RStickBack,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064DE0,PlayerCond_AttachTimerDone,ae_PlayerCond_AttachTimerDone,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064E04,PlayerCond_GroundBehindLow,ae_PlayerCond_GroundBehindLow,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064E6C,PlayerCond_RStickGestureOrTravel,ae_PlayerCond_RStickGestureOrTravel,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064EAC,PlayerCond_AnimDoneRandom,ae_PlayerCond_AnimDoneRandom,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064EF8,PlayerCond_NoMoveInput,ae_PlayerCond_NoMoveInput,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064F28,PlayerCond_LStickFwd,ae_PlayerCond_LStickFwd,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064F5C,PlayerCond_LStickBack,ae_PlayerCond_LStickBack,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80064F90,PlayerCond_RStickEvent04,ae_PlayerCond_RStickEvent04,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+8006501C,PlayerCond_RStickEvent08,ae_PlayerCond_RStickEvent08,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800650A8,PlayerCond_NoGestureR3Held,ae_PlayerCond_NoGestureR3Held,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800650E8,PlayerCond_RStickRotating,ae_PlayerCond_RStickRotating,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+8006512C,PlayerCond_Gadget1RStickFwdFlick,ae_PlayerCond_Gadget1RStickFwdFlick,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065178,PlayerCond_Gadget3RStickBack,ae_PlayerCond_Gadget3RStickBack,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800651C4,PlayerCond_RStickGesture10,ae_PlayerCond_RStickGesture10,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800651D4,PlayerCond_RStickGesture20,ae_PlayerCond_RStickGesture20,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800651E4,PlayerCond_RStickNoGesture,ae_PlayerCond_RStickNoGesture,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800651F4,PlayerCond_GestureEvent04,ae_PlayerCond_GestureEvent04,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065204,PlayerCond_GestureEvent08,ae_PlayerCond_GestureEvent08,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065214,PlayerCond_LStickIdleL3Held,ae_PlayerCond_LStickIdleL3Held,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065244,PlayerCond_LStickIdle,ae_PlayerCond_LStickIdle,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065254,PlayerCond_LStickClass2,ae_PlayerCond_LStickClass2,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065264,PlayerCond_LStickClass4,ae_PlayerCond_LStickClass4,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065274,PlayerCond_LStickClass8,ae_PlayerCond_LStickClass8,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065284,PlayerCond_LStickFull,ae_PlayerCond_LStickFull,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+8006529C,PlayerCond_RStickFull,ae_PlayerCond_RStickFull,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800652B4,PlayerCond_LStickPartial,ae_PlayerCond_LStickPartial,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800652CC,PlayerCond_RStickPartial,ae_PlayerCond_RStickPartial,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065318,PlayerCond_LandingSoon,ae_PlayerCond_LandingSoon,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800653C0,PlayerCond_FacingContactWall,ae_PlayerCond_FacingContactWall,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+8006543C,PlayerCond_ContactKind8,ae_PlayerCond_ContactKind8,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065458,PlayerCond_NotContactKind8,ae_PlayerCond_NotContactKind8,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065474,PlayerCond_FallingHigh,ae_PlayerCond_FallingHigh,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800654AC,PlayerCond_RStickEvent10,ae_PlayerCond_RStickEvent10,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065538,PlayerCond_RStickEvent20,ae_PlayerCond_RStickEvent20,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800655C4,PlayerCond_FirstFrameRStickEvent10,ae_PlayerCond_FirstFrameRStickEvent10,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+8006562C,PlayerCond_FirstFrameRStickEvent20,ae_PlayerCond_FirstFrameRStickEvent20,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800656DC,PlayerCond_JumpPressedAtApex,ae_PlayerCond_JumpPressedAtApex,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065748,PlayerCond_LStickSidePos,ae_PlayerCond_LStickSidePos,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065760,PlayerCond_LStickSideNeg,ae_PlayerCond_LStickSideNeg,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065770,PlayerCond_LStickSideAny,ae_PlayerCond_LStickSideAny,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065790,PlayerCond_LStickIdleStillMoving,ae_PlayerCond_LStickIdleStillMoving,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800657E0,PlayerCond_GestureEvent0C,ae_PlayerCond_GestureEvent0C,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800658E8,PlayerCond_InWater,ae_PlayerCond_InWater,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065904,PlayerCond_WadingOnGround,ae_PlayerCond_WadingOnGround,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065980,PlayerCond_ContactWall3B,ae_PlayerCond_ContactWall3B,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+800659AC,PlayerCond_JumpOutOfWater,ae_PlayerCond_JumpOutOfWater,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065A24,PlayerCond_CanJump,ae_PlayerCond_CanJump,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065AE8,PlayerCond_LStickIdleL3Pressed,ae_PlayerCond_LStickIdleL3Pressed,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065B20,PlayerCond_Dead,ae_PlayerCond_Dead,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065B54,PlayerCond_Gadget4Mode1,ae_PlayerCond_Gadget4Mode1,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065B6C,PlayerCond_AnimDone,ae_PlayerCond_AnimDone,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065BA8,PlayerCond_False2,ae_PlayerCond_False2,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065BB0,PlayerCond_Still,ae_PlayerCond_Still,src/player/ae_player_cond.c,tools/mips/check_player_cond.py,diffed,15,Full instruction coverage; details in notes/port/playercond.md
+80065694,GadgetHasAltStance,ae_GadgetHasAltStance,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,256,
+8006C6A4,GadgetFlashSet,ae_GadgetFlashSet,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,8,
+8006CDE0,GadgetSelectFx,ae_GadgetSelectFx,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,5,
+8006CEF0,Gadget6SparkleFx,ae_Gadget6SparkleFx,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,12,
+8006DAC8,Gadget4TrailReset,ae_Gadget4TrailReset,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,3,
+8007A32C,Gadget3FindAimTarget,ae_Gadget3FindAimTarget,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,6,
+8007A48C,Gadget3LockOnAdd,ae_Gadget3LockOnAdd,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,12,
+8007AA1C,GadgetSwingParamsInit,ae_GadgetSwingParamsInit,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,4,
+8007B358,GadgetUnlockMask,ae_GadgetUnlockMask,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,12,
+8007CD0C,GadgetSetSelected,ae_GadgetSetSelected,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,6,
+80081144,GadgetSlotRemap,ae_GadgetSlotRemap,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,20,
+8006C6D4,GadgetFlashUpdate,ae_GadgetFlashUpdate,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,10,
+8009ABF4,GadgetDrawSlot0Attachment,ae_GadgetDrawSlot0Attachment,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,3,
+8009A800,GadgetSwingUpdate,ae_GadgetSwingUpdate,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,8,
+80099C44,GadgetDrawStaticModel,ae_GadgetDrawStaticModel,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,7,
+8009A4E8,GadgetDrawWithStateCheck,ae_GadgetDrawWithStateCheck,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,5,
+8009B1C0,Gadget6UpdateSound,ae_Gadget6UpdateSound,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,12,
+80098DD0,Gadget4BuildMatrix,ae_Gadget4BuildMatrix,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,3,
+8007AA98,Gadget3AimUpdateAmmo,ae_Gadget3AimUpdateAmmo,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,8,
+80064208,PlayerSetState,ae_PlayerSetState,src/player/ae_player_act_state.c,tools/mips/check_player_act.py,diffed,14,
+80065C20,PlayerAct_ScaleMoveVel,ae_PlayerAct_ScaleMoveVel,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80065D1C,PlayerAct_JumpHoldBoost,ae_PlayerAct_JumpHoldBoost,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,4,
+80065D68,PlayerAct_JumpPct3,ae_PlayerAct_JumpPct3,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80065DEC,PlayerAct_VerticalOnly,ae_PlayerAct_VerticalOnly,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80065E18,PlayerAct_JumpPct2,ae_PlayerAct_JumpPct2,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80065E9C,PlayerAct_SquashReset,ae_PlayerAct_SquashReset,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80065ED4,PlayerAct_FlyerThrust,ae_PlayerAct_FlyerThrust,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,4,
+80065FC8,PlayerAct_FlyerLaunchA,ae_PlayerAct_FlyerLaunchA,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80065FF0,PlayerAct_FlyerLaunchB,ae_PlayerAct_FlyerLaunchB,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80066028,PlayerAct_GadgetSpinFromStick,ae_PlayerAct_GadgetSpinFromStick,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,4,
+800660C8,PlayerAct_Gadget3Aim,ae_PlayerAct_Gadget3Aim,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,3,
+800660E8,PlayerAct_DriftForward,ae_PlayerAct_DriftForward,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+8006611C,PlayerAct_NegateInputXZ,ae_PlayerAct_NegateInputXZ,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80066140,PlayerAct_TurnAround,ae_PlayerAct_TurnAround,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80066168,PlayerAct_TurnAroundAndJump,ae_PlayerAct_TurnAroundAndJump,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80066190,PlayerAct_Nop,ae_PlayerAct_Nop,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80066198,PlayerAct_FaceStick,ae_PlayerAct_FaceStick,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,3,
+800661D4,PlayerAct_JumpFromLStick,ae_PlayerAct_JumpFromLStick,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,4,
+800662DC,PlayerAct_StepBackDrop,ae_PlayerAct_StepBackDrop,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80066358,PlayerAct_BounceBack,ae_PlayerAct_BounceBack,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80066434,PlayerAct_ExitToMode0Forward,ae_PlayerAct_ExitToMode0Forward,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+800664D0,PlayerAct_AnimSpeedNormal,ae_PlayerAct_AnimSpeedNormal,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+800664E0,PlayerAct_AnimSpeedHalf,ae_PlayerAct_AnimSpeedHalf,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+800664F0,PlayerAct_FaceStickMaybeHalfSpeed,ae_PlayerAct_FaceStickMaybeHalfSpeed,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80066530,PlayerAct_FaceStickRotateA,ae_PlayerAct_FaceStickRotateA,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80066568,PlayerAct_FaceStickRotateB,ae_PlayerAct_FaceStickRotateB,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+800665A0,PlayerAct_AimModeEnter,ae_PlayerAct_AimModeEnter,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+800665C0,PlayerAct_AimModeLeave,ae_PlayerAct_AimModeLeave,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+800665F8,PlayerAct_FaceRightPerp,ae_PlayerAct_FaceRightPerp,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,3,
+8006663C,PlayerAct_FaceLeftPerp,ae_PlayerAct_FaceLeftPerp,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,3,
+80066680,PlayerAct_TurnFacingLeft90,ae_PlayerAct_TurnFacingLeft90,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+800666A4,PlayerAct_TurnFacingRight90,ae_PlayerAct_TurnFacingRight90,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+800666C8,PlayerAct_FaceStickOnRotation,ae_PlayerAct_FaceStickOnRotation,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,4,
+8006671C,PlayerAct_Rebound,ae_PlayerAct_Rebound,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80066744,PlayerAct_HurtVoiceFlag,ae_PlayerAct_HurtVoiceFlag,src/player/ae_player_act.c,tools/mips/check_player_act.py,diffed,2,
+80066770,PlayerAct_Land,ae_PlayerAct_Land,src/player/ae_player_act_land.c,tools/mips/check_player_act.py,diffed,5,
+80066E28,PlayerSetClimbTarget,ae_PlayerSetClimbTarget,src/player/ae_player_act_state.c,tools/mips/check_player_act.py,diffed,2,
+80066E8C,PlayerSetRope,ae_PlayerSetRope,src/player/ae_player_act_state.c,tools/mips/check_player_act.py,diffed,1,
+80067C08,PlayerSetEyeFrame,ae_PlayerSetEyeFrame,src/player/ae_player_act_state.c,tools/mips/check_player_act.py,diffed,3,
+8006C2E8,PlayerSetTintEffect,ae_PlayerSetTintEffect,src/player/ae_player_act_state.c,tools/mips/check_player_act.py,diffed,6,
+8007B374,PlayerSetMode,ae_PlayerSetMode,src/player/ae_player_act_mode.c,tools/mips/check_player_act.py,diffed,46,
+80077490,CollProbe_NoContact,ae_CollProbe_NoContact,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,No-contact debug stub; 100 cases with full instruction coverage and 2/2 mutations caught.
+8007734C,CollProbe_Strip,ae_CollProbe_Strip,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,100 cases with full instruction coverage and 2/2 mutations caught.
+80075F48,CollProbe_ThinWall,ae_CollProbe_ThinWall,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,153/153 instructions; 2/2 targeted mutations caught.
+800761AC,CollProbe_EdgeWall,ae_CollProbe_EdgeWall,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,183/183 instructions; 2/2 targeted mutations caught.
+80073BC8,CollProbe_Box,ae_CollProbe_Box,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,251/259 instructions; 8 divide guards proved unreachable; 2/2 targeted mutations caught.
+80076488,CollProbe_DiagonalWall,ae_CollProbe_DiagonalWall,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,336/400 instructions; 64 divide guards proved unreachable; 2/2 targeted mutations caught.
+80074BBC,CollProbe_Radial,ae_CollProbe_Radial,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,637/669 instructions; 32 divide guards proved unreachable; 2/2 targeted mutations caught.
+80075630,CollProbe_HalfPipe,ae_CollProbe_HalfPipe,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,252/260 instructions; 8 divide guards proved unreachable; 3/3 targeted mutations caught.
+80076AC8,CollProbe_Slope,ae_CollProbe_Slope,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,204/238 instructions; 34 instructions proved unreachable; 2/2 targeted mutations caught.
+80073FD4,CollProbe_Ramp,ae_CollProbe_Ramp,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,297/306 instructions; 8 divide guards and one dead jump fallthrough proved unreachable; 2/2 targeted mutations caught.
+80075A40,CollProbe_Trench,ae_CollProbe_Trench,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,322/322 instructions; 2/2 targeted mutations caught.
+8007449C,CollProbe_Triangle,ae_CollProbe_Triangle,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,100,393/456 instructions; 63 instructions proved unreachable; 3/3 targeted mutations caught.
+80076E80,CollProbe_Rope,ae_CollProbe_Rope,src/collision/ae_collprobe.c,tools/mips/check_collprobe.py,diffed,102,307/307 instructions; 2/2 targeted mutations caught.
+
+8006D044,Gadget7TrailUpdate,ae_Gadget7TrailUpdate,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,8,renderer block replaced by native hook
+8006DAF8,Gadget4TrailUpdate,ae_Gadget4TrailUpdate,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,12,per-record renderer replaced by native hook
+8007A514,Gadget4PlayerUpdate,ae_Gadget4PlayerUpdate,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,18,player state and hit-volume logic checked
+8007C6CC,GadgetSelectFxDraw,ae_GadgetSelectFxDraw,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,12,animation and collision logic checked
+800986E0,Gadget4UpdateDraw,ae_Gadget4UpdateDraw,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,23,Super Hoop update and hit-volume logic checked
+8009AD60,Gadget3UpdateDraw,ae_Gadget3UpdateDraw,src/player/ae_gadget.c,tools/mips/check_gadget.py,diffed,12,aim and selection logic checked with named renderer hooks
+80046970,CameraKindFixed_Nop,ae_CameraKindFixed_Nop,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+80047104,CameraSlotInitFollow,ae_CameraSlotInitFollow,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+800471E4,CameraSlotCreate,ae_CameraSlotCreate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+80047290,CameraSlotRemove,ae_CameraSlotRemove,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+80047360,CameraSlotAimAtFocus,ae_CameraSlotAimAtFocus,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+80047464,CameraSlotSmoothEye,ae_CameraSlotSmoothEye,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; positive caller divisors and registered divide-trap proofs."
+80047558,CameraSlotSmoothTarget,ae_CameraSlotSmoothTarget,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; positive caller divisors and registered divide-trap proofs."
+80047654,CameraKindAim_SnapToFocus,ae_CameraKindAim_SnapToFocus,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+800482C0,CameraFollowDispatch,ae_CameraFollowDispatch,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+80048454,CameraKindAimUpdate,ae_CameraKindAimUpdate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; player-state and gadget gates covered."
+8004875C,CameraKindFixedUpdate,ae_CameraKindFixedUpdate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; radar and fixed-state paths covered."
+80048D10,CameraSlotPlaceBehindPlayer,ae_CameraSlotPlaceBehindPlayer,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+80048DD0,CameraSlotUpdateYaw,ae_CameraSlotUpdateYaw,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; yaw wrap and input branches covered."
+80048F6C,CameraSlotGroundClamp,ae_CameraSlotGroundClamp,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+8004906C,CameraSlotGroundClampNear,ae_CameraSlotGroundClampNear,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; clamp and no-clamp paths covered."
+8004923C,CameraSlotStickOrbit,ae_CameraSlotStickOrbit,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; orbit directions and limits covered."
+800493D4,CameraSlotResetFollow,ae_CameraSlotResetFollow,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+80049514,CameraSlotSnapshotEye,ae_CameraSlotSnapshotEye,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+800495F4,CameraFollowUpdate,ae_CameraFollowUpdate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; focused movement, projection, clamp and ground-probe matrix."
+8004AA24,CameraSlotFlagBit81,ae_CameraSlotFlagBit81,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+8004AC84,CameraFollowAimedVariant,ae_CameraFollowAimedVariant,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; aim and player-state paths covered."
+8004AF78,CameraFollowGadgetVariant,ae_CameraFollowGadgetVariant,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; gadget state, stick and primitive paths covered."
+8004B5FC,CameraKind3FollowUpdate,ae_CameraKind3FollowUpdate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+8004B8F4,CameraSlotGetFocusPoint,ae_CameraSlotGetFocusPoint,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; supported focus modes and unreachable mode proof."
+8004C2E4,CameraSlotClearScript,ae_CameraSlotClearScript,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; differential cases at checker default scale."
+8004CA70,CameraSlotUpdate,ae_CameraSlotUpdate,src/camera/ae_camera.c,tools/mips/check_camera_ram.py,diffed,32,"Readable RAM-image camera port; script, focus and update modes covered."
+80050AFC,StageProgressRestore_Nop,ae_StageProgressRestore_Nop,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,1,Empty leaf: both instructions executed on the real EXE and area 01 image.
+800848B0,StageProgressRestore_Nop2,ae_StageProgressRestore_Nop2,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,1,Empty leaf: both instructions executed on the real EXE and area 01 image.
+80010D04,AreaLoadStartSeek,ae_AreaLoadStartSeek,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,5,Member selection and the CD seek request match both alternate-member paths; file seek is hooked.
+80011208,AreaLoadQueueRead,ae_AreaLoadQueueRead,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,2,Queued archive commands and stack-backed location parameters match; CD operations are hooked.
+800114D8,AreaLoadStart,ae_AreaLoadStart,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,5,Load-list cursor and five initial CD commands match both alternate-member paths.
+80096E0C,StageProgressStoreArea,ae_StageProgressStoreArea,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,4,Copies the live eight activity bytes and per-area stage rows to progress tables; time-attack skips the save.
+80096FAC,StageProgressOnExit,ae_StageProgressOnExit,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,10,Persists activity and gimmick rows; handles the time-station special byte and time-attack result tables.
+80094F20,StageRequestExit,ae_StageRequestExit,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,1,Leaf wrapper calls StageExitStart and returns zero.
+800966B4,StageProgressOnEnter,ae_StageProgressOnEnter,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,12,"Initializes per-area records, regular progress, time-attack tables and the level-33 special state."
+800972E0,StageProgressRestore,ae_StageProgressRestore,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,6,"Restores area activity bytes; handles time-station entry and one-time progress reset."
+8003244C,AreaLoadGridAndProps,ae_AreaLoadGridAndProps,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,4,"Binds heightfield arrays and initializes prop records, visibility masks and rotation matrices."
+80031B60,AreaLoad,ae_AreaLoad,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,7,"Loads area tables and runtime state; archive, rendering and subsystem operations remain named hooks."
+8005D100,StageRequest,ae_StageRequest,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,52,"Dispatches all stage-transition actions, including progress, area loading, audio and cutscene handoffs."
+8005D890,StageRequestUpdate,ae_StageRequestUpdate,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,27,"Advances exit streaming and transition state; area checks, CD queue progress and UI updates remain hooks."
+800955C8,StageRequestRetry,ae_StageRequestRetry,src/world/ae_stage.c,tools/mips/check_stage.py,diffed,1,"Repeats the current area's action-8 request using the live area and entry."
+8005AD90,GimmickSaveTableReset,ae_GimmickSaveTableReset,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,4,Full reachable instruction coverage
+8005ADF8,GimmickSaveStates,ae_GimmickSaveStates,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,2,Full reachable instruction coverage
+8005AF4C,GimmickRestoreStates,ae_GimmickRestoreStates,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,2,Full reachable instruction coverage
+8005B130,GimmickSaveEntryAdd,ae_GimmickSaveEntryAdd,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,66,Full reachable instruction coverage
+8005B318,GimmickInitFromProgress,ae_GimmickInitFromProgress,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,2,Progress reads use named hooks
+8005B480,GimmickSaveApplyProgress,ae_GimmickSaveApplyProgress,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,1,Progress writes use named hooks
+8005B538,GimmickSpawnAll,ae_GimmickSpawnAll,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,3,Full reachable instruction coverage
+8005B68C,GimmickUpdateAll,ae_GimmickUpdateAll,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,4,Full reachable instruction coverage
+8005BB5C,GimmickGetState,ae_GimmickGetState,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,6,Full reachable instruction coverage
+8005BB98,GimmickTypeToSfx,ae_GimmickTypeToSfx,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,274,Full reachable instruction coverage
+8008AA6C,GimmickCarryBodiesByDelta,ae_GimmickCarryBodiesByDelta,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,7,Camera movement is an explicit hook
+8008ABB0,GimmickCarryBodiesSwing,ae_GimmickCarryBodiesSwing,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,5,Camera movement is an explicit hook
+8008AD14,GimmickSwingCarryPoint,ae_GimmickSwingCarryPoint,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,39,Full reachable instruction coverage
+8008AF98,GimmickSwingAngle,ae_GimmickSwingAngle,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,270,Four unreachable divide traps are registered
+8008B060,GimmickSwingFirstStep,ae_GimmickSwingFirstStep,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,10,Six unreachable divide traps are registered
+8008B228,GimmickSwingAdvance,ae_GimmickSwingAdvance,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,240,Full reachable instruction coverage
+8008B3A4,GimmickSwingProbeWall,ae_GimmickSwingProbeWall,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,11,Fourth-sample repeat is unreachable and registered
+8008E5C0,Gimmick_SwingDoor_Init,ae_Gimmick_SwingDoor_Init,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,12,Jump-table arms covered beyond inventory size
+8008E90C,Gimmick_SwingDoor_Update,ae_Gimmick_SwingDoor_Update,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,13,Jump-table arms covered beyond inventory size
+8008EAE4,GimmickPlayTypeSfx,ae_GimmickPlayTypeSfx,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,3,Audio backends are explicit hooks
+8008EB58,GimmickAnyBodyInside,ae_GimmickAnyBodyInside,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,4,Body query is an explicit hook
+8008EF60,Gimmick_LiftDoor_Init,ae_Gimmick_LiftDoor_Init,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,6,Full reachable instruction coverage
+8008F0BC,Gimmick_LiftDoor_Update,ae_Gimmick_LiftDoor_Update,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,15,Jump-table arms covered beyond inventory size
+8008F468,Gimmick_Init_ThresholdDoor,ae_Gimmick_Init_ThresholdDoor,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,2,Full reachable instruction coverage
+8008F53C,Gimmick_ThresholdDoor_Update,ae_Gimmick_ThresholdDoor_Update,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,6,Full reachable instruction coverage
+8008F720,Gimmick_SlideDoor_Init,ae_Gimmick_SlideDoor_Init,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,11,Jump-table arms covered beyond inventory size
+8008F8D4,Gimmick_SlideDoor_Update,ae_Gimmick_SlideDoor_Update,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,13,Jump-table arms covered beyond inventory size
+80090370,Gimmick_Switch_Init,ae_Gimmick_Switch_Init,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,6,Full reachable instruction coverage
+80090500,Gimmick_Switch_Update,ae_Gimmick_Switch_Update,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,3,Full reachable instruction coverage
+800905A4,Gimmick_Init_PairToggle,ae_Gimmick_Init_PairToggle,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,2,Full reachable instruction coverage
+80090660,Gimmick_Hit_Update,ae_Gimmick_Hit_Update,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,5,Full reachable instruction coverage
+800909A8,Gimmick_Init_Counter,ae_Gimmick_Init_Counter,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,100,Full reachable instruction coverage
+800909FC,Gimmick_SpinRoller_Update,ae_Gimmick_SpinRoller_Update,src/world/ae_gimmick_a.c,tools/mips/check_gimmick_a.py,diffed,15,Full reachable instruction coverage
+80090D6C,Gimmick_Init_MonkeyQuota,ae_Gimmick_Init_MonkeyQuota,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,4,
+80090D94,Gimmick_MonkeyQuota_Update,ae_Gimmick_MonkeyQuota_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,7,
+80090EB0,Gimmick_NopInit,ae_Gimmick_NopInit,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,8,
+80090EB8,Gimmick_NopUpdate,ae_Gimmick_NopUpdate,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,8,
+80090EC0,Gimmick_Init_Closed,ae_Gimmick_Init_Closed,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,6,
+80090F0C,Gimmick_Init_ZoneMask,ae_Gimmick_Init_ZoneMask,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,2,
+80090F80,Gimmick_PlayerInCylinder_Update,ae_Gimmick_PlayerInCylinder_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,4,
+80091060,Gimmick_ProxTrigger_Init,ae_Gimmick_ProxTrigger_Init,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,3,
+80091178,Gimmick_ProxTrigger_Update,ae_Gimmick_ProxTrigger_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,14,
+80091358,Gimmick_Breakable_Init,ae_Gimmick_Breakable_Init,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,3,
+800913EC,Gimmick_Breakable_Update,ae_Gimmick_Breakable_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,7,
+80091688,Gimmick_Init_Closed2,ae_Gimmick_Init_Closed2,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,5,
+800916FC,Gimmick_NopUpdate2,ae_Gimmick_NopUpdate2,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,8,
+80091704,Gimmick_Init_PropHidden,ae_Gimmick_Init_PropHidden,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,4,
+8009176C,Gimmick_Resize_Update,ae_Gimmick_Resize_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,5,
+80091870,Gimmick_Init_Closed3,ae_Gimmick_Init_Closed3,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,4,
+800918FC,Gimmick_Slider_Update,ae_Gimmick_Slider_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,7,
+80091A18,Gimmick_SliderQuiet_Update,ae_Gimmick_SliderQuiet_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,7,
+80091CF8,Gimmick_PlayerBox_Update,ae_Gimmick_PlayerBox_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,3,
+80091D24,GimmickPlayerInBox,ae_GimmickPlayerInBox,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,10,
+80091FB0,Gimmick_Init_RecordOrigin,ae_Gimmick_Init_RecordOrigin,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,3,
+800920AC,Gimmick_LinkedLift_Update,ae_Gimmick_LinkedLift_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,8,
+80092A68,Gimmick_Init_PropTilt,ae_Gimmick_Init_PropTilt,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,3,
+80092B0C,Gimmick_Oscillate_Update,ae_Gimmick_Oscillate_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,12,
+80092E74,Gimmick_Init_PropMeshSet,ae_Gimmick_Init_PropMeshSet,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,3,
+80092F50,Gimmick_Init_CounterGate,ae_Gimmick_Init_CounterGate,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,5,
+80092FBC,Gimmick_Counter_EventCam_Update,ae_Gimmick_Counter_EventCam_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,7,
+800935F0,Gimmick_PlayerBlast_Update,ae_Gimmick_PlayerBlast_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,5,
+80093740,Gimmick_Init_Disabled,ae_Gimmick_Init_Disabled,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,4,
+80093788,Gimmick_Grab_Update,ae_Gimmick_Grab_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,5,
+8009391C,Gimmick_Init_PropFlag2000,ae_Gimmick_Init_PropFlag2000,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,6,
+8009398C,Gimmick_Bounce_Update,ae_Gimmick_Bounce_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,18,
+80093E74,Gimmick_Init_Hidden,ae_Gimmick_Init_Hidden,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,6,
+80093F04,Gimmick_Rotate_Update,ae_Gimmick_Rotate_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,26,
+8009468C,Gimmick_Falling_Update,ae_Gimmick_Falling_Update,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,7,
+80094B6C,GimmickMoveColliderTo,ae_GimmickMoveColliderTo,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,2,
+80094C10,GimmickMoveCollider,ae_GimmickMoveCollider,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,3,
+80094F40,Gimmick_NopUpdate3,ae_Gimmick_NopUpdate3,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,8,
+80095464,Gimmick_NopUpdate4,ae_Gimmick_NopUpdate4,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,8,
+800962A4,GimmickStateTablePtr,ae_GimmickStateTablePtr,src/world/ae_gimmick_b.c,tools/mips/check_gimmick_b.py,diffed,1,
+800147D0,SvecToDiagMatrix,ae_SvecToDiagMatrix,src/world/ae_zones.c,tools/mips/check_zones.py,diffed,4,
+800438F8,BuildTerrainBlockMask,ae_BuildTerrainBlockMask,src/world/ae_zones.c,tools/mips/check_zones.py,diffed,7,
+8005CA34,DebugMenuInitFlags,ae_DebugMenuInitFlags,src/world/ae_zones.c,tools/mips/check_zones.py,diffed,3,
+8005CB1C,DebugMenuInitPlayerParams,ae_DebugMenuInitPlayerParams,src/world/ae_zones.c,tools/mips/check_zones.py,diffed,3,
+8005CC58,DebugMenuInitCounters,ae_DebugMenuInitCounters,src/world/ae_zones.c,tools/mips/check_zones.py,diffed,3,
+8005CCDC,DebugMenuInitCounters2,ae_DebugMenuInitCounters2,src/world/ae_zones.c,tools/mips/check_zones.py,diffed,3,
+8007D118,ReadSizedValue,ae_ReadSizedValue,src/world/ae_zones.c,tools/mips/check_zones.py,diffed,7,
+8007D1E0,MenuItemInitBound,ae_MenuItemInitBound,src/world/ae_zones.c,tools/mips/check_zones.py,diffed,6,
+8007D29C,MenuItemSetCallback,ae_MenuItemSetCallback,src/world/ae_zones.c,tools/mips/check_zones.py,diffed,4,
+80088670,ColliderZoneMasksUpdate,ae_ColliderZoneMasksUpdate,src/world/ae_zones.c,tools/mips/check_zones.py,diffed,14,
+800889EC,ColliderComputeQuadrantMask,ae_ColliderComputeQuadrantMask,src/world/ae_zones.c,tools/mips/check_zones.py,diffed,4,
+8005E7EC,AreaTexCopyInit,ae_AreaTexCopyInit,src/render/ae_tex_copy.c,tools/mips/check_tex_copy.py,diffed,8,Ported area texture recoloring and buffer lifecycle
+8008C064,HeapFree,ae_HeapFree,src/render/ae_tex_copy.c,tools/mips/check_tex_copy.py,diffed,5,Ported scan of the 64-entry heap pointer table
+80015D58,SetColorMatrixMode,ae_SetColorMatrixMode,src/world/ae_items_init.c,tools/mips/check_items_init.py,diffed,7,
+80015F24,MatrixCopy8,ae_MatrixCopy8,src/world/ae_items_init.c,tools/mips/check_items_init.py,diffed,2,
+800323F8,ApplyLevelFog,ae_ApplyLevelFog,src/world/ae_items_init.c,tools/mips/check_items_init.py,diffed,3,
+80083470,ItemsLoadForArea,ae_ItemsLoadForArea,src/world/ae_items_init.c,tools/mips/check_items_init.py,diffed,13,
+80083844,PickupSpawnSlot,ae_PickupSpawnSlot,src/world/ae_items_init.c,tools/mips/check_items_init.py,diffed,10,
+80084904,CollectedItemsHas,ae_CollectedItemsHas,src/world/ae_items_init.c,tools/mips/check_items_init.py,diffed,7,
+800962E8,GetCollectedItemsTable,ae_GetCollectedItemsTable,src/world/ae_items_init.c,tools/mips/check_items_init.py,diffed,1,
+80086540,SoundLoopsStopAll,ae_SoundLoopsStopAll,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,4,
+80086F00,SoundAreaKeepsMusic,ae_SoundAreaKeepsMusic,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,45,
+80087388,BgmStart,ae_BgmStart,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,12,
+8008740C,BgmModeWantsMusic,ae_BgmModeWantsMusic,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,99,
+8008745C,BgmUpdateVolume,ae_BgmUpdateVolume,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,22,
+800878E0,SoundLoopStart,ae_SoundLoopStart,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,208,
+80088578,SoundDelayedQueueReset,ae_SoundDelayedQueueReset,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,3,
+800963AC,ProgressGetByte,ae_ProgressGetByte,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,53,
+800A0900,SeqUpdateVoiceVolume,ae_SeqUpdateVoiceVolume,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,5,
+800A0A64,SeqVoiceVolumeSide,ae_SeqVoiceVolumeSide,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,12,
+800A0DB0,SeqFadeInit,ae_SeqFadeInit,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,7,
+800A1DB0,BgmSeqOpen,ae_BgmSeqOpen,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,24,
+800A2428,BgmSeqSetVolume,ae_BgmSeqSetVolume,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,11,
+800A2ACC,SeqTrackRearm,ae_SeqTrackRearm,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,4,
+800A2E3C,SeqFadeTrackIn,ae_SeqFadeTrackIn,src/sound/ae_bgm.c,tools/mips/check_bgm.py,diffed,7,
+80015BA0,ModelInitAuto,ae_ModelInitAuto,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,3,
+80050580,ZakoTypeIsIgnored,ae_ZakoTypeIsIgnored,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,17,
+800505C8,ZakoInit,ae_ZakoInit,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,9,
+800508B8,ZakoSpawnFromEntry,ae_ZakoSpawnFromEntry,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,4,
+800509A4,ZakoClearSlotTable,ae_ZakoClearSlotTable,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,1,
+80050D04,ZakoSetupType,ae_ZakoSetupType,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,184,
+80051E34,ObjUnregisterBody,ae_ObjUnregisterBody,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,4,
+80051E98,ObjKill,ae_ObjKill,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,4,
+80051FE8,ZakoFindEntryByType,ae_ZakoFindEntryByType,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,6,
+80052038,ObjInitModel,ae_ObjInitModel,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,5,
+800520A8,ZakoGetAnimTable,ae_ZakoGetAnimTable,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,5,
+80052134,ZakoSetAnimFromEntry,ae_ZakoSetAnimFromEntry,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,5,
+80057558,ZakoHooksReset,ae_ZakoHooksReset,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,1,
+80057FD0,ZakoSetAreaMode,ae_ZakoSetAreaMode,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,12,
+800583BC,ObjSetPathFromTable,ae_ObjSetPathFromTable,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,3,
+800587EC,ZakoDebugMenuInit,ae_ZakoDebugMenuInit,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,1,
+8007D23C,MenuItemInitToggle,ae_MenuItemInitToggle,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,16,
+8009764C,GetLevelFirstArea,ae_GetLevelFirstArea,src/world/ae_zako_init.c,tools/mips/check_zako_init.py,diffed,6,
+80010C3C,AreaGetEntryPoint,ae_AreaGetEntryPoint,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,3,"Full instruction coverage; real area data and edge entries."
+80032BBC,PlayerSpawnAtEntry,ae_PlayerSpawnAtEntry,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,12,"Full instruction coverage across several real areas and entry records."
+80046D80,SetProjection,ae_SetProjection,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,3,"Full instruction coverage; projection RAM and GTE H output compared."
+80046DAC,CameraActivateSlot,ae_CameraActivateSlot,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,3,"Full instruction coverage across first, middle and last camera slots."
+80047754,CameraResetAll,ae_CameraResetAll,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,5,"Full instruction coverage across absent, named, unmatched and area-camera CAM cases."
+800489EC,CameraShakeReset,ae_CameraShakeReset,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,1,"Full instruction coverage; both shake fields are seeded nonzero."
+8004B510,AimModeLeave,ae_AimModeLeave,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,2,"Full instruction coverage; active and inactive paths with sound ID 5 setup."
+8004BAD8,EventCamSetScript,ae_EventCamSetScript,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,2,"Full instruction coverage for both script table sets."
+8004D0F0,StageExitFlagsClear,ae_StageExitFlagsClear,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,1,"Full instruction coverage; halfword flags and pending byte are seeded."
+800877F8,PlaySfx,ae_PlaySfx,src/player/ae_player_spawn.c,tools/mips/check_player_spawn.py,diffed,5,"Full instruction coverage for missing bank, queued, full, success and busy voice paths."
+80010CA4,AreaGetKind,ae_AreaGetKind,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,15,
+80010CC0,AreaGetLevel,ae_AreaGetLevel,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,15,
+80015AC0,ModelInit,ae_ModelInit,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,6,
+80015D10,StaticModelInit,ae_StaticModelInit,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,1,
+80043380,AreaSetZoneBoxes,ae_AreaSetZoneBoxes,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,2,
+800592E0,ProjectilesReset,ae_ProjectilesReset,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,4,
+8005AB00,BossKindForArea,ae_BossKindForArea,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,6,
+8005AB90,BossInit,ae_BossInit,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,6,
+80069500,EffectsReset,ae_EffectsReset,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,4,
+8006A9B0,EffectsResetSubsystems,ae_EffectsResetSubsystems,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,4,
+8006B7DC,PlayerFxBlinkReset,ae_PlayerFxBlinkReset,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,3,
+8006E02C,SparkTableClear,ae_SparkTableClear,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,4,
+8006ED4C,TrailsReset,ae_TrailsReset,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,4,
+8006FE54,EffectObjsReset,ae_EffectObjsReset,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,4,
+80070B48,RandomParticlesReset,ae_RandomParticlesReset,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,4,
+800710F8,FxTableClear12,ae_FxTableClear12,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,3,
+800715A0,IndicatorsReset,ae_IndicatorsReset,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,4,
+8007163C,AreaSetIndicatorModelA,ae_AreaSetIndicatorModelA,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,6,
+80071694,AreaSetIndicatorModelB,ae_AreaSetIndicatorModelB,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,4,
+8007AFB8,AreaSpecialFlagsClear,ae_AreaSpecialFlagsClear,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,3,
+8007BCB4,MonkeyLodModelsInit,ae_MonkeyLodModelsInit,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,6,
+8007CD60,TargetListClear,ae_TargetListClear,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,4,
+8007D0F0,TableClearDAT_800BEF60,ae_TableClearDAT_800BEF60,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,3,
+80084A60,FxSlotsReset,ae_FxSlotsReset,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,4,
+80085230,ProjectileGroupsClear,ae_ProjectileGroupsClear,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,4,
+8008C01C,HeapInit,ae_HeapInit,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,3,
+8008C058,AreaBumpAllocSet,ae_AreaBumpAllocSet,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,1,
+8008C09C,HeapAlloc,ae_HeapAlloc,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,11,
+8008C1B8,AreaBumpAlloc,ae_AreaBumpAlloc,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,5,
+8008C348,SmallocError,ae_SmallocError,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,1,
+8008DEE0,MessageBoxClose,ae_MessageBoxClose,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,3,
+8009946C,RcCarDespawn,ae_RcCarDespawn,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,3,
+8009B3CC,AreaSetSpecialActor,ae_AreaSetSpecialActor,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,10,
+8009B7C8,AreaSetFeature30,ae_AreaSetFeature30,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,2,
+8009B7E4,AreaSetFeature31,ae_AreaSetFeature31,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,2,
+8009B7F0,AreaSetFeature32,ae_AreaSetFeature32,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,2,
+800A3700,exit,ae_exit,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,1,
+800A3720,printf,ae_printf,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,1,
+8013D1AC,FUN_8013d1ac,ae_FUN_8013d1ac,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,1,
+8013DA10,FUN_8013da10,ae_FUN_8013da10,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,2,
+8013DAE8,FUN_8013dae8,ae_FUN_8013dae8,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,2,
+8013DC68,FUN_8013dc68,ae_FUN_8013dc68,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,2,
+8013DF90,FUN_8013df90,ae_FUN_8013df90,src/world/ae_areaset.c,tools/mips/check_areaset.py,diffed,2,
+800690E8,AreaSetVramAnimList,ae_AreaSetVramAnimList,src/render/ae_vram_anim.c,tools/mips/check_vram_anim.py,diffed,9,
+80011F6C,XaPlay,ae_XaPlay,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,48,CD and sound control calls remain named hooks
+80012360,CdMgrQueueCommand,ae_CdMgrQueueCommand,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,5,CD SDK and libc calls remain named hooks
+80012A0C,CdMgrIssueCommand,ae_CdMgrIssueCommand,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,13,CD SDK operations remain named hooks
+80012C0C,ArcGetMemberPos,ae_ArcGetMemberPos,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,48,CdIntToPos remains a named SDK hook
+80014EF0,ActorAnimDecodeEntry,ae_ActorAnimDecodeEntry,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,56,Calls the verified AnimDecodeLerp port directly
+80017D94,ModelDrawWithOt,ae_ModelDrawWithOt,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,48,GTE projection and primitive emission use renderer hooks
+8001D4A8,ModelPrepCycleColors,ae_ModelPrepCycleColors,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,60,
+8001F884,TrailRingReset,ae_TrailRingReset,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,24,
+80032ADC,PlayerIdleModelSetup,ae_PlayerIdleModelSetup,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,40,Calls the verified ModelInit port directly
+80048430,AimRequestClear,ae_AimRequestClear,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,20,
+80048748,CameraFixedModeOff,ae_CameraFixedModeOff,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,20,
+8004B4B8,AimModeEnter,ae_AimModeEnter,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,48,Calls the verified IsArea53 and PlaySfx ports directly
+8004BC9C,EventCamStartRandom,ae_EventCamStartRandom,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,48,Event camera creation remains a named hook
+8005AB6C,IsArea53,ae_IsArea53,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,64,
+8005E42C,HudShowHealth,ae_HudShowHealth,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,64,
+8005E6F0,PlayerDamage,ae_PlayerDamage,src/player/ae_player1.c,tools/mips/check_player1.py,diffed,128,Calls the verified HudShowHealth port directly
+80050B04,ZakoSpawnNearby,ae_ZakoSpawnNearby,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,2,
+80050C34,ZakoUpdateAll,ae_ZakoUpdateAll,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,1,
+80050CB0,ZakoAllocSlot,ae_ZakoAllocSlot,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,3,
+800511A4,ZakoUpdateLoop,ae_ZakoUpdateLoop,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,11,
+80051410,PointOffscreen,ae_PointOffscreen,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,5,
+80051534,ZakoCullAndDraw,ae_ZakoCullAndDraw,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,3,
+80051620,ZakoGetBonePoint,ae_ZakoGetBonePoint,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,2,
+800516D8,ZakoUpdateLinkPoints,ae_ZakoUpdateLinkPoints,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,1,
+80051740,ZakoUpdateColliderPos,ae_ZakoUpdateColliderPos,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,3,
+800518AC,ZakoBuildMatrix,ae_ZakoBuildMatrix,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,7,
+80051A28,ZakoPoseHidden,ae_ZakoPoseHidden,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,3,
+80051AA4,ModelLightColorsToScratch,ae_ModelLightColorsToScratch,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,2,renderer GTE lighting loops delegated to ZakoDebugDrawPrimitive
+80051C00,ZakoDraw,ae_ZakoDraw,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,5,
+80051DCC,ObjReenableBody,ae_ObjReenableBody,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,3,
+80051F1C,ZakoDefeat,ae_ZakoDefeat,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,2,
+8005216C,ZakoDropPickups,ae_ZakoDropPickups,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,2,
+800522A8,ZakoSetKnockback,ae_ZakoSetKnockback,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,3,
+8005240C,ZakoApplyHit,ae_ZakoApplyHit,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,6,
+800525A0,ObjApplyDamage,ae_ObjApplyDamage,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,3,
+800525E0,ZakoOnHitByGadget,ae_ZakoOnHitByGadget,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,2,
+80052640,ObjIsOwnerType0B,ae_ObjIsOwnerType0B,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,2,
+80052658,ObjAnimClampLastFrame,ae_ObjAnimClampLastFrame,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,2,
+80052688,ObjBounceOnGround,ae_ObjBounceOnGround,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,4,
+8005278C,ObjApplyVelocity,ae_ObjApplyVelocity,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,1,
+80052800,ObjKnockbackDecay,ae_ObjKnockbackDecay,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,1,
+80052864,ObjDeathSfx,ae_ObjDeathSfx,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,3,
+800528E0,ObjResetMotion,ae_ObjResetMotion,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,5,
+800529A0,ObjSwapToReactAnim,ae_ObjSwapToReactAnim,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,2,
+80052A24,ObjUpdateMotionState,ae_ObjUpdateMotionState,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,11,
+80052BC8,ObjSyncBodyHitFlags,ae_ObjSyncBodyHitFlags,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,3,
+80055404,ObjPlaySfx,ae_ObjPlaySfx,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,1,
+8005685C,ObjTurnTowardsXZ,ae_ObjTurnTowardsXZ,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,5,divide trap guards are registered unreachable
+80056C58,ObjGroundHeightCached,ae_ObjGroundHeightCached,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,2,
+800573A0,ObjPuffAt,ae_ObjPuffAt,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,1,
+8005760C,ZakoHooksRun,ae_ZakoHooksRun,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,1,
+80058954,ZakoDebugMenuDraw,ae_ZakoDebugMenuDraw,src/world/ae_zako1.c,tools/mips/check_zako1.py,diffed,3,debug OT packet generation delegated to native renderer
+80014168,PadRumble,ae_PadRumble,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,
+800154DC,CopySvecAt1C,ae_CopySvecAt1C,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,
+80046340,Atan2Safe,ae_Atan2Safe,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,
+800470CC,CameraGetEye,ae_CameraGetEye,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,
+80047DA4,CameraSnapshotPlayer,ae_CameraSnapshotPlayer,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,
+8004A940,IsFlightArea,ae_IsFlightArea,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,
+8004B880,CameraGetPlayerDir,ae_CameraGetPlayerDir,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,
+8005DD18,CutsceneModeOn,ae_CutsceneModeOn,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,
+8005DD28,CutsceneModeOff,ae_CutsceneModeOff,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,
+80046A78,ScreenFadeUpdate,ae_ScreenFadeUpdate,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,
+80046DE8,CameraSelectMode,ae_CameraSelectMode,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,uses existing camera slot snapshot and activation ports
+80047FF0,CameraApplySlot,ae_CameraApplySlot,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,interpolates saved and active slot eye and target positions
+80048BBC,CameraShakeApply,ae_CameraShakeApply,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,decays signed shake amplitudes and applies them to eye and target
+8004BD98,CameraRegionTest,ae_CameraRegionTest,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,tests strict position bounds against active area camera regions
+8004D134,EventCamLoadRecord,ae_EventCamLoadRecord,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,loads and interpolates event camera endpoints through exact SDK rotations
+8004D39C,EventCamStart,ae_EventCamStart,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,validates index then loads the selected event camera record and exits cutscene mode
+8004BB68,EventCamCreate,ae_EventCamCreate,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,creates a scripted camera slot using the existing slot and script ports
+8004BA0C,EventCamTrigger,ae_EventCamTrigger,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,dispatches camera and particle triggers through direct stage and rumble ports
+8004D6F4,StageExitRequest,ae_StageExitRequest,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,clears active event state before requesting stage clear setup
+8004D7A0,EventCamUpdate,ae_EventCamUpdate,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,advances event camera records and requests stage exit when its timer or flags finish
+8004D40C,StageExitSequenceUpdate,ae_StageExitSequenceUpdate,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,advances transition frames and positions the active camera at the stage exit
+8004BF20,CameraRegionUpdate,ae_CameraRegionUpdate,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,tracks region entry and exit and updates its camera slot through existing ports
+80047BD0,CameraUpdate,ae_CameraUpdate,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,updates camera slots regions event state and native look-at boundary
+8004C318,CameraScriptRun,ae_CameraScriptRun,src/camera/ae_camupd.c,tools/mips/check_camupd.py,diffed,32,interprets the camera script command set with structured control flow
+80059A54,ProjectileAddHitBody,ae_ProjectileAddHitBody,src/world/ae_zako2.c,tools/mips/check_zako2.py,diffed,4,
+80059B08,ProjectilesUpdateDraw,ae_ProjectilesUpdateDraw,src/world/ae_zako2.c,tools/mips/check_zako2.py,diffed,4,
+80059B54,ProjectilesDraw,ae_ProjectilesDraw,src/world/ae_zako2.c,tools/mips/check_zako2.py,diffed,6,
+80059FA4,ProjectilesUpdate,ae_ProjectilesUpdate,src/world/ae_zako2.c,tools/mips/check_zako2.py,diffed,59,
+8008373C,PickupPickKindA,ae_PickupPickKindA,src/world/ae_zako2.c,tools/mips/check_zako2.py,diffed,5,
+80083790,PickupPickKindB,ae_PickupPickKindB,src/world/ae_zako2.c,tools/mips/check_zako2.py,diffed,5,
+80083AA8,SpawnPickups,ae_SpawnPickups,src/world/ae_zako2.c,tools/mips/check_zako2.py,diffed,10,
+8008C3C0,ColorFadeSet,ae_ColorFadeSet,src/world/ae_zako2.c,tools/mips/check_zako2.py,diffed,4,
+8008C6F0,DebugTextPrintf,ae_DebugTextPrintf,src/world/ae_zako2.c,tools/mips/check_zako2.py,diffed,11,
+8008CBFC,DebugTextPrintfWhite,ae_DebugTextPrintfWhite,src/world/ae_zako2.c,tools/mips/check_zako2.py,diffed,3,
+80097678,IsTimeAttack,ae_IsTimeAttack,src/world/ae_zako2.c,tools/mips/check_zako2.py,diffed,4,
+80069920,ParticlesDraw,ae_ParticlesDraw,src/effects/ae_fxscript.c,tools/mips/check_fxscript.py,diffed,7,FX script batch; notes/port/fxscript.md
+80069BEC,EffectScriptUpdate,ae_EffectScriptUpdate,src/effects/ae_fxscript.c,tools/mips/check_fxscript.py,diffed,11,FX script batch; notes/port/fxscript.md
+8006F3D0,RibbonDraw,ae_RibbonDraw,src/effects/ae_fxscript.c,tools/mips/check_fxscript.py,diffed,11,FX script batch; notes/port/fxscript.md
+80084AA0,ProjectileSystemsUpdate,ae_ProjectileSystemsUpdate,src/effects/ae_fxscript.c,tools/mips/check_fxscript.py,diffed,2,FX script batch; notes/port/fxscript.md
+80084BC0,ProjectileExpire,ae_ProjectileExpire,src/effects/ae_fxscript.c,tools/mips/check_fxscript.py,diffed,2,FX script batch; notes/port/fxscript.md
+80084C94,ProjectileRecordsUpdate,ae_ProjectileRecordsUpdate,src/effects/ae_fxscript.c,tools/mips/check_fxscript.py,diffed,17,FX script batch; notes/port/fxscript.md
+80085254,ProjectileGroupSpawn,ae_ProjectileGroupSpawn,src/effects/ae_fxscript.c,tools/mips/check_fxscript.py,diffed,11,FX script batch; notes/port/fxscript.md
+80085630,ProjectileGroupSpawnSpread,ae_ProjectileGroupSpawnSpread,src/effects/ae_fxscript.c,tools/mips/check_fxscript.py,diffed,5,FX script batch; notes/port/fxscript.md
+800856FC,ProjectileGroupsUpdate,ae_ProjectileGroupsUpdate,src/effects/ae_fxscript.c,tools/mips/check_fxscript.py,diffed,18,FX script batch; notes/port/fxscript.md
+800994A8,RcCarUpdate,ae_RcCarUpdate,src/effects/ae_fxscript.c,tools/mips/check_fxscript.py,diffed,18,FX script batch; notes/port/fxscript.md
+8005DC78,PlayerCanExitStage,ae_PlayerCanExitStage,src/effects/ae_effects_core.c,tools/mips/check_effects.py,diffed,40,"Uses nine real area members; all 27 original instructions covered."
+8006EF08,TrailPointAdd,ae_TrailPointAdd,src/effects/ae_effects_core.c,tools/mips/check_effects.py,diffed,40,"Uses nine real area members; all 32 original instructions covered."
+8006D4C0,SpriteEffectQueue,ae_SpriteEffectQueue,src/effects/ae_effects_core.c,tools/mips/check_effects.py,diffed,40,"Uses nine real area members; one proven impossible fallback instruction declared unreachable."
+8006D588,SpriteEffectQueue2,ae_SpriteEffectQueue2,src/effects/ae_effects_core.c,tools/mips/check_effects.py,diffed,40,"Calls the verified SpriteEffectQueue port; all 8 original instructions covered."
+8006B950,PlayerSplash,ae_PlayerSplash,src/effects/ae_effects_player.c,tools/mips/check_effects.py,diffed,40,"Directly calls verified particle and sound ports; checker models PlaySfx only to compare its selected id; all 42 instructions covered."
+8006B168,PlayerFxTrailUpdate,ae_PlayerFxTrailUpdate,src/effects/ae_effects_player.c,tools/mips/check_effects.py,diffed,40,"Directly calls verified EffectSpawnFromDef and SpawnParticle ports; all 109 original instructions covered."
+8006EE3C,TrailsUpdate,ae_TrailsUpdate,src/effects/ae_effects_trails.c,tools/mips/check_effects.py,diffed,40,"Uses nine real area members; all 50 reachable instructions covered; 8006EED8 is unreachable from unsigned halfword bounds."
+8006C334,PlayerTintEffectUpdate,ae_PlayerTintEffectUpdate,src/effects/ae_effects_player.c,tools/mips/check_effects.py,diffed,40,"Uses nine real area members; all 150 original instructions covered, including both particle modes and SpawnRandomParticle hook."
+80071370,FlyingMeshesUpdateDraw,ae_FlyingMeshesUpdateDraw,src/effects/ae_effects_flying.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; 135/137 original instructions covered; 80071518..8007151C are transparently patched to observe and execute SpawnParticle."
+8006A9F8,EffectsUpdateAll,ae_EffectsUpdateAll,src/effects/ae_effects_dispatch.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; all 26 instructions covered; completed subsystems call their ports directly and preserve the original dispatch order."
+8006B800,PlayerEffectsUpdate,ae_PlayerEffectsUpdate,src/effects/ae_effects_dispatch.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; all 18 instructions covered; directly calls the player trail, stage-exit, water, tint, and trail-point ports."
+8006BA2C,PlayerWaterEffectsUpdate,ae_PlayerWaterEffectsUpdate,src/effects/ae_effects_water.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; all 313 instructions covered across five water-state scenarios and boundary velocities."
+8006D5A8,SpriteEffectsDraw,ae_SpriteEffectsDraw,src/effects/ae_effects_sprite_draw.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; 156/328 original instructions covered and 172 projection/packet instructions declared for GpuDrawSprite."
+80070D94,RandomParticlesUpdate,ae_RandomParticlesUpdate,src/effects/ae_effects_random.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; all 217 instructions covered, including signed life values, both source-position layouts, interpolation, and RibbonDraw calls."
+8006EF88,TrailPointsDraw,ae_TrailPointsDraw,src/effects/ae_effects_trail_draw.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; 94/187 instructions covered; 93 GTE, clipping, and packet instructions are declared for GpuDrawTrailPoint."
+8006FA10,EffectObjDraw,ae_EffectObjDraw,src/effects/ae_effects_objects.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; 121/273 instructions covered; native projection and packet emission use GpuDrawEffectObj, with its range and two zero-sine correction instructions declared."
+8006FEE8,EffectObjsUpdate,ae_EffectObjsUpdate,src/effects/ae_effects_objects.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; all 146 instructions covered, including object aging, motion, body allocation and registration."
+8006E1C0,FxPlayerState6Update,ae_FxPlayerState6Update,src/effects/ae_effects_player_state.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; 199/253 instructions covered; the 54-instruction GTE projection and primitive-packet block is declared for GpuDrawFxPlayerState6."
+80070560,GroundSparksUpdateDraw,ae_GroundSparksUpdateDraw,src/effects/ae_effects_ground_sparks.c,tools/mips/check_effects.py,diffed,40,"Nine real area members; 207/378 instructions covered; native projection and SpawnParticle jal/delay-slot ranges are declared and compared through their boundaries."
+80014750,MatrixRotYMul,ae_MatrixRotYMul,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
+80016D60,MeshCalcEnvUVs,ae_MeshCalcEnvUVs,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4,Full instruction coverage; UV generation is routed through the renderer hook.
+80047690,CameraNudge,ae_CameraNudge,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
+8005ACE8,AreaOverlayUpdate,ae_AreaOverlayUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,7,Dispatcher matches; five overlay targets remain hooked pending their ports.
+8005DD78,StageTimerAdd,ae_StageTimerAdd,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,2
+8005E794,PlayerHeal,ae_PlayerHeal,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
+80067AF0,PlayerEyeBlinkUpdate,ae_PlayerEyeBlinkUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,14
+800715B4,IndicatorHintFree,ae_IndicatorHintFree,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,1,Full instruction coverage.
+800715FC,IndicatorHintReady,ae_IndicatorHintReady,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3,Full instruction coverage.
+800719F8,IndicatorsUpdateDraw,ae_IndicatorsUpdateDraw,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,15,Renderer block is registered as RenderIndicator.
+80078A18,PickupCollect,ae_PickupCollect,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,12
+80078C9C,CollisionRayTest,ae_CollisionRayTest,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,16
+8007BC9C,PlayerClearDAT44A2,ae_PlayerClearDAT44A2,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,1,Full instruction coverage.
+800836E0,PickupSetPosition,ae_PickupSetPosition,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,2
+80083CB8,PickupsUpdate,ae_PickupsUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,24
+8008435C,ItemsDraw,ae_ItemsDraw,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,11
+80084598,ItemsUpdateDraw,ae_ItemsUpdateDraw,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,2,Full instruction coverage.
+800846D8,ItemDrawModelEnvMap,ae_ItemDrawModelEnvMap,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,2,Full instruction coverage; environment UV generation is routed through the renderer hook.
+80084964,CollectedItemsAdd,ae_CollectedItemsAdd,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,5
+8008686C,SoundEmitterUpdate,ae_SoundEmitterUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,12
+80087654,BgmApplyPlayerEffect,ae_BgmApplyPlayerEffect,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,5,Full instruction coverage.
+80087EE0,SoundEmitterAttenuation,ae_SoundEmitterAttenuation,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,8
+80088AB8,ColliderScriptsUpdate,ae_ColliderScriptsUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,5,Full instruction coverage.
+8008B7F8,ColliderScriptRun,ae_ColliderScriptRun,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
+8008DF20,MessageBoxSetText,ae_MessageBoxSetText,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3
+8008DF3C,MessageBoxBusy,ae_MessageBoxBusy,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3
+80095600,HudPanelB_Start,ae_HudPanelB_Start,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
+800958C0,HudCounterC_Start,ae_HudCounterC_Start,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,5
+80098398,HudPopupStartPickup,ae_HudPopupStartPickup,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,1,Full instruction coverage.
+800983E8,HudPopupUpdate,ae_HudPopupUpdate,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,7,HUD primitive and ordering-table block is registered as RenderHudPopup.
+8009B6C8,SpecialActorPlayerNear,ae_SpecialActorPlayerNear,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,7
+8009B7A0,AreaFeature30GetState,ae_AreaFeature30GetState,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
+800A25CC,SeqFadeTrackProgram,ae_SeqFadeTrackProgram,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3
+800A30D8,SeqGetChannelProgram,ae_SeqGetChannelProgram,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,4
+800A3570,SfxVoiceSetPanVol,ae_SfxVoiceSetPanVol,src/world/ae_misc.c,tools/mips/check_misc.py,diffed,3
+800652E4,PlayerIsOnGround,ae_PlayerIsOnGround,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,6,
+80066018,PlayerStartHurtBlink,ae_PlayerStartHurtBlink,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,3,
+80066094,PlayerEnterSwimIfInWater,ae_PlayerEnterSwimIfInWater,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,6,
+800665E0,PlayerResetAir,ae_PlayerResetAir,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,3,
+8006CFA4,PlayerFxResetBlink,ae_PlayerFxResetBlink,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,3,
+8007A304,AimTableClear3,ae_AimTableClear3,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,3,
+8007AA64,PlayerFxClearDAT_800F5144,ae_PlayerFxClearDAT_800F5144,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,3,
+8007F5D4,IsPauseMenuOpen,ae_IsPauseMenuOpen,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,3,
+80099D20,RadarResetState,ae_RadarResetState,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,3,
+800A1174,Max16,ae_Max16,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,6,
+800A2A14,SpuSetMainVolume,ae_SpuSetMainVolume,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,6,
+8006699C,PlayerAccelXZ,ae_PlayerAccelXZ,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,6,
+80066ADC,PlayerAccelXYZ,ae_PlayerAccelXYZ,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,6,
+80067A1C,PlayerApplyGadgetStance,ae_PlayerApplyGadgetStance,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,12,
+8006BF10,PlayerSpawnDustBehind,ae_PlayerSpawnDustBehind,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,3,
+8006C204,PlayerSparkleBurst,ae_PlayerSparkleBurst,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,3,
+8006896C,PlayPlayerVoice,ae_PlayPlayerVoice,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,14,
+800668A0,PlayerOnWallBump,ae_PlayerOnWallBump,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,7,
+8006B70C,PlayerSpawnDust,ae_PlayerSpawnDust,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,7,
+8006C2C0,PlayerFxSpawn10C,ae_PlayerFxSpawn10C,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,6,
+800657F0,PlayerCheckWaterEntry,ae_PlayerCheckWaterEntry,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,8,
+8006B570,EffectGroundImpact,ae_EffectGroundImpact,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,6,
+8006BF84,EffectGroundImpactAtPlayer,ae_EffectGroundImpactAtPlayer,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,6,
+80086248,SoundSetVolumeMode,ae_SoundSetVolumeMode,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,8,
+80099360,RcCarSpawn,ae_RcCarSpawn,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,6,
+80070B70,SpawnRandomParticle,ae_SpawnRandomParticle,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,8,
+8006B848,PlayerSplashStart,ae_PlayerSplashStart,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,4,
+800649D8,PlayerRunTransitions,ae_PlayerRunTransitions,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,7,
+80068634,PlayerUpdateHeldByObject,ae_PlayerUpdateHeldByObject,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,7,
+8006C92C,PlayerFxSquashParticles,ae_PlayerFxSquashParticles,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,8,
+8006CC28,PlayerFxFlattenedParticles,ae_PlayerFxFlattenedParticles,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,7,
+800689F0,PlayerDrawSquashed,ae_PlayerDrawSquashed,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,5,
+80068ADC,PlayerDrawSquashedWithFx,ae_PlayerDrawSquashedWithFx,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,8,
+80068B1C,PlayerDrawSquashedFlattened,ae_PlayerDrawSquashedFlattened,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,7,
+800687D8,PlayerUpdateIdleAnim,ae_PlayerUpdateIdleAnim,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,4,
+8007AC64,PlayerSelectGadget,ae_PlayerSelectGadget,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,10,
+80067CAC,PlayerUpdateClimb,ae_PlayerUpdateClimb,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,67,
+800681E4,PlayerUpdateRope,ae_PlayerUpdateRope,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,55,
+80066FC8,PlayerOnContact,ae_PlayerOnContact,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,440,
+8007BD38,MonkeyNetCatchDraw,ae_MonkeyNetCatchDraw,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,11,
+8007C2A0,MonkeyNetCatchUpdate,ae_MonkeyNetCatchUpdate,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,12,
+8013F0C0,FUN_8013f0c0,ae_FUN_8013f0c0,src/player/ae_player2_leaf.c,tools/mips/check_player2.py,diffed,4,overlay code: area-2 overlay member 18C.bin (other overlays may hold different code at this address)
+80053550,ZakoUpdateGenericEnemy,ae_ZakoUpdateGenericEnemy,src/world/ae_zakoai.c,tools/mips/check_zakoai.py,diffed,27,common update state machine for type handlers 0x03 0x0E 0x49
+800546DC,ZakoUpdateStageSpecificEnemy,ae_ZakoUpdateStageSpecificEnemy,src/world/ae_zakoai.c,tools/mips/check_zakoai.py,diffed,6,type 0x28 dispatches by stage level to overlay handlers
+80057680,ZakoAreaModeNoop,ae_ZakoAreaModeNoop,src/world/ae_zakoai.c,tools/mips/check_zakoai.py,diffed,2,first entry in the area-mode handler table returns without side effects
+80079B10,StageFadeUpdate,ae_StageFadeUpdate,src/world/ae_stagefade.c,tools/mips/check_stagefade.py,diffed,91,fade and reload transitions; five real area members
+80079E78,ScreenFlashFadeDraw,ae_ScreenFlashFadeDraw,src/world/ae_stagefade.c,tools/mips/check_stagefade.py,diffed,32,signed timer scaling and renderer hook
+80079ECC,FadeSpiralDraw,ae_FadeSpiralDraw,src/world/ae_stagefade.c,tools/mips/check_stagefade.py,diffed,32,original clamp and state setup compared; renderer hook owns packet and ordering-table writes
+80086FD0,SoundStop,ae_SoundStop,src/world/ae_stagefade.c,tools/mips/check_stagefade.py,diffed,32,sequencer and SPU operations cross native hooks
+80088194,SoundLoopsReset,ae_SoundLoopsReset,src/world/ae_stagefade.c,tools/mips/check_stagefade.py,diffed,32,reset loop table fields
+8008D064,TimListResidentUpdate,ae_TimListResidentUpdate,src/world/ae_stagefade.c,tools/mips/check_stagefade.py,diffed,32,8008D1C4 is proven unreachable for an unsigned byte count
+80095244,HudPanelA_Start,ae_HudPanelA_Start,src/world/ae_stagefade.c,tools/mips/check_stagefade.py,diffed,32,start panel and preserve visibility flags
+80014208,PadRumbleReset,ae_PadRumbleReset,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,3,
+8004626C,GetZoneMask,ae_GetZoneMask,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,4,
+8004A978,CameraRcCarActive,ae_CameraRcCarActive,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,4,
+8004D104,StageExitPending,ae_StageExitPending,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,2,
+8005AC28,BossUpdate,ae_BossUpdate,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,6,
+800691F8,VramScrollUpdate,ae_VramScrollUpdate,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,8,
+8006B9F8,PlayerIsSubmerged,ae_PlayerIsSubmerged,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,3,
+800716EC,Indicator_Register,ae_Indicator_Register,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,3,
+8007D290,MenuItemSetRange,ae_MenuItemSetRange,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,1,
+8007D2A4,MenuItemSetStep,ae_MenuItemSetStep,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,1,
+8008197C,HudFindGadgetIconPos,ae_HudFindGadgetIconPos,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,2,
+8008C390,ColorFadeReset,ae_ColorFadeReset,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,1,
+8009632C,ProgressFlagGet,ae_ProgressFlagGet,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,2,
+8009B7FC,AreaFeature30Update,ae_AreaFeature30Update,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,5,
+800892C4,ColliderScriptFollowPath,ae_ColliderScriptFollowPath,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,4,
+8008A4B0,ColliderScriptPlayerMove,ae_ColliderScriptPlayerMove,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,11,
+8008A91C,ColliderScriptCarry,ae_ColliderScriptCarry,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,3,
+8008B980,ColliderScriptCommand,ae_ColliderScriptCommand,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,19,
+8008BDB4,ColliderResetToStart,ae_ColliderResetToStart,src/world/ae_misc_batch.c,tools/mips/check_misc.py,diffed,2,
+800468EC,RadarUsable,ae_RadarUsable,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+80046ACC,HudDrawIconSprite,ae_HudDrawIconSprite,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+80046BC4,HudDrawGadgetIcons,ae_HudDrawGadgetIcons,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8005DD34,GetDAT_800B01C2,ae_GetDAT_800B01C2,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8005E0F0,StageDrawScreenOverlay,ae_StageDrawScreenOverlay,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8005E4A8,HudDrawHealth,ae_HudDrawHealth,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8005EAB0,AreaTexCopyDraw,ae_AreaTexCopyDraw,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8005F2E0,HudPanelA_DrawIcon,ae_HudPanelA_DrawIcon,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8005F5FC,HudPanelB_DrawSprite,ae_HudPanelB_DrawSprite,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8005F770,HudDrawDigit,ae_HudDrawDigit,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8005F87C,HudDrawNumber,ae_HudDrawNumber,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8005F978,HudDrawTime,ae_HudDrawTime,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8005FCA4,HudDrawIcon16,ae_HudDrawIcon16,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8005FD80,HudCounterC_Draw,ae_HudCounterC_Draw,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8005FFD4,HudDrawTimerGauge,ae_HudDrawTimerGauge,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+80081180,HudDrawGadgetSlotsFrame,ae_HudDrawGadgetSlotsFrame,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+800813D8,HudDrawGadgetSlotIcons,ae_HudDrawGadgetSlotIcons,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+80081664,HudDrawGadgetSlots,ae_HudDrawGadgetSlots,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+800819E8,HudDrawGadgetIcon,ae_HudDrawGadgetIcon,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8008D9D0,FontDrawGlyph,ae_FontDrawGlyph,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8008DD68,TextNextGlyph,ae_TextNextGlyph,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8008DDB0,TextSetCursor,ae_TextSetCursor,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8008DF4C,MessageBoxUpdateDraw,ae_MessageBoxUpdateDraw,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8008DF80,MessageBoxDrawText,ae_MessageBoxDrawText,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8008DFFC,MessageBoxDrawPrompt,ae_MessageBoxDrawPrompt,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8008E23C,MessageBoxDrawWindow,ae_MessageBoxDrawWindow,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8009529C,HudPanelA_Update,ae_HudPanelA_Update,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+80095690,HudPanelB_Update,ae_HudPanelB_Update,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+80095924,HudCounterC_Update,ae_HudCounterC_Update,src/ui/ae_hud.c,tools/mips/check_hud.py,diffed,20,
+8004F884,ColliderSlopeContactDir,ae_ColliderSlopeContactDir,src/bodies/ae_bodymove.c,tools/mips/check_bodymove.py,diffed,12,
+80063EC4,PlayerTryLedgeGrab,ae_PlayerTryLedgeGrab,src/bodies/ae_bodymove.c,tools/mips/check_bodymove.py,diffed,12,
+80072A14,PlayerVehicleSoundUpdate,ae_PlayerVehicleSoundUpdate,src/bodies/ae_bodymove.c,tools/mips/check_bodymove.py,diffed,12,
+80072BE8,PlayerMoveRumbleSoundUpdate,ae_PlayerMoveRumbleSoundUpdate,src/bodies/ae_bodymove.c,tools/mips/check_bodymove.py,diffed,12,
+80072DC4,CollisionStub_ReturnZero,ae_CollisionStub_ReturnZero,src/bodies/ae_bodymove.c,tools/mips/check_bodymove.py,diffed,12,
+80072DCC,BodyLandOnGround,ae_BodyLandOnGround,src/bodies/ae_bodymove.c,tools/mips/check_bodymove.py,diffed,12,
+80073450,CollisionResolveProbes,ae_CollisionResolveProbes,src/bodies/ae_bodymove.c,tools/mips/check_bodymove.py,diffed,12,
+800739FC,SignedRangeOverlap,ae_SignedRangeOverlap,src/bodies/ae_bodymove.c,tools/mips/check_bodymove.py,diffed,12,
+800792C8,BodyRecordColliderContact,ae_BodyRecordColliderContact,src/bodies/ae_bodymove.c,tools/mips/check_bodymove.py,diffed,12,
+80087B34,SoundEmitterPan,ae_SoundEmitterPan,src/bodies/ae_bodymove.c,tools/mips/check_bodymove.py,diffed,12,
+80087C28,SoundEmitterPitch,ae_SoundEmitterPitch,src/bodies/ae_bodymove.c,tools/mips/check_bodymove.py,diffed,12,
+8008806C,SoundLoopStop,ae_SoundLoopStop,src/bodies/ae_bodymove.c,tools/mips/check_bodymove.py,diffed,12,
+80014A84,MatrixFromFrontUp,ae_MatrixFromFrontUp,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,120,
+80014D70,AnimDecodeFrame,ae_AnimDecodeFrame,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,80,
+80015240,AnimFramePtr,ae_AnimFramePtr,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,80,
+8001526C,AnimDecodeLerpPtr,ae_AnimDecodeLerpPtr,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,100,
+800463A4,StepToward,ae_StepToward,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,100,
+80046584,IntSqrt,ae_IntSqrt,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,120,
+80063628,PlayerAnimateAndDraw,ae_PlayerAnimateAndDraw,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,80,
+80068BC0,PlayerSwimSfxUpdate,ae_PlayerSwimSfxUpdate,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,48,
+8007C618,PlayerRumbleSlam,ae_PlayerRumbleSlam,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,32,
+8007CA48,PlayerCanActivateGadget,ae_PlayerCanActivateGadget,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,64,
+80097E88,AreaGetMonkeyRecord,ae_AreaGetMonkeyRecord,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,32,
+80098FEC,PlayerHeadLookUpdate,ae_PlayerHeadLookUpdate,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,32,
+80099AE0,RcCarDraw,ae_RcCarDraw,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,32,
+80099D70,RadarUpdateDraw,ae_RadarUpdateDraw,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,64,
+8009A17C,MonkeyFlag248Set,ae_MonkeyFlag248Set,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,48,
+8009A1A4,MonkeyRadarSignal,ae_MonkeyRadarSignal,src/player/ae_animdraw.c,tools/mips/check_animdraw.py,diffed,80,
+80052D70,ZakoWalkToTarget,ae_ZakoWalkToTarget,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80052DFC,ZakoStateHurt,ae_ZakoStateHurt,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,4,
+80052ED4,ZakoEnterIdleWait,ae_ZakoEnterIdleWait,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,2,
+80052F28,ObjFootstepFx,ae_ObjFootstepFx,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,4,
+80052FE8,ZakoChasePlayer,ae_ZakoChasePlayer,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,5,
+800530D0,ZakoEnterDeath,ae_ZakoEnterDeath,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80053154,ObjTurnTowardsPlayerXZ,ae_ObjTurnTowardsPlayerXZ,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,5,
+8005325C,ObjSetSpeed96,ae_ObjSetSpeed96,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,1,
+80053264,ZakoStateWatch,ae_ZakoStateWatch,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80053304,Zako_WanderBounce,ae_Zako_WanderBounce,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+8005337C,Zako_InitDefaultStats,ae_Zako_InitDefaultStats,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,6,
+80053440,Zako_RecoverFromStun,ae_Zako_RecoverFromStun,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+800534E8,ZakoReturnIfFar,ae_ZakoReturnIfFar,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80055370,ObjTargetBeyondRange,ae_ObjTargetBeyondRange,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80055460,ObjWalkOnGround,ae_ObjWalkOnGround,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80055524,ObjSetVelAlongDir,ae_ObjSetVelAlongDir,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,4,
+800555D8,ObjSetVelTowardPlayer,ae_ObjSetVelTowardPlayer,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80055674,ObjSetVelTowardTarget,ae_ObjSetVelTowardTarget,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+8005588C,ObjCooldown,ae_ObjCooldown,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,4,
+80055AA0,ObjWalkToPoint,ae_ObjWalkToPoint,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80055C00,ObjChasePlayer,ae_ObjChasePlayer,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80055D28,ObjWanderStep,ae_ObjWanderStep,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80055DC0,ObjWanderOrReturn,ae_ObjWanderOrReturn,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80056128,ObjFleeFromPlayerInArea,ae_ObjFleeFromPlayerInArea,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80056200,ObjSetVelFromFacing,ae_ObjSetVelFromFacing,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80056344,ObjTryStepOnGround,ae_ObjTryStepOnGround,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+8005648C,ObjFallToGround,ae_ObjFallToGround,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+800564EC,ObjPlayerOutOfYRange,ae_ObjPlayerOutOfYRange,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,5,
+8005654C,ObjPlayerNearPointXZ,ae_ObjPlayerNearPointXZ,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,4,
+800565C4,ObjPlayerInCone,ae_ObjPlayerInCone,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+800567B8,ObjPlayerInConeFromPos2,ae_ObjPlayerInConeFromPos2,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+8005696C,ObjTurnToPlayer,ae_ObjTurnToPlayer,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80056DC4,ObjAccelerate,ae_ObjAccelerate,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,5,
+800570D4,ObjClampFrame,ae_ObjClampFrame,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+800570F4,PlayerWithinRadiusXZ,ae_PlayerWithinRadiusXZ,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+800571C4,ObjAimAtPlayer,ae_ObjAimAtPlayer,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,4,
+800572CC,ObjFallAndBounce,ae_ObjFallAndBounce,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,4,
+80057504,ObjSpawnParticleAt,ae_ObjSpawnParticleAt,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+80058134,Zako_Nop,ae_Zako_Nop,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,1,
+8005813C,ObjAddHitBody,ae_ObjAddHitBody,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,2,
+80058220,ObjAddHitBodyIfPlayerNear,ae_ObjAddHitBodyIfPlayerNear,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+800582EC,ObjGetLinkedObjState,ae_ObjGetLinkedObjState,src/world/ae_zakohelpers.c,tools/mips/check_zakohelpers.py,diffed,3,
+8007D188,WriteSizedValue,ae_WriteSizedValue,src/ui/ae_menuwin.c,tools/mips/check_menuwin.py,diffed,320,
+8007D2AC,MenuStrLen,ae_MenuStrLen,src/ui/ae_menuwin.c,tools/mips/check_menuwin.py,diffed,240,
+8007D2D8,MenuWindowAdd,ae_MenuWindowAdd,src/ui/ae_menuwin.c,tools/mips/check_menuwin.py,diffed,360,
+8007D530,MenuWindowsRun,ae_MenuWindowsRun,src/ui/ae_menuwin.c,tools/mips/check_menuwin.py,diffed,85,
+80066C90,TurnTowardsY,ae_TurnTowardsY,src/player/ae_playerupdate.c,tools/mips/check_playerupdate.py,diffed,436,Full 71-instruction coverage; original SDK RotMatrixY is a named hook.
+80060780,PlayerUpdate,ae_PlayerUpdate,src/player/ae_playerupdate_frame.c,tools/mips/check_playerupdate.py,diffed,2700,Whole enclosing function on four real areas; 2969/2986 instructions plus registered proofs; explicit unwritten-local and voice-argument services
+800729CC,SoundLoopsResume,ae_SoundLoopsResume,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,16,18/18 instructions; overlay and pan hooks checked; 2 mutations caught
+8007A180,PlayerStopGadgetSounds,ae_PlayerStopGadgetSounds,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,16,97/97 instructions; sound-hook order checked; 2 mutations caught
+8007CAE0,DrawScaledModelAt,ae_DrawScaledModelAt,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,19,Scale-zero trap and divisor-minus-one cases checked with renderer hooks.
+8007F5E4,PauseMenuDrawButton,ae_PauseMenuDrawButton,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,130,"Item model selection and disabled-button behavior checked; 8007F790..8007F794 is impossible for integer item values."
+8007F830,ScreenWipeReset,ae_ScreenWipeReset,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,16,full instruction coverage; 2 mutations caught
+8007F848,ScreenSnapshotRestore,ae_ScreenSnapshotRestore,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,16,full instruction coverage; LoadImage arguments and stack window checked; 2 mutations caught
+8007F8F4,ScreenWipeBlurBlock,ae_ScreenWipeBlurBlock,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,4,All 382 pixels and nine blur samples per pixel checked against renderer GTE hooks.
+8007F9D0,ScreenWipeStep,ae_ScreenWipeStep,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,3,Rows 239 4 and 0 cover the wipe stepping and completion paths.
+8007FA4C,PauseMenuRun,ae_PauseMenuRun,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,26,"Mode transitions inputs cursor and sounds checked; 358 instructions are registered renderer or proven unreachable paths. Listing span is 5880 bytes to 80081144; inventory lists 3980."
+80081B9C,PauseMenuSetLayout,ae_PauseMenuSetLayout,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,8,full instruction coverage; 2 mutations caught
+80081D54,PauseMenuDrawButtons,ae_PauseMenuDrawButtons,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,8,All button layout state changes and renderer packet effects checked.
+80081F18,HudDrawWindowFrame,ae_HudDrawWindowFrame,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,3,"Rectangle arguments are checked at the RendererHudDrawWindowFrame native boundary; all 70 GPU packet instructions are registered to the renderer hook."
+80082030,PauseItemEnabled,ae_PauseItemEnabled,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,324,full instruction coverage; edge return values checked; 2 mutations caught
+800821D4,PauseMenuUpdate,ae_PauseMenuUpdate,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,3,Inactive and active paths checked including sound stop and pause run calls.
+8008227C,SetDAT_800BEF80,ae_SetDAT_800BEF80,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,64,RAM write and random values checked; 2 mutations caught
+80086788,SoundLoopsSetPan,ae_SoundLoopsSetPan,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,64,57/57 instructions; sound hardware hook arguments checked; 2 mutations caught
+8008DDC8,MessageBoxDrawString,ae_MessageBoxDrawString,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,8,Text pointer increments glyph reads and draw calls checked.
+8008DE68,TextWidthUntilGlyph,ae_TextWidthUntilGlyph,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,4,Found and absent glyphs checked with exact accumulated widths.
+8009A574,RadarDrawModel,ae_RadarDrawModel,src/ui/ae_pausemenu.c,tools/mips/check_pausemenu.py,diffed,4,Matrix transforms renderer hooks and positive zero and negative heights checked.
+800119F4,SaveSlotInfoPtr,ae_SaveSlotInfoPtr,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,
+80016E68,MeshAnimAdvance,ae_MeshAnimAdvance,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,
+8006D548,SpriteEffectQueue0,ae_SpriteEffectQueue0,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,
+8007292C,SoundLoopsPause,ae_SoundLoopsPause,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,SoundLoopStop direct; pan and overlay hooks
+8007F400,ClearDAT_800BEF70,ae_ClearDAT_800BEF70,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,
+8007F56C,OpenPauseMenu,ae_OpenPauseMenu,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,6,CutsceneModeOff direct
+80082288,DrawTextSprites,ae_DrawTextSprites,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,10,SetDrawTPage SDK hook
+800862E4,SoundSetVolumes,ae_SoundSetVolumes,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,10,SoundBankSetVolume hook; BgmSeqSetVolume direct
+80086428,SoundVolumesDefault,ae_SoundVolumesDefault,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,SoundBankSetVolume hook; BgmSeqSetVolume direct
+800864B4,SoundGetVolumes,ae_SoundGetVolumes,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,
+800864DC,SoundSaveVolumes,ae_SoundSaveVolumes,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,
+800864FC,SoundRestoreVolumes,ae_SoundRestoreVolumes,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,delegates to SoundSetVolumes
+80095B3C,SaveBufferFill,ae_SaveBufferFill,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,Time-attack saves skip the progress tail
+80095CEC,SaveCaptureState,ae_SaveCaptureState,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,6,ProgressFlagSet and ProgressSetByte hooks
+80095D44,SaveHeaderFill,ae_SaveHeaderFill,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,
+800961D0,RecordBestTime,ae_RecordBestTime,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,10,
+8009628C,SaveBlockPtr,ae_SaveBlockPtr,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,
+800963DC,ProgressMarkStageResult,ae_ProgressMarkStageResult,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,12,
+80096514,AreaKindVisitedGet,ae_AreaKindVisitedGet,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,AreaGetKind direct
+80096580,LevelProgressGet,ae_LevelProgressGet,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,
+800976B8,HubDestinationState,ae_HubDestinationState,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,12,Area metadata and gate decisions preserved
+800977BC,HubGateLocked,ae_HubGateLocked,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,10,
+80097820,UnlockSpecialArea,ae_UnlockSpecialArea,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,7,GadgetUnlockMask direct
+800978E0,HubGateBitTest,ae_HubGateBitTest,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,8,
+800978FC,ExitSpecialArea,ae_ExitSpecialArea,src/world/ae_progress.c,tools/mips/check_progress.py,diffed,10,Three mode-18 instructions unreachable for signed source halfword
+8013D000,Area02_SpawnAmbientParticle,ae_Area02_SpawnAmbientParticle,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013D0B0,Area02_InterpolateAnimValue,ae_Area02_InterpolateAnimValue,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013D1C4,Area02_PlayerWithinHeightAndRadius,ae_Area02_PlayerWithinHeightAndRadius,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013D224,Area02_PlayerOutsideHeightAndRadius,ae_Area02_PlayerOutsideHeightAndRadius,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013D294,Area02_EnemyAnimationTriggerUpdate,ae_Area02_EnemyAnimationTriggerUpdate,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013D3B8,Area02_UpdateEnemyWakeOrigin,ae_Area02_UpdateEnemyWakeOrigin,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013D430,Area02_UpdateEnemyWake,ae_Area02_UpdateEnemyWake,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013D518,Area02_EnemyType0B_Update,ae_Area02_EnemyType0B_Update,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013D660,Area02_CopyEnemyModel,ae_Area02_CopyEnemyModel,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013D7C8,Area02_InitializeEffects,ae_Area02_InitializeEffects,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013D81C,Area02_FindFreeEffectSlot,ae_Area02_FindFreeEffectSlot,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013D858,Area02_SpawnRadialEffect,ae_Area02_SpawnRadialEffect,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013D990,Area02_EffectBelowGround,ae_Area02_EffectBelowGround,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013D9CC,Area02_SpawnEffectParticle,ae_Area02_SpawnEffectParticle,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013DA0C,Area02_SpawnEffectBurst,ae_Area02_SpawnEffectBurst,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013DA94,Area02_UpdateEffects,ae_Area02_UpdateEffects,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013DC70,Area02_SpawnEnemyHitParticle,ae_Area02_SpawnEnemyHitParticle,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013DC9C,Area02_EnemyHitUpdate,ae_Area02_EnemyHitUpdate,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013DD2C,Area02_EnemyEnterHitReaction,ae_Area02_EnemyEnterHitReaction,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013DDBC,Area02_EnemySplashUpdate,ae_Area02_EnemySplashUpdate,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013DE20,Area02_EnemyEnterDefeat,ae_Area02_EnemyEnterDefeat,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013DEF8,Area02_EnemyPhase6Update,ae_Area02_EnemyPhase6Update,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013DF54,Area02_StageSpecificEnemyUpdate,ae_Area02_StageSpecificEnemyUpdate,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013E1E0,Area02_SurfaceEffectsInit,ae_Area02_SurfaceEffectsInit,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin
+8013E33C,Area02_EffectDraw,ae_Area02_EffectDraw,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin; lifetime/animation records verified; renderer block hooked
+8013E950,Area02_SurfaceDraw,ae_Area02_SurfaceDraw,src/world/ae_ovl18c.c,tools/mips/check_ovl18c.py,diffed,8,overlay member 18C.bin; animation/state records verified; projection and packet blocks hooked
+
+80136000,StageClearUi_LookAt_18B,ae_StageClearUi_LookAt_18B,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+801361D8,SaveUi_StringTableIndex_18B,ae_SaveUi_StringTableIndex_18B,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+80136208,Mode_SpecialAreaEnter,ae_Mode_SpecialAreaEnter,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+80136954,SpecialEnterUi_DrawWipe,ae_SpecialEnterUi_DrawWipe,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+80137214,SpecialEnterUi_DrawText,ae_SpecialEnterUi_DrawText,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+80137334,SpecialEnterUi_DrawMessageShadow,ae_SpecialEnterUi_DrawMessageShadow,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+801373A4,SpecialEnterUi_DrawBlink,ae_SpecialEnterUi_DrawBlink,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+801374D0,SpecialEnterUi_RunScript,ae_SpecialEnterUi_RunScript,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,15,overlay member 18B.bin
+80137CD4,StageClearUi_SetDrawStp_18B,ae_StageClearUi_SetDrawStp_18B,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+80137D4C,StageClearUi_CopyStrip_18B,ae_StageClearUi_CopyStrip_18B,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+80137DF0,SpecialEnterUi_UpdateObjects,ae_SpecialEnterUi_UpdateObjects,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+801380D8,SpecialEnterUi_DrawScene,ae_SpecialEnterUi_DrawScene,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+801383B8,SpecialEnterUi_SetAreaTablePointer,ae_SpecialEnterUi_SetAreaTablePointer,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+801383D8,SpecialEnterUi_TextWidth,ae_SpecialEnterUi_TextWidth,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+80138468,SpecialEnterUi_PlayXa,ae_SpecialEnterUi_PlayXa,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+80138490,StageClearUi_DrawScanlines_18B,ae_StageClearUi_DrawScanlines_18B,src/modes/ae_ovl18b.c,tools/mips/check_ovl18b.py,diffed,8,overlay member 18B.bin
+80050490,HalfPipeRangeTest,ae_HalfPipeRangeTest,src/world/ae_area02.c,tools/mips/check_area02.py,diffed,32,59/59 instructions; 2/2 mutations caught
+800554F0,ObjMove,ae_ObjMove,src/world/ae_area02_paths.c,tools/mips/check_area02.py,diffed,32,13/13 instructions; 2/2 mutations caught
+80055718,ObjSeekPoint,ae_ObjSeekPoint,src/world/ae_area02_paths.c,tools/mips/check_area02.py,diffed,32,93/93 instructions; 2/2 mutations caught
+80057588,ZakoHooksAdd,ae_ZakoHooksAdd,src/world/ae_area02_paths.c,tools/mips/check_area02.py,diffed,32,33/33 instructions; 2/2 mutations caught
+80058400,ObjSeekPathPoint,ae_ObjSeekPathPoint,src/world/ae_area02_paths.c,tools/mips/check_area02.py,diffed,32,27/27 instructions; 2/2 mutations caught
+800584C8,ObjAdvancePath,ae_ObjAdvancePath,src/world/ae_area02_paths.c,tools/mips/check_area02.py,diffed,32,63/66 instructions; 3 unreachable; 2/2 mutations caught
+800585D0,ObjFollowPath,ae_ObjFollowPath,src/world/ae_area02_paths.c,tools/mips/check_area02.py,diffed,32,26/26 instructions; 2/2 mutations caught
+80058638,ObjSetPosToPathPoint,ae_ObjSetPosToPathPoint,src/world/ae_area02_paths.c,tools/mips/check_area02.py,diffed,32,13/13 instructions; 2/2 mutations caught
+8005866C,ObjFacePathPoint,ae_ObjFacePathPoint,src/world/ae_area02_paths.c,tools/mips/check_area02.py,diffed,32,36/37 instructions; 1 unreachable; 2/2 mutations caught
+8005BDC0,main,ae_main,src/game/ae_modes.c,tools/mips/check_modes.py,diffed,80,Resident modes and named native boundaries
+8005BEE4,Mode_04,ae_Mode_04,src/game/ae_modes.c,tools/mips/check_modes.py,diffed,32,Resident modes and named native boundaries
+8005BF70,Mode_Stage,ae_Mode_Stage,src/game/ae_modes.c,tools/mips/check_modes.py,diffed,290,Resident modes and named native boundaries
+8008D1F0,Mode_06,ae_Mode_06,src/game/ae_modes.c,tools/mips/check_modes.py,diffed,80,Resident modes and named native boundaries
+80010B50,StageInitMemory,ae_StageInitMemory,src/game/ae_modes.c,tools/mips/check_modes.py,diffed,64,Resident modes and named native boundaries
+8005BEF0,StageRenderInit,ae_StageRenderInit,src/game/ae_modes.c,tools/mips/check_modes.py,diffed,32,Resident modes and named native boundaries
+8008C000,BumpAllocPeek,ae_BumpAllocPeek,src/game/ae_modes.c,tools/mips/check_modes.py,diffed,160,Resident modes and named native boundaries
+800143B0,NullInit,ae_NullInit,src/game/ae_modes.c,tools/mips/check_modes.py,diffed,32,Resident modes and named native boundaries
+8005DDE0,ResetFrameFlip,ae_ResetFrameFlip,src/game/ae_modes.c,tools/mips/check_modes.py,diffed,32,Resident modes and named native boundaries
+80136000,Mode_Boot,ae_Mode_Boot,src/modes/ae_ovl181.c,tools/mips/check_ovl181.py,diffed,2,overlay member 181.bin
+801362A4,Boot_ClearScreen,ae_Boot_ClearScreen,src/modes/ae_ovl181.c,tools/mips/check_ovl181.py,diffed,4,overlay member 181.bin
+80136424,Boot_SetupDisplay,ae_Boot_SetupDisplay,src/modes/ae_ovl181.c,tools/mips/check_ovl181.py,diffed,4,overlay member 181.bin
+80136528,Boot_DrawLogoA,ae_Boot_DrawLogoA,src/modes/ae_ovl181.c,tools/mips/check_ovl181.py,diffed,2,overlay member 181.bin
+801366EC,Boot_DrawLogoB,ae_Boot_DrawLogoB,src/modes/ae_ovl181.c,tools/mips/check_ovl181.py,diffed,2,overlay member 181.bin
+80136894,Mode_02,ae_Mode_02,src/modes/ae_ovl181.c,tools/mips/check_ovl181.py,diffed,4,overlay member 181.bin
+80136000,Mode_03,ae_Mode_03,src/modes/ae_ovl182.c,tools/mips/check_ovl181.py,diffed,7,overlay member 182.bin
+8013654C,Ovl182_DrawScene3D,ae_Ovl182_DrawScene3D,src/modes/ae_ovl182.c,tools/mips/check_ovl181.py,diffed,8,overlay member 182.bin
+8013674C,Ovl182_UpdateCamera,ae_Ovl182_UpdateCamera,src/modes/ae_ovl182.c,tools/mips/check_ovl181.py,diffed,8,overlay member 182.bin
+80136AC0,Ovl182_Init,ae_Ovl182_Init,src/modes/ae_ovl182.c,tools/mips/check_ovl181.py,diffed,8,overlay member 182.bin
+80136C5C,Ovl182_StateMachine,ae_Ovl182_StateMachine,src/modes/ae_ovl182.c,tools/mips/check_ovl181.py,diffed,12,overlay member 182.bin
+80136D00,Ovl182_DrawIntroState,ae_Ovl182_DrawIntroState,src/modes/ae_ovl182.c,tools/mips/check_ovl181.py,diffed,6,overlay member 182.bin
+80136F54,Ovl182_MenuInput,ae_Ovl182_MenuInput,src/modes/ae_ovl182.c,tools/mips/check_ovl181.py,diffed,13,overlay member 182.bin
+801374E4,Ovl182_FadeTick,ae_Ovl182_FadeTick,src/modes/ae_ovl182.c,tools/mips/check_ovl181.py,diffed,8,overlay member 182.bin
+801375C4,Ovl182_DrawFade,ae_Ovl182_DrawFade,src/modes/ae_ovl182.c,tools/mips/check_ovl181.py,diffed,8,overlay member 182.bin
+80136940,Ovl181_CheckCdHardwareIntegrity,ae_Ovl181_CheckCdHardwareIntegrity,src/modes/ae_ovl181.c,tools/mips/check_ovl181.py,diffed,8,overlay member 181.bin
+80136D18,Ovl181_DrawIntegrityWarning,ae_Ovl181_DrawIntegrityWarning,src/modes/ae_ovl181.c,tools/mips/check_ovl181.py,diffed,4,overlay member 181.bin
+80136000,StageClearUi_LookAt,ae_StageClearUi_LookAt,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,2,overlay member 187.bin
+801361D8,StageClearUi_StringTableIndex,ae_StageClearUi_StringTableIndex,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,3,overlay member 187.bin
+80136208,Mode_StageClear,ae_Mode_StageClear,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,10,overlay member 187.bin
+801368FC,StageClearUi_DrawWipe,ae_StageClearUi_DrawWipe,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,19,overlay member 187.bin
+801372D0,StageClearUi_DrawText,ae_StageClearUi_DrawText,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,3,overlay member 187.bin
+801373F8,StageClearUi_DrawMessage,ae_StageClearUi_DrawMessage,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,1,overlay member 187.bin
+801374C8,StageClearUi_RunScript,ae_StageClearUi_RunScript,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,48,overlay member 187.bin
+80137CA8,StageClearUi_SetDrawStp,ae_StageClearUi_SetDrawStp,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,1,overlay member 187.bin
+80137D20,StageClearUi_CopyStrip,ae_StageClearUi_CopyStrip,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,1,overlay member 187.bin
+80137DC4,StageClearUi_DrawBlinkIcons,ae_StageClearUi_DrawBlinkIcons,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,2,overlay member 187.bin
+80137F4C,StageClearUi_UpdateObjects,ae_StageClearUi_UpdateObjects,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,2,overlay member 187.bin
+80138258,StageClearUi_DrawBox,ae_StageClearUi_DrawBox,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,1,overlay member 187.bin
+8013836C,StageClearUi_DrawBackdrop,ae_StageClearUi_DrawBackdrop,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,4,overlay member 187.bin
+801384A0,StageClearUi_DrawTimes,ae_StageClearUi_DrawTimes,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,6,overlay member 187.bin
+80138660,StageClearUi_PlayXa,ae_StageClearUi_PlayXa,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,2,overlay member 187.bin
+801386B8,StageClearUi_DrawScanlines,ae_StageClearUi_DrawScanlines,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,3,overlay member 187.bin
+80138A9C,StageClearUi_CheckRequirements,ae_StageClearUi_CheckRequirements,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,1,overlay member 187.bin
+80138B0C,RippleGrid_Init,ae_RippleGrid_Init,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,1,overlay member 187.bin
+80138C24,RippleGrid_Smooth,ae_RippleGrid_Smooth,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,1,overlay member 187.bin
+80138E20,RippleGrid_Draw,ae_RippleGrid_Draw,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,1,overlay member 187.bin
+80138F38,StageClearUi_Setup,ae_StageClearUi_Setup,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,16,overlay member 187.bin
+801392B0,StageClearUi_ObjMatrix,ae_StageClearUi_ObjMatrix,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,2,overlay member 187.bin
+8013939C,StageClearUi_DrawStars,ae_StageClearUi_DrawStars,src/modes/ae_ovl187.c,tools/mips/check_ovl187.py,diffed,4,overlay member 187.bin
+80136000,SeqPlayer_StreamRingInit,ae_SeqPlayer_StreamRingInit,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80136074,SeqPlayer_Run,ae_SeqPlayer_Run,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,10,overlay member 180.bin
+80136604,SeqPlayer_DisplayStateInit,ae_SeqPlayer_DisplayStateInit,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+8013668C,SeqPlayer_Init,ae_SeqPlayer_Init,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+801369E0,SeqPlayer_Stop,ae_SeqPlayer_Stop,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80136EA8,SeqPlayer_FadeIn,ae_SeqPlayer_FadeIn,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80139FA0,SeqPlayer_SetTransitionSweep,ae_SeqPlayer_SetTransitionSweep,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80139FB8,SeqPlayer_AdvanceTransitionSweep,ae_SeqPlayer_AdvanceTransitionSweep,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80139EC4,SeqPlayer_CommandWriteObjectFlags,ae_SeqPlayer_CommandWriteObjectFlags,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+8013990C,SeqPlayer_ParseObjects,ae_SeqPlayer_ParseObjects,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80137AC0,Mode_Title,ae_Mode_Title,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,10,overlay member 180.bin
+80137D20,SeqPlayer_InitHook,ae_SeqPlayer_InitHook,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+801398B0,SeqPlayer_Hook2,ae_SeqPlayer_Hook2,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+801398D0,SeqPlayer_GetObject,ae_SeqPlayer_GetObject,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80139DAC,SeqPlayer_FreeObjects,ae_SeqPlayer_FreeObjects,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80139DE4,SeqPlayer_GetObjectFlag,ae_SeqPlayer_GetObjectFlag,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80139E00,SeqPlayer_ClearObjectFlags,ae_SeqPlayer_ClearObjectFlags,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80139E44,SeqPlayer_MeshInit,ae_SeqPlayer_MeshInit,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80139E88,SeqPlayer_ModelInit,ae_SeqPlayer_ModelInit,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80139F0C,SeqPlayer_ClearObjectFlagsWrap,ae_SeqPlayer_ClearObjectFlagsWrap,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80139F38,SeqPlayer_SumRecordSizes,ae_SeqPlayer_SumRecordSizes,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+80139F6C,SeqPlayer_FindRecordByTime,ae_SeqPlayer_FindRecordByTime,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+8013AC98,SeqPlayer_FindRangeIndex,ae_SeqPlayer_FindRangeIndex,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin
+8013B8D0,SeqPlayer_ApplyFlagOps,ae_SeqPlayer_ApplyFlagOps,src/modes/ae_ovl180.c,tools/mips/check_ovl180.py,diffed,8,overlay member 180.bin

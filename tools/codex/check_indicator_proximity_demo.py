@@ -1,0 +1,81 @@
+"""SDL proximity phase/animation checks; no full hint protocol or console parity."""
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT/'tools'))
+from codex.build_native_viewer import build
+from codex.pack_indicators import pack as indicators
+from codex.pack_area import pack,OUT
+from codex.pack_actor import pack_actor
+from codex.pack_ui import pack_ui
+
+def main():
+    executable=build(ROOT/'src/player');actor=pack_actor()
+    rows=[];env=dict(os.environ,SDL_AUDIO_DRIVER='dummy')
+    for area in (1,5,0x15):
+        scene=pack(area);world=indicators(area,runtime=True);ui=pack_ui(area)
+        args=[str(executable),scene['pack'],'--actor',actor['path'],
+            '--ground',str(ROOT/f'extract/members/{scene["member"]:03X}.bin'),
+            '--collision-exe',str(ROOT/'extract/disc/SCUS_944.23'),
+            '--player-member',str(ROOT/'extract/members/008.bin'),
+            '--ui-pack',ui['pack'],'--indicators-pack',world['pack'],'--indicator-proximity']
+        runs=[]
+        for repeat in range(2):
+            trace=OUT/f'indicator_proximity_{area:02X}_{repeat}.json'
+            image=OUT/f'indicator_proximity_{area:02X}_{repeat}.ppm'
+            r=subprocess.run([*args,'--frames','90','--walk-test',str(trace),'--capture',str(image)],
+                             cwd=ROOT,env=env,capture_output=True,text=True,timeout=45)
+            (OUT/f'indicator_proximity_{area:02X}_{repeat}.log').write_text(r.stdout+'\n'+r.stderr)
+            assert not r.returncode,(area,repeat,r.stdout,r.stderr)
+            frames=json.loads(trace.read_text())['frames'];assert len(frames)==90
+            for i,f in enumerate(frames):
+                assert f['indicator_proximity_ticks']==i+1,('clock',area,i,f)
+                if i:assert f['indicator_tick_position']==frames[i-1]['xyz'],('body phase',area,i)
+                assert not f['indicator_pickup_requests'] and not f['indicator_effect_requests']
+            captures=json.loads(Path(str(image)+'.json').read_text());assert captures['covered_pixels']>100
+            runs.append(trace.read_bytes());rows.append(dict(area=f'{area:02X}',repeat=repeat,frames=90,
+                hints=frames[-1]['indicator_hint_requests'],missing=frames[-1]['indicator_missing_touch_mask']))
+        assert runs[0]==runs[1],('repeat',area)
+        if area==1:
+            # Diagnostic start at an actual marker center; no claim this is a console route.
+            source=world['records'][0];x,y,z=source['position'];trace=OUT/'indicator_proximity_activation.json'
+            image=OUT/'indicator_proximity_activation.ppm'
+            r=subprocess.run([*args,'--actor-pos',str(x/256),str(-y/256),str(z/256),
+                '--frames','12','--walk-test',str(trace),'--capture',str(image)],
+                cwd=ROOT,env=env,capture_output=True,text=True,timeout=45)
+            (OUT/'indicator_proximity_activation.log').write_text(r.stdout+'\n'+r.stderr)
+            assert not r.returncode,(r.stdout,r.stderr)
+            frames=json.loads(trace.read_text())['frames'];first=frames[0]
+            assert first['indicator_tick_position']==[x,y,z]
+            assert first['indicator_hint_requests']==1 and first['indicator_request_mask']==1
+            assert first['indicator_frames'][0]==29 and first['indicator_render_frames'][0]==1
+            assert first['indicator_trigger_states'][0]==1 and not first['indicator_missing_touch_mask']&1
+            assert any(f['indicator_missing_touch_mask']&1 for f in frames[1:]),'Required unknown touch never reported'
+            assert all(f['indicator_hint_requests']==1 for f in frames),'Repeated without known contact'
+            assert r.stderr.count('INDICATOR unexecuted request mask now')==1
+            assert f'hint_sector={source["hint_sector"]}' in r.stderr
+            # --check rejects the legacy pack and missing world before claiming success.
+            legacy=indicators(1)
+            invalid=list(args);invalid[invalid.index('--indicators-pack')+1]=legacy['pack']
+            rejected=subprocess.run([*invalid,'--check'],cwd=ROOT,capture_output=True,text=True,timeout=30)
+            assert rejected.returncode and 'AEIND2' in rejected.stderr
+            invalid=list(args);index=invalid.index('--indicators-pack');del invalid[index:index+2]
+            rejected=subprocess.run([*invalid,'--check'],cwd=ROOT,capture_output=True,text=True,timeout=30)
+            assert rejected.returncode and 'requires --indicators-pack' in rejected.stderr
+    report=dict(deterministic_walk_frames=540,activation_frames=12,original_pre_body_phase=True,
+                cached_model_frame_before_activation=True,invalid_launch_checks=2,failures=0,walks=rows)
+    (OUT/'indicator-proximity-demo-validation.json').write_text(json.dumps(report,indent=2)+'\n')
+    (ROOT/'notes/port/validation/indicator_proximity_demo_validation.md').write_text(
+        '# Proximity demo validation\n\nGenerated by check_indicator_proximity_demo.py.\n\n'+
+        '\n'.join(f'- {k}: {v}' for k,v in report.items() if k!='walks')+'\n\n'+
+        'Three repeated actual-area walks feed previous integrated positions to the pre-body callback. '
+        'A diagnostic marker-center start emits one original hint request and preserves the pre-activation '
+        'model frame for drawing; subsequent unknown contact is reported and does not fabricate repeat '
+        'activation. Hint/player-mode/pickup/effect protocols remain unexecuted; these are SDL integration '
+        'checks, not console gameplay captures.\n')
+    print(report)
+
+if __name__=='__main__':main()

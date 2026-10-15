@@ -1,0 +1,138 @@
+"""Dump the per-area interactive object ("gimmick") tables.
+
+In the area data blob (see tools/dump_areas.py):
+    blob +0x4D4 -> T:  count u32, then count group entries (8 bytes):
+                       {count s16, unk s16 (zeroed at load), first s16, unk s16}
+                  then instances (0x18 bytes each), indexed globally:
+                       +0x00 type u16    +0x02 state u16   +0x04 collider s16
+                       +0x06..+0x16 per-type params (+0x0C = linked instance)
+The EXE's per-area handler table (0x800AF868[area]) pairs group i with handler i
+(12-byte entries {fn, ?, group*}, 0-terminated); handlers run at load and every frame.
+
+Usage: uv run python tools/dump_objects.py   -> notes/14-area-objects.md
+"""
+import collections
+import csv
+import struct
+from pathlib import Path
+
+import dump_areas
+
+ROOT = Path(__file__).resolve().parent.parent
+OUT = ROOT / "notes/14-area-objects.md"
+HANDLER_TABLE = 0x800AF868
+
+
+def names() -> dict[int, str]:
+    out = {}
+    inv = ROOT / "notes/inventory/functions.csv"
+    if inv.exists():
+        for r in csv.DictReader(open(inv, encoding="utf-8")):
+            if "::" not in r["entry"] and not r["name"].startswith("FUN_"):
+                out[int(r["entry"], 16)] = r["name"]
+    for line in (ROOT / "tools/symbols.csv").read_text(encoding="utf-8").splitlines():
+        if line and not line.startswith("#") and "," in line and "::" not in line.split(",")[0]:
+            addr, name = line.split(",", 2)[:2]
+            out[int(addr, 16)] = name
+    return out
+
+
+AREA_OVERLAY_BASE = 0x8013D000
+
+
+def area_overlay_member(area: int) -> int | None:
+    """Code overlay member the area's load list puts at 0x8013D000."""
+    rec = dump_areas.exe_u32(dump_areas.AREA_PTRS + area * 8)
+    for _ in range(8):
+        member, post = struct.unpack_from("<Hh", dump_areas.EXE, rec - 0x80010000 + 0x800)
+        if post < 0:
+            break
+        if dump_areas.exe_u32(rec + 4) == AREA_OVERLAY_BASE and member >= 0x180:
+            return member
+        rec += 8
+    return None
+
+
+def handlers(area: int) -> list[tuple[int, int]]:
+    """(initFn, updateFn) per group from the area's handler list {init, update, group*}."""
+    ptr = dump_areas.exe_u32(HANDLER_TABLE + area * 4)
+    if 0x80010000 <= ptr < 0x800B5000:
+        read = dump_areas.exe_u32
+    else:
+        member = area_overlay_member(area)
+        if member is None or not AREA_OVERLAY_BASE <= ptr < AREA_OVERLAY_BASE + 0x20000:
+            return []
+        ovl = (ROOT / f"extract/members/{member:03X}.bin").read_bytes()
+        read = lambda a: struct.unpack_from("<I", ovl, a - AREA_OVERLAY_BASE)[0]
+    out = []
+    while (init := read(ptr)) != 0 and len(out) < 64:
+        out.append((init, read(ptr + 4)))
+        ptr += 12
+    return out
+
+
+def parse(blob: bytes) -> tuple[list, list]:
+    t = struct.unpack_from("<I", blob, 0x4D4)[0]
+    count = struct.unpack_from("<I", blob, t)[0]
+    groups = [struct.unpack_from("<hhhh", blob, t + 4 + i * 8) for i in range(count)]
+    base = t + 4 + count * 8
+    total = sum(g[0] for g in groups)
+    inst = [struct.unpack_from("<HHh9h", blob, base + i * 0x18) for i in range(total)]
+    return groups, inst
+
+
+def main() -> None:
+    fn_names = names()
+    type_areas = collections.defaultdict(set)
+    type_count = collections.Counter()
+    type_handlers = collections.defaultdict(collections.Counter)
+    sections = []
+    for area, member in sorted(dump_areas.area_members().items()):
+        blob = (ROOT / f"extract/members/{member:03X}.bin").read_bytes()
+        try:
+            groups, inst = parse(blob)
+        except struct.error as e:
+            sections.append(f"## Area 0x{area:02X}\n\nparse failed: {e}\n")
+            continue
+        hs = handlers(area)
+        lines = [f"## Area 0x{area:02X} (member 0x{member:03X}) — {len(groups)} groups, {len(inst)} objects", ""]
+        if not groups:
+            sections.append("\n".join(lines + ["(none)", ""]))
+            continue
+        lines += ["| Group | Init / update handlers | Objects (type/state/collider: params) |", "|---|---|---|"]
+        for gi, (cnt, _, first, _) in enumerate(groups):
+            if gi < len(hs):
+                hname = " / ".join(fn_names.get(f, f"0x{f:08X}") for f in hs[gi])
+            else:
+                hname = "-"
+            objs = []
+            for k in range(first, first + cnt):
+                typ, st, col, *params = inst[k]
+                type_areas[typ].add(area)
+                type_count[typ] += 1
+                if gi < len(hs):
+                    init_name = fn_names.get(hs[gi][1], f"0x{hs[gi][1]:08X}")
+                    type_handlers[typ][init_name.removesuffix("_Update")] += 1
+                p = " ".join(f"{v}" for v in params)
+                objs.append(f"#{k} t{typ:02X} s{st} c{col}: {p}")
+            lines.append(f"| {gi} | `{hname}` | {'<br>'.join(objs)} |")
+        sections.append("\n".join(lines) + "\n")
+
+    head = ["# Area objects (generated)", "",
+            "Generated by `tools/dump_objects.py`. Format in the script header and "
+            "notes/12-level-collision.md. Params are instance words +0x06..+0x16 "
+            "(+0x0C, the 4th, is the linked instance).", "",
+            "## Types across all areas", "",
+            "Behaviour = the update handler(s) the type's groups use (named in tools/symbols.csv; "
+            "raw addresses are unnamed / overlay handlers).", "",
+            "| Type | Count | Behaviour (update handler) | Areas |", "|---|---|---|---|"]
+    for typ in sorted(type_count):
+        areas = " ".join(f"{a:02X}" for a in sorted(type_areas[typ]))
+        beh = ", ".join(f"{h}" + (f" ×{n}" if n > 1 else "") for h, n in type_handlers[typ].most_common(3))
+        head.append(f"| 0x{typ:02X} | {type_count[typ]} | {beh} | {areas} |")
+    OUT.write_text("\n".join(head) + "\n\n" + "\n".join(sections), encoding="utf-8")
+    print(f"wrote {OUT}: {sum(type_count.values())} objects, {len(type_count)} types")
+
+
+if __name__ == "__main__":
+    main()

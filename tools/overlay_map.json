@@ -1,0 +1,395 @@
+{
+ "note": "BNS code overlay load addresses. Seeded from mstan/ApeEscapeRecomp aot/overlays.json; established entries independently verified by tools/verify_overlay_map.py against the game tables.",
+ "overlays": [
+  {
+   "index": "0x180",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x80137ac0"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x181",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x80136000",
+    "0x80136894"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x182",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x80136000"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x183",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x80136000"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x184",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x80136000"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x185",
+   "load_addr": "0x80146000",
+   "entries": [],
+   "status": "tentative: no load path found"
+  },
+  {
+   "index": "0x186",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x80136ab8"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x187",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x80136208"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x188",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x8013683c"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x189",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x8013606c"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x18a",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x80136208"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x18b",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x80136208"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x18c",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x18d",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x18e",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x18f",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x190",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x191",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x192",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x193",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x194",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x195",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x196",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x197",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x198",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x199",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x19a",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x19b",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x19c",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x19d",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x19e",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x19f",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x1a0",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x1a1",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x1a2",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x1a3",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x1a4",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x1a5",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x1a6",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x1a7",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x1a8",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x1a9",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x1aa",
+   "load_addr": "0x8013d000",
+   "entries": [
+    "0x8013d000"
+   ],
+   "status": "verified: area records 0x800A71E0"
+  },
+  {
+   "index": "0x1ab",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x80137654"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x1ac",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x801385b0"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x1ad",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x80136ab8"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x1ae",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x80136000"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x1af",
+   "load_addr": "0x80136000",
+   "entries": [
+    "0x80136000",
+    "0x8013668c"
+   ],
+   "status": "verified: mode table 0x800AFA30"
+  },
+  {
+   "index": "0x1B0",
+   "load_addr": "0x80136000",
+   "entries": [],
+   "status": "tentative: no load path found"
+  }
+ ]
+}

@@ -1,0 +1,622 @@
+# Struct definitions applied by tools/ghidra_scripts/ApplyStructs.java.
+#
+#   struct <Name> <size>
+#   <offset> <type> <field> [; comment]
+#   end
+#   apply <address> <type>          (types: u8 s8 u16 s16 u32 s32, <Struct>, T* , T[n])
+#
+# Gaps between fields stay undefined. Field names use unk_XX until the meaning is known.
+
+# Skinned model header (actor models: player, monkeys, gadgets). Data follows the 0xC-byte
+# header: colors[colorCount] (u32), bones[boneCount] (12 bytes), verts[vertCount], prims.
+struct ModelHeader 0xC
+0x0 u32       flags
+0x4 u16       boneCount
+0x6 u16       vertCount
+0x8 u16       colorCount
+0xA u16       hasNormals       ; nonzero: 16-byte verts with normals, drawn environment-mapped
+end
+
+struct Monkey 0x250
+# Common actor/model-instance header (same layout as Player).
+0x000 ModelHeader* model
+0x004 u32     colors
+0x008 u32     prims
+0x00C u32     bones
+0x010 u32     verts
+0x014 MATRIX* boneMatrices
+0x018 u32     animSet          ; compared/assigned from 0x800F4504/0x800F4508
+0x024 s32[3]  pos              ; world position (x, y, z)
+0x046 u16     bodyHeight       ; collision body height (CollisionBody +0x22; 0x100 in special states)
+0x04A u16     bodyFlags        ; collision body flags (CollisionBody +0x26): 0x8000 normally, 0xC000 in some states
+0x05C u16     animFrame        ; set by MonkeyPickAnim
+0x05E u16     animIndex        ; index into the anim table at +0x16C (ActorAnimDecode)
+0x060 SVECTOR moveDir          ; normalised movement direction (rotated by rotMatrix in the move states)
+0x068 SVECTOR wishDir          ; direction to the goal (MonkeyCalcMoveDir: goal - pos, normalised; 0x1000 at init)
+0x070 s16[3]  vel              ; added to pos every frame in the move / jump states
+0x078 u8      aiState          ; 0..0x42; handlers via jump table 0x800A4AB0, flags at 0x800AE944
+0x079 u8      alerted          ; 1 = has noticed the target (set by idle sight checks; selects MoveAlerted vs MoveUnalerted). Tentative
+0x07A u8      activity         ; 0 idle, 1 active, 2 skipped, 4 -> 1 when selected
+0x07B u8      slot             ; slot index; staggers work and indexes nav visit marks
+0x07C u8      id
+0x080 s16     unk_80
+0x082 s16     unk_82
+0x08E s16     unk_8e
+0x090 s16     timer_90         ; decremented while activity == 3
+0x094 s16     actionCooldown   ; counted down in the move states; actions wait for <= 0
+0x096 s16     animTime         ; frames in the current animation (reset by MonkeyPickAnim, compared with animLength)
+0x09C MATRIX  rotMatrix        ; orientation (RotMatrixYXZ in MonkeyUpdateFacing)
+0x0BC s32[3]  goalPos          ; movement target position
+0x0D5 u8      lod              ; 0..2 by camera distance, 3 = special states
+0x0D7 u8      groupCount       ; patrol groups
+0x0D8 u8      group            ; current patrol group
+0x0D9 u8      groupStep
+0x0DA u8[8]   groupSizes
+0x0E2 u8      stunTimer        ; set to 0x1E by MonkeyEnterState2F / knockdown, counted down in MonkeyAiStateUpdate
+0x0E6 s16     goalNode         ; nav node index
+0x0E8 u16     groupVisitMask
+0x0EA u16     goalAge          ; frames since goal pick; repick at >= 0xA8D
+0x0EC s16     prevNode         ; previous nav node (-1 = none; MonkeySelectNextNode avoids going back)
+0x0EE s16     navMarkCount
+0x0F0 s16     unk_f0
+0x0F2 u16     navNode0         ; nav node index (checked for visit marks)
+0x0F4 u16     navNode1         ; nav node index (checked for visit marks)
+0x100 s32[3]  facingVec        ; current facing vector (MonkeyUpdateFacing)
+0x110 s32[3]  turnTarget       ; desired facing vector (AngleBetweenXZ with facingVec)
+0x120 s16     turnFrames       ; facing interpolation frames left
+0x124 s16     timer_124
+0x128 u16     animLength       ; frames of the current animation (MonkeyAnimFinished: animTime > animLength)
+0x12C s32[3]  jumpStart        ; jump arc start position (MonkeyPrepareJumpArc)
+0x13C s32[3]  jumpVel          ; jump arc velocity (4.12; y gets the gravity term)
+0x154 s32     unk_154          ; set to -1 when flag bit 21 clears
+0x158 s16     timer_158        ; ticked down every frame by MonkeyUpdateAll
+0x160 s32     sfxHandle        ; looping sound; stopped with id 0x602D in area 0x24
+0x168 s16     shadowSize       ; 0 = no shadow
+0x16C s32     animTable        ; animation table: 8 byte records {u16 first frame, u16 last frame, ...} = area monkey data + header +0x18 / +0x1C
+0x170 u16     jumpLandFrames   ; landing phase length of a jump animation (MonkeyAi_JumpArc; Tentative)
+0x172 u16     jumpRiseFrames   ; frames advanced during the rise of a jump (MonkeyAi_JumpArc; Tentative)
+0x174 s16     timer_174
+0x1DA u8[16]  linkBlocked      ; per nav link: 1 = blocked (MonkeyMarkBlockedLinks; size tentative)
+0x20C s32     distToTarget
+0x210 s32     distToPlayer     ; ranking key for MonkeySelectActive
+0x21C s32     unk_21c
+0x220 s16     reachRadius      ; node arrival radius (200 at init; MonkeyReachedNode scales it)
+0x222 s8      patrolCounter    ; counted down by MonkeyAi_Patrol
+0x228 u32     flags2           ; bit 14 checked in AI/visuals
+0x22C s16     nodeWait         ; wait frames at the reached node (MonkeyArriveAtNode)
+0x230 s32     stateTimer       ; frames in state 0x1E (limit 0xF0)
+0x248 u32     flags            ; bit 21 transient, 25, 27 nav-stuck, 30, 31 disabled
+0x24C u32     flags3
+end
+
+
+# Player object (single global). Layout recovered from absolute references
+# (tools/ghidra_scripts/DumpDataRefs.java -> notes/inventory/player-refs.csv).
+# Shares the object header pattern with Monkey and the RC car: +0x18 anim set, +0x24 pos.
+struct Player 0x150
+# Common actor/model-instance header (same layout in Monkey; see ModelInit / ModelPoseBones).
+0x000 ModelHeader* model
+0x004 u32     colors           ; vertex colors (CVECTOR[colorCount])
+0x008 u32     prims            ; primitive list (GPU-code runs, see ModelEmitPrims)
+0x00C u32     bones            ; 12 bytes per bone {vertCount u16, firstVert u16, offset s16[3], parent u16}
+0x010 u32     verts            ; SVECTOR[vertCount] (16 bytes each when the model has normals)
+0x014 MATRIX* boneMatrices     ; [0] root, [1..] bones (shared buffer 0x800E9C60)
+0x018 u32     animSet          ; animation frames: (boneCount + 2) words per frame, 10-bit packed ZYX angles
+0x01C s16[3]  posShort         ; short copy of the position (x, ground y, z): set at spawn, read by PlayerAnimateAndDraw / Gadget4TrailUpdate (Tentative)
+0x024 s32[3]  pos              ; world position; 139 functions read it
+0x030 s32[3]  vel              ; added to pos when state == 0x2D
+0x03C SVECTOR prevFacing       ; facing at the end of the last update
+0x044 s16     bodyRadius       ; collision body radius (CollisionBody +0x20; 0x40 at spawn, also used by PlayerTryLedgeGrab)
+0x046 s16     bodyHeight       ; collision body height (CollisionBody +0x22; 0x100 at init)
+0x050 u32     contact          ; what the player touched: >>28 = type (4/5 push-off, 0xA wall, 0xB hazard), &0xFFF = object index
+0x058 s16     contactCollider  ; collider index recorded by BodyRecordColliderContact (CollisionBody +0x34)
+0x05C u16     animFrame        ; current animation frame; runs between the state's [first,last] in the state table
+0x05E u16     state            ; index into the state table (>= 0x80 = gadget-specific table); set by PlayerSetState
+0x060 SVECTOR facing           ; facing direction (x,y,z,pad), 0x1000 = 1.0
+0x068 s16[3]  upVector         ; model tilt; follows the slope / right stick per the state's tilt mode
+0x070 u32     stateFlags       ; flag nibbles copied from the state table entry by PlayerSetState (hi nibble 0xC/0xD/0xE tested)
+0x074 SVECTOR desiredDir       ; direction to turn towards (TurnTowardsY), usually camera-relative stick
+0x07C s32     pitch            ; angle for turn mode 4 (swimming up/down)
+0x080 SVECTOR savedFacing      ; facing saved on water entry
+0x088 s16     nextFrame
+0x08A u16     animLerp         ; 0..0xFFF fraction between animFrame and nextFrame (AnimDecodeLerp t)
+0x08C u16     animBlend        ; 0 = none, 5 = blend frames when changing state, 0xFFFE/0xFFFF special
+0x08E u16     animSpeed        ; 0x1000 normal (PlayerSetState), 0x800 half (transition actions)
+0x090 u32     animBlendFrom
+0x0B4 s16[6]  climbTarget      ; climb attach point (x,y,z, ?, ?, height); set by PlayerSetClimbTarget, used by PlayerUpdateClimb
+0x0C0 s16[8]  rope             ; two end points [0..2] [3..5] + position along it [6] (0..0x1000); PlayerUpdateRope
+0x0D8 s16[3]  attachDir        ; facing / push direction stored by PlayerAttachSet (x, y, z)
+0x0DE u16     attachTimer      ; frames left (PlayerAttachSet arg 2, PlayerCond_AttachTimerDone)
+0x0E0 u32     attachFlags      ; bit1 climb target set, bit2 rope set, bit3 0xD8 attach set
+0x0E4 u32     prevAttachFlags  ; attachFlags of the previous frame
+0x0E8 s16     health           ; input ignored when 0; blink code checks < 1 (name tentative)
+0x0EA s16     invulnTimer      ; 0x3C after PlayerDamage, counted down in PlayerOnContact
+0x0EC s16     surfaceKind      ; index into the surface table 0x800AEF60; -1 airborne
+0x0EE u8      unk_ee
+0x0EF u8      contactFrames    ; consecutive contact frames (PlayerOnContact acts after 5)
+0x0F0 u8      hurt             ; 1 after PlayerDamage, cleared by PlayerOnContact
+0x0F1 u8      contactCooldown  ; 0xF, counted down by PlayerOnContact
+0x0F2 s8      currentGadget    ; 7 = RC car
+0x0F3 s8      savedGadget      ; restored into currentGadget on room change (StageRequest code 6)
+0x0F4 u8[4]   tint             ; current model color (r,g,b); fades toward tintTarget
+0x0F8 u8[4]   tintTarget
+0x0FC s16     fallFrames       ; frames at terminal fall speed; PlayerAct_Land hurts when >= 6
+0x0FE s16     squashTimer      ; >0 scales the model (squash/stretch)
+0x100 u16     squashFrame      ; frame counter for PlayerDrawSquashed
+0x102 s16     unk_102
+0x104 s16     slopeX           ; ground slope (x); slides / limits per surface table
+0x106 s16     slopeZ
+0x108 s32[3]  velFrac          ; sub-unit remainder of moveVel after vel = moveVel >> 12 (also external push)
+0x114 s32[3]  targetMoveVel    ; desired velocity; PlayerAccelXZ/XYZ move moveVel toward it
+0x120 s32[3]  moveVel          ; movement velocity (y negative = up; jumps set -0x1E000..-0x80000)
+0x12C s32     groundY          ; floor height under the player (shadow height)
+0x130 s16[3]  lastPos          ; compared with pos to detect idling
+0x136 s16     hasGround        ; floor found under the player
+0x138 u16     groundType       ; >>12 == 1: water (then waterY is the surface)
+0x13A u16     prevGroundType   ; groundType of the previous frame
+0x13C s16     waterY
+0x13E u16     unk_13e
+0x148 u16     idleTimer        ; idle animation streams in after 900 frames
+0x14A u8      idleAnimLoading
+0x14B u8      idleAnimReady
+end
+
+# One state-table entry (decoded from PlayerUpdate / PlayerSetState).
+struct PlayerStateEntry 0x8
+0x0 u16       firstFrame
+0x2 u16       lastFrame
+0x4 u8        turnTilt          ; lo nibble: turn mode (how facing follows input); hi nibble: model tilt mode
+0x5 u8        moveMode          ; how moveVel is derived (0..0x10, switch in PlayerUpdate)
+0x6 u8        frameAction       ; g_PlayerActionFns index called every frame in this state (0 = none)
+0x7 u8        flags             ; copied to Player.stateFlags (hi nibble = state class: 0x4 air, 0xA wall, 0xC/0xE water...)
+end
+
+# One per gadget (+1; index 0 = no gadget). Indexed as [currentGadget + 1]. Gadget 9 = none.
+struct PlayerStateSet 0x10
+0x00 u32      animSet
+0x04 PlayerStateEntry* stateTable
+0x08 u32      transitions       ; PlayerRunTransitions table
+0x0C u32      events            ; PlayerRunAnimEvents list
+end
+
+# Scratchpad block player code works from. PlayerUpdate copies pad/stick state into it
+# each frame (zeroed when input is locked). Left stick moves, right stick swings gadgets
+# (raw DualShock order RX RY LX LY; movement uses left, flicks/rotations come from right).
+struct PlayerScratch 0x3C
+0x00 PlayerStateEntry* stateTable ; active PlayerStateSet fields for the current state range
+0x04 u32      transitions
+0x08 u32      events
+0x0C u32      held             ; buttons held (PsyQ bits: 0x0A = R1|R2 jump, 0x200 L3, 0x400 R3)
+0x10 u32      changed          ; buttons changed this frame
+0x14 u16      leftStickClass      ; 0 / 2 / 4 / 8 by magnitude (copy of 0x800E5498)
+0x16 u16      rightStickGesture    ; 4/8 flick, 0x10/0x20 rotation, 0x80 (copy of 0x800E549A)
+0x18 u16      unk_18
+0x1A u16      gestureEvents    ; one-shot gesture flags (copy of 0x800E549E)
+0x1C u16      leftStickMag        ; 0..0x7F
+0x1E u16      rightStickMag        ; 0..0x7F
+0x20 s32      unk_20
+0x24 s32      unk_24
+0x28 s16[2]   rightStickCam       ; right stick relative to camera (fwd/side, +-0x1000)
+0x2C s16[2]   leftStickCam        ; left stick relative to camera
+0x30 s16      stickRotation    ; signed rotation amount
+0x32 s16      unk_32
+0x34 u16      stickTravelR     ; summed stick movement over the history
+0x36 u16      stickTravelL
+0x38 u16      inputLocked      ; nonzero: player input ignored
+end
+
+struct PlayerParams 0x48
+0x00 s32      unk_00
+0x04 s32      gravity          ; 0xAD; added to vy every frame (x 0x80)
+0x08 s32      jumpImpulse      ; -0x672; jump vy = (gravity + jumpImpulse) * 0x80
+0x0C s32      jumpHoldBoost    ; added to vy each frame jump is held (variable jump height)
+0x10 s32      jumpVel2         ; vy for the other jump actions (<< 7)
+0x14 s32      dropVel          ; positive vy action (<< 7)
+0x18 s32      squashFrames
+0x1C s32      unk_1c
+0x20 s32      unk_20
+0x24 s32      moveSpeed        ; stick-driven jump speed scale
+0x28 s32      jumpSpeedPct     ; horizontal speed kept on jump (100)
+0x2C s32      jumpSpeedPct2    ; 80
+0x30 s32      jumpSpeedPct3    ; 60
+0x34 s32      unk_34
+0x38 s32      unk_38
+0x3C s32      unk_3c
+0x40 s32      unk_40
+0x44 s32      unk_44
+end
+
+# Terrain heightfield + render settings for the current area (filled by AreaLoadGridAndProps /
+# AreaLoad). Cells are 0x200 units; the grid is centered on the origin.
+struct LevelGrid 0x30
+0x00 u16      width            ; cells in x
+0x02 u16      depth            ; cells in z
+0x04 u32      colorCount
+0x08 u32      cells            ; u32[width*depth]: hi16 surface attribute, bit 11 + bits 8-10 triangle split
+0x0C u32      colors           ; CVECTOR[colorCount] terrain vertex colors
+0x10 u32      cellTiles        ; 8 bytes per cell: corner color indices u8[4] + tile/texture info u8[4]
+0x14 u32      heights          ; s16[(w+1)*(d+1)] corner heights, then s16[w*d] cell-center heights
+0x18 u32      blockMask        ; u8 per 2x2 block, -1 = nothing to draw (BuildTerrainBlockMask)
+0x1C u8[4]    fogColor         ; far color (GTE FC) from area header +0x20
+0x20 u32      unk_20
+0x24 u32      fogParam         ; 0xF000
+0x28 u32      fogStart         ; from area header +0x2C (default 0x4B0)
+0x2C u32      drawDistance     ; fogStart * 4 + 0x400
+end
+
+# Collider box (0x38 bytes; table pointer g_Colliders, count g_ColliderCount).
+struct Collider 0x38
+0x00 s16[3]   pos              ; center x, top y, z
+0x06 s16[3]   halfSize         ; half extents x, height, z
+0x0E s16      propIndex        ; prop (g_AreaProps) moved / re-meshed with this collider, -1 none
+0x10 u16      geometry         ; geometry / response handler word (dispatch class in the high nibble, shape type; codex notes/69)
+0x12 u16      type             ; surface / contact type: low byte kind (9 = water volume); bits 8-11 surface nibble
+0x14 u16      mode             ; bit 15 = solid mode (ColliderTypeActive; codex notes/69)
+0x18 u16      flags            ; 0x8000 = disabled
+0x1E s16      touchedBy        ; reset to -1 each frame by CollisionUpdate
+0x20 u16      zoneMask         ; quadrant mask (ColliderComputeQuadrantMask), tested against GetColliderQuadrantMaskXZ
+0x24 s16[3]   origin           ; closed / pivot position used by door gimmicks
+0x2A s16[3]   flow             ; current / push vector (x, y, z) << 12 in GetSurfaceType
+end
+
+# Interactive area object ("gimmick"): switches, doors, breakables, triggers (0x18 bytes;
+# array g_Gimmicks from the area blob +0x4D4, grouped by g_GimmickGroups).
+struct Gimmick 0x18
+0x00 u16      type
+0x02 u16      state            ; doors: 0 closed, 2 opening, 3 open, 5 closing (1/4 = start states)
+0x04 s16      collider         ; g_Colliders index (its propIndex is the visual)
+0x06 s16      timer            ; door travel / hit counter
+0x08 s16      subtype          ; e.g. door direction 0-7, switch kind
+0x0A s16      param_a
+0x0C s16      link             ; gimmick activated by this one (GimmickActivate), -1 none
+0x0E s16      param_e          ; trigger radius for proximity triggers
+0x10 s16      param_10
+0x12 s16      param_12         ; unique id for proximity triggers (progress flag)
+0x14 s16      param_14
+0x16 s16      param_16
+end
+
+# Area header inside the area data blob (0x80154000 + [0x801544D0]); offsets are in words.
+struct AreaHeader 0x54
+0x00 u32      flags            ; bit0 no terrain draw, bit1 no heightfield, bit2 ...
+0x04 u32      gridOfs          ; -> LevelGrid data
+0x08 u32      meshTableOfs     ; -> mesh table (g_AreaMeshTable)
+0x0C u32      propsOfs         ; -> count, then 12-byte placements {mesh u16, rotY u16, x s16, y s16, z s16, ?}
+0x10 u32      collisionOfs     ; -> {shapeGridOfs, shapesOfs, collidersOfs, list3Ofs, list4Ofs} (byte offsets)
+0x20 u8[4]    fogColor
+0x24 u32      unk_24
+0x28 s16      fogEnabled
+0x2A s16      unk_2a
+0x2C u16      fogNear
+0x2E u16      fogFar
+0x34 u32[8]   features         ; low byte = feature id (0x08 0x10 0x11 0x20 0x30-0x32 0x40 0x41), upper bits = data offset
+end
+
+apply 800ebfa0 LevelGrid       ; g_LevelGrid
+apply 800f455c Collider*       ; g_Colliders
+apply 800f44e4 AreaHeader*     ; g_AreaHeader
+apply 800f4570 Gimmick*        ; g_Gimmicks
+
+apply 1f800048 PlayerScratch   ; g_PlayerScratch
+apply 800ec010 PlayerParams    ; g_PlayerParams (set by PlayerInit)
+apply 800f4de0 PlayerStateSet[10] ; g_PlayerStateSets
+apply 800ec1e0 Player          ; g_Player
+# Object / enemy actor used by the area overlays (partial: offsets seen in the Obj* helpers; same header as Monkey).
+struct Obj 0xE4
+0x000 ModelHeader* model
+0x018 u32     animSet
+0x01C u32     targetNode       ; lock-on target list node (TargetListAdd / TargetListRemove)
+0x024 s32[3]  pos
+0x044 s16     bodyRadius       ; collision body (obj + 0x24 = CollisionBody) radius
+0x046 s16     bodyHeight       ; collision body height (0x80 by ZakoSetupType)
+0x048 s16     bodyParam        ; CollisionBody +0x24 (1 by ZakoSetupType)
+0x04A u16     bodyFlags        ; CollisionBody +0x26 (0x8103 by ZakoSetupType)
+0x050 u16     targetBody       ; & 0xFFF = collision body index
+0x05C u16     animFrame        ; current frame, inside the {first,last} pair of animSlot
+0x05E u16     animIndex        ; set to 1 by ObjKill
+0x060 s16[3]  dir              ; facing vector (x, y, z), 0x1000 = 1.0
+0x070 s16     ownCollider      ; collider ignored by this object's collision (g_IgnoreCollider), -1 none
+0x074 u32     link0            ; linked part / partner object records (boss and paired enemies)
+0x078 u32     link1
+0x07C u8      loopSlot         ; sound loop slot (0xFF = none)
+0x07D u8      defense          ; damage scaled by (10 - defense) / 10; 10 = immune (ZakoApplyHit)
+0x07E u8      type             ; enemy type 0..0xB6 (handler table 0x800AF350)
+0x07F u8      animSlot         ; index into the anim table (+0x88): {firstFrame, lastFrame} u16 pairs
+0x080 u8      aiState
+0x081 u8      hp               ; ObjApplyDamage subtracts (attacker body +0x24 & 0xF)
+0x082 u8      motionState      ; ObjUpdateMotionState: 4 falling, 5 knockback
+0x083 u8      lastHitType      ; attacker body flags byte (+0x26) of the last hit
+0x084 u8      flashTimer       ; hit flash frames (ZakoDraw)
+0x085 u8      motionTimer      ; ObjUpdateMotionState counter
+0x086 s16     groundCache
+0x088 u32     animTable      ; ObjGroundHeightCached
+0x08C u16     pathPoint        ; current point of the path (ObjAdvancePath)
+0x08E u8      pathIndex
+0x08F u8      subState
+0x090 u32     pathPtr          ; path points (8 bytes each) in the area ZED data (ObjSetPathFromTable)
+0x094 s16[3]  vel
+0x09A s16     targetX
+0x09C s16     homeY            ; spawn height (ObjSeekHomeY)
+0x09E s16     targetZ
+0x0A0 s16     shadowSize       ; DrawShadow size (0x30 by ZakoSetupType)
+0x0A4 s16     senseRadius      ; from the spawn entry +8 (ObjPlayerInConeFromHome / ObjPlayerNearBoxInArea)
+0x0A6 s16     radius
+0x0A8 s16     speed            ; scaled >> 3 for the movement helpers
+0x0AA s16     angle            ; ObjRotateStep
+0x0AC s16     heading
+0x0AE s16     timerAE          ; counted down by ZakoUpdateLoop
+0x0B0 s16     unk_b0
+0x0B2 s16     turnSpeed
+0x0B4 u32     hitTarget        ; hit target handle (FUN_80058220)
+0x0C8 u8      scale            ; 10 = 1.0x
+0x0C9 u8      cooldown
+0x0CA u8      spawnSlot        ; slot of the spawn record (ZakoClearDefeatedBits)
+0x0CB u8      slot             ; index in the object array
+0x0CC u8      spawnIndex       ; entry in the spawn table (DAT_800E77D4, 0x20 bytes each)
+0x0CD u8      reactAnim        ; anim slot used by ObjSwapToReactAnim
+0x0CE u8      prevAnimSlot     ; anim slot restored after the reaction
+0x0D0 u32     groundHeight     ; cached ground height (ObjGroundHeightCached)
+0x0D8 s16     knockback        ; strength << 3 (ZakoSetKnockback), decays by knockDecay
+0x0DA u8      knockDecay
+0x0DB u8      hitCount         ; read by ZakoApplyHit (Tentative)
+0x0DC u8      dropTable
+0x0DF u8      idlePhase        ; rotation step / idle phase (Zako_RandomizeIdlePhase, ObjCircleTarget)
+0x0E0 u32     flags            ; bit 8 ground cache valid, bit 1 body unregistered, bit 14 body active
+end
+
+apply 800ec330 MATRIX          ; g_CameraRotMatrix (camera-relative stick input, CameraUpdate output)
+
+apply 800e5500 Monkey[8]       ; g_Monkeys
+apply 800e54f0 Monkey*[4]      ; g_ActiveMonkeys
+apply 800b4d08 Monkey*         ; g_CurMonkey
+
+# Visibility zone box (area feature 0x08): GetZoneMask ORs the mask of every box containing the point.
+struct ZoneBox 0x10
+0x00 s16[3]   center
+0x06 s16[3]   half             ; half extents x, y, z
+0x0C u16      mask
+end
+
+# Type 0x22 trigger indicator (area features 0x10/0x11 supply the models); max 4, g_Indicators.
+struct Indicator 0x18
+0x00 s16      kind             ; 0/1 = model A (hint trigger), 2 = model B (other effect)
+0x02 s16      angle            ; facing, passed to rsin/rcos
+0x04 s16[3]   pos
+0x0A s16      timer            ; counts down after activation (kind 2)
+0x0C s16[3]   dir              ; (sin, 0, cos) for MatrixFromDirXZ
+0x12 s16      unk_12
+0x14 s16      animFrame        ; looped: 0x1C frames idle, 0x58 when activated (model A)
+0x16 s16      state            ; 0 idle, 1 activated
+end
+
+apply 800bbd34 Indicator[4]    ; g_Indicators
+apply 800e6960 Obj[16]               ; g_Objs (enemy objects, 'zako')
+
+# from codex-inbox (ParticleState)
+# Evidence: EffectScriptUpdate 80069BEC, SpawnOneParticle 8006962C,
+# ParticleAlloc 80069548, ParticlesDraw 80069920; notes/54-effect-vm.md.
+struct ParticleState 0x34
+0x00 u8 type ; Zero means free; local script types start at 200
+0x01 u8 freeze_position ; Nonzero suppresses velocity integration
+0x02 u8 anchor_mode ; Opcodes 25/26/27 set 0/1/2; allocator fallback tests zero
+0x03 s8 loop_depth ; -1 means no active loop; valid slots 0 and 1
+0x04 u16* script_pc
+0x08 u16*[2] loop_body
+0x10 u8[2] loop_remaining
+0x12 u8 width
+0x13 u8 height
+0x14 s16[3] position
+0x1A s8 fade_step ; Positive values subtract from RGB with zero clamp
+0x1B u8 unknown_1b ; Initially copied as part of the input SVECTOR pad
+0x1C s16[3] velocity
+0x22 s16 wait_frames
+0x24 u16 uv0 ; Low byte U, high byte V
+0x26 u16 clut
+0x28 u16 uv1
+0x2A u16 tpage
+0x2C u16 uv2
+0x2E u16 uv3
+0x30 u8[3] rgb
+0x33 u8 primitive_code ; Textured quad command; raw/semitransparent flags
+end
+apply 800b9900 ParticleState[100]
+
+# from codex-inbox (AreaEntryPoint, 2026-10-06 15:48). 16 slots at area blob +0..+0x23F (exit count at +0x240);
+# AreaGetEntryPoint 80010C3C copies one record, PlayerSpawnAtEntry 80032BBC uses it. No apply (blob address varies).
+struct AreaEntryPoint 0x24
+0x00 s32[3] playerPos
+0x0C s32[3] cameraPos         ; low halfwords copied to g_CameraEye by PlayerSpawnAtEntry
+0x18 s32[3] facing            ; PlayerPlaceAtEntry reads the low halfwords
+end
+
+# Camera slot (12 at *g_CameraSlots, from the area data); layout from the uses in the 22 Camera* functions that take a
+# slot (notes/19). Offsets are certain, meanings tentative.
+struct CameraSlot 0xB0
+0x00 u8       kind             ; 0 unused, 1 follow, 2 aim, 3 fixed, 4 / 5 area camera
+0x02 u8       linkedSlot       ; slot removed by script command 2
+0x03 u8       scriptActive     ; cleared by CameraSlotClearScript
+0x04 s16      followDist       ; 0x460 at init
+0x06 s16      eyeHeight        ; -370 at init (CameraSlotInitFollow)
+0x08 s16      targetHeight     ; -110 at init
+0x0A s16[3]   eye              ; smoothed by CameraSlotSmoothEye / set by scripts
+0x12 s16[3]   target           ; smoothed by CameraSlotSmoothTarget
+0x1A s16[3]   lastPlayerPos    ; compared with the player position (CameraSlotUpdateYaw)
+0x2C s32      unk_2c
+0x30 u8       stillFrames      ; counts frames the player did not move
+0x31 u8       yawHold
+0x32 u8       modeTimer        ; 0x18 after CameraKindAim_SnapToFocus; counted down by CameraFollowUpdate
+0x33 u8       fixedActive      ; 1 while the fixed camera holds (CameraKindFixedUpdate)
+0x34 u8       clampState       ; ground clamp state bytes 0x34..0x37 (CameraSlotGroundClampNear)
+0x35 u8       clampTimer
+0x36 s8       clampCount
+0x37 u8       clampFlag
+0x38 s32      dist             ; current distance (0x460 at init)
+0x40 s32      yaw              ; ratan2 of the eye - target direction
+0x44 s32      savedYaw
+0x48 s32      targetYaw
+0x4C s32      yawDelta         ; wrapped to +-0x800
+0x50 s16[3]   eyeVel
+0x58 s16[3]   targetVel
+0x60 s32      side             ; cross product of the stick and the view direction
+0x64 s16      dirX
+0x68 s16      dirZ
+0x6C s16      orbitX
+0x6E s16      orbitY           ; cleared by CameraSlotStickOrbit
+0x70 s32      heightA          ; heights compared in CameraFollowUpdate
+0x74 s32      heightB
+0x80 u8       followFlagA
+0x81 u8       followFlagB      ; 1 after CameraSlotResetFollow
+0x84 s32      script           ; camera script pointer (CameraScriptRun)
+0x88 s16      scriptTimer
+0x8A s16      scriptStep
+0x8C s16      scriptRate
+0x8E u8       regionFlag       ; == 1 selects the area camera in CameraSelectMode
+0x90 u8[3]    scriptState
+0x94 s16[3]   scriptFocus      ; script command operands
+0x9C s16[3]   scriptVel        ; per frame eye motion of a script move
+0xA4 s16      focusDist        ; CameraSlotGetFocusPoint
+0xA6 s16      focusHeight
+0xA8 s16[3]   anchor           ; region anchor position (CameraSlotUpdate)
+end
+apply 800b4d40 CameraSlot*     ; g_CameraSlots
+
+# Sound driver (notes/23): 24 SPU voices. Offsets from the allocators (SeqAllocVoice / SeqVoiceAlloc), the voice free
+# scan in SeqTick, the extended SFX controllers and the per frame voice update; names tentative where marked.
+struct SeqVoice 0x66
+0x00 u16      active           ; voice in use
+0x02 u16      note
+0x04 u16      channel          ; MIDI channel of the note (status & 0xF)
+0x06 u16      track            ; owning track index, 0xFFFF = none
+0x08 u16      freeable         ; 1 = may be freed / stolen once the envelope is < 0x10 (key on, or key off for layer flag 0x01)
+0x0A u16      age              ; allocation order (0 = oldest), 0xFFFF free
+0x0E u16      pan
+0x10 u16      lfoWave          ; LFO curve index (layer [14], or program header [5] when program flag 0x40 is set)
+0x12 u16      lfoPhase
+0x14 u16      lfoActive        ; 1 = modulation enabled; forced by controller 1, note-on sets it only with tone flag 0x20 and nonzero channel depth
+0x16 u16      lfoDepth         ; controller 1
+0x1A u16      isEffect         ; 1 = sound effect voice (SeqVoiceAlloc)
+0x1C u16      modulationMode   ; 0 = normal music additive bend; NoteOnA0 writes 4 (non-additive branch, no bend decomposition)
+0x1E u16      priority         ; effect priority (steal test)
+0x20 u16      effectId         ; effect reused by the same effect id
+0x22 u16      bank             ; bank index (matched with the track bank)
+0x2C u16      volume           ; current voice volume (start of a volume ramp)
+0x36 u16      fineTune         ; low byte = signed 8-bit fine offset for the pitch lookup
+0x38 u16      pitchBend        ; stored channel bend, midpoint 64
+0x3A u16      bendRange        ; tone[13] at key-on, used for music bend decomposition
+0x3C u16      lfoSpeed         ; LFO phase increment; controller 2 writes 240 / (60 - floor(value*58/127))
+0x3E u16      program          ; matched by the extended effect controllers
+0x40 u16      rootKey          ; tone[2], subtracted from the note (normalised around 120)
+0x44 u16      glideActive      ; controller 0x41 pitch glide running
+0x46 u16      volRampActive    ; controller 7 volume ramp running
+0x48 u16      panRampActive    ; controller 10 pan ramp running
+0x4C u16      panCurrent
+0x4E u16      pitchNote        ; glide start note (0x78 when freed)
+0x50 u16      volTarget
+0x52 u16      volStart
+0x54 u16      volFramesLeft
+0x56 u16      volFrames
+0x58 u16      panTarget
+0x5A u16      panStart
+0x5C u16      panFramesLeft
+0x60 u16      glideAmount      ; tenths of a semitone; bit 7 = down (256 - value)
+0x62 u16      glideFramesLeft
+0x64 u16      glideFrames
+end
+apply 800e07f0 SeqVoice[24]    ; g_SeqVoices
+
+# 24 concurrent sequence players (song + effect tracks), 0x120 bytes each.
+struct SeqTrack 0x120
+0x00 u8       status           ; current event status byte (low nibble = channel)
+0x01 u8[5]    data             ; data bytes of the current event ([1] = note, [2] = velocity / value)
+0x0C s32      readPos          ; read offset into the sequence data
+0x10 s32      channelRecords   ; SSsq channel records (+0x12 = program)
+0x20 u8       bank             ; bank index
+0x21 u8       layerFirst       ; layer range of the current note
+0x23 u8       layerLast
+0x24 u8       active
+0x25 u8       paused
+0x27 u8       effectMode       ; nonzero = extended effect sequence (60 BPM, 480 PPQ)
+0xE8 s16      volumeScale      ; 0x1000 = 1.0 (used when the voice flag +0x42 is set)
+0x104 u16     tempo            ; BPM (60 for effect tracks)
+0x106 u16     ppq              ; 480
+0x108 u8      roundUp          ; delta rounding carry flag (SeqReadDelta)
+0x10C s32     deltaRemainder
+0x110 s32     deltaTicks10     ; delta * 10
+0x114 s32     delta            ; frames until the next event
+0x118 u8      glideBase        ; start note of a pitch glide (SeqCmd_Ctl41)
+end
+apply 800f5ac0 SeqTrack[24]    ; g_SeqTracks
+
+# Area prop instance (notes/12 "Props"): 32 bytes, MeshInit fills the first 0x10 bytes.
+struct AreaProp 0x20
+0x00 u32*     mesh             ; mesh header; low nibble of its first word = mesh type (3 = real rotation matrix)
+0x04 u32      meshData1
+0x08 u32      meshData2
+0x0C u32      meshData3
+0x10 s16[3]   pos
+0x16 u16      zoneMask         ; draw only when it intersects the player / camera zone mask; 0 hides the prop
+0x1C u32      rot              ; 90 degree rotation code, or a MATRIX* for mesh type 3
+end
+apply 800b4d64 AreaProp*       ; g_AreaProps
+
+# Collision body: the block passed to the collision code. For objects / the player / monkeys it is the object's
+# position block (obj + 0x24); CollisionBodyAlloc returns standalone ones (128 at 0x800BD1A0).
+struct CollisionBody 0x38
+0x00 s32[3]   pos
+0x0C s32[3]   vel
+0x18 SVECTOR  facing
+0x20 s16      radius
+0x22 s16      height           ; CollisionBodyGetCenter halves it for most types
+0x26 u16      flags            ; 0x8000 set for type 3 (monkeys)
+0x2A u16      solid            ; 1 for body types 6-8 and 0xC-0x11 (hit volumes)
+0x2C u32      contact          ; contact word (Player +0x50: >>28 = contact type)
+0x34 s16      contactCollider  ; collider index (BodyRecordColliderContact)
+end
+
+apply 800e68d8 CameraSlot*     ; g_CameraActiveSlot
+
+# Monkey info record of the area (one per monkey id; notes/27 decodes the texts).
+struct MonkeyInfo 0x88
+0x00 u16      callVoice        ; voice / caught-group value (MonkeyGetCallVoice, MonkeyCaughtGroupValue)
+0x04 s16      sightRange       ; 0 = no sight checks (MonkeyTargetInSightRange, MonkeyUpdateSight)
+0x08 s16      unk_8
+0x0C s16[4]   ranges           ; indexed range values (MonkeyTargetInSightRange)
+0x1C u8[12]   name             ; font codes (notes/27)
+0x28 u8[40]   description      ; font codes (notes/27)
+end
+apply 800b4cf0 MonkeyInfo*     ; g_MonkeyInfoTable
+
+# Live save block (g_SaveBuffer, 0x7A0 bytes; SaveBufferFill / SaveHeaderFill write it, SaveRestoreState copies a
+# slot image of 0x7A0 bytes from 0x800E1A00 + slot * 0x3D0 into it and restores the globals). Field meanings follow
+# the globals they are copied from; names tentative where marked.
+struct SaveBlock 0x7A0
+0x000 u16     resumeArea       ; first area of the current level (GetLevelFirstArea)
+0x002 u8      lives            ; g_Lives
+0x003 u8      unk_3            ; DAT_800F44B8
+0x004 u32     gadgetUnlockMask ; g_GadgetUnlockMask
+0x008 u8[4]   gadgetSlots      ; g_GadgetSlots
+0x00C u8      ammo2            ; DAT_800F51C2 (Slingback ammo counter)
+0x00D u8      ammo1            ; DAT_800F51C1
+0x00E u8      currentGadget
+0x010 u8      unk_10           ; DAT_800F44A6
+0x011 u8      unk_11           ; DAT_800F44A4
+0x014 u32     options          ; bit 0 DAT_800F448A (vibration?), bit 1 DAT_800F4488; bytes 2 / 3 = volumes (SoundGetVolumes)
+0x018 u8[16]  unk_18
+0x028 u8[32]  progressA        ; 0x800DFC70
+0x048 u8[32]  progressB        ; 0x800DFC98
+0x068 u16[128] areaRecords     ; 0x800DFB70, 0xFFFF = none
+0x168 u8[396] slotInfo         ; 3 records of 0x84 bytes (SaveSlotInfoPtr)
+0x2F4 u8[752] gimmickStates    ; 0x800DF820 (GimmickSaveStates)
+0x664 u32     unk_664          ; DAT_800DFDCC
+0x668 u32     unk_668          ; DAT_800DFDD0
+0x66C u32[8]  unk_66c          ; 0x800DFDD8
+0x68C u32     unk_68c          ; DAT_800DFDF8
+0x690 u32[32] timeRecords      ; 0x800DFD40, -1 = none (time attack mode)
+0x710 u32     unk_710          ; DAT_800F44A8
+0x714 u16     hubDestB         ; DAT_800F461D (LeaveHubStoreDestination)
+0x716 u16     hubDestA         ; DAT_800F461C
+0x718 u32     unk_718          ; DAT_800DFDFC
+0x794 u32     unk_794
+end
+apply 800e0018 SaveBlock       ; g_SaveBuffer
+

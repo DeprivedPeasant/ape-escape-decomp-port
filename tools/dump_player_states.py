@@ -1,0 +1,163 @@
+"""Dump the player's per-gadget state machine tables to notes/09-player-state-tables.md.
+
+Source data: archive member 0x008 (extract/members/008.bin), loaded to 0x80103000 by
+g_LoadListTable. PlayerInit (0x8003272C) rebases its header into g_PlayerStateSets:
+    header +0x14 + i*0x10: u16 word offsets (x4) of
+        +0x0 animSet, +0x4 stateTable, +0x8 transitions, +0xC events      (10 sets)
+
+Formats (from PlayerSetState / PlayerRunTransitions / PlayerRunAnimEvents):
+    stateTable  8 bytes per state: firstFrame u16, lastFrame u16, flags u32 (stateFlags = flags >> 24)
+    transitions 4 bytes: state u8, cond s8, newState u8, action u8; sorted by state, 0xFF ends.
+                cond > 0: take if cond_fn[cond]() != 0;  cond <= 0: take if cond_fn[-cond]() == 0.
+                cond_fn table 0x800B0298, action table 0x800B03AC (action 0 = none).
+    events      4-byte header: state u8, frame u8 (relative to firstFrame), kind u8, arg u8;
+                payload follows for kinds 2/6 (12 bytes) and 3/7 (4 bytes); 0xFF ends.
+                kind 1 PlaySfx(arg), 2 effect, 3 effect at player, 4 fn 0x800B027C[arg],
+                5 fn 0x800B03AC[arg], 6 0x8007C468, 7 effect at 0x800F5180, 8 PlayPlayerVoice(arg).
+
+Usage: uv run python tools/dump_player_states.py
+"""
+import csv
+import struct
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+BLOB = (ROOT / "extract/members/008.bin").read_bytes()
+EXE = (ROOT / "extract/disc/SCUS_944.23").read_bytes()
+OUT = ROOT / "notes/09-player-state-tables.md"
+
+COND_TABLE, ACTION_TABLE, EVENT_FN_TABLE = 0x800B0298, 0x800B03AC, 0x800B027C
+EVENT_PAYLOAD = {2: 12, 6: 12, 3: 4, 7: 4}
+EVENT_KIND = {1: "sfx", 2: "effect", 3: "effect@player", 4: "call", 5: "action",
+              6: "fx 0x8007C468", 7: "effect@0x800F5180", 8: "voice"}
+
+# States identified from code and these tables (notes/08-player.md). Everything else stays numeric.
+# 0/1, 3/4, 5/7, 0x13/0x14 are normal/alt-stance pairs (PlayerApplyGadgetStance);
+# 2/3/5 follow left-stick tilt classes 2/4/8 (creep/walk/run); 5/7 play footstep SFX, 0x08/0x0B play the jump SFX and are entered on PlayerCond_JumpPressed.
+# Turn modes (low nibble of entry byte 4), from the switch in PlayerUpdate.
+TURN_MODES = {0: "snap to L", 1: "slow to L", 2: "fast to L", 3: "none", 4: "swim pitch",
+              5: "away from R", 6: "to R gesture", 7: "to desiredDir", 8: "rot A", 9: "rot B",
+              10: "snap 8-dir"}
+
+GADGET_NAMES = {0: " (Stun Club)", 1: " (Monkey Net)", 2: " (Monkey Radar)", 7: " (RC car)"}  # 0/1 from the 2026-10-06 playtest
+
+KNOWN_STATES = {
+    0x00: "stand", 0x01: "stand (alt stance)", 0x02: "creep", 0x03: "walk", 0x04: "walk (alt stance)",
+    0x05: "run", 0x06: "dash (pushed)", 0x07: "run (alt stance)", 0x0B: "jump (alt stance)",
+    0x08: "jump", 0x09: "jump (air)", 0x0A: "jump (falling)", 0x0E: "ledge hang", 0x0F: "ledge climb up",
+    0x10: "crouch (down)", 0x11: "crouch", 0x12: "crouch (stand up)", 0x13: "crouch walk",
+    0x1E: "hurt", 0x1F: "hurt", 0x20: "hurt", 0x21: "hurt (recover)", 0x25: "land",
+    0x26: "against wall", 0x31: "curl up", 0x32: "curled (ball)", 0x33: "uncurl", 0x30: "wall bump (recover)", 0x36: "double jump (air)", 0x37: "double jump (land)",
+    0x48: "net catch", 0x1B: "knockback", 0x1C: "knockback (light)",
+    0x1D: "hurt (launched)", 0x24: "fall", 0x2B: "launched", 0x2F: "wall bump",
+    0x35: "double jump / rope jump-off", 0x38: "climb", 0x3D: "rope", 0x42: "wall bonk",
+    0x46: "swim", 0x47: "swim move", 0x49: "enter water", 0x4A: "water", 0x4B: "hazard hit",
+    0x4C: "water / slide", 0x4D: "timed launch",
+}
+
+
+def exe_u32(addr: int) -> int:
+    return struct.unpack_from("<I", EXE, addr - 0x80010000 + 0x800)[0]
+
+
+def load_names() -> dict[int, str]:
+    names = {}
+    inv = ROOT / "notes/inventory/functions.csv"
+    if inv.exists():
+        for r in csv.DictReader(open(inv, encoding="utf-8")):
+            if r["block"] == "CODE":
+                names[int(r["entry"], 16)] = r["name"]
+    for line in (ROOT / "tools/symbols.csv").read_text(encoding="utf-8").splitlines():
+        if line and not line.startswith("#") and "," in line:
+            addr, name = line.split(",", 2)[:2]
+            if "::" not in addr:
+                names[int(addr, 16)] = name
+    return names
+
+
+NAMES = load_names()
+
+
+def fn(table: int, index: int) -> str:
+    addr = exe_u32(table + index * 4)
+    return NAMES.get(addr, f"FUN_{addr:08x}")
+
+
+def state_label(s: int) -> str:
+    base = KNOWN_STATES.get(s & 0x7F) if s < 0x80 else None
+    return f"0x{s:02X}" + (f" {base}" if base else "")
+
+
+def main() -> None:
+    sets = []
+    for i in range(10):
+        anim, states, trans, events = (struct.unpack_from("<H", BLOB, 0x14 + i * 0x10 + k)[0] * 4
+                                       for k in (0, 4, 8, 12))
+        sets.append((anim, states, trans, events))
+
+    out = ["# Player state tables (generated)", "",
+           "Generated by `tools/dump_player_states.py` from archive member 0x008 "
+           "(loaded at 0x80103000). Format notes are in the script header and notes/08-player.md.",
+           "Set 0 = no gadget; set N = gadget N-1 (gadget 7 = RC car). Gadget states are >= 0x80.",
+           "Condition/action names come from tools/symbols.csv; `FUN_` ones are still unnamed.", "",
+           "| Set | animSet | stateTable | transitions | events | states |",
+           "|---|---|---|---|---|---|"]
+    for i, (a, s, t, e) in enumerate(sets):
+        n = (t - s) // 8 if t > s else 0
+        out.append(f"| {i} | 0x{a:05X} | 0x{s:05X} | 0x{t:05X} | 0x{e:05X} | {n} |")
+
+    for i, (a, s, t, e) in enumerate(sets):
+        title = "no gadget" if i == 0 else f"gadget {i - 1}" + GADGET_NAMES.get(i - 1, "")
+        out += ["", f"## Set {i} — {title}", ""]
+        sbase = 0x80 if i else 0
+        n = (t - s) // 8 if t > s else 0
+
+        out += ["### States", "",
+                "Turn = how facing follows input, tilt = model tilt mode, move = moveVel mode "
+                "(see notes/08-player.md), frame action = called every frame in the state.", "",
+                "| State | Frames | Turn | Tilt | Move | Frame action | Flags |",
+                "|---|---|---|---|---|---|---|"]
+        for k in range(n):
+            first, last, turn_tilt, move, frame_act, flags = struct.unpack_from("<HHBBBB", BLOB, s + k * 8)
+            action = f"`{fn(ACTION_TABLE, frame_act)}`" if frame_act else ""
+            out.append(f"| {state_label(sbase + k)} | {first}–{last} | {TURN_MODES.get(turn_tilt & 0xF, turn_tilt & 0xF)} "
+                       f"| {turn_tilt >> 4} | {move} | {action} | 0x{flags:02X} |")
+
+        out += ["", "### Transitions", "", "| From | When | To | Action |", "|---|---|---|---|"]
+        p = t
+        while BLOB[p] != 0xFF:
+            frm, cond, to, act = struct.unpack_from("<BbBB", BLOB, p)
+            when = (f"`{fn(COND_TABLE, cond)}`" if cond > 0 else f"not `{fn(COND_TABLE, -cond)}`")
+            action = f"`{fn(ACTION_TABLE, act)}`" if act else ""
+            out.append(f"| {state_label(frm)} | {when} | {state_label(to)} | {action} |")
+            p += 4
+
+        out += ["", "### Animation events", "", "| State | Frame | Kind | Arg |", "|---|---|---|---|"]
+        p = e
+        while BLOB[p] != 0xFF:
+            st, frame, kind, arg = BLOB[p:p + 4]
+            detail = f"0x{arg:02X}"
+            if kind == 4:
+                detail = f"`{fn(EVENT_FN_TABLE, arg)}`"
+            elif kind == 5:
+                detail = f"`{fn(ACTION_TABLE, arg)}`"
+            out.append(f"| {state_label(st)} | +{frame} | {EVENT_KIND.get(kind, kind)} | {detail} |")
+            p += 4 + EVENT_PAYLOAD.get(kind, 0)
+
+    OUT.write_text("\n".join(out) + "\n", encoding="utf-8")
+    print(f"wrote {OUT}")
+
+    # State names for the PCSX-Redux player logger (tools/pcsx/player_state_logger.lua).
+    lua = ["-- Generated by tools/dump_player_states.py. Known player state names.",
+           "return {"]
+    lua += [f'    [0x{k:02X}] = "{v}",' for k, v in sorted(KNOWN_STATES.items())]
+    lua.append("}")
+    names_path = ROOT / "tools/pcsx/player_state_names.lua"
+    names_path.write_text("\n".join(lua) + "\n", encoding="utf-8")
+    print(f"wrote {names_path}")
+    for i, (a, s, t, e) in enumerate(sets):
+        print(f"set {i}: states={(t - s) // 8}")
+
+
+if __name__ == "__main__":
+    main()

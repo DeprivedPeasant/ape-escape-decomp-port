@@ -1,0 +1,15 @@
+[project]
+name = "ape-escape-decomp"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "ghidra-mcp-bridge",
+    "numpy",
+    "pillow",
+    "scipy>=1.17.1",
+    "spimdisasm>=1.42.4",
+    "splat64[mips]>=0.50.0",
+]
+
+[tool.uv.sources]
+ghidra-mcp-bridge = { path = "tools/_downloads/ghidra_mcp_bridge-6.0.0-py3-none-any.whl" }

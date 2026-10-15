@@ -1,0 +1,6 @@
+address,mnemonic,reftype,function,from
+800f4588,_sw,WRITE,AreaLoad,80031fec
+800f4588,sw,WRITE,AreaLoad,80031ff8
+800f4588,lw,READ,FUN_80010d80,80010db0
+800f4588,lw,READ,FUN_8009a1a4,8009a3a0
+800f4588,lw,READ,-,ovl_1A5::80141694

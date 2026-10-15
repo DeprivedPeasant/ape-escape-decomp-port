@@ -1,0 +1,251 @@
+#ifndef AE_OVL18B_H
+#define AE_OVL18B_H
+
+#include "../core/ae_ram.h"
+#include "../core/ae_pad.h"
+#include "../core/ae_pose.h"
+#include "../core/ae_sdk_matrix.h"
+#include "../math/native_sdk_apply.h"
+#include "../sound/ae_sound.h"
+#include "../ui/ae_pausemenu.h"
+#include "../world/ae_areaset.h"
+#include "../world/ae_items_init.h"
+#include "../world/ae_stagefade.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define AE_OVL18B_BASE 0x80136000u
+#define AE_OVL18B_SIZE 0x3000u
+#define AE_OVL18B_G_MODE_TABLE 0x80138888u
+#define AE_OVL18B_G_SCRIPT_DISPATCH 0x80138958u
+#define AE_OVL18B_G_AREA_TABLE 0x80138CD0u
+#define AE_OVL18B_G_XA_INDEX 0x80138CECu
+#define AE_OVL18B_G_UI_STATE 0x80138CA0u
+#define AE_OVL18B_G_UI_OBJECTS 0x80138D00u
+#define AE_OVL18B_G_TEXT_TABLE 0x80138AACu
+#define AE_OVL18B_G_WIPE_FRAME 0x80138B8Cu
+#define AE_OVL18B_G_SCANLINE_PHASE 0x80138C90u
+#define AE_OVL18B_G_SCANLINE_AUX 0x80138B7Cu
+#define AE_OVL18B_G_FRAME_COUNTER 0x800EC350u
+#define AE_OVL18B_G_PRIMITIVE_CURSOR (AE_OVL18B_G_FRAME_COUNTER + 4u)
+#define AE_OVL18B_G_FRAME_DISPLAY_FLAGS (AE_OVL18B_G_FRAME_COUNTER + 0x28u)
+#define AE_OVL18B_G_FRAME_DISPLAY_FLAGS_1 (AE_OVL18B_G_FRAME_DISPLAY_FLAGS + 1u)
+#define AE_OVL18B_G_FRAME_DISPLAY_FLAGS_2 (AE_OVL18B_G_FRAME_DISPLAY_FLAGS + 2u)
+#define AE_OVL18B_G_FRAME_DISPLAY_FLAGS_3 (AE_OVL18B_G_FRAME_DISPLAY_FLAGS + 3u)
+#define AE_OVL18B_G_FRAME_PACKET_FLAGS (AE_OVL18B_G_FRAME_COUNTER + 0x40A0u)
+#define AE_OVL18B_G_FRAME_PACKET_FLAGS_1 (AE_OVL18B_G_FRAME_PACKET_FLAGS + 1u)
+#define AE_OVL18B_G_FRAME_PACKET_FLAGS_2 (AE_OVL18B_G_FRAME_PACKET_FLAGS + 2u)
+#define AE_OVL18B_G_FRAME_PACKET_FLAGS_3 (AE_OVL18B_G_FRAME_PACKET_FLAGS + 3u)
+#define AE_OVL18B_G_SCREEN_MODE (AE_OVL18B_G_SCREEN_AREA_STATE + 0x120u)
+#define AE_OVL18B_G_SCREEN_AREA_STATE 0x800F4350u
+#define AE_OVL18B_G_CURRENT_AREA (AE_OVL18B_G_SCREEN_AREA_STATE + 0x126u)
+#define AE_OVL18B_G_DISPLAY_MODE 0x80138CE8u
+#define AE_OVL18B_AREA_TABLE_INDEX 0x1Cu
+#define AE_OVL18B_AREA_RESOURCE_TABLE_INDEX 0x14u
+#define AE_OVL18B_AREA_MODEL_TABLE_INDEX 0x18u
+#define AE_OVL18B_AREA_OBJECT_MODEL_IDS 0x04u
+#define AE_OVL18B_AREA_OBJECT_ANIM_IDS 0x0Cu
+#define AE_OVL18B_AREA_OBJECT_ID_STRIDE 0x04u
+#define AE_OVL18B_AREA_MODEL_RECORD_STRIDE 0x0Cu
+#define AE_OVL18B_AREA_MODEL_TABLE_RECORDS 0x04u
+#define AE_OVL18B_AREA_MODEL_PROP_STRIDE 0x20u
+#define AE_OVL18B_MODEL_PROP_MESH_INSTANCE 0x00u
+#define AE_OVL18B_MODEL_PROP_POSITION_X 0x10u
+#define AE_OVL18B_MODEL_PROP_POSITION_Y 0x12u
+#define AE_OVL18B_MODEL_PROP_POSITION_Z 0x14u
+#define AE_OVL18B_MODEL_PROP_STATE 0x16u
+#define AE_OVL18B_MODEL_PROP_SOURCE_FIELD_2 0x1Cu
+#define AE_OVL18B_MODEL_PROP_FLAGS_MASK 0xFFFF1FFFu
+#define AE_OVL18B_OT_CONTEXT_RESOURCE_TABLE 0x224u
+#define AE_OVL18B_OT_CONTEXT_MODEL_TABLE 0x228u
+#define AE_OVL18B_OT_CONTEXT_MODEL_COUNT 0x280u
+#define AE_OVL18B_OT_DISPLAY_ENV_OFFSET 0x6Cu
+#define AE_OVL18B_OT_DRAW_ENV_OFFSET 0x10u
+#define AE_OVL18B_G_MODE_AREA_TAG 0x801389C4u
+#define AE_OVL18B_G_MODE_STAGE_DATA 0x801389B4u
+#define AE_OVL18B_G_AREA_LIST 0x80138B7Cu
+#define AE_OVL18B_G_AREA_LIST_CURSOR 0x80138B7Cu
+#define AE_OVL18B_G_RENDER_TRANSFORM 0x800E78C0u
+#define AE_OVL18B_G_MODEL_DRAW_BASE 0x800E7D00u
+#define AE_OVL18B_G_FRAME_OT_INDEX (AE_OVL18B_G_FRAME_COUNTER + 0x0Cu)
+#define AE_OVL18B_G_FRAME_MODEL_INSTANCES (AE_OVL18B_G_FRAME_COUNTER + 0x80u)
+#define AE_OVL18B_G_OT_PACKET_BASE 0x800F03CCu
+#define AE_OVL18B_OT_PACKET_STRIDE 0x4078u
+#define AE_OVL18B_G_GLYPH_TABLE 0x80138B90u
+#define AE_OVL18B_G_RENDER_PROP_TABLE 0x800B4D64u
+#define AE_OVL18B_G_RANDOM_SEED 0x800AE8F0u
+#define AE_OVL18B_G_RENDER_MATRIX 0x800E78C0u
+#define AE_OVL18B_G_AREA_RENDER_DATA 0x800F03C0u
+#define AE_OVL18B_G_MODE_SELECTOR 0x800F4476u
+#define AE_OVL18B_G_MODE_SFX_AREA_FLAGS 0x800F51C1u
+#define AE_OVL18B_G_MODE_SFX_AREA_FLAGS_1 (AE_OVL18B_G_MODE_SFX_AREA_FLAGS + 1u)
+#define AE_OVL18B_G_PAD_STATE 0x800E5320u
+#define AE_OVL18B_G_BLINK_FRAME 0x80138CFCu
+#define AE_OVL18B_G_SCRIPT_AREA_ENTRY 0x80138A64u
+#define AE_OVL18B_G_SCRIPT_DEFAULT_ENTRY 0x801389D4u
+#define AE_OVL18B_G_UI_CAMERA_ROTATION (AE_OVL18B_G_UI_STATE + AE_OVL18B_UI_CAMERA_ROTATION_X)
+#define AE_OVL18B_G_UI_CAMERA_POSITION (AE_OVL18B_G_UI_STATE + AE_OVL18B_UI_CAMERA_POSITION_X)
+#define AE_OVL18B_G_FRAME_DRAW_CONTEXT (AE_OVL18B_G_FRAME_COUNTER + 8u)
+
+/* Special-area entry state fields at AE_OVL18B_G_UI_STATE. */
+enum AeOvl18bUiField {
+    AE_OVL18B_UI_TEXT_X = 0x00,
+    AE_OVL18B_UI_TEXT_Y = 0x02,
+    AE_OVL18B_UI_TEXTURE_PAGE = 0x04,
+    AE_OVL18B_UI_FONT_ROW = 0x06,
+    AE_OVL18B_UI_RENDER_RESULT = 0x08,
+    AE_OVL18B_UI_TEXT_COLOR = 0x14,
+    AE_OVL18B_UI_TEXT_SPACING = 0x0C,
+    AE_OVL18B_UI_SCRIPT = 0x20,
+    AE_OVL18B_UI_SCRIPT_AUX = 0x24,
+    AE_OVL18B_UI_STATE = 0x28,
+    AE_OVL18B_UI_STATE_TIMER = 0x2A,
+    AE_OVL18B_UI_SELECTED_OBJECT = 0x2C,
+    AE_OVL18B_UI_DISPLAY_INDEX = 0x2C,
+    AE_OVL18B_UI_CAMERA_ROTATION_X = 0x10,
+    AE_OVL18B_UI_CAMERA_ROTATION_Y = 0x12,
+    AE_OVL18B_UI_CAMERA_ROTATION_Z = 0x14,
+    AE_OVL18B_UI_CAMERA_POSITION_X = 0x18,
+    AE_OVL18B_UI_CAMERA_POSITION_Y = 0x1A,
+    AE_OVL18B_UI_CAMERA_POSITION_Z = 0x1C,
+    AE_OVL18B_UI_ROTATION_TARGET_X = 0x34,
+    AE_OVL18B_UI_ROTATION_TARGET_Y = 0x36,
+    AE_OVL18B_UI_ROTATION_TARGET_Z = 0x38,
+    AE_OVL18B_UI_ROTATION_REMAINING = 0x3A,
+    AE_OVL18B_UI_POSITION_TARGET_X = 0x3C,
+    AE_OVL18B_UI_POSITION_TARGET_Y = 0x3E,
+    AE_OVL18B_UI_POSITION_TARGET_Z = 0x40,
+    AE_OVL18B_UI_POSITION_REMAINING = 0x42,
+    AE_OVL18B_UI_WAIT_TIMER = 0x44,
+    AE_OVL18B_UI_OBJECT_STATE = 0x48,
+    AE_OVL18B_UI_OBJECT_LIST = 0x30,
+    AE_OVL18B_UI_OBJECT_COUNT_TABLE = 0x34,
+    AE_OVL18B_UI_OBJECT_COUNT = 0x48,
+    AE_OVL18B_UI_AREA_ENTRY = 0x4C,
+    AE_OVL18B_UI_SCRIPT_FLAGS = 0x58,
+    AE_OVL18B_UI_SCRIPT_WAIT = 0x5C,
+    AE_OVL18B_UI_SIZE = 0x60
+};
+
+/* Native PadData words consumed by the confirmation check. */
+enum AeOvl18bPadStateField {
+    AE_OVL18B_PAD_BUTTONS_PRESSED = 0x158,
+    AE_OVL18B_PAD_BUTTONS_CURRENT = 0x160
+};
+
+enum AeOvl18bAreaModelRecordField {
+    AE_OVL18B_AREA_MODEL_RECORD_MESH_INDEX = 0x00,
+    AE_OVL18B_AREA_MODEL_RECORD_SOURCE_FIELD_2 = 0x02,
+    AE_OVL18B_AREA_MODEL_RECORD_POSITION_X = 0x04,
+    AE_OVL18B_AREA_MODEL_RECORD_POSITION_Y = 0x06,
+    AE_OVL18B_AREA_MODEL_RECORD_POSITION_Z = 0x08
+};
+
+enum AeOvl18bResourceMeshField {
+    AE_OVL18B_RESOURCE_MESH_HEADER_INDEX = 0x04
+};
+
+enum AeOvl18bAnimationTableField {
+    AE_OVL18B_ANIMATION_HEADER_COUNT = 0x00,
+    AE_OVL18B_ANIMATION_HEADER_ENTRIES = 0x04,
+    AE_OVL18B_ANIMATION_ENTRY_STRIDE = 0x04,
+    AE_OVL18B_ANIMATION_ENTRY_FRAME_LIMIT = 0x02
+};
+
+/* Script-controlled object records at AE_OVL18B_G_UI_OBJECTS. */
+enum AeOvl18bObjectField {
+    AE_OVL18B_OBJ_POSITION_X = 0x00,
+    AE_OVL18B_OBJ_POSITION_Y = 0x02,
+    AE_OVL18B_OBJ_POSITION_Z = 0x04,
+    AE_OVL18B_OBJ_MODEL_ID = 0x08,
+    AE_OVL18B_OBJ_FLAGS = 0x0C,
+    AE_OVL18B_OBJ_MODEL_INSTANCE = 0x10,
+    AE_OVL18B_OBJ_ANIMATION = 0x14,
+    AE_OVL18B_OBJ_ROTATION_X = 0x18,
+    AE_OVL18B_OBJ_ROTATION_Y = 0x1A,
+    AE_OVL18B_OBJ_ROTATION_Z = 0x1C,
+    AE_OVL18B_OBJ_POSITION_SOURCE_X = 0x24,
+    AE_OVL18B_OBJ_POSITION_SOURCE_Y = 0x28,
+    AE_OVL18B_OBJ_POSITION_SOURCE_Z = 0x2C,
+    AE_OVL18B_OBJ_ANIMATION_FRAME = 0x5C,
+    AE_OVL18B_OBJ_ANIM_INDEX = 0x5E,
+    AE_OVL18B_OBJ_ANIMATION_TARGET = 0x70,
+    AE_OVL18B_OBJ_POSITION_CURRENT_X = 0x60,
+    AE_OVL18B_OBJ_POSITION_CURRENT_Y = 0x62,
+    AE_OVL18B_OBJ_POSITION_CURRENT_Z = 0x64,
+    AE_OVL18B_OBJ_ANIM_TABLE = 0x74,
+    AE_OVL18B_OBJ_ROTATION_TARGET_X = 0x78,
+    AE_OVL18B_OBJ_ROTATION_TARGET_Y = 0x7A,
+    AE_OVL18B_OBJ_ROTATION_TARGET_Z = 0x7C,
+    AE_OVL18B_OBJ_ROTATION_REMAINING = 0x7E,
+    AE_OVL18B_OBJ_POSITION_TARGET_X = 0x80,
+    AE_OVL18B_OBJ_POSITION_TARGET_Y = 0x82,
+    AE_OVL18B_OBJ_POSITION_TARGET_Z = 0x84,
+    AE_OVL18B_OBJ_POSITION_REMAINING = 0x86,
+    AE_OVL18B_OBJ_SIZE = 0x88
+};
+
+enum AeOvl18bModelInstanceField {
+    AE_OVL18B_INSTANCE_MODEL = 0x00,
+    AE_OVL18B_INSTANCE_COLORS = 0x04,
+    AE_OVL18B_INSTANCE_PRIMITIVES = 0x08,
+    AE_OVL18B_INSTANCE_BONES = 0x0C,
+    AE_OVL18B_INSTANCE_VERTICES = 0x10,
+    AE_OVL18B_INSTANCE_MATRICES = 0x14,
+    AE_OVL18B_INSTANCE_ANIMATION = 0x18,
+    AE_OVL18B_INSTANCE_ANIMATION_FRAME = 0x5C,
+    AE_OVL18B_INSTANCE_ANIMATION_INDEX = 0x5E,
+    AE_OVL18B_INSTANCE_ANIMATION_TARGET = 0x70,
+    AE_OVL18B_INSTANCE_FLAGS = 0x72,
+    AE_OVL18B_INSTANCE_ANIMATION_TABLE = 0x74
+};
+
+/* Native callbacks receive named original APIs and computed values for inline renderer work. */
+typedef int32_t (*AeOvl18bNamedHook)(void *user, AeRam *r,
+                                     const char *name, uint32_t address,
+                                     uint32_t argc, const uint32_t *argv);
+
+typedef struct AeOvl18bHooks {
+    void *user;
+    uint32_t stack_pointer;
+    const AeAreaSetHooks *area;
+    const AePadHooks *pad;
+    const AeItemsInitHooks *items;
+    const AeStageFadeHooks *stage_fade;
+    const AePauseMenuHooks *pause_menu;
+    AeOvl18bNamedHook native_call;
+    AeOvl18bNamedHook renderer;
+} AeOvl18bHooks;
+
+void ae_StageClearUi_LookAt_18B(AeRam *r, const AeOvl18bHooks *h,
+                                uint32_t eye, uint32_t target); /* 80136000 */
+uint32_t ae_SaveUi_StringTableIndex_18B(AeRam *r, uint32_t strings,
+                                        int32_t index); /* 801361D8 */
+int32_t ae_Mode_SpecialAreaEnter(AeRam *r, const AeOvl18bHooks *h); /* 80136208 */
+int32_t ae_SpecialEnterUi_DrawWipe(AeRam *r, const AeOvl18bHooks *h, uint32_t source); /* 80136954 */
+void ae_SpecialEnterUi_DrawText(AeRam *r, const AeOvl18bHooks *h,
+                                uint32_t text); /* 80137214 */
+void ae_SpecialEnterUi_DrawMessageShadow(AeRam *r, const AeOvl18bHooks *h,
+                                         uint32_t text); /* 80137334 */
+void ae_SpecialEnterUi_DrawBlink(AeRam *r, const AeOvl18bHooks *h); /* 801373A4 */
+void ae_SpecialEnterUi_RunScript(AeRam *r, const AeOvl18bHooks *h); /* 801374D0 */
+void ae_StageClearUi_SetDrawStp_18B(AeRam *r, const AeOvl18bHooks *h); /* 80137CD4 */
+void ae_StageClearUi_CopyStrip_18B(AeRam *r, const AeOvl18bHooks *h,
+                                   int32_t index); /* 80137D4C */
+void ae_SpecialEnterUi_UpdateObjects(AeRam *r, const AeOvl18bHooks *h,
+                                    uint32_t objects); /* 80137DF0 */
+void ae_SpecialEnterUi_DrawScene(AeRam *r, const AeOvl18bHooks *h); /* 801380D8 */
+void ae_SpecialEnterUi_SetAreaTablePointer(AeRam *r); /* 801383B8 */
+int32_t ae_SpecialEnterUi_TextWidth(AeRam *r, const AeOvl18bHooks *h,
+                                    uint32_t text); /* 801383D8 */
+void ae_SpecialEnterUi_PlayXa(AeRam *r, const AeOvl18bHooks *h); /* 80138468 */
+void ae_StageClearUi_DrawScanlines_18B(AeRam *r,
+                                       const AeOvl18bHooks *h); /* 80138490 */
+
+#ifdef __cplusplus
+}
+#endif
+#endif
+

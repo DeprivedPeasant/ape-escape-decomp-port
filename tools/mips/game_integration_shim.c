@@ -1,0 +1,197 @@
+/* Integration-only instrumentation; no game data or game logic. */
+#include "../../src/game/ae_calls.h"
+#include <stdlib.h>
+#include <string.h>
+
+typedef int32_t (*Trace)(void *, const char *, uint32_t, uint32_t, const uint32_t *);
+typedef struct Integration {
+    AeGame game;
+    Trace trace;
+    void *user;
+    const uint8_t *member;
+    size_t size;
+    const uint8_t *overlay;
+    size_t overlay_size;
+    uint32_t overlay_member, overlay_address;
+    uint16_t direction_padding;
+    uint16_t spawn_padding[64];
+    uint32_t spawn_padding_count, spawn_padding_index;
+    uint32_t renderer_words_calls;
+} Integration;
+
+void integration_set_direction_padding(Integration *s, uint32_t padding) { s->direction_padding = (uint16_t)padding; }
+static uint32_t direction_padding(void *user, AeRam *ram) {
+    (void)ram; return ((Integration *)user)->direction_padding;
+}
+static Integration *spawn_padding_owner;
+static uint16_t integration_spawn_position_padding(void *user, AeRam *ram, uint32_t function) {
+    (void)user; (void)ram; (void)function;
+    Integration *s = spawn_padding_owner;
+    if (s == NULL || s->spawn_padding_index >= s->spawn_padding_count) return 0;
+    return s->spawn_padding[s->spawn_padding_index++];
+}
+
+static int32_t trace_call(Integration *s, const char *name, uint32_t address, uint32_t argc,
+                           uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a4, uint32_t a5) {
+    const uint32_t args[6] = {a0, a1, a2, a3, a4, a5};
+    return s->trace(s->user, name, address, argc, args);
+}
+static int32_t missing_call(void *user, AeRam *r, const char *name, uint32_t address,
+                              uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)r;
+    return trace_call(user, name, address, 4, a0, a1, a2, a3, 0, 0);
+}
+static int32_t missing_words(void *user, AeRam *r, const char *name, uint32_t address,
+                             uint32_t count, const uint32_t *words) {
+    Integration *s = user;
+    (void)r;
+    return s->trace(s->user, name, address, count, words);
+}
+static int32_t render_call(void *user, AeRam *r, const char *name,
+                             uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    return missing_call(user, r, name, 0, a0, a1, a2, a3);
+}
+static int32_t render_words_call(void *user, AeRam *r, const char *name, uint32_t address,
+                                 uint32_t count, const uint32_t *words) {
+    ++((Integration *)user)->renderer_words_calls;
+    return missing_words(user, r, name, address, count, words);
+}
+static void debug_call(void *user, AeRam *r, const char *name,
+                        uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    (void)missing_call(user, r, name, 0x800A3720u, a0, a1, a2, a3);
+}
+static int area_member(void *user, int32_t area, const uint8_t **bytes, size_t *size) {
+    Integration *s = user;
+    (void)area;
+    *bytes = s->member; *size = s->size;
+    return s->member != NULL;
+}
+static int area_overlay(void *user, int32_t area, uint32_t *member, uint32_t *address,
+                          const uint8_t **bytes, size_t *size) {
+    Integration *s = user;
+    (void)area;
+    *member = s->overlay_member; *address = s->overlay_address;
+    *bytes = s->overlay; *size = s->overlay_size;
+    return s->overlay != NULL;
+}
+
+/* Named platform and renderer callbacks generated for the test trace. */
+#include "game_integration_callbacks.inc"
+
+static void sound_wait(void *user, AeRam *r, uint32_t units) {
+    (void)r; trace_call(user, "SpuWaitLoop", 0x8009D79Cu, 1, units, 0, 0, 0, 0, 0);
+}
+static void sound_adsr(void *user, AeRam *r, uint32_t ch, uint16_t a, uint16_t b) {
+    (void)r; trace_call(user, "SoundAdsr", 0, 3, ch, a, b, 0, 0, 0);
+}
+static void sound_off(void *user, AeRam *r, uint32_t half, uint16_t mask) {
+    (void)r; trace_call(user, "SoundKeyOff", 0, 2, half, mask, 0, 0, 0, 0);
+}
+static void sound_volume(void *user, AeRam *r, uint32_t ch, uint32_t side, uint16_t volume) {
+    (void)r; trace_call(user, "SoundVolume", 0, 3, ch, side, volume, 0, 0, 0);
+}
+static void sound_printf(void *user, AeRam *r, uint32_t fmt, uint32_t count, int32_t a, int32_t b, int32_t c) {
+    (void)r; (void)count; trace_call(user, "Printf", 0x800A3720u, 4, fmt, (uint32_t)a, (uint32_t)b, (uint32_t)c, 0, 0);
+}
+
+Integration *integration_create(Trace trace, void *user) {
+    Integration *s = calloc(1, sizeof(*s));
+    if (!s) return NULL;
+    AeRam *r = ae_ram_create();
+    if (!r) { free(s); return NULL; }
+    s->trace = trace; s->user = user;
+    AeGameHost host;
+    memset(&host, 0, sizeof(host));
+    host.user = s;
+    host.missing = missing_call; host.missing_words = missing_words; host.render = render_call; host.render_words = render_words_call; host.debug = debug_call;
+    host.body_direction_padding = direction_padding;
+    host.area_member = area_member;
+    host.area_overlay = area_overlay;
+    integration_callbacks(&host);
+    host.sound_hw.user = s;
+    host.sound_hw.wait_idle = test_platform_SpuWaitIdle;
+    host.sound_hw.wait_loop = sound_wait;
+    host.sound_hw.set_voice_adsr = sound_adsr;
+    host.sound_hw.voice_key_off = sound_off;
+    host.sound_hw.set_voice_volume = sound_volume;
+    host.sound_hw.printf_error = sound_printf;
+    ae_game_init(&s->game, r, &host);
+    return s;
+}
+void integration_destroy(Integration *s) {
+    if (s) { ae_ram_destroy(s->game.ram); free(s); }
+}
+AeRam *integration_ram(Integration *s) { return s->game.ram; }
+void integration_set_loaded_overlay(Integration *s, uint32_t member) { s->game.loaded_overlay = member; }
+uint32_t integration_renderer_words_calls(Integration *s) { return s->renderer_words_calls; }
+int32_t integration_overlay_words(Integration *s, uint32_t render, uint32_t address,
+                                 uint32_t count, const uint32_t *words) {
+    const AeOvl18cHooks *h = &s->game.ovl18c;
+    return (render ? h->renderer : h->original_call)(h->user, s->game.ram,
+             render ? "OverlayRenderProbe" : "OverlayCallProbe", address, count, words);
+}
+void integration_set_hud_draw(Integration *s, void (*draw)(void *, AeRam *, const AeHudDraw *)) {
+    s->game.host.hud_draw = draw;
+}
+AeBodyHooks *integration_body_hooks(Integration *s) { return &s->game.body; }
+AeBodyMoveHooks *integration_bodymove_hooks(Integration *s) { return &s->game.body.move; }
+AeSoundHw *integration_sound_hw(Integration *s) { return &s->game.host.sound_hw; }
+void integration_set_bodymove_sp(Integration *s, uint32_t sp) { s->game.body.move.stack_pointer = sp; }
+void integration_set_spawn_padding(Integration *s, const uint16_t *values, uint32_t count) {
+    if (count > 64u) count = 64u;
+    if (count != 0u) memcpy(s->spawn_padding, values, count * sizeof(*values));
+    s->spawn_padding_count = count;
+    s->spawn_padding_index = 0;
+    spawn_padding_owner = s;
+    s->game.spawn.position_padding = integration_spawn_position_padding;
+}
+uint32_t integration_spawn_padding_consumed(Integration *s) { return s->spawn_padding_index; }
+const AePlayerUpdateFrameHooks *integration_playerupdate_hooks(Integration *s) {
+    return &s->game.player_update_frame;
+}
+int32_t integration_call(Integration *s, uint32_t address, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    return ae_game_call(&s->game, address, a0, a1, a2, a3);
+}
+int32_t integration_wrapper(Integration *s, uint32_t index, uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    const AeGameCall *call = ae_game_call_at(index);
+    return call ? call->invoke(&s->game, a0, a1, a2, a3) : 0;
+}
+int32_t integration_load_area(Integration *s, int32_t area, int32_t entry, const uint8_t *member, size_t size) {
+    s->member = member; s->size = size;
+    int32_t result = ae_game_load_area(&s->game, area, entry);
+    s->member = NULL; s->size = 0;
+    s->overlay = NULL; s->overlay_size = 0;
+    return result;
+}
+void integration_set_overlay(Integration *s, uint32_t member, uint32_t address, const uint8_t *bytes, size_t size) {
+    s->overlay_member = member; s->overlay_address = address;
+    s->overlay = bytes; s->overlay_size = size;
+}
+int integration_frame(Integration *s) { return ae_game_frame(&s->game); }
+int32_t integration_hook(Integration *s, uint32_t index, uint32_t a0, uint32_t a1,
+                         uint32_t a2, uint32_t a3, uint32_t a4, uint32_t a5, uint32_t a6) {
+    AeGame *g = &s->game;
+    switch (index) {
+#include "game_integration_hooks.inc"
+    default: return 0;
+    }
+}
+
+/* Observe the callback's o32 stack while the central helper is active. */
+static int32_t stack_probe(void *user, AeRam *r, const char *name, uint32_t address,
+                           uint32_t a0, uint32_t a1, uint32_t a2, uint32_t a3) {
+    Integration *s = user;
+    uint32_t sp = s->game.call_stack_pointer;
+    const uint32_t words[7] = {a0, a1, a2, a3, ae_rd32(r, sp + 16u),
+                               ae_rd32(r, sp + 20u), ae_rd32(r, sp + 24u)};
+    (void)name; (void)address;
+    return s->trace(s->user, "TestStackWords", 0, 7, words);
+}
+int32_t integration_stack7(Integration *s, uint32_t a0, uint32_t a1, uint32_t a2,
+                            uint32_t a3, uint32_t a4, uint32_t a5, uint32_t a6) {
+    AeGameHost saved = s->game.host;
+    s->game.host.missing = stack_probe;
+    int32_t result = ae_game_call7(&s->game, 0, a0, a1, a2, a3, a4, a5, a6);
+    s->game.host = saved;
+    return result;
+}
