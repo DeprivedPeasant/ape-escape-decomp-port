@@ -11,17 +11,20 @@ there is no emulator, no recompiler and no machine-translated code.
 
 ## Status
 
-- About 1,160 original functions are ported and differentially verified. The ledger is `tools/verified.csv`;
+- About 1,500 original functions are ported and differentially verified. The ledger is `tools/verified.csv`;
   `uv run python tools/check_verified.py` checks it.
-- The **game host** (`src/game/`) runs the ported `Mode_Stage` loop on one RAM image:
+- The **game host** (`src/game/`) runs `main`'s mode dispatch (boot -> title, matching the original) and the ported
+  `Mode_Stage` loop on one RAM image:
   - area load, the player (`PlayerUpdate`), monkeys and their AI, enemies, collision, camera, HUD, pause menu and
     stage fades;
   - the Monkey Net catch;
   - every frame of areas 01, 02, 05 and 44 matches the original instructions byte for byte.
 - The **native viewer** (`src/app/`, SDL3 + OpenGL) runs the real game logic and renders terrain, props and sky.
-  Drawing of characters, HUD and effects from game data is still in progress.
-- **Overlays:** the area 02 overlay and the boot, intro, title, Stage Clear and Special Area Enter mode overlays are
-  ported. Most area and boss overlays and the save menu are not yet.
+  It reaches no missing functions in areas 01 and 02. Drawing of characters, HUD and effects from game data is still
+  in progress.
+- **Overlays:** nearly all mode overlays (boot, intro, title, save menu, Stage Clear, Special Area Enter, minigames)
+  and the area overlays 18C, 1A0 and 1A8 are ported. Most area and boss overlays are not yet.
+- The project is paused until about 2026-10-23; `notes/port/paused_2026-10-15.md` lists the open work.
 
 See [notes/HANDOFF.md](notes/HANDOFF.md) for the full picture and [AGENTS.md](AGENTS.md) for the project rules.
 
